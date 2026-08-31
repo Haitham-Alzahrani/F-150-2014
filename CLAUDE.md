@@ -68,3 +68,13 @@ reference values for reading scan data.
   a single block.
 - Don't present links or data as verified unless you actually checked them.
   Say plainly what was confirmed and what was not.
+
+## Python Environment & Commands
+
+This is a Linux host.
+
+- **Virtual environment path:** `/home/user/f-150-2014/.venv/`
+- **Never use `source .venv/bin/activate`.** Always invoke the binary path
+  directly.
+- **Run a script:** `/home/user/f-150-2014/.venv/bin/python <filename>.py`
+- **Install packages:** `/home/user/f-150-2014/.venv/bin/pip install <package>`
