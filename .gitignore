@@ -1,4 +1,4 @@
-# Python environment and build artifacts
 .venv/
 __pycache__/
 *.pyc
+logs/
