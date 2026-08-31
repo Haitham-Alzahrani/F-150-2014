@@ -1,7 +1,7 @@
 # 2014 Ford F-150 3.7L — Diagnostics
 
-Working notes and tools for diagnosing a 2014 Ford F-150 XL 3.7L V6, and for
-running the diagnostic tooling from an Android phone without a laptop.
+Working diagnostic record for a 2014 Ford F-150 XL, 3.7L V6 Ti-VCT, 6R80
+automatic, 4x2.
 
 VIN `1FTMF1EM1EFC80632` · 131,000 km · Jeddah, Saudi Arabia
 
@@ -9,23 +9,36 @@ VIN `1FTMF1EM1EFC80632` · 131,000 km · Jeddah, Saudi Arabia
 
 | File | What it is |
 |---|---|
-| [`docs/f150-diagnosis.md`](docs/f150-diagnosis.md) | Full diagnostic log — vehicle ID, history report findings, symptom, tests performed, ruled-out causes, ranked open suspects, and the scan data still needed |
-| [`docs/android-claude-code-setup.md`](docs/android-claude-code-setup.md) | Verified procedure for running Claude Code on Android via Termux + proot Debian, including the PATH trap that breaks it silently |
-| [`haraj_laptops.py`](haraj_laptops.py) | Searches haraj.com.sa for used business laptops, filters out auction posts, scores listings against a spec |
-| [`CLAUDE.md`](CLAUDE.md) | Auto-loaded context so a Claude Code session in this folder already knows the truck |
+| [`docs/f150-diagnosis.md`](docs/f150-diagnosis.md) | The diagnostic log — vehicle ID, history report findings, symptom, tests performed, ruled-out causes, ranked open suspects, and the scan data still needed |
+| [`docs/android-claude-code-setup.md`](docs/android-claude-code-setup.md) | Running Claude Code on Android via Termux + proot Debian, so this repo can be worked from the phone at the truck |
+| [`CLAUDE.md`](CLAUDE.md) | Auto-loaded context so a session opened here already knows the truck |
 
-## Current state
+## Current state — open
 
-**Truck: open.** Mounts, flexplate and torque converter are ruled out by the
-gear-position test — the shake is *less* in D/R than in N, which points at
-combustion roughness masked by the converter when it is coupled. The top
-unexplored lead is the throttle body, which has never been cleaned. Blocked
-on scan data: fuel trims, per-cylinder misfire counters, EGR position.
+**Symptom:** small shake in the cab, unstable RPM held around 1,000–2,000.
+Present before any repair work.
 
-**Tooling:** Claude Code confirmed running on Android — Termux → proot
-Debian → Node 24 → Claude Code v2.1.250.
+**Ruled out:** engine and transmission mounts, cracked flexplate, torque
+converter. The gear-position test settles it — the shake is *less* in D/R
+than in N, the inverse of the mount signature. The converter damps the
+pulses when coupled, so the engine is genuinely running rough and the
+converter masks it in gear.
 
-## Get this on the phone
+**Already replaced or serviced, with no effect on the shake:** spark plugs,
+air filter, injector clean, oil and filter, coolant flush, 6R80 fluid at
+113,000 km, and an O2 sensor "cleaning" that may have damaged the sensors.
+
+**Top unexplored lead:** the throttle body, never cleaned. Needs no scan
+tool. Clean it, then run the idle relearn.
+
+**Blocked on:** fuel trims both banks (idle in P/N vs D vs 2,500 rpm),
+per-cylinder misfire counters, EGR actual position at idle, and codes —
+stored, pending and permanent.
+
+Two numbers collapse most of the diagnosis: fuel trims say whether it is a
+mixture problem, misfire counters say whether it is one cylinder or all six.
+
+## Working this from the phone
 
 ```
 proot-distro login debian
@@ -45,39 +58,4 @@ claude
 
 Starting `claude` from inside this folder loads `CLAUDE.md` automatically, so
 the session already knows the truck, the symptom, what has been ruled out,
-and what data is still missing. No re-explaining.
-
-## The laptop search script
-
-```
-pip install requests
-```
-
-Probe the site first — the parser is written against an unverified page
-structure, and recon reports what actually comes back:
-
-```
-python3 haraj_laptops.py --recon
-```
-
-Then search:
-
-```
-python3 haraj_laptops.py --max-price 500
-```
-
-Filters applied: auction posts (السوم / مزاد with no final price) are
-dropped, pre-8th-gen Intel is a hard reject by default, and unknown specs
-are flagged rather than assumed.
-
-### Buying spec
-
-For running FORScan, Claude Code and the Python diagnostic tooling, the real
-requirement is modest — any Core i5 with 8 GB RAM is comfortable. The
-8th-gen threshold in the script's default scoring is about Windows 11
-support, not capability; lower `MIN_CPU_GEN` for a tighter budget.
-
-Reject regardless of price: 4 GB RAM, a BIOS/supervisor password (common on
-ex-fleet machines and often unfixable), or no stated price. A mechanical
-hard drive is acceptable if you plan to fit an SSD — that upgrade matters
-more to daily usability than the CPU generation does.
+and what data is still missing.

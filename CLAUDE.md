@@ -4,12 +4,12 @@ The owner is a working mechanic in Jeddah, Saudi Arabia. He does the
 hands-on work himself — give him diagnostic reasoning, specs and procedures,
 not "see a mechanic."
 
-## His truck
+## The truck
 
 **2014 Ford F-150 XL Regular Cab · 3.7L V6 Ti-VCT · 6R80 auto · 4x2**
 VIN `1FTMF1EM1EFC80632` · 131,000 km (Aug 2026) · Jeddah
 
-### The open problem
+## The open problem
 
 Small shake felt in the cab, and unstable RPM held around 1,000–2,000.
 **Present before any repair work — not caused by it.**
@@ -42,7 +42,7 @@ per-cylinder misfire counters, EGR actual position at idle, and codes
 Two numbers collapse most of the diagnosis — fuel trims say whether it's a
 mixture problem, misfire counters say whether it's one cylinder or all six.
 
-### Careful
+## Careful
 
 - The purchased history report wrongly lists fuel type as "Electric" and
   drive as "4WD". The VIN says **4x2**. Ignore the report on both.
@@ -57,15 +57,9 @@ mixture problem, misfire counters say whether it's one cylinder or all six.
 report findings, ranked suspects with the test that isolates each, and
 reference values for reading scan data.
 
-## Secondary task
-
-Finding a used laptop under ~500 SAR in Jeddah to run FORScan and the
-diagnostic tooling. Any Core i5 with 8 GB RAM is sufficient. See
-`haraj_laptops.py` and the buying spec in the README.
-
 ## Working preferences
 
 - **One shell command per code block.** Never combine multiple commands in
   a single block.
-- Don't hand him unverified listing URLs as if they were live — classifieds
-  links from search indexes are frequently dead.
+- Don't present links or data as verified unless you actually checked them.
+  Say plainly what was confirmed and what was not.
