@@ -53,7 +53,12 @@ mixture problem, misfire counters say whether it's one cylinder or all six.
   coolant disappears with no external leak, check the oil for coolant before
   chasing anything else.
 
-**Full detail: [`docs/f150-diagnosis.md`](docs/f150-diagnosis.md)** — history
+**Specs and technical data: [`docs/f150-specs.md`](docs/f150-specs.md)** —
+identification, engine, transmission, capacities, fluids, OBD-II buses,
+intervals, part numbers. Figures are marked [VIN] / [SPEC] / [VERIFY];
+never act on a [VERIFY] torque or capacity without checking the manual.
+
+**Diagnostic detail: [`docs/f150-diagnosis.md`](docs/f150-diagnosis.md)** — history
 report findings, ranked suspects with the test that isolates each, and
 reference values for reading scan data.
 

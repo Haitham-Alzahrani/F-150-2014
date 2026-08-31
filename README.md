@@ -9,6 +9,7 @@ VIN `1FTMF1EM1EFC80632` · 131,000 km · Jeddah, Saudi Arabia
 
 | File | What it is |
 |---|---|
+| [`docs/f150-specs.md`](docs/f150-specs.md) | Vehicle reference — identification, engine, transmission, driveline, capacities, fluids, OBD-II bus layout, maintenance intervals, part numbers. Every figure marked verified, spec, or verify-before-use. No diagnostic content. |
 | [`docs/f150-diagnosis.md`](docs/f150-diagnosis.md) | The diagnostic log — vehicle ID, history report findings, symptom, tests performed, ruled-out causes, ranked open suspects, and the scan data still needed |
 | [`docs/android-claude-code-setup.md`](docs/android-claude-code-setup.md) | Running Claude Code on Android via Termux + proot Debian, so this repo can be worked from the phone at the truck |
 | [`CLAUDE.md`](CLAUDE.md) | Auto-loaded context so a session opened here already knows the truck |
