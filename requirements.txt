@@ -1,0 +1,15 @@
+# Diagnostic tooling for the 2014 F-150 3.7L
+
+# HTTP — fetching parts data, service bulletins, reference lookups
+requests>=2.31.0
+
+# Serial communication with an ELM327 / vLinker OBD-II adapter.
+# The core dependency for reading live PIDs and DTCs from the PCM.
+pyserial>=3.5
+
+# Tabular analysis of scan-tool logs — fuel trims across load states,
+# per-cylinder misfire counts, VCT commanded vs actual over time.
+pandas>=2.0.0
+
+# Plotting logged parameters against RPM and load.
+matplotlib>=3.7.0
