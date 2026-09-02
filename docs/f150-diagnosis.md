@@ -3,7 +3,9 @@
 Working log for VIN `1FTMF1EM1EFC80632`. Records what was checked, what it
 ruled out, and what is still open.
 
-**Status:** open — awaiting scan data (fuel trims, misfire counters, codes).
+**Status:** open — but the first open question is no longer *which fault*.
+It is **whether there is a fault at all.** See
+[Is this a fault?](#is-this-a-fault) before spending anything further.
 
 ---
 
@@ -81,130 +83,344 @@ is unknown — relevant to cam phaser condition, which depends on oil history.
 
 ---
 
-## Symptom
+## Symptom — as actually characterised
 
-Small shake, felt in the cab. Unstable RPM when held around 1,000–2,000.
-Present **before** any of the repair work below — not introduced by it.
+A **small** vibration felt in the cab, with visible movement on the
+tachometer. Refined description from the owner:
 
----
+- It is **felt, not heard.** From under the hood a trained ear cannot tell
+  the engine has a problem.
+- The engine **does not lope, stumble, or feel close to stalling.**
+- Idle rpm is normal, **650–750** warm in P, A/C off.
+- **No change with A/C on.**
+- **Identical cold and hot.**
+- Present **since purchase** — the truck has never been smooth in this
+  owner's hands.
+- **No check engine light, ever.**
 
-## Work already performed
-
-Improved throttle response. **Did not affect the shake.**
-
-- Spark plugs replaced
-- Air filter replaced
-- Fuel injectors cleaned
-- Engine oil and filter changed
-- Oxygen sensors cleaned
-- Coolant flushed and replaced
-- 6R80 transmission fluid changed at 113,000 km
-
-### Concern: the oxygen sensors
-
-Heated O2 sensors are not serviceable by cleaning. Solvent on the ceramic
-element can poison or slow them permanently, and a lazy upstream sensor
-causes fuel control to hunt — which is itself an unstable-idle symptom.
-
-**Check upstream HO2S switching rate at 2,500 rpm.** A healthy sensor
-crosses 0.1↔0.9 V several times per second. If either upstream sensor is
-slow or parked mid-range, replace it rather than cleaning again.
+That description matters. A charge-dilution or vacuum-leak fault severe
+enough to shake a cab produces an *audibly* uneven idle. This one does not.
 
 ---
 
-## Diagnostic test performed
+## Is this a fault?
 
-**Shake at a complete stop, comparing gear positions:**
+**Not established.** This must be settled before more money is spent.
 
-> Shake in D and R is **less** than in N.
+### The case that it is normal
 
-### What this rules out
+- The truck is a base **regular cab XL** — minimal sound deadening, cab
+  mounted close to the engine, no acoustic glass.
+- The 3.7 is a **60° V6**, which is not inherently balanced the way an
+  inline-six or a cross-plane V8 is.
+- Never smooth in the owner's entire ownership — a characteristic, not a
+  change.
+- No code in years, across every condition.
+- Normal idle rpm; nothing stalls or nearly stalls.
+- Perfect under load.
+- **Six competent repairs, aimed at six different systems, every one of
+  which changed nothing.** The simplest explanation for a fault that
+  resists every repair is that there is no fault.
 
-This is the inverse of the classic mount signature. A collapsed engine or
-transmission mount gets *worse* under load in gear; this gets better.
+### The two tests that settle it — both free
 
-| Suspect | Status |
+1. **Control sample.** Find another 2014-ish F-150 regular cab with the 3.7.
+   Hand on the fender at idle, then sit in the cab. Two minutes, and it
+   answers what six repairs have not.
+2. **Quantify the rpm movement.** Log the RPM PID for 60 s at warm idle in
+   P — `src/obd_logger.py` already does this.
+
+| RPM movement at steady warm idle | Reading |
 |---|---|
-| Engine / transmission mounts | **Ruled down** — wrong direction |
-| Cracked flexplate | **Ruled down** — would worsen in gear |
-| Torque converter shudder | **Ruled down** — fluid changed 18,000 km ago, and TC shudder does not appear at a standstill |
-| Combustion roughness | **Confirmed as the branch** |
+| ±25–50 rpm, gentle wander | **Normal** closed-loop idle control. Every engine does this. |
+| ±100 rpm or more, or a rhythmic hunt | **Real fault.** Work the ranked suspects below. |
 
-### Interpretation
+---
 
-In D/R the torque converter is coupled and loaded, and the fluid coupling
-damps torsional pulses before they reach the chassis. In N the driveline is
-decoupled and the engine rocks freely on its mounts, so identical roughness
-reads louder in the seat.
+## The load relationship — the key observation
 
-**The engine is genuinely running rough; the converter is masking it in
-gear.** Mounts are likely fine. The fault is in combustion — mixture,
-ignition, or mechanical.
+Symptom strength tracks engine load, inversely:
+
+| Condition | Manifold vacuum | Shake |
+|---|---|---|
+| P / N at standstill | Highest | **Worst** |
+| D / R at standstill | Slightly lower | **Less** |
+| Driving under load | Lowest | **Absent — pulls great, no vibration** |
+
+**Rpm is not the variable; load is.** Across a no-load rpm sweep in Park the
+symptom is roughly equal at all engine speeds. It is the arrival of *load*
+that removes it.
+
+If a fault exists, it is one whose effect scales with manifold vacuum and
+vanishes when the throttle opens.
+
+### Superseded reasoning — do not reuse
+
+Earlier revisions of this document argued:
+
+> In D/R the torque converter is coupled and loaded, and the fluid coupling
+> damps torsional pulses... **The engine is genuinely running rough; the
+> converter is masking it in gear.**
+
+That was wrong on two counts:
+
+1. **Every** torque-converter automatic is smoother in gear at a standstill.
+   The observation was never evidence of a fault.
+2. The truck being flawless under real road load rules out the entire
+   worsens-under-load family that this reasoning pointed at — which is most
+   of what the old ranked-suspect table contained.
+
+### The better mount test
+
+**D and R feel the same as each other.** Engine torque reacts in opposite
+directions in D and R, so a collapsed mount or a torque-reaction contact
+point would feel different between them. It does not.
+
+Combined with the symptom reproducing at a standstill in **Park**, this
+rules out mounts, flexplate, driveshaft, U-joints, tyres and wheel balance
+more firmly than the old D-vs-N test ever did.
+
+---
+
+## Work already performed — none of it changed the shake
+
+| Work | Detail |
+|---|---|
+| Spark plugs | Replaced. No change. |
+| Air filter | Replaced. |
+| **Throttle body** | **Removed from the manifold and hand-cleaned. No change.** |
+| **Fuel injectors** | **Removed, cleaned and flow-tested.** |
+| Engine oil and filter | Changed. Currently 5W-30. |
+| Coolant | Flushed and replaced. Level steady since. |
+| 6R80 fluid | Changed at 113,000 km. |
+| Oxygen sensors | "Cleaned" — **method unknown**. |
+| Intake manifold | Off during the injector work, refitted. **No change.** |
+| Battery | Disconnected once; relearn done plus ~300 km driven. |
+
+### Also established
+
+- **Factory airbox and duct**, no oiled aftermarket filter — MAF
+  calibration is as Ford intended.
+- **Always 95 octane, same station** — fuel supply is constant.
+- **No aftermarket tune**, no evidence of prior engine work.
+- **Thermostat reaches and holds** normal temperature — the PCM does exit
+  warm-up enrichment.
+- **Rear differential fluid** changed at some point.
+- Oil is **5W-30** against a 5W-20 spec — correct at the next change, but it
+  is not the cause: sluggish phasers hurt more under load, and this truck is
+  flawless under load.
+
+### Concern: the oxygen sensors — separate from the shake
+
+Heated O2 sensors are not serviceable by cleaning. Solvent attacks the
+platinum layer and the ceramic element, and mechanical cleaning damages the
+shroud's diffusion slots. Either is permanent.
+
+**But they are not the cause of this shake.** The symptom is identical cold,
+where the PCM runs open loop and ignores them entirely.
+
+**Still check upstream HO2S switching rate at 2,500 rpm.** A healthy sensor
+crosses 0.1↔0.9 V several times per second. Slow, lazy or parked mid-range
+means replace. Treat as a separate, owed repair.
+
+---
+
+## Elimination record
+
+Everything below is ruled out, with the evidence that ruled it out.
+
+| Ruled out | Evidence |
+|---|---|
+| Fuel delivery — pump, filter, pressure | Pulls great under load; these fail under load first |
+| Compression, valves, cam timing, phasers *stuck in position* | Same — all worsen under load |
+| Ignition — plugs, coils, boots | Plugs changed nothing; ignition faults bite under load |
+| Mounts, damper, flexplate, driveline, exhaust contact | Reproduces in Park; D and R identical; nothing mechanical moves a tachometer needle |
+| O2 sensors as *root cause* | Symptom identical cold, in open loop |
+| MAF / metering error | Factory airbox and duct, no oiled filter |
+| Fuel quality or octane | Always 95, same station; symptom utterly constant |
+| Aftermarket PCM tune | Never tuned; no evidence of prior engine work |
+| Unlearned adaptive memory | Relearn done, plus 300 km |
+| Intake manifold gasket disturbed in the injector job | Manifold off and refitted with **zero** change |
+| **Throttle body carbon** | **Properly removed, hand-cleaned, no change** |
+| **Injectors** | **Removed, cleaned and flow-tested** |
+| Thermostat / warm-up enrichment | Reaches and holds temperature |
+| Coolant intrusion / internal water pump | Level steady, no loss |
+| Idle air control / low idle speed | Idle normal at 650–750; no change with A/C load |
 
 ---
 
 ## Open suspects, ranked
 
-Nothing in the completed work addresses any of these.
+Only if the rpm-movement test shows a genuine fault. Note what they have in
+common: **every survivor is a vacuum- or charge-control component that has
+never been touched.**
 
 | # | Suspect | Why it fits | Test |
 |---|---|---|---|
-| 1 | **Throttle body carbon** | Never cleaned. Carbon around the plate distorts the small airflow the PCM meters at idle. Sets no code. | Inspect plate edge and bore. Clean, then **run idle relearn** — mandatory, or it idles worse afterward. |
-| 2 | **Vacuum leak (age)** | Brake booster hose, PCV valve and hose, intake gaskets — all original, 11 years, heat-cycled. Pre-existing; nothing done would have fixed it. | Smoke test intake. Plus PCV pinch test at idle in N. |
-| 3 | **EGR stuck or leaking** | Fits the D-vs-N result: dilution hurts most at idle where airflow is lowest, shrinks under load. Often sets no code. | Commanded vs actual EGR position at idle — must be **0% / closed**. |
-| 4 | **Weak ignition coil** | Plugs changed, coils not. A tired coil misfires worst at idle and light load. | Per-cylinder misfire counters, then swap suspect coil with a neighbour and see whether the count follows the coil. |
-| 5 | **VCT cam phaser** | 76,000 km of unknown oil history. Phasers are the first casualty of poor oil maintenance on this engine. | Commanded vs actual cam position at idle. Listen for a 1–2 s rattle at first cold start. |
-| 6 | **Low compression, one cylinder** | The one cause consistent with "nothing fixes it." Valve seat recession or sticky valve. Remember the odometer may understate real distance. | Relative compression / cylinder balance, or wet-dry compression test. |
+| 1 | **EVAP purge valve stuck partly open** | Never touched. Reported as a very common failure on the 2009–2014 F-150. Stuck open = a constant unmetered air and vapour leak, rough idle that shakes when stopped, worst at a standstill, **frequently no code**. Part is cheap. | Pinch its hose to the manifold at idle. Or hand-vacuum-pump the inlet with the connector unplugged — it must hold. |
+| 2 | **PCV valve, hose, elbow** | Never inspected. 12 years of Jeddah heat hardens the rubber; cracks open hot and close cold. Same leak signature. | Flex it **hot and running**. Pinch test at idle. Oil filler cap test. |
+| 3 | **VCT solenoid / cam phaser** | This engine's *internal EGR* is done by cam overlap — see the note below. A phaser or solenoid misbehaving specifically at idle, where oil pressure and phaser authority are lowest, produces dilution that clears as load and pressure rise. | Commanded vs actual cam position at idle. **Swap solenoids bank to bank** — if the fault follows, it is the solenoid. Inspect solenoid screens. |
+| 4 | **Vacuum leak elsewhere** | Brake booster hose, manifold gaskets, fittings. Not excluded, but the manifold refit changed nothing. | Smoke test — **only after trims justify it**. |
 
-### Also worth checking
+### Why suspect 3 was previously eliminated, and why it is back
 
-Verify the spark plug **part number and gap** against the Motorcraft
-catalogue for this VIN. Wrong heat range or reach produces exactly this
-symptom, and plugs get dropped and closed up in shipping. Check every gap
-with a wire gauge.
+An earlier revision ruled out cam phasers on the grounds that they worsen
+under load. That argument conflated two different failure modes:
 
-Firing order is **1-4-2-5-3-6**; bank 1 is passenger side (1-2-3), bank 2
-driver side (4-5-6). Verify against the manual before acting on it.
+- **Phaser stuck in a fixed wrong position** — costs power under load. The
+  truck pulling great genuinely rules this out.
+- **Phaser or VCT solenoid misbehaving at idle** — oil pressure is lowest
+  at idle, so control authority is weakest exactly there. Cam position
+  wanders, rpm wanders with it, and it cleans up as load and oil pressure
+  rise. The elimination never applied to this mode.
+
+Two things still argue against it: VCT faults normally set **P0010–P0024**
+and there have been no codes, and the classic description is
+rough-cold-smooths-warm, while this is identical cold and hot.
+
+### There is no external EGR valve on this engine
+
+The 3.7 Ti-VCT uses twin independent cam phasing to create **internal EGR**
+through controlled valve overlap; retarding the exhaust cam does the job the
+EGR valve used to do, so the valve was deleted. RockAuto's catalogue is
+consistent with this — the 2014 F-150 **3.5L EcoBoost** lists an EGR valve
+control solenoid, the **3.7L** does not.
+
+Earlier revisions of this document listed "EGR stuck or leaking" as a ranked
+suspect and "EGR actual position at idle" as required scan data. **Both were
+wrong** — there is no such valve and likely no such PID. The dilution
+mechanism survives; it lives in the phasers. [VERIFY against the service
+manual]
 
 ---
 
 ## Data still needed
 
-The suspect ranking above is informed guesswork until these exist.
-
-1. **Codes** — stored, pending **and permanent**, all modules. Pending and
-   permanent codes often hold misfire history with no dash light.
-2. **LTFT bank 1 and bank 2** at warm idle in P/N, then in D with foot on
-   brake, then at 2,500 rpm.
-3. **Misfire counters per cylinder.**
-4. **EGR actual position at idle.**
-5. **VCT commanded vs actual**, including a cold-start log.
+1. **RPM movement at warm idle, logged** — the threshold question. See
+   [Is this a fault?](#is-this-a-fault).
+2. **Codes — permanent (Mode $0A) especially.** The battery disconnect
+   wiped stored and pending; permanent codes are the only surviving history.
+3. **LTFT bank 1 and bank 2** at warm idle in P, in D on the brake, and at
+   2,500 rpm no load.
+4. **Misfire counters per cylinder.**
+5. **VCT commanded vs actual** at idle, both banks.
+6. **HO2S upstream switching rate** — separate, owed repair.
 
 ### How to read the results
 
 | Reading | Healthy | Fault indication |
 |---|---|---|
+| RPM at steady warm idle | ±25–50 rpm wander | ±100 rpm or rhythmic hunting |
 | LTFT B1 / B2, warm idle | within ±5%, ±10% tolerable | Double-digit positive that **shrinks** at 2,500 rpm → unmetered air. The key reading. |
 | LTFT split between banks | within a few % of each other | One bank high → narrows to three cylinders |
-| Misfire counters | 0, or a stray count | One cylinder dominant → that cylinder's coil, injector or compression. Even spread → global cause |
-| EGR actual, idle | 0% closed | Anything open → dilution |
-| VCT actual vs commanded | tracks within a few degrees | Lagging or not following → phaser or solenoid |
+| Misfire counters | 0, or a stray count | One cylinder dominant → that cylinder. Even spread → global cause |
+| Rough idle **with normal trims** | — | **Dilution, not mixture** → suspect 3 |
+| VCT actual vs commanded | tracks within a few degrees | Lagging, wandering or not following → phaser or solenoid |
 | HO2S upstream @ 2,500 rpm | 0.1↔0.9 V, several times/sec | Slow or parked mid-range → sensor damaged |
-| ECT warm | ~88–100 °C | Running cold → thermostat stuck open, causes rich idle |
+| ECT warm | ~88–100 °C | Confirmed normal on this truck |
 
-**Two numbers collapse most of the table:** fuel trims tell you whether it's
-a mixture problem, and misfire counters tell you whether it's one cylinder
-or all six.
+**Trims decide whether to smoke test, not the other way round.** LTFT within
+±10% at idle means no leak present is significant enough to explain a shake,
+and a smoke test would only surface leaks too small to matter. Any 12-year
+old engine shows *some* smoke somewhere.
+
+---
+
+## Test procedures
+
+### 1. EVAP purge valve (free, do first)
+
+The valve is **normally closed** when de-energized. Everything below tests
+that. Fuel vapour is involved — no ignition sources.
+
+- **Pinch test.** Warm idle in P. Clamp the hose from the purge valve to the
+  intake manifold, watch 20 s. *Idle steadies, shake reduces, rpm may rise
+  slightly* → **the valve was leaking.** No change → move on.
+- **Vacuum hold, engine off.** Disconnect both hoses, hand vacuum pump on
+  the inlet port, connector unplugged. Must **hold**. Bleeds down → stuck
+  open.
+- **Flow test, running.** Unplug the connector so the PCM cannot command it
+  open, pull the canister-side hose, finger over the port. Vacuum pulling →
+  passing with no command → stuck open.
+- **Scan tool.** Command 0% then 100% duty at idle. Rpm and STFT must react
+  when commanded open and be flat when commanded closed.
+
+If any test is positive, **replace rather than clean.**
+
+### 2. PCV valve, hose, elbow (free)
+
+- **Flex it hot and running.** Heat-hardened rubber cracks open when flexed
+  and closes cold — a cold visual inspection misses it. Look for glazing,
+  crazing, a chalky surface.
+- **Pinch test at idle.** Rough idle smooths → air was getting in. Idle
+  rises slightly then settles → normal.
+- **Oil filler cap.** Lift slowly at idle. Small change that settles →
+  normal. Idle drops hard → restricted ventilation. Idle *smooths* →
+  crankcase pressure problem.
+
+[VERIFY] Confirm against the parts catalogue whether this engine has a
+serviceable PCV valve at all — several Ford engines of this era integrate a
+fixed orifice into the valve cover with no replaceable valve.
+
+### 3. Vacuum leak, general
+
+- **Smoke test.** Seal the intake. **Clamp off the PCV and purge lines
+  first**, or a leaking valve shows up as "system leaks" and localises
+  nothing. Run twice — clamped and unclamped; the difference isolates the
+  valves from the manifold. Inspect manifold gaskets, throttle body base,
+  every hose and fitting, brake booster hose, dipstick tube.
+- **Vacuum gauge, manifold port, warm idle.** Steady 18–22 inHg → healthy at
+  this elevation. Steady but low → leak or retarded timing. Needle drifting
+  slowly → mixture instability. Rapid regular flicker → valve or guide.
+- **Brake booster.** Clamp its hose at idle; a change means booster or check
+  valve.
+
+Do not spray flammable cleaner around a hot running engine to hunt leaks.
+Smoke does the same job with none of the risk.
+
+### 4. VCT solenoid and phasers
+
+- **Scan data both banks at idle.** Actual tracking commanded smoothly →
+  working. Wandering, lagging or hunting → solenoid or phaser.
+- **Bank swap.** Swap the two VCT solenoids side to side. Fault moves →
+  **the solenoid** (cheap). Fault stays → phaser, chain or oil supply.
+- **Solenoid screens.** Pull and inspect for debris or a holed screen.
+- **Oil pressure at hot idle**, mechanical gauge. Reported requirement is at
+  least **25 psi** for phasers and tensioners. [VERIFY — reported in a TSB
+  summary, source document not read]
+- **Chain stretch.** Reported TSB method: **VCT_INT_ACT1 ≥ +6° at idle**
+  indicates a worn chain; with the cover off, **more than 5 teeth** of
+  tensioner extension confirms. [VERIFY — same caveat]
 
 ---
 
 ## Recommended next actions
 
-1. **Clean the throttle body and run the idle relearn.** Cheapest, undone,
-   needs no scan tool, and addresses the top suspect.
-2. **Smoke test the intake.** ~20 minutes, resolves the entire leak branch.
-3. **Read EGR position at idle.** One PID.
-4. **Pull codes and log fuel trims + misfire counters.**
+1. **Establish whether there is a fault.** Control-sample another truck, and
+   log the rpm movement at warm idle. Free. Do this first.
+2. **Purge valve and PCV pinch tests.** Free, two minutes, no tools, and
+   they target the two components never touched in twelve years.
+3. **Read permanent codes, fuel trims and misfire counters.**
+4. **Smoke test** — only if trims show a leak that matters.
+5. **VCT cam position tracking and bank-swap** — if trims are normal but the
+   rpm movement is genuinely out of range.
+6. **HO2S switching rate** — separate, owed regardless.
+
+**Do not fit another part before steps 1 and 2.** Six repairs have been
+bought chasing a symptom nobody has yet established is abnormal, and every
+one of them targeted a fault that gets *worse* under load — which this truck
+does not have.
+
+---
+
+## Research note
+
+Forum and TSB sources were searched, but this environment's network policy
+blocks f150forum, ford-trucks, fordf150.net, edmunds, reddit, RockAuto,
+go-parts and static.nhtsa.gov. **Findings attributed to those sources come
+from search-engine summaries, not pages actually opened.** Treat them as
+second-hand. The purge valve failure-rate claim and the VCT/TSB thresholds
+above are both in that category.
 
 ---
 
@@ -213,4 +429,5 @@ or all six.
 The 3.7L Cyclone uses an **internal, timing-chain-driven water pump.** When
 it fails it dumps coolant into the oil pan rather than onto the ground. If
 any coolant loss appears with no external leak, check the dipstick for milky
-oil or an over-full pan before chasing anything else.
+oil or an over-full pan before chasing anything else. **Level is currently
+steady.**
