@@ -469,6 +469,11 @@ disturbance in or out.
 
 ### Bank symmetry — upstream identical, downstream not
 
+**SUPERSEDED IN PART.** The heading's claim that the banks are fuelled
+identically is wrong — see *Bank 2 short-term trim runs +3.5 %* below. The
+upstream sensors do read the same, but that is the corrected mixture, not the
+fuelling. The downstream observation below still stands.
+
 | | Bank 1 | Bank 2 |
 |---|---|---|
 | Upstream (wideband AFR) | 14.41-15.05, avg 14.65 | 14.35-15.23, avg 14.68 |
@@ -493,6 +498,88 @@ buffering less of the dither.
 It is a real, reproducible asymmetry and it is the first thing in this
 investigation to point at one component on one bank. That is worth a cruise
 capture. It is not worth a converter.
+
+### Bank 2 short-term trim runs +3.5 % where bank 1 runs 0 % (2026-09)
+
+Nine consecutive ~15 s windows, `Engine RPM` paired with `STFT B2`, warm idle
+in Park.
+
+| | Bank 1 | Bank 2 |
+|---|---|---|
+| STFT baseline | ~**0 %** (-0.9 to +1.6) | ~**+3.5 %** (steps 3.13 <-> 3.91) |
+| STFT excursions | +/-1.56 % | 1.56 % to 6.25 % |
+
+Bank 2 is consistent across all nine windows: the trace steps between 3.13 and
+3.91 %, two adjacent quantisation codes (1 LSB = 0.78125 %), so the true value
+sits at about **+3.5 %**, with excursions up to 5.47 and 6.25 and dips to 1.56.
+
+**Bank 2 needs about 3.5 % more fuel than bank 1 to reach the same measured
+lambda.**
+
+#### This corrects "fuelling is symmetric across banks"
+
+An earlier entry read the two upstream wideband sensors (avg 14.65 B1 vs
+14.68 B2) as proof that both banks were fuelled identically. **Wrong variable.**
+The upstream sensor reads the mixture *after* the PCM has corrected it; the
+trim reads *how much correction was needed*. Identical lambda with different
+trims means the underlying fuelling is not identical — bank 2 arrives leaner
+and the PCM makes up the difference. Same class of error as reading STFT as
+though it were the mixture.
+
+#### It agrees with the downstream asymmetry
+
+Bank 2 gets more fuel added, so its exhaust runs marginally richer, so its
+downstream sensor sits higher (0.70-0.72 V against bank 1's 0.58-0.63 V). Two
+independent measurements pointing the same direction, which makes both more
+credible than either alone.
+
+#### How much does 3.5 % matter?
+
+**On its own, very little.** Anything within +/-10 % is normal and a few points
+of bank-to-bank spread is ordinary — intake manifold air distribution alone can
+produce it. It will not set a code and it is not a fault by itself.
+
+What makes it worth pursuing is that it is the **second** consistent asymmetry,
+and the causes of a bank-specific lean bias *that appears only at idle* match
+this truck's load curve:
+
+- **A small vacuum leak feeding one bank.** Largest effect at idle, when total
+  airflow is smallest and any fixed leak is the biggest fraction of it.
+  Vanishes proportionally as the throttle opens.
+- **An exhaust leak upstream of the bank 2 sensor.** At idle, exhaust flow is
+  low and strongly pulsating, so the negative pulses draw fresh air in through
+  a small leak; the sensor reads lean and the PCM adds fuel. Under load,
+  exhaust pressure stays positive and no air is drawn in. Lean at idle, normal
+  under load, no code.
+- **Bank 2 upstream sensor bias.** A sensor reading slightly lean makes the PCM
+  add fuel it does not need. The O2 sensors on this truck were "cleaned" by an
+  unknown method.
+
+Neither of the first two is claimed. They are recorded because the *shape* of
+the symptom fits them and nothing else examined so far has that shape.
+
+#### The test that settles the offset
+
+`STFT B1` and `STFT B2` **paired in one window.** Both figures above come from
+captures taken at different points in the same session; a single window removes
+any doubt that the offset is real rather than drift between captures. Quick to
+set up and it should be done before anything is concluded from it.
+
+#### Axis width — now settled by two clocks
+
+Across these nine screenshots the graph clock ran 21:20 to 23:55 while the
+phone clock ran 12:48 to 12:51. That is **2 min 35 s of graph against ~3 min of
+real time**, so the axis is MM:SS, gridlines are 5 seconds, and the screen is
+~15 seconds wide. An HH:MM reading would require 2 h 35 m to elapse in 3
+minutes. This independently confirms the screen width assumed throughout, and
+retires the question.
+
+#### Phase against rpm
+
+Not readable by eye. Bank 2's trim moves at the same seconds-scale rhythm as
+everything else, but whether it leads or lags rpm cannot be judged from
+screenshots of a closed loop. That needs a synchronised log and
+cross-correlation (`f150diag analyze`).
 
 ### Is this dither abnormal?
 

@@ -275,6 +275,55 @@ judge one (lowest flow and temperature), and the slow 3.4–4 s period argues
 *for* intact oxygen storage, not against it — less storage would make the loop
 run faster. The reading that matters is at steady 60–80 km/h cruise.
 
+### Bank 2 trim runs +3.5 % where bank 1 runs 0 % (2026-09)
+
+Nine consecutive ~15 s windows of `STFT B2` paired with rpm. Bank 2's trace
+steps between **3.13 and 3.91 %** — two adjacent 0.78 % codes, so the true
+value is about **+3.5 %** — with excursions to 6.25 and dips to 1.56. Bank 1
+sits at ~0 % (−0.9 to +1.6).
+
+**Bank 2 needs ~3.5 % more fuel than bank 1 to reach the same lambda.**
+
+**CORRECTION — "fuelling is symmetric across banks" is withdrawn.** That came
+from the two upstream sensors reading almost the same AFR (14.65 vs 14.68).
+Wrong variable: the upstream sensor reads the mixture *after* correction, the
+trim reads *how much correction was needed*. Same lambda + different trim =
+different underlying fuelling. Same class of error as reading STFT as the
+mixture.
+
+**It agrees with the downstream asymmetry.** More fuel into bank 2 → richer
+exhaust → higher downstream voltage (0.70–0.72 vs 0.58–0.63). Two independent
+measurements, same direction.
+
+**3.5 % is not a fault on its own** — anything within ±10 % is normal and will
+not set a code. What makes it worth chasing is that it is the *second*
+consistent asymmetry, and the causes of a bank-specific lean bias **that
+appears only at idle** match this truck's load curve:
+
+- **Small vacuum leak feeding one bank** — biggest fraction of total airflow at
+  idle, proportionally vanishing as the throttle opens.
+- **Exhaust leak upstream of the bank 2 sensor** — at idle, low pulsating flow
+  draws fresh air in through the leak, the sensor reads lean, the PCM adds
+  fuel. Under load, exhaust pressure stays positive and no air enters. Lean at
+  idle, normal under load, no code.
+- **Bank 2 upstream sensor bias** — the O2 sensors were "cleaned" by an unknown
+  method.
+
+Neither of the first two is claimed. They are recorded because the *shape* fits
+and nothing else examined so far does.
+
+**Settle the offset first:** capture `STFT B1` and `STFT B2` **paired in one
+window.** Both figures above come from captures taken at different points in
+the same session.
+
+### Graph axis width — settled by two clocks (2026-09)
+
+Across nine consecutive screenshots the graph clock ran 21:20 → 23:55 while the
+phone clock ran 12:48 → 12:51. That is **2 min 35 s of graph against ~3 min of
+real time**, so the axis is MM:SS, gridlines are 5 s, and the screen is ~15 s
+wide. An HH:MM reading would need 2 h 35 m to elapse in 3 minutes. The question
+is retired.
+
 ### Amplitude — do not overstate it
 
 Paired captures show a **24–34 rpm** band, tighter than the earlier 30–53.
