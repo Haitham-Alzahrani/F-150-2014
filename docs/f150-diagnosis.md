@@ -180,6 +180,29 @@ withdraws an earlier over-reading: the consistently slightly-negative STFT
 average was taken as a possible vapour signature, but at half a percent that
 was reading meaning into a rounding step.
 
+### Reading these graphs: check the axis before judging amplitude
+
+**The scan app auto-scales the y-axis to whatever range the data occupies.**
+When a value is nearly constant, the axis zooms in until normal rounding
+flicker fills the whole screen height and looks like a violent oscillation.
+
+Two examples from this vehicle, both of which misled the analysis at first:
+
+- The **purge** trace shows full-height vertical spikes. Its axis spans 40.40
+  to 40.78 — a range of **0.38 %**. The spikes are the value flicking between
+  40.39 and 40.78, which are *adjacent* values: the PID resolves 0.392 % per
+  step, so there is nothing between them. Rounding noise on a flat signal.
+- The **short-term fuel trim** trace looks like a square wave. Its axis spans
+  about ±1.5 %, and its resolution is 0.78 % per step. It is the loop
+  dithering across two or three steps.
+
+By contrast the **rpm** axis spans 618-703, an 85 rpm range, and the trace
+genuinely occupies a third of it. That one is a real oscillation.
+
+This caused a real error: the consistently slightly-negative trim average was
+read as a possible fuel-vapour signature and had to be withdrawn. Check the
+axis range first, every time.
+
 ### Amplitude — stated honestly
 
 In the paired captures the band is **24-34 rpm**, tighter than the 30-53
