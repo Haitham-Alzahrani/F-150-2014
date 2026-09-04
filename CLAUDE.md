@@ -275,6 +275,68 @@ judge one (lowest flow and temperature), and the slow 3.4–4 s period argues
 *for* intact oxygen storage, not against it — less storage would make the loop
 run faster. The reading that matters is at steady 60–80 km/h cruise.
 
+### CONFIRMED BOTH BANKS — the correction is a SLOPE (2026-09, 01:30–01:32)
+
+Thirteen windows of `LTFT - B1` paired with `LTFT - B2`. Idle → held ~2000 rpm
+for 2 min 7 s → idle.
+
+| | Bank 1 | Bank 2 |
+|---|---|---|
+| **Idle, before** | **+3.13 %** | **+2.34 %** |
+| **~2000 rpm** | **0 %** | **0 %** |
+| **Idle, after** | **+3.12 %**, min = avg = max | **+2.34 %**, min = avg = max |
+
+Both banks left their idle value on throttle opening and returned to the
+identical value on closing, with no re-learning interval. The load-cell
+mechanism is now beyond doubt.
+
+**The new finding: it is a gradient, not a step.** During the hold `LTFT - B1`
+kept flicking to **0.78 %** and back (bank 2 less often) — the rpm would not sit
+still, so the PCM kept crossing into neighbouring cells, and those hold 0.78 %.
+
+| Operating point | Learned correction |
+|---|---|
+| Idle | **+3.13 / +2.34 %** |
+| Just above idle | **+0.78 %** |
+| ~2000 rpm | **0 %** |
+
+**The correction fades smoothly as airflow rises — the behaviour of a fixed-size
+opening.** A MAF or baro calibration error is a *proportional* error and would
+put the same value in every cell. This slope is stronger evidence than the two
+endpoints, and it substantially weakens the un-learned-cell objection: cells
+across the range hold distinct, ordered values, which is not what an untouched
+default table looks like.
+
+**Owner's note: rpm would not hold steady at 2000.** Two ordinary explanations —
+the throttle is drive-by-wire, so a steady foot is not a steady plate (this
+project has already measured the PCM moving it), and coolant at 98 °C means the
+fan is cycling and loading the engine. Does not touch the trim finding, which
+rests on learned cell values. Worth its own capture: `Engine RPM` +
+`Throttle Position Actually` at a held 2000 rpm.
+
+### PRIME SUSPECT: EVAP purge flowing unmetered air at idle
+
+`Commanded evaporative purge` runs at **~40 % at warm idle**, flat, on a truck
+that had been idling for over three hours — long past when a canister should
+still hold fuel vapour. **Purge flow enters downstream of the MAF.** If the
+canister is dry, that flow is plain air the PCM never measured.
+
+**The fraction is the whole argument.** At idle the engine takes ~3 g/s total.
+At 2000 rpm it takes several times that. The same purge flow is therefore a
+large share of idle airflow and a small share at 2000 rpm — **which is exactly
+the slope measured above.**
+
+It has never been touched, Mustang 3.7 sources name stuck-open as *the* purge
+valve failure mode, and it frequently sets no code.
+
+**Test it without disconnecting anything on a running engine:** engine OFF,
+disconnect the purge line at the intake manifold, **plug the manifold port**,
+restart, and watch `Short term fuel % trim - Bank 1` and `- Bank 2` at warm
+idle. Trims falling toward zero name purge as the source. Leave the valve's
+electrical connector attached so no circuit code is set.
+
+Then the same method for the **PCV** circuit and the **brake booster** line.
+
 ### THE 2000 RPM LOAD TEST — lean ONLY at idle (2026-09, 01:18–01:20)
 
 **The strongest finding in this investigation.** Thirteen windows of `STFT B1`

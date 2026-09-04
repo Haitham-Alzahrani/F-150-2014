@@ -3,13 +3,17 @@
 Working log for VIN `1FTMF1EM1EFC80632`. Records what was checked, what it
 ruled out, and what is still open.
 
-**Status:** open — but there is now a measured lead with the right shape.
-**Long term fuel trim reads +2.34 % at idle and 0 % at ~2000 rpm** — the lean
-correction exists only at idle and vanishes when the throttle opens. That is the
-signature of a vacuum leak, and it is the same load curve as the symptom itself.
-See [THE 2000 RPM LOAD TEST](#the-2000-rpm-load-test--the-lean-correction-exists-only-at-idle-2026-09-0118-0120).
-One confirmation is outstanding: re-read the load cell after a proper drive, to
-rule out its 0 % being un-learned rather than learned.
+**Status:** open — but there is now a measured lead with the right shape,
+**confirmed on both banks.** Long term fuel trim reads **+3.13 % (B1) and
++2.34 % (B2) at idle, +0.78 % just above idle, and 0 % at ~2000 rpm**, returning
+to the identical idle values the moment the throttle closes. The lean correction
+fades smoothly as airflow rises — the behaviour of **unmetered air entering
+downstream of the MAF**, and the same load curve as the symptom itself. See
+[CONFIRMED ON BOTH BANKS](#confirmed-on-both-banks--and-the-correction-is-a-slope-not-a-step-2026-09-0130-0132).
+
+**The next step is physical: block each vacuum consumer in turn and watch the
+idle trims.** EVAP purge first — it is commanded at ~40 % at idle, it has never
+been touched, and unmetered purge flow produces exactly this signature.
 
 ---
 
@@ -650,6 +654,85 @@ addresses the actual complaint.
 - `Knock retard` not yet captured paired with rpm.
 
 ---
+
+## CONFIRMED ON BOTH BANKS — and the correction is a SLOPE, not a step (2026-09, 01:30-01:32)
+
+Thirteen consecutive ~15 s windows pairing `LTFT - B1` with `LTFT - B2`, graph
+clock 3:00 through 5:38. Idle, a held ~2000 rpm for 2 min 7 s, then idle again.
+
+### The measurement
+
+| Graph clock | `LTFT - B1` | `LTFT - B2` | Event |
+|---|---|---|---|
+| 3:00-3:11 | **3.13 %** | **2.34 %** | Idle |
+| **3:11** | 3.13 → 2.34 → 0.78 → **0** | 2.34 → 0.78 → **0** | Throttle opened |
+| 3:11-5:18 | **0 %**, with excursions to 0.78 | **0 %**, with excursions to 0.78 | Held ~2000 rpm |
+| **5:18** | 0 → 0.78 → 2.34 → **3.13** | 0 → 1.56 → **2.34** | Throttle closed |
+| 5:22-5:38 | **3.12**, min = avg = max | **2.34**, min = avg = max | Idle, settled |
+
+**Both banks left their idle values and both returned to exactly the same
+numbers.** The final window is two perfectly flat lines with min, max and
+average identical. This replicates the 01:18-01:20 result on bank 2 and extends
+it to bank 1, which had never been measured at load.
+
+### The new finding: it is a gradient
+
+During the hold, `LTFT - B1` did not sit pinned at zero — it repeatedly flicked
+up to **0.78 %** and back, and `LTFT - B2` did the same less often. The owner
+reports the rpm would not stay put, so the engine kept wandering across load
+cell boundaries. Each excursion is the PCM crossing into a **neighbouring cell**,
+and those cells hold 0.78 %.
+
+So the learned correction is not two values. It is a slope:
+
+| Operating point | Learned correction |
+|---|---|
+| Idle | **+3.13 % (B1) / +2.34 % (B2)** |
+| Just above idle | **+0.78 %** |
+| ~2000 rpm | **0 %** |
+
+**The correction fades smoothly as airflow rises.** That is the behaviour of a
+fixed-size opening: a large share of a small airflow, a negligible share of a
+large one. **A MAF or barometric calibration error would put the same value in
+every cell**, because it is a proportional error rather than a fixed quantity.
+
+**This slope is stronger evidence than the two endpoints alone**, and it
+substantially weakens the un-learned-cell objection: cells across the range hold
+distinct, ordered, non-zero values, which is not what an untouched default table
+looks like.
+
+### The load-cell mechanism, now beyond doubt
+
+Two independent captures, two hours apart in graph time, on both banks, have now
+shown long term trim leaving a value on throttle opening and returning to the
+identical value on throttle closing — instantly, with no re-learning interval.
+Long term fuel trim on this PCM is **indexed by load**, and the displayed number
+is whichever cell is currently active.
+
+### The owner's observation: rpm would not hold steady at 2000
+
+Recorded because it was reported, and because it is a separate question from the
+trim finding.
+
+Two ordinary explanations, both expected on this vehicle:
+
+- **The throttle is drive-by-wire.** The pedal is a sensor; the PCM decides the
+  actual plate angle. A steady foot does not produce a steady throttle opening,
+  and this project has already measured the PCM moving the plate independently.
+- **Coolant was at 98 °C.** Cooling fan cycling at that temperature loads and
+  unloads the engine noticeably at a fixed throttle.
+
+**It does not affect the trim finding**, which rests on learned cell values and
+is indifferent to how steady the rpm was. Worth its own capture later — `Engine
+RPM` paired with `Throttle Position Actually` at a held 2000 rpm would show
+whether the plate is moving on its own.
+
+### What remains open
+
+The drive is still worth doing, but it is now confirmation rather than the
+deciding test. Fifteen to twenty minutes of ordinary driving with sustained
+cruise, then re-read both long term trims. **Cruise cells at or near 0 % while
+idle holds +2.3 to +3.1 % completes the case.**
 
 ## THE 2000 RPM LOAD TEST — the lean correction exists ONLY at idle (2026-09, 01:18-01:20)
 
