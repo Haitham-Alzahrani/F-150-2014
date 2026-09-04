@@ -106,7 +106,9 @@ enough to shake a cab produces an *audibly* uneven idle. This one does not.
 
 ## RPM stability — 2026-09, six windows at warm idle in Park
 
-Six recordings of 10–15 minutes each, warm, in Park.
+Six recordings of 10–15 minutes each, warm, in Park, **with the air
+conditioning ON** — established after the fact, and it changes how the traces
+read. See the correction below.
 
 | Window | Min | Max | Span |
 |---|---|---|---|
@@ -132,15 +134,29 @@ engine events, and they should be excluded.
 between roughly **638 and 668 rpm — about 30 rpm wide**. That is well inside
 normal closed-loop idle control.
 
-### The slow cycle is not a hunt
+### The slow cycle is not a hunt — and its cause is now known
 
 There is a repeating structure: rpm climbs to 670–700, falls to about 635,
 climbs again, on a period of roughly **four to five minutes**.
 
 That is not an idle control hunt. A hunting idle oscillates over *seconds* and
-is visible and felt. A four-minute cycle is the PCM tracking slowly changing
-loads — cooling fan cycling at 37 °C ambient, evaporative purge cycling
-(commanded at 41 %, measured), alternator load. Normal idle management.
+is visible and felt.
+
+**These traces were recorded with the air conditioning ON**, so the compressor
+cycling is the leading candidate for the multi-minute pattern — a real,
+repeating mechanical load being applied and removed. The A/C is confirmed to
+cool properly, so the compressor is doing genuine work and the load is real.
+
+An earlier revision of this section attributed the cycle to cooling fan,
+purge and alternator load. That was written before the A/C state was known and
+should not be relied on.
+
+**This reads better for the engine, not worse.** Holding 650–660 rpm through
+repeated compressor engagement at 37 °C ambient is competent idle control.
+
+**But it also means these traces are not a bare-idle measurement.** The
+cyclic load was present throughout, so they cannot be read as showing what the
+idle does when nothing is loading it.
 
 ### The important limitation — and a correction
 
@@ -160,11 +176,42 @@ treated them as one symptom, and that was wrong.
 like-for-like: slow load drift accumulates over ten minutes and inflates the
 peak-to-peak. On its proper timescale this idle is normal.
 
+### It separates the tachometer from the shake
+
+The owner reports the shake feels **identical with A/C on and off**. These
+traces show the rpm pattern clearly **does** change with A/C — the compressor
+cycle is visible in them.
+
+A pattern that changes with A/C cannot be the cause of a symptom that does
+not. That is direct evidence, from this vehicle, that the tachometer movement
+and the felt vibration are two separate phenomena.
+
 ### Verdict
 
-**Idle speed control is working correctly.** This is the fourth independent
-line of evidence that there is no engine fault, after the load curve, the
-absence of powertrain codes, and the live fuel and combustion data.
+**Idle speed control is working correctly**, under load. This is the fourth
+independent line of evidence that there is no engine fault, after the load
+curve, the absence of powertrain codes, and the live fuel and combustion data.
+
+### Still to record
+
+Two short traces, back to back, warm and in Park:
+
+1. **3 minutes with A/C OFF** — the bare-idle baseline, never yet measured
+2. **3 minutes with A/C ON**, max cold, high blower
+
+If the multi-minute cycle disappears in the first and returns in the second,
+the compressor is confirmed as its cause and bare idle stability is finally
+measured cleanly. Also worth noting whether the felt shake changes at the
+moment the compressor engages — the owner reports it does not, and that
+observation is worth making deliberately rather than in passing.
+
+**Also unresolved:** whether the A/C was running during the live-data scan
+that produced the fuel trims and the 661 rpm reading. If it was, those numbers
+were taken under compressor load, which makes them stronger evidence rather
+than weaker — an engine metering correctly while loaded is healthier than one
+measured at no load. The A/C pressure PID read 0 kPa in that scan, but since
+the system cools properly that is almost certainly an unsupported parameter
+rather than a fault.
 
 ### The remaining test is not electronic
 

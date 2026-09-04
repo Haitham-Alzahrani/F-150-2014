@@ -189,16 +189,25 @@ load curve and the absence of powertrain codes.
 - "EGR system" monitor available and completed — on this engine that covers the
   internal EGR done by cam overlap. Does not prove a valve exists.
 
-### RPM stability — measured 2026-09, six windows of 10–15 min
+### RPM stability — measured 2026-09, six windows of 10–15 min, **A/C ON**
 
 Mean 650–660. Raw peak-to-peak 64–81 rpm, but **the raw span overstates it**:
 the vertical drops to 621–626 are one sample wide, so they are adapter frame
 losses rather than engine events. Excluding those, the body of every trace
 sits **638–668 rpm, a band about 30 rpm wide** — normal closed-loop control.
 
-There is a slow cycle of roughly **4–5 minutes** — the PCM tracking cooling
-fan cycling, purge cycling and alternator load. **That is not a hunt.** A
-hunting idle oscillates over seconds.
+There is a slow cycle of roughly **4–5 minutes**, and the **A/C compressor
+cycling** is the leading candidate: the A/C was running throughout and is
+confirmed to cool properly, so the load is real. **That is not a hunt** — a
+hunting idle oscillates over seconds. Holding 650–660 through repeated
+compressor engagement at 37 °C ambient is competent idle control.
+
+**These are therefore not a bare-idle measurement.** A cyclic load was present
+throughout. A 3-minute A/C-off trace is still owed.
+
+**It also separates the tachometer from the shake.** The rpm pattern changes
+with A/C; the owner reports the shake does not. A pattern that changes with
+A/C cannot cause a symptom that doesn't.
 
 **Two corrections this forced:**
 
@@ -223,9 +232,13 @@ on the seat, warm idle. At ~660 rpm:
 
 ### Still unmeasured
 
-1. **Permanent codes (Mode 0A)** — the only code history a clear cannot destroy.
-2. LTFT after several hundred km, since the current 0 % is probably un-relearned.
-3. VCT commanded vs actual, via the FORScan handoff, if anything still points there.
+1. **Bare idle, A/C OFF** — 3 minutes, then 3 minutes A/C ON for comparison.
+   Every rpm trace so far was taken under compressor load.
+2. **Permanent codes (Mode 0A)** — the only code history a clear cannot destroy.
+3. LTFT after several hundred km, since the current 0 % is probably un-relearned.
+4. Whether the A/C was running during the live-data scan. If it was, those
+   trims were measured under load, which makes them stronger evidence.
+5. VCT commanded vs actual, via the FORScan handoff, if anything still points there.
 
 Two numbers collapse most of the diagnosis — fuel trims say whether it's a
 mixture problem, misfire counters say whether it's one cylinder or all six.
