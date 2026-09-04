@@ -213,20 +213,67 @@ Bare idle: **30–53 rpm band around 650, 4–6 cycles per 15 s screen.** A/C
 roughly doubles the amplitude but the oscillation is present either way, so
 the compressor is not its cause.
 
-### Paired traces — two candidates eliminated (2026-09)
+### Paired traces (2026-09) — the PCM COMMANDS the oscillation
 
-**Fuel control: OUT.** STFT bank 1 stays within ±1.56 % (one LSB is 0.78 %),
-averaging −0.2 to −0.9 %, while rpm swings ±20. A hunting fuel loop would
-swing ±10–20 %. **The O2 sensor hypothesis is dead** — those sensors cannot
-move the idle 40 rpm with corrections that small.
+**`Fuel/Air commanded equivalence ratio` is a square wave**, alternating
+between about **14.41 and 14.86 AFR** (lambda ~0.98 / ~1.012) at the same
+3.4–4 s period as everything else. Measured lambda on both banks follows it.
+The chain, in the order the measurements support it:
 
-**EVAP purge: OUT.** Commanded purge is flat at ~40 %, drifting down one LSB
-at a time (40.78 → 40.39 → 40.30 → 40.00) over two minutes. A flat command
-cannot drive an oscillation.
+```
+PCM commands ±1.5 % AFR square wave → measured lambda follows (0.98–1.02)
+→ cylinder torque varies → rpm swings ±15–20 → spark modulates 10–13.5°
+```
 
-**A/C compressor: OUT** — the hunt is present with A/C off.
+That is the shape of **fore/aft catalyst control** — the deliberate dither
+that exercises the catalyst's oxygen storage. Its period is set by how slowly
+the catalyst stores and releases oxygen, which is why it lands at seconds
+rather than at any frequency the engine turns at.
 
-That leaves **air path or spark**.
+**CORRECTION — "fuel control is OUT" is withdrawn.** An earlier revision read
+STFT staying within ±1.56 % as proof the fuel loop was quiet. That was a
+conceptual error: **STFT is the correction applied around the commanded
+ratio, not the mixture.** With the dither living in the *command*, trim
+correctly sits near zero. Flat trim was never evidence of flat mixture. Fuel
+control is not eliminated — it is the source of the oscillation.
+
+**Still OUT, and these hold:**
+
+- **EVAP purge** — commanded flat at ~40 %, drifting one LSB at a time
+  (40.78 → 40.39 → 40.30 → 40.00) over two minutes. A flat command cannot
+  drive an oscillation.
+- **A/C compressor** — the hunt is present with A/C off.
+- **Throttle, both channels** — commanded 1.57 % and actual both read
+  min = max on a wide axis while rpm swings 40. The throttle never moves at
+  idle on this engine.
+- **MAF** — ~3.01 g/s, ±1.7 %, flat. Expected: at idle the throttle is a fixed
+  restriction with ~30 kPa manifold against ~100 kPa baro, so flow is choked
+  and nearly independent of engine speed. Flat MAF rules nothing in or out.
+- **Cam phaser** — 0.00 to −0.06°, parked.
+
+**Is the dither abnormal? Unknown — this is the honest limit.** ±1.5 %
+commanded AFR at idle is within what many Ford PCMs run. Settling it needs a
+control sample on another 3.7, or cross-correlation on a synchronised log
+(`f150diag analyze`), not screenshots.
+
+### Bank symmetry — the only asymmetry is downstream (2026-09)
+
+| | Bank 1 | Bank 2 |
+|---|---|---|
+| Upstream wideband AFR | 14.41–15.05, avg 14.65 | 14.35–15.23, avg 14.68 |
+| Downstream narrowband | avg **0.58–0.63**, swing **0.17–0.82** | avg **0.70–0.72**, swing **0.30–0.83** |
+
+**Same fuel in, different exhaust out.** Both upstream sensors report the
+commanded dither faithfully, fast and at equal amplitude — so fuelling is
+symmetric and neither upstream sensor is lazy. Bank 1's post-cat voltage
+swings deeper and leaner, meaning **bank 1's catalyst buffers less of the
+dither.** First thing in this investigation to point at one component on one
+bank.
+
+**Do not condemn a catalyst on this.** Idle is the worst operating point to
+judge one (lowest flow and temperature), and the slow 3.4–4 s period argues
+*for* intact oxygen storage, not against it — less storage would make the loop
+run faster. The reading that matters is at steady 60–80 km/h cruise.
 
 ### Amplitude — do not overstate it
 
@@ -300,6 +347,14 @@ made visible by young adaptives.
 
 ### Next — all physical, OBD is done
 
+0. **Charging voltage — NEW, and it now outranks the rest.** `ECU voltage`
+   averaged **12.62 V with the engine running**, in windows taken minutes
+   after other windows in the same session read 13.76–14.0 V. Either Ford's
+   smart-charging strategy dropping field excitation, or **the alternator has
+   stopped charging.** DMM on DC volts across the battery posts at warm idle:
+   13.5–14.5 V expected. 12.6 V means it is not charging. Settle this before
+   anything else on this list — a sagging or noisy supply moves every sensor
+   reference in the truck.
 1. **AC ripple across the battery.** DMM on AC volts at idle: under 0.1 V.
    Above that an alternator diode is injecting ripple into every sensor
    reference.

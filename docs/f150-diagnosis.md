@@ -324,6 +324,14 @@ normal governor behaviour made visible by young adaptives.
 
 ### What oscillates with a period of a few seconds
 
+**SUPERSEDED — this section named the oxygen sensors as the leading suspect.
+They have since been measured and are fast, clean and symmetric across both
+banks. The seconds-scale period belongs to the fore/aft catalyst control loop,
+whose dither the PCM commands deliberately. See
+[Paired traces](#paired-traces--2026-09--the-pcm-commands-the-oscillation).
+The reasoning below is kept only because the cold-start test it proposes is
+still worth running.**
+
 A 2.5-4 second cycle is characteristic of the **closed-loop fuel control
 loop**, whose speed is set by how fast the upstream oxygen sensors switch. A
 slow sensor lengthens the loop and increases its overshoot: mixture goes rich,
@@ -379,6 +387,143 @@ phenomena.
 It is likely there are **two separate observations** here: a slow idle
 breathing, now measured and worth chasing, and a fast vibration that no OBD
 log can resolve. The frequency test described below addresses the second.
+
+---
+
+## Paired traces — 2026-09 — THE PCM COMMANDS THE OSCILLATION
+
+Every trace in this section is a phone-app graph screen paired with
+`Engine RPM`, ~15 s wide, 5 s gridlines, warm idle in Park, A/C off, timed
+against the phone clock. Values are read off the plotted curve. **The app's
+Min/Avg/Max fields are session-cumulative, not per-window, and are not used
+anywhere below** — proof: they read an identical 617/703 on every screenshot
+regardless of what the curve was doing.
+
+### The finding
+
+**The mixture oscillation at idle is commanded by the PCM. It is not a
+disturbance the PCM is reacting to.**
+
+`Fuel/Air commanded equivalence ratio` is a **square wave**, alternating
+between about **14.41 and 14.86 AFR** (lambda ~0.98 / ~1.012), ±1.5 % about
+stoichiometric, at the same 3.4-4 s period as everything else. The measured
+upstream sensors follow that command. Rpm follows the resulting torque
+variation. Spark advance then modulates to hold rpm.
+
+**The causal chain, in the order the measurements support it:**
+
+```
+PCM commands a +/-1.5 % AFR square wave  (measured: 14.41 <-> 14.86)
+        v
+measured lambda follows                   (measured: 0.98-1.02 both banks)
+        v
+cylinder torque varies slightly
+        v
+rpm swings +/-15-20 at 3.4-4 s            (measured: 24-34 rpm p2p)
+        v
+spark advance modulates 10-13.5 deg       (measured: ~3.5 deg p2p)
+```
+
+This is the shape of **fore/aft catalyst control** — the deliberate rich/lean
+dither a PCM uses to exercise the catalyst's oxygen storage and to run the
+catalyst monitor. Its period is set by how slowly the catalyst stores and
+releases oxygen, which is exactly why it lands at seconds rather than at any
+frequency the engine itself turns at.
+
+### This corrects an earlier claim in this file
+
+An earlier revision said "fuel control is eliminated, STFT stays within
+±1.56 %." That was a **conceptual error**: short-term fuel trim is the
+*correction applied around the commanded ratio*, not the mixture itself. With
+the dither living in the command, trim correctly stays near zero. Flat trim
+was never evidence of flat mixture. **Fuel control is not eliminated — it is
+the source.**
+
+### Measured this session — what moves and what does not
+
+| Channel | Reading across the window | Verdict |
+|---|---|---|
+| `Throttle actuator control` (commanded) | 1.57 %, min = max | **static** |
+| `Throttle position actual` | min = max on a 6.2-8.2 deg axis | **static** |
+| `Mass air flow` | ~3.01 g/s, ±1.7 % | **flat** |
+| `Calculated load` | tracks rpm | derived, not a witness |
+| `Timing advance` | 10-13.5 deg, ~3.5 deg p2p | **swinging, in rhythm** |
+| `Fuel/Air commanded equiv ratio` | 14.41 <-> 14.86 square wave | **swinging — the driver** |
+| `O2S1 air:fuel` (upstream B1) | 14.41-15.05, avg 14.64-14.67 | follows the command |
+| `O2S5 air:fuel` (upstream B2) | 14.35-15.23, avg 14.66-14.70 | follows the command |
+| `Short term fuel trim B1` | within ±1.56 % (2 LSB) | near zero, as expected |
+| `Commanded purge` | flat ~40 %, 1 LSB drift over 2 min | **flat** |
+| `Cam actual advance #1` | 0.00 to -0.06 deg | **parked** |
+
+**The throttle never moves at idle on this engine.** Both the commanded and
+the actual channel are dead flat while rpm swings 40. A static throttle was
+earlier misread as "the PCM is passive". It is not passive — it holds idle
+with spark, its fast fine-trim lever, and leaves the air path alone.
+
+**MAF being flat is expected, not suspicious.** At idle the throttle is a
+fixed restriction with ~30 kPa manifold against ~100 kPa baro — that is
+choked flow, so mass flow is set by the throttle area and barometric
+pressure, essentially independent of engine speed. A flat MAF under a
+swinging rpm is what a healthy engine does here; it does not rule an air-path
+disturbance in or out.
+
+### Bank symmetry — upstream identical, downstream not
+
+| | Bank 1 | Bank 2 |
+|---|---|---|
+| Upstream (wideband AFR) | 14.41-15.05, avg 14.65 | 14.35-15.23, avg 14.68 |
+| Downstream (narrowband V) | avg **0.58-0.63**, swing **0.17-0.82** | avg **0.70-0.72**, swing **0.30-0.83** |
+
+**Same fuel going in; different exhaust coming out.** Both upstream sensors
+report the commanded dither faithfully, fast, and at the same amplitude, so
+fuelling is symmetric across banks and neither upstream sensor is lazy. The
+only asymmetry anywhere in this data set is downstream: bank 1's post-cat
+voltage swings deeper and leaner than bank 2's, meaning bank 1's catalyst is
+buffering less of the dither.
+
+**Do not condemn a catalyst on this.** Two reasons:
+
+1. **Idle is the wrong operating point.** Exhaust mass flow and temperature
+   are at their lowest; downstream sensors are least informative here. The
+   reading that matters is at steady cruise, 60-80 km/h.
+2. **The period argues against it.** A catalyst with less oxygen storage
+   would let the fore/aft loop run *faster*, not at the slow 3.4-4 s
+   observed. If anything the slow period suggests storage is intact.
+
+It is a real, reproducible asymmetry and it is the first thing in this
+investigation to point at one component on one bank. That is worth a cruise
+capture. It is not worth a converter.
+
+### Is this dither abnormal?
+
+**Unknown, and this is the honest limit.** ±1.5 % commanded AFR at idle is
+within the range many Ford PCMs run. Nothing measured says the amplitude is
+excessive; nothing measured says it is normal either. Separating the two needs
+one of:
+
+- **A control sample** — the same two channels on another 2011-2014 3.7 at
+  warm idle. Still the single most decisive free test available.
+- **Cross-correlation on a synchronised log**, not screenshots — which is what
+  `f150diag analyze` computes. By eye, lead and lag cannot be separated in a
+  closed loop.
+
+### It still does not explain the felt vibration
+
+The commanded dither and everything downstream of it run at ~0.28 Hz. The
+vibration felt in the seat at 660 rpm is the firing pulse at ~33 Hz. These
+remain two separate observations, and no OBD channel sampled at this rate can
+resolve the second one. The phone-accelerometer frequency test is what
+addresses the actual complaint.
+
+### Open, from this session
+
+- **`ECU voltage` averaged 12.62 V with the engine running**, in windows taken
+  minutes after other windows in the same session read 13.76-14.0 V. Either
+  Ford's smart-charging strategy dropping field excitation, or the alternator
+  has stopped charging. **Deferred to a multimeter test** — the app's own
+  voltage reading is not the instrument to settle this with.
+- `Short term fuel trim - Bank 2` not yet captured; bank 1 only.
+- `Knock retard` not yet captured paired with rpm.
 
 ---
 
