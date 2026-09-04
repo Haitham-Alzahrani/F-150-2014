@@ -1,0 +1,95 @@
+id: vct-check
+title: Variable cam timing — via a FORScan handoff
+description: |
+  Cam position commanded against actual is a Ford enhanced parameter. This
+  tool cannot read it, and guessing the data identifier would return a
+  plausible number rather than an error — which is how a good phaser gets
+  condemned.
+
+  So FORScan reads it and this protocol drives the handoff: the adapter is
+  released, FORScan is launched, its export is collected automatically, and
+  the branch below runs on the result. The port is handed over, never shared.
+
+  Run this when idle-quality lands on 'dilution or mechanical' — a rough idle
+  with fuel trims that are actually normal.
+
+entry: intro
+
+steps:
+  - id: intro
+    type: prompt
+    text: |
+      VCT CHECK
+
+      Needed: FORScan installed, the vehicle warm, and the adapter connected.
+
+      Run `f150diag forscan-status` first if you are not sure this tool can
+      find your FORScan installation or its export folder.
+    confirm: Press Enter to begin
+    next: warm
+
+  - id: warm
+    type: prompt
+    text: |
+      Engine at full operating temperature, in Park, A/C off.
+
+      Cam phaser authority is lowest at hot idle, because oil pressure is
+      lowest there. That is the condition worth measuring — a cold engine can
+      hide the fault behind thicker oil and a higher idle.
+    confirm: Confirm warm and idling in Park
+    next: baseline
+
+  - id: baseline
+    type: measure
+    label: pre_handoff
+    seconds: 60
+    pids: [idle]
+    next: handoff
+
+  - id: handoff
+    type: handoff
+    request: vct
+    label: vct
+    seconds: 90
+    timeout_s: 1200
+    next: verdict
+
+  - id: verdict
+    type: branch
+    checks:
+      - when: not vct.imported
+        finding: vct-no-data
+        summary: "No FORScan export was collected, so cam timing is still unmeasured. Re-run this protocol once a CSV export exists."
+        next: END
+      - when: vct_pairs == 0
+        finding: vct-no-channels
+        summary: "The export contained no cam channels. Check the parameter names in FORScan against the mapping report, then add any missing ones to SYNONYMS in forscan.py."
+        next: END
+      - when: vct_worst_error > 5
+        finding: vct-solenoid-phaser
+        summary: "Actual cam position departs from commanded by more than 5 degrees. Swap the VCT solenoids bank to bank — if the error follows the solenoid it is the solenoid; if it stays it is the phaser, chain or oil supply."
+        next: solenoid_swap
+      - when: vct_actual_periodic
+        finding: vct-solenoid-phaser
+        summary: "Cam position oscillates while the command sits still — hunting phaser control rather than an inability to reach target. Same bank-swap test applies."
+        next: solenoid_swap
+      - finding: vct-tracks-correctly
+        summary: "Cam position tracks the command within limits and does not oscillate. Variable cam timing is not the cause of this idle symptom."
+        next: END
+
+  - id: solenoid_swap
+    type: prompt
+    text: |
+      SOLENOID SWAP
+
+      Engine off. Swap the two VCT solenoids bank to bank, keeping their
+      connectors on their original banks. Then repeat this protocol.
+
+      - error moves to the other bank  → the solenoid. The cheap half.
+      - error stays on the same bank   → the phaser, the chain, or oil supply
+        to that bank. Measure oil pressure at hot idle with a mechanical
+        gauge before condemning a phaser.
+
+      While the solenoids are out, look at their screens for debris or a hole.
+    confirm: Press Enter to finish
+    next: END

@@ -215,3 +215,52 @@ def vct_channels(samples: list[dict]) -> list[tuple[str, str]]:
             if des in present and act in present:
                 pairs.append((des, act))
     return pairs
+
+
+def tracking_metrics(samples: list[dict]) -> dict[str, float | bool]:
+    """
+    Reduce cam desired-versus-actual to names a protocol can branch on.
+
+    Publishes `vct_worst_error` (the largest departure of actual from
+    commanded, across every bank and cam present), `vct_pairs` and
+    `vct_actual_periodic` — actual position oscillating while the command
+    sits still is a hunting phaser, which is a different fault from one that
+    simply cannot reach its target.
+    """
+    from .analysis import column, describe, find_periodicity, sample_interval
+
+    out: dict[str, float | bool] = {}
+    pairs = vct_channels(samples)
+    out["vct_pairs"] = len(pairs)
+    if not pairs:
+        return out
+
+    dt = sample_interval(samples)
+    worst_overall = 0.0
+    any_periodic = False
+
+    for desired, actual in pairs:
+        errors = [s[actual] - s[desired] for s in samples
+                  if s.get(actual) is not None and s.get(desired) is not None]
+        if not errors:
+            continue
+        worst = max(abs(e) for e in errors)
+        worst_overall = max(worst_overall, worst)
+
+        stem = actual.replace("vct_", "")
+        out[f"vct_{stem}_worst_error"] = round(worst, 3)
+        out[f"vct_{stem}_mean_error"] = round(sum(errors) / len(errors), 3)
+
+        stats = describe(samples, actual)
+        if stats:
+            out[f"vct_{stem}_sd"] = stats.sd
+        series = column(samples, actual)
+        if series:
+            per = find_periodicity(series, dt, min_p2p=2.0)
+            out[f"vct_{stem}_periodic"] = per.periodic
+            any_periodic = any_periodic or per.periodic
+
+    out["vct_worst_error"] = round(worst_overall, 3)
+    out["vct_actual_periodic"] = any_periodic
+    out["vct_tracks"] = worst_overall <= 5.0 and not any_periodic
+    return out

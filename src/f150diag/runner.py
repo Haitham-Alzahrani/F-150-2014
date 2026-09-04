@@ -32,12 +32,13 @@ import ast
 import logging
 import operator
 from dataclasses import dataclass, field
+import time
 from pathlib import Path
 from typing import Any, Callable
 
 import yaml
 
-from . import analysis, pids as pidmod, services
+from . import analysis, forscan, forscan_control, pids as pidmod, services
 from .recorder import measure
 from .transport import Elm327
 
@@ -171,7 +172,7 @@ class Protocol:
                 if t is not None and t not in valid:
                     problems.append(f"step {sid!r} points at unknown step {t!r}")
             if step.get("type") not in {"prompt", "measure", "service", "branch",
-                                        "finding", "end"}:
+                                        "finding", "end", "handoff"}:
                 problems.append(f"step {sid!r} has unknown type {step.get('type')!r}")
         return problems
 
@@ -216,11 +217,19 @@ class Session:
     findings: list[Finding] = field(default_factory=list)
     transcript: list[str] = field(default_factory=list)
     asker: Asker = default_asker
+    dry_run: bool = False
+    #: Called to re-open the adapter after it has been handed to FORScan.
+    reconnect: Callable[[], Elm327] | None = None
 
     @property
     def live(self) -> bool:
-        """True when an adapter is attached and measurements are real."""
-        return self.elm is not None
+        """
+        True when this session is really measuring.
+
+        Not simply "is the adapter open" — during a FORScan handoff the port
+        is deliberately released while the session is still very much live.
+        """
+        return not self.dry_run
 
     def record(self, finding: Finding) -> None:
         """
@@ -256,10 +265,13 @@ class Session:
             self.asker(step.get("confirm", "Press Enter when done"), None)
 
     def do_measure(self, step: dict) -> None:
-        if self.elm is None:
+        if self.dry_run:
             self.say(f"  [dry run] would measure {step.get('label', step['id'])} "
                      f"for {step.get('seconds', 60)} s")
             return
+        if self.elm is None:
+            raise RuntimeError("the adapter is not connected — a handoff may "
+                               "have failed to hand it back")
         selected = pidmod.resolve(step.get("pids", ["idle"]))
         seconds = float(step.get("seconds", 60))
         label = step.get("label", step["id"])
@@ -284,9 +296,12 @@ class Session:
                 self.say(f"  {key}: {m[key]}")
 
     def do_service(self, step: dict) -> None:
-        if self.elm is None:
+        if self.dry_run:
             self.say(f"  [dry run] would run service {step['service']}")
             return
+        if self.elm is None:
+            raise RuntimeError("the adapter is not connected — a handoff may "
+                               "have failed to hand it back")
         what = step["service"]
 
         if what == "survey":
@@ -335,6 +350,80 @@ class Session:
                          "(common on a generic tool — needs Ford enhanced access)")
         else:
             raise ValueError(f"unknown service {what!r}")
+
+    def do_handoff(self, step: dict) -> None:
+        """
+        Hand the adapter to FORScan, then take back what it measured.
+
+        The port is released, never shared. FORScan reads what this tool
+        cannot — cam position above all — and its export is collected
+        automatically, so the operator never has to relay a filename.
+        """
+        request = step.get("request", "vct")
+        label = step.get("label", f"forscan_{request}")
+        seconds = int(step.get("seconds", 90))
+        timeout = float(step.get("timeout_s", 900))
+
+        self.say("\n" + "═" * 70)
+        self.say(forscan_control.instructions(request, seconds))
+        self.say("═" * 70)
+
+        if self.dry_run:
+            self.say("  [dry run] would release the port, launch FORScan and "
+                     "wait for an export")
+            return
+
+        if self.elm is not None:
+            self.elm.close()
+            self.elm = None
+            self.say("\n  adapter released — FORScan may connect now")
+
+        started = time.time()
+        if step.get("launch", True):
+            forscan_control.launch()
+
+        self.say(f"  watching for a new export (up to {timeout / 60:.0f} min)…")
+        export = forscan_control.wait_for_export(
+            since=started, timeout_s=timeout,
+            on_wait=lambda: self.say("  nothing yet — recording, then save as CSV"))
+
+        if export is None:
+            self.say("  no export appeared within the timeout.")
+            self.context[f"{label}.imported"] = False
+        elif not export.is_csv:
+            self.say(f"  found {export.path.name}, which is FORScan's own "
+                     f"format and cannot be read here.")
+            self.asker("Re-save it as CSV in FORScan (it converts offline, no "
+                       "adapter needed), then press Enter", None)
+            export = forscan_control.wait_for_export(since=started, timeout_s=300)
+            self.context[f"{label}.imported"] = export is not None and export.is_csv
+
+        if export is not None and export.is_csv:
+            imported = forscan.load(export.path)
+            self.say("\n" + imported.report())
+            metrics = analysis.metrics(imported.samples)
+            metrics.update(forscan.tracking_metrics(imported.samples))
+            self.context[f"{label}.imported"] = True
+            for key, value in metrics.items():
+                self.context[key] = value
+                self.context[f"{label}.{key}"] = value
+            if metrics.get("vct_pairs"):
+                self.say(f"  cam pairs found: {metrics['vct_pairs']}")
+                self.say(f"  worst tracking error: {metrics.get('vct_worst_error')} deg")
+                self.say(f"  actual position oscillating: "
+                         f"{metrics.get('vct_actual_periodic')}")
+            else:
+                self.say("  no cam channels in this export — check the PID "
+                         "names against the mapping report above")
+
+        if self.reconnect is not None:
+            self.asker("Close FORScan so the adapter is free, then press Enter",
+                       None)
+            try:
+                self.elm = self.reconnect()
+                self.say("  adapter reconnected")
+            except Exception as exc:                       # noqa: BLE001
+                self.say(f"  could not reconnect the adapter: {exc}")
 
     def do_branch(self, step: dict) -> str | None:
         for check in step.get("checks", []):
@@ -391,6 +480,9 @@ class Session:
             elif kind == "service":
                 self.say(f"\n{step.get('text', step['service'])}")
                 self.do_service(step)
+                current = step.get("next")
+            elif kind == "handoff":
+                self.do_handoff(step)
                 current = step.get("next")
             elif kind == "branch":
                 current = self.do_branch(step)

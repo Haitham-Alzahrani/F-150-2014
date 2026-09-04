@@ -23,6 +23,64 @@ clean:
 
 ---
 
+## Driving FORScan from a protocol
+
+FORScan has no command line, no API and no scripting interface — nothing
+public — so it cannot be called as a library. It can be *orchestrated*: this
+tool owns the sequence, hands the adapter over, and collects the result.
+
+A protocol step does the whole handoff:
+
+```yaml
+- id: vct_handoff
+  type: handoff
+  request: vct          # vct | misfire | fuel
+  label: vct
+  seconds: 90
+  timeout_s: 1200
+  next: vct_verdict
+```
+
+What happens when it runs:
+
+1. The adapter is **closed and released**. The session stays live; only the
+   port is given up.
+2. FORScan is launched, if it can be found.
+3. The exact parameter list to add is printed, and what to record.
+4. The tool **watches for a new export** across the FORScan data folder,
+   Documents, Downloads and Desktop — waiting for the file size to settle
+   before reading, since a file appears in the directory before it is
+   finished being written.
+5. The export is imported, cam tracking computed, and the metrics enter the
+   protocol context so the next `branch` can decide on them.
+6. The adapter is reconnected and the protocol continues.
+
+Step 4 is the point. The alternative — "export it and tell me the filename" —
+puts a person in the middle of every handoff.
+
+Branch on the result like any other measurement:
+
+```yaml
+- when: vct_worst_error > 5 or vct_actual_periodic
+  finding: vct-solenoid-phaser
+```
+
+Published metrics: `vct_worst_error`, `vct_actual_periodic`, `vct_tracks`,
+`vct_pairs`, and per-channel `vct_<cam>_<bank>_worst_error` / `_mean_error` /
+`_sd` / `_periodic`. `<label>.imported` says whether an export arrived at all.
+
+`f150diag forscan-status` shows where FORScan was found, whether it is
+running, which folders are watched, and the parameter sets available. Set
+`FORSCAN_EXE` and `FORSCAN_DATA` if the defaults miss.
+
+Two protocols use this: `vct-check` standalone, and `idle-quality`, which
+offers the handoff automatically when it finds an unstable idle with normal
+fuel trims — the case where fuel control has been excluded and cam timing is
+the remaining dilution path.
+
+Before a session starts, `f150diag run` refuses to open the port if FORScan
+is already running, rather than failing with a permission error mid-protocol.
+
 ## The workflow
 
 1. Run the `idle-quality` protocol with `f150diag`. Disconnect when it ends.

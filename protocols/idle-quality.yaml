@@ -388,17 +388,78 @@ steps:
       - when: mode06_failing > 0
         finding: monitor-out-of-limits
         summary: "One or more on-board monitor tests are outside their limits."
-        next: closing
+        next: vct_decision
+      - next: vct_decision
+
+  - id: vct_decision
+    type: branch
+    checks:
+      - when: idle_park.ltft_mean < 10 and idle_park.ltft_mean > -10 and (rpm_periodic or rpm_p2p > 100)
+        next: vct_offer
       - next: closing
+
+  - id: vct_offer
+    type: prompt
+    text: |
+      The idle is unstable but the fuel trims are normal.
+
+      Fuel control is therefore not the cause — it corrects mixture, and
+      mixture is not what is wrong. That leaves charge dilution or something
+      mechanical, and on this engine the dilution path is the cam phasers:
+      there is no external EGR valve, and internal EGR is made by valve
+      overlap.
+
+      Cam position commanded against actual is a Ford enhanced parameter that
+      this tool cannot read. FORScan can. The next step hands the adapter over,
+      collects FORScan's export automatically, and continues from the result.
+    ask: run_vct
+    question: Run the FORScan cam timing handoff now?
+    options:
+      - Yes - FORScan is installed and ready
+      - No - do it in a later session
+    next: vct_branch
+
+  - id: vct_branch
+    type: branch
+    checks:
+      - when: run_vct == "Yes - FORScan is installed and ready"
+        next: vct_handoff
+      - next: closing
+
+  - id: vct_handoff
+    type: handoff
+    request: vct
+    label: vct
+    seconds: 90
+    timeout_s: 1200
+    next: vct_verdict
+
+  - id: vct_verdict
+    type: branch
+    checks:
+      - when: not vct.imported
+        finding: vct-no-data
+        summary: "No FORScan export was collected — cam timing remains unmeasured. Run: f150diag run vct-check"
+        next: closing
+      - when: vct_pairs == 0
+        finding: vct-no-channels
+        summary: "The export carried no cam channels. Check FORScan's parameter names against the mapping report."
+        next: closing
+      - when: vct_worst_error > 5 or vct_actual_periodic
+        finding: vct-solenoid-phaser
+        summary: "Cam position does not follow the command. Swap the VCT solenoids bank to bank to separate solenoid from phaser."
+        next: closing
+      - finding: vct-tracks-correctly
+        summary: "Cam position tracks the command. Variable cam timing is not the cause."
+        next: closing
 
   - id: closing
     type: prompt
     text: |
       Electronic testing for this protocol is complete.
 
-      If the finding was 'dilution or mechanical' with normal trims, the next
-      branch is variable cam timing — commanded against actual cam position,
-      and swapping the VCT solenoids bank to bank. Those are Ford enhanced
-      parameters and need FORScan; this tool cannot read them.
+      Anything still unresolved after this is mechanical and needs the engine
+      opened, or it was never a fault to begin with — see the control-sample
+      test in the knowledge base entry `idle-normal`.
     confirm: Press Enter for the findings summary
     next: END

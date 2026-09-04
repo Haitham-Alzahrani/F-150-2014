@@ -9,7 +9,8 @@ import logging
 import sys
 from pathlib import Path
 
-from . import analysis, forscan, knowledge, pids as pidmod, runner, services
+from . import (analysis, forscan, forscan_control, knowledge,
+               pids as pidmod, runner, services)
 from .transport import Elm327, available_ports
 
 REPO = Path(__file__).resolve().parents[2]
@@ -174,6 +175,30 @@ def cmd_forscan(args) -> int:
     return 0
 
 
+def cmd_forscan_status(args) -> int:
+    """Where FORScan is, whether it is running, and where its exports land."""
+    exe = forscan_control.find_executable()
+    data = forscan_control.data_directory()
+    print(f"executable : {exe or 'not found — set FORSCAN_EXE'}")
+    print(f"data folder: {data or 'not found — set FORSCAN_DATA'}")
+    print(f"running    : {forscan_control.is_running()}")
+    roots = forscan_control.search_roots()
+    print("\nwatched for exports:")
+    for root in roots:
+        print(f"  {root}")
+    if not roots:
+        print("  none — set FORSCAN_DATA, or exports will not be found")
+    recent = forscan_control.newest_export(since=0.0, roots=roots)
+    if recent:
+        import datetime as _dt
+        when = _dt.datetime.fromtimestamp(recent.modified).isoformat(timespec="seconds")
+        print(f"\nmost recent export: {recent.path}  ({when})")
+    print("\nParameter sets this tool knows how to ask FORScan for:")
+    for name, pids in sorted(forscan_control.REQUESTS.items()):
+        print(f"  {name:<10} {', '.join(pids)}")
+    return 0
+
+
 def cmd_protocols(args) -> int:
     protos = runner.load_all(PROTOCOL_DIR)
     for proto in protos.values():
@@ -190,8 +215,16 @@ def cmd_run(args) -> int:
         print(f"unknown protocol {args.protocol!r}. Known: {', '.join(protos)}")
         return 1
 
+    if not args.dry_run and forscan_control.is_running():
+        print("FORScan appears to be running and will be holding the adapter.")
+        print("Close it before starting — a serial port is opened by one")
+        print("process at a time.")
+        return 1
+
     elm = None if args.dry_run else connect(args)
-    session = runner.Session(elm=elm, out_dir=LOG_DIR)
+    session = runner.Session(
+        elm=elm, out_dir=LOG_DIR, dry_run=args.dry_run,
+        reconnect=(None if args.dry_run else lambda: connect(args)))
     try:
         findings = session.run(proto)
     finally:
@@ -383,6 +416,56 @@ def cmd_selftest(args) -> int:
         failures += 0 if ok else 1
         print(f"  {'ok  ' if ok else 'FAIL'} normalise {header!r} -> {got!r}")
 
+    print("\nFORScan orchestration")
+    import math as _m2
+    tracking_samples = []
+    for i in range(200):
+        tt = i * 0.1
+        tracking_samples.append({
+            "elapsed_s": round(tt, 3),
+            "vct_int_des_b1": 4.0,
+            "vct_int_act_b1": 4.0 + 9.0 * _m2.sin(2 * _m2.pi * tt / 2.5),
+            "vct_int_des_b2": 4.0,
+            "vct_int_act_b2": 4.1,
+        })
+    tm = forscan.tracking_metrics(tracking_samples)
+    orch_checks = [
+        ("pairs detected", tm.get("vct_pairs"), 2),
+        ("worst error found", round(tm.get("vct_worst_error", 0)) >= 9, True),
+        ("oscillation detected", tm.get("vct_actual_periodic"), True),
+        ("tracks verdict false", tm.get("vct_tracks"), False),
+        ("steady bank not periodic", tm.get("vct_int_act_b2_periodic"), False),
+    ]
+    for name, got, want in orch_checks:
+        ok = got == want
+        failures += 0 if ok else 1
+        print(f"  {'ok  ' if ok else 'FAIL'} {name:<26} {got!r} (want {want!r})")
+
+    try:
+        forscan_control.instructions("vct", 90)
+        forscan_control.instructions("misfire", 60)
+        print("  ok   handoff instructions render for known requests")
+    except Exception as exc:                                  # noqa: BLE001
+        failures += 1
+        print(f"  FAIL handoff instructions: {exc}")
+    try:
+        forscan_control.instructions("nonsense", 60)
+        print("  FAIL unknown request was accepted")
+        failures += 1
+    except KeyError:
+        print("  ok   unknown request rejected")
+
+    newest = forscan_control.newest_export(since=0.0, roots=[])
+    ok = newest is None
+    failures += 0 if ok else 1
+    print(f"  {'ok  ' if ok else 'FAIL'} empty search roots return nothing")
+
+    # Asking whether FORScan is running puts "forscan" in our own command
+    # line. A self-match here would refuse to start a session that could run.
+    ok = forscan_control.is_running() is False
+    failures += 0 if ok else 1
+    print(f"  {'ok  ' if ok else 'FAIL'} process check does not match this process")
+
     print("\nProtocols")
     protos = runner.load_all(PROTOCOL_DIR)
     if not protos:
@@ -473,6 +556,10 @@ def build_parser() -> argparse.ArgumentParser:
     live.add_argument("--seconds", type=float, default=60)
     live.add_argument("--label", default="live")
     live.set_defaults(fn=cmd_live)
+
+    sub.add_parser("forscan-status",
+                   help="where FORScan is installed and where its exports land"
+                   ).set_defaults(fn=cmd_forscan_status)
 
     fs = sub.add_parser("forscan",
                         help="import and analyse a FORScan CSV export")
