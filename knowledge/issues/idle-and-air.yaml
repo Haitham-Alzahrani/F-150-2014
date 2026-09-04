@@ -39,9 +39,43 @@
         A 60-degree V6 without a balance shaft has an inherent rocking couple;
         if this engine has one, this entry's mechanism is weaker.
       url: https://en.wikipedia.org/wiki/Ford_Cyclone_engine
+    - source: community
+      confidence: medium
+      verified: false
+      note: >
+        SAME ENGINE, DIFFERENT VEHICLE. Owners of the 2011-2014 Mustang 3.7 V6
+        raised a vibration complaint large enough to reach a public petition,
+        and Ford's stated position is that it is normal operation of the
+        vehicle - one owner was reportedly told it is normal "because of the
+        twin cam setup". Ford technicians who rode along were reported to
+        disagree informally. From search summaries.
+      check: >
+        Read the petition and the Mustang forum threads and establish WHERE
+        the vibration is felt and at what rpm. The Mustang accounts describe
+        roughly 2200-2800 rpm and vibration through the shifter, which is NOT
+        the same as this truck's idle vibration. The valuable part is Ford's
+        position that a 3.7 vibration is normal for this engine; the symptom
+        described may be a different one.
+      url: https://www.change.org/p/ford-motor-company-2011-2014-mustang-3-7-v6-vibration-issue
+    - source: community
+      confidence: low
+      verified: false
+      note: >
+        Mustang owners of the same engine discussing idle vibration, including
+        vibration felt when stopped in gear.
+      check: >
+        Look for any account matching THIS truck's pattern specifically: small
+        idle vibration, worst in Park and Neutral, less in gear, absent under
+        load, no codes.
+      url: https://www.mustangevolution.com/threads/engine-vibration-when-stopped-in-gear.369539/
   notes: >
     Always test this before spending. A fault that resists every repair is
     often not a fault.
+
+    The Mustang 3.7 uses the same Cyclone engine as this truck, so its owner
+    community is a legitimate and much larger source for engine-specific
+    behaviour. Vehicle-specific claims (mounts, cab, driveline, exhaust) do
+    NOT transfer; engine-specific ones do.
 
 - id: evap-purge-stuck-open
   title: EVAP purge valve stuck partly open
@@ -94,9 +128,28 @@
         Confirm the two bench tests quoted in `tests` above are as this source
         describes them, particularly the direction of the vacuum test.
       url: https://engineneeds.com/ford-f150-evap-purge-valve/
+    - source: community
+      confidence: medium
+      verified: false
+      note: >
+        SAME ENGINE. Mustang 3.7 sources state that the common failure mode of
+        Ford's purge valve is to be stuck OPEN, and that vacuum lines leak
+        particularly at the purge valve. A 2014 Mustang V6 case reported rough
+        idle after refuelling and on cold start traced to a bad purge valve -
+        notable because the codes were P2196 and P2198 (oxygen sensor signal
+        biased rich) rather than EVAP codes. From search summaries.
+      check: >
+        Confirm the stuck-open-is-the-common-failure claim, and confirm the
+        P2196/P2198 case - a purge valve presenting as O2 rich codes rather
+        than EVAP codes would change what codes we look for.
+      url: https://www.mustang6g.com/forums/threads/diagnosing-a-bad-evap-purge-valve.107593/
   notes: >
     On this truck: never inspected in twelve years. Top candidate if the idle
     measurement shows a genuine fault.
+
+    Test by disconnecting and plugging the manifold port with the ENGINE OFF -
+    the lines on this engine are hard plastic and cannot be clamped, and
+    opening a manifold port on a running engine will stall it.
 
 - id: pcv-leak
   title: PCV valve, hose or elbow cracked
@@ -114,8 +167,9 @@
   temperature: independent
   sets_code: sometimes
   tests:
+    - "Pull the PCV valve and shake it - no rattle means clogged. It sits on the passenger-side valve cover, roughly halfway towards the front [VERIFY on the F-150; that position is documented for the Mustang 3.7]"
     - "Flex the hose and both elbows by hand with the engine hot and running - heat-hardened rubber opens when flexed and closes cold, so a cold inspection misses it"
-    - "Clamp the PCV hose briefly at idle and watch whether the roughness reduces"
+    - "ENGINE OFF, disconnect the PCV line at the manifold and plug that port, then restart and measure. PCV is a metered air path, so blocking it shifts the idle even on a healthy engine - the signal is whether the INSTABILITY reduces, not whether the rpm number moves"
     - "Oil filler cap test at idle: a large idle drop means restricted ventilation, a smoothing means crankcase pressure"
   fix: Replace the cracked component.
   cost: Very low.
@@ -131,18 +185,23 @@
         Confirm the reports concern a Ford V6 or V8 of comparable design rather
         than an unrelated engine, and note whether any names the 3.7.
       url: https://repairpal.com/rough-idle-due-to-cracked-pcv-hose-856
-    - source: unverified
-      confidence: low
+    - source: community
+      confidence: medium
       verified: false
       note: >
-        Open question: whether this engine even has a serviceable PCV valve.
-        Several Ford engines of this era integrate a fixed orifice into the
-        valve cover with no replaceable valve.
+        SAME ENGINE, and this largely answers the open question of whether a
+        serviceable valve exists. The PCV valve on the 2011 Mustang 3.7 V6 is
+        described as sitting on the passenger-side valve cover, roughly halfway
+        towards the front of the engine, and as removable - the documented test
+        is to pull it and shake it, with no rattle meaning clogged. Mustang 3.7
+        sources also name PCV valve clogging and vacuum leaks as a known cause
+        of rough idle on this engine. From search summaries.
       check: >
-        Look up the 2014 F-150 3.7L in a parts catalogue under PCV valve. If no
-        valve is listed, the test remains valid but there is no part to replace
-        and the repair becomes a valve cover or hose.
-      url: https://www.rockauto.com/en/catalog/ford,2014,f-150,3.7l+v6,3305851
+        Confirm the location on the F-150 specifically - the engine is shared
+        but the installation is not, so the valve may be positioned or routed
+        differently in the truck. Then confirm a PCV valve part number exists
+        for the 2014 F-150 3.7L.
+      url: https://www.justanswer.com/ford/oamwy-pcv-valve-location-2011-v6-mustang-3-7.html
 
 - id: unmetered-air
   title: Unmetered air entering downstream of the mass air flow sensor
@@ -161,7 +220,7 @@
   sets_code: sometimes
   tests:
     - "Compare long-term trim at idle against 2500 rpm no load; a fall of more than about 5% points at a leak"
-    - "Smoke test the intake with the PCV and purge lines clamped off first, then again unclamped - the difference isolates the valves from the manifold"
+    - "Smoke test the intake with the PCV and purge lines disconnected and their ports plugged first, then again connected - the difference isolates the valves from the manifold"
     - "Vacuum gauge at idle: steady 18-22 inHg near sea level is healthy; low-and-steady suggests a leak"
   fix: Locate and seal. Suspect the purge valve, PCV and booster hoses before the manifold gaskets.
   cost: Depends entirely on location.
@@ -196,7 +255,7 @@
   temperature: independent
   sets_code: sometimes
   tests:
-    - "Clamp the booster hose at idle with the vehicle stationary; a change in idle means the booster or its check valve leaks. Brake assist is absent while clamped and returns on release"
+    - "ENGINE OFF, disconnect the booster hose at the manifold and plug that port, then restart and measure. Sealing it should change nothing on a healthy system. Vehicle stationary; the booster keeps only stored vacuum while isolated, so assist fades after a few pedal applications and returns on reconnection"
   fix: Replace the check valve or the booster.
   cost: Low for a check valve.
   provenance:

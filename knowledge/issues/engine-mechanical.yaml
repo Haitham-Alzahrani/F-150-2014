@@ -70,6 +70,20 @@
         Confirm the cam-torque-actuated phaser failure claim applies to the
         3.7 in longitudinal F-150 form and not only to transverse applications.
       url: https://www.motorreviewer.com/engine.php?engine_id=158
+    - source: community
+      confidence: low
+      verified: false
+      note: >
+        SAME ENGINE. Mustang 3.7 owners report knocking and ticking at idle on
+        2014 cars, which is the noise profile associated with phaser and chain
+        wear. Not this truck's symptom - the owner reports the engine is silent
+        and gives no indication of trouble from under the hood - but recorded
+        as the population this truck should be compared against.
+      check: >
+        Establish whether phaser complaints on the 3.7 are accompanied by
+        codes. If they usually are, the absence of any code here further
+        weakens this entry for this truck.
+      url: https://www.mustangevolution.com/threads/2014-mustang-3-7-engine-knocking-ticking-at-idle.375141/
     - source: unverified
       confidence: low
       verified: false
@@ -341,3 +355,37 @@
       url: "owner report, this vehicle, VIN 1FTMF1EM1EFC80632"
   notes: >
     Kept in the base as a standing watch item rather than an active suspect.
+
+- id: same-engine-sources
+  title: "Research note: the 3.7 Cyclone is shared across several Ford models"
+  summary: >
+    The 3.7L Ti-VCT Cyclone V6 in this truck is the same engine fitted to the
+    2011-2014 Mustang V6 and used across other Ford models. The Mustang
+    community is far larger and more technically active than the F-150 3.7
+    community, so most published knowledge about this ENGINE is filed under
+    Mustang.
+  systems: [research]
+  load_signature: none
+  sets_code: never
+  tests:
+    - "When researching a 3.7 problem, search Mustang sources as well as F-150 ones - it is the same engine and the same failure modes"
+    - "Before transferring a claim, ask whether it is about the ENGINE or about the VEHICLE"
+  fix: Not applicable - this is a method note, not a fault.
+  provenance:
+    - source: measured
+      confidence: high
+      verified: true
+      note: >
+        Raised by the owner, who is a working mechanic: the 3.7 in the Mustang
+        and the 3.7 in the F-150 are the same engine, so engine-level sources
+        transfer regardless of which model they were written about.
+      url: "owner, this project"
+  notes: >
+    What transfers: cam phasers, VCT solenoids, timing chain, internal water
+    pump, PCV valve type and test, purge valve failure mode, oil leaks, intake
+    behaviour, fuel trim behaviour.
+
+    What does NOT transfer: engine mounts, driveline, exhaust, transmission,
+    cab and NVH, idle strategy differences between a truck and a sports car
+    calibration, and anything about installation position or routing. The
+    engine is shared; the installation is not.

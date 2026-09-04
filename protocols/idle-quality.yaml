@@ -10,6 +10,17 @@ description: |
   trims near normal while the engine still runs rough. Those two findings send
   you to completely different places.
 
+  VACUUM TESTING RULE, and it governs the whole second half of this protocol:
+  the lines on this engine are hard plastic. They cannot be clamped or
+  pinched. The only way to isolate one is to disconnect it and plug the
+  manifold port — and that must be done with the ENGINE OFF, because opening
+  a manifold port on a running engine is a leak large enough to stall it.
+
+  Every isolation test therefore runs: engine off, disconnect, plug, restart,
+  stabilise, measure. Because each test involves a restart, the comparison
+  baseline is taken the same way — started, stabilised, measured — so all four
+  measurements are made under identical conditions.
+
 entry: intro
 
 steps:
@@ -18,8 +29,14 @@ steps:
     text: |
       IDLE QUALITY PROTOCOL
 
-      You will need: the vehicle at operating temperature, a clear area, and
-      hose clamping pliers within reach.
+      You will need:
+        - the vehicle at operating temperature
+        - vacuum caps or plugs sized to the manifold ports (a golf tee, a
+          bolt of the right diameter, or proper vacuum caps)
+        - the three vacuum lines identified: EVAP purge, PCV, brake booster
+
+      RULE FOR THE WHOLE SESSION: the engine is OFF for every disconnect and
+      every reconnect. Never open a vacuum port on a running engine.
 
       Nothing in this protocol writes to a control module.
     confirm: Press Enter to begin
@@ -99,11 +116,12 @@ steps:
 
       If a vibration is still felt in the cab, the remaining question is
       whether it is abnormal for this vehicle rather than whether the engine
-      is running badly. A base regular cab has little sound deadening and a
-      60-degree V6 is not inherently balanced.
+      is running badly. A base regular cab has little sound deadening, and
+      owners of the same 3.7 Cyclone engine in the Mustang have raised a
+      vibration complaint that Ford's own position is normal operation.
 
-      The test that settles it: idle another F-150 regular cab of the same
-      engine alongside. Hand on the fender, then sit in the cab.
+      The test that settles it: idle another vehicle with this engine
+      alongside. Hand on the fender, then sit in the cab.
 
       No further electronic testing will answer this.
     confirm: Press Enter to finish
@@ -148,7 +166,7 @@ steps:
       - when: idle_park.ltft_mean > 10 and rpm_2500.ltft_mean < idle_park.ltft_mean - 5
         finding: unmetered-air
         summary: "Long-term trim is high at idle and falls at 2500 rpm. That is the signature of an unmetered air leak."
-        next: leak_purge
+        next: vacuum_prep
       - when: idle_park.ltft_mean > 10
         finding: fuel-metering
         summary: "Trim is high at both idle and 2500 rpm — metering or fuel supply rather than a leak."
@@ -163,26 +181,78 @@ steps:
         next: mode06
       - finding: dilution-or-mechanical
         summary: "Rough idle with normal fuel trims. Fuel control is not the cause — this is dilution or mechanical."
-        next: leak_purge
+        next: vacuum_prep
 
-  - id: leak_purge
+  # ---------------------------------------------------------------------
+  # Vacuum line isolation. Engine OFF for every connect and disconnect.
+  #
+  # Order is deliberate. Purge and booster should have NO effect on a healthy
+  # engine when plugged, so they give a clean signal. PCV always changes the
+  # idle a little because it is a metered air path in normal operation, so it
+  # is the noisiest test and goes last.
+  # ---------------------------------------------------------------------
+
+  - id: vacuum_prep
     type: prompt
     text: |
-      EVAP PURGE VALVE TEST
+      VACUUM LINE ISOLATION
 
-      Engine idling in Park. Locate the hose running from the purge valve to
-      the intake manifold and clamp it fully shut.
+      Three lines will be isolated one at a time: EVAP purge, brake booster,
+      then PCV.
 
-      Leave it clamped for the whole of the next measurement.
+      The lines are hard plastic and cannot be clamped. Each test means
+      disconnecting the line and plugging the MANIFOLD port — the port must be
+      sealed, or you have replaced a suspected small leak with a certain large
+      one and the measurement is worthless.
 
-      The valve is normally closed when de-energised, so on a healthy system
-      clamping this hose changes nothing.
-    confirm: Confirm hose clamped
+      ENGINE OFF for every disconnect and reconnect, without exception.
+
+      First: confirm all three lines are currently connected and seated, and
+      have your plugs ready.
+    confirm: Confirm all lines connected, plugs ready
+    next: ref_start
+
+  - id: ref_start
+    type: prompt
+    text: |
+      REFERENCE MEASUREMENT
+
+      Start the engine and let it idle for 30 seconds before continuing, so
+      fuel control settles after the restart.
+
+      Every isolation test below involves a restart, so this reference is
+      taken the same way. Comparing a restarted idle against a long-settled
+      one would show a difference that means nothing.
+    confirm: Confirm engine running and settled 30 s
+    next: measure_ref
+
+  - id: measure_ref
+    type: measure
+    label: base_ref
+    seconds: 60
+    pids: [idle]
+    next: purge_isolate
+
+  - id: purge_isolate
+    type: prompt
+    text: |
+      TEST 1 — EVAP PURGE
+
+      1. SHUT THE ENGINE OFF.
+      2. Disconnect the purge line where it meets the intake manifold.
+      3. Plug the manifold port so it is fully sealed.
+      4. Leave the hose end from the purge valve open to atmosphere.
+      5. Start the engine and let it idle 30 seconds.
+
+      The purge valve should contribute nothing at idle on a healthy system,
+      so sealing this port should change nothing at all. If the idle improves,
+      the valve was passing.
+    confirm: Confirm purge port plugged, engine running and settled
     next: measure_purge
 
   - id: measure_purge
     type: measure
-    label: purge_clamped
+    label: purge_plugged
     seconds: 60
     pids: [idle]
     next: purge_branch
@@ -190,41 +260,86 @@ steps:
   - id: purge_branch
     type: branch
     checks:
-      - when: purge_clamped.rpm_p2p < idle_park.rpm_p2p * 0.6
+      - when: purge_plugged.rpm_p2p < base_ref.rpm_p2p * 0.6
         finding: evap-purge-stuck-open
-        summary: "Clamping the purge line cut the rpm instability substantially. The purge valve was leaking."
-        next: pcv_test
-      - when: purge_clamped.ltft_mean < idle_park.ltft_mean - 5
+        summary: "Sealing the purge port cut the rpm instability substantially. The purge valve was leaking."
+        next: booster_isolate
+      - when: purge_plugged.ltft_mean < base_ref.ltft_mean - 5
         finding: evap-purge-stuck-open
-        summary: "Fuel trim dropped with the purge line clamped — unmetered flow was coming through that valve."
-        next: pcv_test
-      - next: pcv_test
+        summary: "Fuel trim dropped with the purge port sealed — unmetered flow was coming through that valve."
+        next: booster_isolate
+      - next: booster_isolate
 
-  - id: pcv_test
+  - id: booster_isolate
     type: prompt
     text: |
-      PCV TEST
+      TEST 2 — BRAKE BOOSTER
 
-      Release the purge line clamp.
+      1. SHUT THE ENGINE OFF.
+      2. Reconnect the purge line and seat it properly.
+      3. Disconnect the booster hose at the manifold and plug that port.
+      4. Start the engine and let it idle 30 seconds.
 
-      With the engine running and hot, work the PCV hose and both elbows by
-      hand along their whole length. Heat-hardened rubber splits open when
-      flexed hot and closes up cold, so a cold inspection misses it.
+      The vehicle stays stationary for this test. With the booster isolated it
+      keeps only its stored vacuum, so assist fades after a few pedal
+      applications and returns once the line is reconnected.
 
-      Then clamp the PCV hose shut for the next measurement. Keep it brief —
-      blocking crankcase ventilation raises case pressure.
+      As with the purge line, sealing this port should change nothing on a
+      healthy system.
+    confirm: Confirm purge restored, booster port plugged, engine settled
+    next: measure_booster
+
+  - id: measure_booster
+    type: measure
+    label: booster_plugged
+    seconds: 60
+    pids: [idle]
+    next: booster_branch
+
+  - id: booster_branch
+    type: branch
+    checks:
+      - when: booster_plugged.rpm_p2p < base_ref.rpm_p2p * 0.6
+        finding: booster-leak
+        summary: "Sealing the booster port cut the instability — the booster or its check valve leaks."
+        next: pcv_isolate
+      - next: pcv_isolate
+
+  - id: pcv_isolate
+    type: prompt
+    text: |
+      TEST 3 — PCV
+
+      1. SHUT THE ENGINE OFF.
+      2. Reconnect the booster hose and seat it properly.
+      3. Disconnect the PCV line at the manifold and plug that port.
+      4. Start the engine and let it idle 30 seconds.
+
+      Read this one differently from the other two. PCV is a metered air path
+      in normal operation, so sealing it WILL shift the idle slightly even on
+      a healthy engine. That shift is not the signal.
+
+      What matters is whether the INSTABILITY reduces — the wander and the
+      roughness — not whether the rpm number moves.
+
+      Keep this test brief. Blocked ventilation raises crankcase pressure.
+
+      While you are there: pull the PCV valve and shake it. No rattle means it
+      is clogged. It sits on the passenger-side valve cover, roughly halfway
+      towards the front of the engine. [VERIFY location on the F-150 — that
+      position is documented for the Mustang 3.7, which is the same engine]
     ask: pcv_condition
-    question: What did the PCV hose and elbows look like?
+    question: What did the PCV valve and its hose look like?
     options:
-      - Sound - flexible, no cracks
-      - Hardened or glazed but intact
-      - Cracked or split
+      - Valve rattles, hose sound
+      - Valve does not rattle - clogged
+      - Hose or elbow cracked or hardened
       - Could not access it
     next: measure_pcv
 
   - id: measure_pcv
     type: measure
-    label: pcv_clamped
+    label: pcv_plugged
     seconds: 45
     pids: [idle]
     next: pcv_branch
@@ -232,49 +347,33 @@ steps:
   - id: pcv_branch
     type: branch
     checks:
-      - when: pcv_clamped.rpm_p2p < idle_park.rpm_p2p * 0.6
+      - when: pcv_condition == "Valve does not rattle - clogged"
         finding: pcv-leak
-        summary: "Clamping the PCV hose cut the instability — air was entering through the crankcase ventilation path."
-        next: booster_test
-      - next: booster_test
-
-  - id: booster_test
-    type: prompt
-    text: |
-      BRAKE BOOSTER TEST
-
-      Release the PCV clamp.
-
-      Clamp the brake booster vacuum hose at idle. The vehicle is stationary
-      and stays stationary for this test; brake assist is lost while the hose
-      is clamped, and returns when it is released.
-
-      If the idle changes, the booster or its check valve is leaking.
-    confirm: Confirm booster hose clamped, vehicle stationary
-    next: measure_booster
-
-  - id: measure_booster
-    type: measure
-    label: booster_clamped
-    seconds: 45
-    pids: [idle]
-    next: booster_branch
-
-  - id: booster_branch
-    type: branch
-    checks:
-      - when: booster_clamped.rpm_p2p < idle_park.rpm_p2p * 0.6
-        finding: booster-leak
-        summary: "Clamping the booster hose cut the instability — the booster or its check valve leaks."
+        summary: "The PCV valve is clogged — it does not rattle. Replace it regardless of what the measurement showed."
+        next: restore
+      - when: pcv_condition == "Hose or elbow cracked or hardened"
+        finding: pcv-leak
+        summary: "Cracked or hardened PCV hose found by inspection. That is an unmetered air leak."
+        next: restore
+      - when: pcv_plugged.rpm_p2p < base_ref.rpm_p2p * 0.6
+        finding: pcv-leak
+        summary: "Sealing the PCV port cut the instability — air was entering through the crankcase ventilation path."
         next: restore
       - next: restore
 
   - id: restore
     type: prompt
     text: |
-      Release every clamp. Confirm each hose is back on its spigot and secured
-      before continuing.
-    confirm: Confirm all hoses restored
+      RESTORE
+
+      1. SHUT THE ENGINE OFF.
+      2. Reconnect the PCV line.
+      3. Check every one of the three lines is back on its spigot and fully
+         seated, and that no plug has been left in a port.
+      4. Start the engine and confirm the idle is as it was at the start.
+
+      A plug left behind is a vacuum leak you created and will chase later.
+    confirm: Confirm all three lines restored and verified, no plugs left
     next: mode06
 
   - id: mode06
