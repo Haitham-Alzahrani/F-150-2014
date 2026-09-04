@@ -27,6 +27,10 @@
       note: >
         Follows from what fuel trim measures. Inert exhaust dilution does not
         move the mixture away from stoichiometric, so it does not move trims.
+      check: >
+        Confirm against an engine management reference that EGR dilution does
+        not drive fuel trim correction. This is the logical hinge of the whole
+        branch and deserves a real source rather than reasoning alone.
 
 - id: vct-solenoid-phaser
   title: VCT solenoid or cam phaser misbehaving at idle
@@ -58,9 +62,14 @@
       confidence: medium
       verified: false
       note: >
-        "Rough idle that smooths under load aligns with typical VCT solenoid
-        behavior", and reports that most stalling-at-idle F-150 cases trace to
-        VCT. From search summaries; sources not opened.
+        "Cam torque actuated phasers failure is pretty common for the Ti-VCT
+        engines." Also that rough idle smoothing under load matches typical VCT
+        solenoid behaviour, and that most stalling-at-idle F-150 cases trace to
+        VCT. From search summaries.
+      check: >
+        Confirm the cam-torque-actuated phaser failure claim applies to the
+        3.7 in longitudinal F-150 form and not only to transverse applications.
+      url: https://www.motorreviewer.com/engine.php?engine_id=158
     - source: unverified
       confidence: low
       verified: false
@@ -69,10 +78,21 @@
         more as indicating a worn chain, more than 5 teeth of tensioner
         extension as confirming it, and at least 25 psi at hot idle as the
         phaser oil pressure requirement. NONE of these figures were read from
-        the bulletin itself. Do not act on them without the service manual.
-  notes: >
-    On this truck two things argue against it: no codes have ever appeared,
-    and the symptom is identical cold and hot rather than better when warm.
+        the bulletin itself.
+      check: >
+        Find the actual bulletin and confirm all three numbers, AND confirm it
+        applies to the 3.7 rather than the 3.5 EcoBoost or the 5.0. Do not use
+        any of these figures to condemn a chain until this is done.
+      url: https://static.nhtsa.gov/odi/tsbs/2018/MC-10144908-9999.pdf
+    - source: measured
+      confidence: high
+      verified: true
+      note: >
+        On this vehicle two observations argue AGAINST this entry: no code has
+        ever appeared (P0010-P0024 would be expected), and the symptom is
+        identical cold and hot rather than better once warm. Owner-reported,
+        this vehicle.
+      url: "owner report, this vehicle, VIN 1FTMF1EM1EFC80632"
 
 - id: no-external-egr
   title: The 3.7 Ti-VCT has no external EGR valve
@@ -92,14 +112,105 @@
       confidence: medium
       verified: false
       note: >
-        Two independent sources state Ti-VCT with exhaust cam phasing removes
-        the need for EGR. A parts catalogue listing an EGR valve control
-        solenoid for the 2014 F-150 3.5L EcoBoost but not the 3.7L is
-        consistent. All from search summaries; nothing opened.
+        Two sources state that VCT on the exhaust camshaft removes the need for
+        EGR, retarding exhaust cam timing achieving the same result. A parts
+        catalogue listing an EGR valve control solenoid for the 2014 F-150 3.5L
+        EcoBoost but not the 3.7L is consistent. All from search summaries.
+      check: >
+        Confirm the statement that exhaust-cam VCT removes the EGR requirement,
+        and confirm it is made about Ford Ti-VCT specifically.
+      url: https://en.wikipedia.org/wiki/Variable_camshaft_timing
     - source: unverified
       confidence: low
       verified: false
-      note: "[VERIFY] Confirm against the service manual before relying on it."
+      note: Needs confirmation from Ford's own documentation, not third parties.
+      check: >
+        Confirm in the 2014 F-150 service manual emissions section that no EGR
+        valve is fitted to the 3.7. This is the authoritative check and it
+        settles the question permanently.
+  notes: >
+    `f150diag survey` settles this on the vehicle itself: unsupported PIDs 2C
+    and 2D are a measurement, not a citation. Run it before trusting any of
+    the above.
+
+- id: cmcv-not-established
+  title: "Open question: does the 3.7 have charge motion control valves?"
+  summary: >
+    Earlier reasoning in this repo raised CMCV plates stuck open as a candidate
+    - plates that close at low load to create tumble would, if stuck open,
+    produce instability exactly at idle and nothing at all under load. The
+    mechanism fits the symptom well. Whether the part exists on this engine is
+    unresolved.
+  systems: [intake]
+  symptoms:
+    - unstable idle with no code
+    - normal behaviour under load
+  codes: [P2004, P2005, P2006, P2007]
+  load_signature: worst-at-idle
+  temperature: independent
+  sets_code: sometimes
+  tests:
+    - "Look up the upper intake manifold for the 2014 F-150 3.7L in a parts diagram and see whether a runner control actuator is listed"
+    - "Read the supported-PID and DTC support: if the PCM has no CMCV monitor, the system is not fitted"
+    - "Visual: an actuator on the back of the upper intake manifold with a linkage"
+  fix: Not applicable until the part is shown to exist.
+  provenance:
+    - source: unverified
+      confidence: low
+      verified: false
+      note: >
+        Searched and NOT confirmed. CMCV/IMRC is documented on Ford Modular and
+        Coyote engines and on the 5.0 in the F-150, but no source found states
+        the 3.7 Cyclone has it. Absence of evidence, not evidence of absence -
+        recorded so nobody re-derives the idea and treats it as established.
+      check: >
+        Settle it from a parts diagram for the 2014 F-150 3.7L upper intake
+        manifold. Either a runner control actuator is listed or it is not.
+        Then either promote this to a real entry or delete it.
+      url: https://www.rockauto.com/en/catalog/ford,2014,f-150,3.7l+v6,3305851
+  notes: >
+    Do not present this as a suspect to anyone until the parts question is
+    answered. It is a hypothesis about a part that may not exist.
+
+- id: timing-chain-stretch
+  title: Timing chain stretch
+  summary: >
+    A stretched chain retards cam timing, disturbs phaser control, and on this
+    engine family lets chain slack beat the internally mounted water pump. The
+    3.7 is an interference engine, so a chain that jumps significantly puts
+    pistons into valves.
+  systems: [engine, vct]
+  symptoms:
+    - rattle on start-up
+    - rough idle
+    - misfires
+    - cam timing correlation codes
+  codes: [P0016, P0017, P0018, P0019, P0340, P0341]
+  load_signature: worse-under-load
+  temperature: cold-only
+  sets_code: always
+  tests:
+    - "Cam position actual versus commanded at idle (Ford enhanced parameter)"
+    - "Listen for a one to two second rattle at first cold start"
+    - "With the valve cover off, count the teeth of tensioner extension"
+  fix: Chain, tensioners, guides - and the water pump while it is open.
+  cost: High.
+  provenance:
+    - source: community
+      confidence: medium
+      verified: false
+      note: >
+        Chain stretch is documented across the Cyclone family, and 2011+ 3.7
+        Ti-VCT engines are described as less prone to the associated water pump
+        failure thanks to a revised chain and sprocket design. From search
+        summaries.
+      check: >
+        Confirm the 2011+ revision claim specifically - it matters directly for
+        this 2014 truck and would lower this entry's priority if true.
+      url: https://8020automotive.com/ford-3-7-cyclone-engine-problems/
+  notes: >
+    On this truck: no codes have ever appeared, no cold-start rattle reported,
+    and the engine pulls faultlessly under load. Low priority.
 
 - id: coil-boot-carbon-tracking
   title: Coil boot breakdown and carbon tracking
@@ -126,12 +237,22 @@
       confidence: medium
       verified: false
       note: >
-        Reported as a very common misfire cause on 2010-2016 F-150, with a
-        Ford TSB cited for boots and gap. From search summaries; the bulletin
-        itself was not read.
-  notes: >
-    On this truck: ignition faults worsen under load, and this truck is
-    flawless under load. Low priority here despite the general frequency.
+        Reported as a very common misfire cause on 2010-2016 F-150, with a Ford
+        TSB cited for boots and gap checking. From search summaries; the
+        bulletin itself was not read.
+      check: >
+        Find the bulletin said to cover boots and gap, confirm its number, and
+        confirm whether it covers the 3.7 or only EcoBoost engines.
+      url: https://www.go-parts.com/garage/ps-2010-2016-ford-f-150-direct-ignition-coil-boot-kit
+    - source: measured
+      confidence: high
+      verified: true
+      note: >
+        On this vehicle: spark plugs were replaced and the symptom did not
+        change, and the engine is flawless under load - where ignition faults
+        bite hardest. Owner-reported, this vehicle. Does not eliminate boots
+        outright, since the boots themselves were not inspected.
+      url: "owner report, this vehicle, VIN 1FTMF1EM1EFC80632"
 
 - id: o2-cleaned-damage
   title: Oxygen sensor damaged by cleaning
@@ -160,19 +281,30 @@
       note: >
         Multiple sources agree that chemical cleaners degrade the platinum and
         ceramic, that the protective shroud is easily damaged, and that a lazy
-        sensor's platinum depletion cannot be restored. From search summaries.
-  notes: >
-    On this truck the sensors were "cleaned" by an unknown method. They are
-    NOT the cause of the idle symptom - it is identical cold, where the PCM
-    runs open loop and ignores them - but they may well be damaged and are
-    worth measuring on their own account.
+        sensor's platinum depletion cannot be restored by any topical chemical.
+        From search summaries.
+      check: >
+        Confirm the platinum-depletion mechanism from one technical source, and
+        confirm the switching-rate figure used as this tool's threshold
+        (several crossings per second at 2500 rpm).
+      url: https://www.kemsoracing.com/blogs/news/can-you-clean-oxygen-sensors-a-practical-guide-to-diagnosis-cleaning-and-replacement
+    - source: measured
+      confidence: high
+      verified: true
+      note: >
+        On this vehicle the sensors were "cleaned" by an unknown method. They
+        are NOT the cause of the idle symptom - it is identical cold, where the
+        PCM runs open loop and ignores them entirely - but their condition is
+        unknown and worth measuring on its own account. Owner-reported.
+      url: "owner report, this vehicle, VIN 1FTMF1EM1EFC80632"
 
 - id: internal-water-pump
   title: Internal timing-chain-driven water pump failure
   summary: >
-    The 3.7 Cyclone drives its water pump off the timing chain, inside the
-    engine. When the seal fails it puts coolant into the oil rather than onto
-    the ground, so there is nothing to see underneath.
+    The Cyclone V6 drives its water pump off the timing chain, inside the
+    engine, behind the timing cover. When the seal fails it puts coolant into
+    the oil rather than onto the ground, so there is nothing to see
+    underneath, and left alone it can destroy the engine.
   systems: [cooling, engine]
   symptoms:
     - coolant level falling with no external leak
@@ -181,11 +313,31 @@
   sets_code: rarely
   tests:
     - "If coolant disappears with no external leak, check the dipstick for milky oil or an over-full pan before chasing anything else"
+    - "Mark the coolant reservoir level and re-check after a week"
   fix: Major - the pump is behind the timing cover.
   cost: High.
   provenance:
     - source: community
       confidence: high
       verified: false
-      note: Widely documented characteristic of the Ford Cyclone V6 family.
-  notes: "On this truck: coolant level is currently steady."
+      note: >
+        Documented characteristic of the Cyclone family: pump in the valley
+        behind the timing cover, driven by the timing chain, failing coolant
+        into the oil. Notably, 2011+ Cyclone V6 engines including the 3.7
+        Ti-VCT are described as LESS prone to this, due to a revised timing
+        chain and sprocket design. From search summaries.
+      check: >
+        Confirm the 2011+ revision claim - it applies directly to this 2014
+        truck. Also note that the source frames the failure around transversely
+        mounted applications; the F-150 3.7 is longitudinal, so confirm whether
+        the failure rate claim transfers at all.
+      url: https://8020automotive.com/ford-cyclone-water-pump-failure/
+    - source: measured
+      confidence: high
+      verified: true
+      note: >
+        On this vehicle: coolant level is steady and no loss has been observed.
+        Owner-reported.
+      url: "owner report, this vehicle, VIN 1FTMF1EM1EFC80632"
+  notes: >
+    Kept in the base as a standing watch item rather than an active suspect.

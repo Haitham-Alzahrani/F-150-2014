@@ -39,12 +39,17 @@ class Source:
     confidence: str = "unknown"
     note: str = ""
     url: str = ""
-    verified: bool = False           # did somebody actually read the source?
+    verified: bool = False           # did somebody actually READ the source?
+    check: str = ""                  # what to confirm when someone can reach it
 
     @property
     def weight(self) -> int:
         base = CONFIDENCE_ORDER.get(self.confidence, 0)
         return base + (1 if self.verified else 0)
+
+    @property
+    def needs_verification(self) -> bool:
+        return not self.verified and bool(self.url or self.check)
 
 
 @dataclass
@@ -161,6 +166,21 @@ class KnowledgeBase:
     def validate(self) -> dict[str, list[str]]:
         return {i.id: p for i, p in ((i, i.problems()) for i in self.issues.values()) if p}
 
+    def verification_queue(self) -> list[tuple[Issue, Source]]:
+        """
+        Every claim still resting on something nobody opened.
+
+        This is the base's honest debt. Work it where the network allows it:
+        open the source, confirm the specific claim in `check`, then set
+        verified and record what was confirmed.
+        """
+        out = []
+        for issue in sorted(self.issues.values(), key=lambda i: i.id):
+            for source in issue.provenance:
+                if source.needs_verification:
+                    out.append((issue, source))
+        return out
+
 
 def render(issue: Issue) -> str:
     """One issue as readable text, provenance included — never stripped."""
@@ -190,6 +210,8 @@ def render(issue: Issue) -> str:
             lines.append(f"      {s.note}")
         if s.url:
             lines.append(f"      {s.url}")
+        if s.check and not s.verified:
+            lines.append(f"      TO CONFIRM: {s.check}")
     if issue.notes:
         lines.append(f"  notes: {issue.notes}")
     return "\n".join(lines)

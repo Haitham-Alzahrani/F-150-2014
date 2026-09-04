@@ -175,6 +175,30 @@ def cmd_kb(args) -> int:
         print(knowledge.render(issue))
     elif args.action == "search":
         print(knowledge.summarise(kb.search(args.term or "")))
+    elif args.action == "verify":
+        queue = kb.verification_queue()
+        verified = sum(1 for i in kb.issues.values() if i.is_verified)
+        print(f"{len(kb.issues)} issues, {verified} with at least one source "
+              f"somebody actually opened.\n")
+        if not queue:
+            print("Nothing outstanding.")
+            return 0
+        print(f"{len(queue)} claims still resting on an unopened source:\n")
+        current = None
+        for issue, source in queue:
+            if issue.id != current:
+                current = issue.id
+                print(f"\n{issue.id}  —  {issue.title}")
+            print(f"  [{source.source}/{source.confidence}]")
+            if source.check:
+                print(f"    confirm : {source.check}")
+            if source.url:
+                print(f"    source  : {source.url}")
+            if not source.url and not source.check:
+                print("    (no source reference and nothing stated to confirm)")
+        print("\nWhen a source is opened and the claim confirmed, set")
+        print("verified: true and replace `note` with what was actually read.")
+        return 0
     elif args.action == "validate":
         problems = kb.validate()
         if not problems:
@@ -371,7 +395,8 @@ def build_parser() -> argparse.ArgumentParser:
     run.set_defaults(fn=cmd_run)
 
     kb = sub.add_parser("kb", help="query the issue knowledge base")
-    kb.add_argument("action", choices=["list", "show", "search", "validate"])
+    kb.add_argument("action",
+                    choices=["list", "show", "search", "validate", "verify"])
     kb.add_argument("term", nargs="?")
     kb.set_defaults(fn=cmd_kb)
 

@@ -13,7 +13,7 @@ f150diag analyze logs/<file>.csv       statistics and causality on a log
 f150diag run triage --port /dev/ttyUSB0
 f150diag run idle-quality --port /dev/ttyUSB0
 f150diag run <protocol> --dry-run      rehearse the prompts, no adapter
-f150diag kb list | show <id> | search <term> | validate
+f150diag kb list | show <id> | search <term> | validate | verify
 f150diag selftest                      everything checkable with no vehicle
 ```
 
@@ -150,8 +150,20 @@ edited during a session, and a data file must never be able to execute code.
       confidence: medium
       verified: false               # true ONLY if somebody opened the source
       note: Where this came from and how sure we are.
+      check: What specifically to confirm when someone can reach it.
       url: https://...
 ```
+
+`check` is what makes the base self-correcting. An unverified claim without
+one is a dead end; with one it is a task. `f150diag kb verify` prints every
+claim still resting on an unopened source, with its URL and what to confirm —
+work the list wherever the network allows it, then set `verified: true` and
+replace `note` with what was actually read.
+
+`source: measured` with `verified: true` means the claim came from this
+vehicle. That is the strongest evidence in the base — better than any
+document, because it is about this truck rather than trucks in general — and
+it is the grade to use when a test on the vehicle eliminates a suspect.
 
 `load_signature` is the field that earns its keep. It is the strongest
 discriminator available for a fault that sets no code, and `kb.by_signature()`

@@ -1,5 +1,8 @@
 # Issues whose effect scales with manifold vacuum: worst at idle and light
 # load, absent under real load. Load signature is the primary discriminator.
+#
+# Every unverified source carries `check:` — the specific claim to confirm
+# when somebody can reach it. See `f150diag kb verify`.
 
 - id: idle-normal
   title: Idle vibration within normal limits for the vehicle
@@ -30,6 +33,12 @@
         Reasoned from this truck's own evidence: never smooth in the owner's
         ownership, no code in years, normal idle rpm, flawless under load, and
         six competent repairs across six systems that each changed nothing.
+      check: >
+        Confirm the 3.7 Cyclone has no balance shaft, and confirm the 60-degree
+        bank angle, against the service manual or the Cyclone engine reference.
+        A 60-degree V6 without a balance shaft has an inherent rocking couple;
+        if this engine has one, this entry's mechanism is weaker.
+      url: https://en.wikipedia.org/wiki/Ford_Cyclone_engine
   notes: >
     Always test this before spending. A fault that resists every repair is
     often not a fault.
@@ -69,9 +78,22 @@
       note: >
         Reported as a very common failure point on the 2009-2014 F-150, with
         rough idle and hard starting after refuelling, and noted as sometimes
-        setting no code. Read from search-engine summaries only - the forum
-        and parts sources are blocked from the environment where this entry
-        was written and were never opened.
+        setting no code. Read from search-engine summaries only.
+      check: >
+        Confirm three claims separately: (1) that it is specifically common on
+        the 2009-2014 generation rather than F-150s generally, (2) that a
+        stuck-open valve is documented as producing rough idle with NO code -
+        this is the claim that makes it fit this truck, and (3) the part
+        number and location for the 3.7 specifically.
+      url: https://truckpowered.com/ford-f-150-purge-valve-symptoms-location-replacement-guide/
+    - source: community
+      confidence: medium
+      verified: false
+      note: Second independent account of the same failure and its test method.
+      check: >
+        Confirm the two bench tests quoted in `tests` above are as this source
+        describes them, particularly the direction of the vacuum test.
+      url: https://engineneeds.com/ford-f150-evap-purge-valve/
   notes: >
     On this truck: never inspected in twelve years. Top candidate if the idle
     measurement shows a genuine fault.
@@ -102,13 +124,25 @@
       confidence: medium
       verified: false
       note: >
-        Multiple owner reports name a cracked PCV hose or a rotted elbow as
-        the entire fix for a months-long rough idle with no check engine
-        light. From search summaries; sources not opened.
-  notes: >
-    Confirm whether this engine has a serviceable PCV valve at all - several
-    Ford engines of the era integrate a fixed orifice into the valve cover.
-    [VERIFY against the parts catalogue]
+        Owner reports name a cracked PCV hose or rotted elbow as the entire fix
+        for a months-long rough idle with no check engine light. From search
+        summaries.
+      check: >
+        Confirm the reports concern a Ford V6 or V8 of comparable design rather
+        than an unrelated engine, and note whether any names the 3.7.
+      url: https://repairpal.com/rough-idle-due-to-cracked-pcv-hose-856
+    - source: unverified
+      confidence: low
+      verified: false
+      note: >
+        Open question: whether this engine even has a serviceable PCV valve.
+        Several Ford engines of this era integrate a fixed orifice into the
+        valve cover with no replaceable valve.
+      check: >
+        Look up the 2014 F-150 3.7L in a parts catalogue under PCV valve. If no
+        valve is listed, the test remains valid but there is no part to replace
+        and the repair becomes a valve cover or hose.
+      url: https://www.rockauto.com/en/catalog/ford,2014,f-150,3.7l+v6,3305851
 
 - id: unmetered-air
   title: Unmetered air entering downstream of the mass air flow sensor
@@ -136,8 +170,13 @@
       confidence: high
       verified: false
       note: >
-        Standard fuel-trim interpretation - the shrinking-correction test is
-        general engine management theory, not a vehicle-specific claim.
+        Standard fuel-trim interpretation. The shrinking-correction test is
+        general engine management theory, not a vehicle-specific claim, which
+        is why confidence is high despite being unverified.
+      check: >
+        Confirm the ±10% trim tolerance and the 18-22 inHg idle vacuum figure
+        against a diagnostic reference rather than memory. Both are quoted as
+        decision thresholds in this tool.
   notes: >
     Trims decide whether a smoke test is worth doing. Within about ±10% at
     idle, no leak present is large enough to explain a shake, and a smoke test
@@ -165,6 +204,9 @@
       confidence: high
       verified: false
       note: Standard vacuum-leak diagnosis; no vehicle-specific claim made.
+      check: >
+        Confirm the 2014 F-150 booster hose has an inline check valve and where
+        it sits, so the clamp goes on the correct side of it.
 
 - id: throttle-body-carbon
   title: Carbon around the throttle plate
@@ -185,16 +227,22 @@
   fix: Remove the throttle body and clean by hand, then relearn.
   cost: Low.
   provenance:
+    - source: measured
+      confidence: high
+      verified: true
+      note: >
+        ELIMINATED ON THIS TRUCK. The throttle body was removed from the
+        manifold and hand-cleaned - the method that actually reaches the
+        downstream plate edge and the bore - and the symptom did not change.
+        A properly conducted test with a negative result, performed on this
+        vehicle and reported by its owner.
+      url: "owner report, this vehicle, VIN 1FTMF1EM1EFC80632"
     - source: community
       confidence: medium
       verified: false
       note: >
-        Widely reported as a rough-idle cause and a common first repair.
-        From search summaries; sources not opened.
-    - source: measured
-      confidence: high
-      verified: false
-      note: >
-        ELIMINATED ON THIS TRUCK. Removed from the manifold, hand-cleaned, and
-        the symptom did not change. That is a properly conducted test with a
-        negative result.
+        Widely reported as a rough-idle cause and a common first repair. From
+        search summaries.
+      check: >
+        Low value now that the on-vehicle test is negative. Verify only if the
+        entry is reused for a different vehicle.
