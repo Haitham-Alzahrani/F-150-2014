@@ -78,15 +78,51 @@ engine work · thermostat reaches and holds temperature · coolant level
 steady · currently 5W-30 (spec is 5W-20 — correct at next change, but it is
 not the cause) · battery disconnected once, relearn done plus 300 km.
 
+### Do these first — ten minutes, engine off, no scan tool
+
+Both come from the Mustang 3.7 community, which is the **same Cyclone
+engine** and a far larger source than the F-150 3.7 community. Run
+`python -m f150diag.cli run quick-wins` to be walked through them.
+
+1. **PCV valve shake test.** Passenger-side valve cover, roughly halfway
+   forward [VERIFY on the F-150; that location is documented for the Mustang
+   3.7]. Pull it and shake it — **no rattle means clogged.** Mustang 3.7
+   sources name PCV clogging as a known rough-idle cause on this engine.
+2. **Purge valve vacuum-hold test.** Engine off, connector unplugged, hand
+   pump on the inlet — **it must hold.** Mustang sources state the common
+   failure mode of Ford's purge valve is stuck **open**.
+3. **Calibration check.** `f150diag survey` prints the PCM calibration IDs.
+   Give those and the VIN to a Ford dealer and ask whether a later
+   calibration exists — a reflash is a repair with no parts.
+
 ### Current leads, if the rpm test shows a real fault
 
 1. **EVAP purge valve stuck partly open** — never touched. Documented as a
-   very common failure on the 2009–2014 F-150, causes a rough idle that
-   shakes when stopped, and frequently sets **no code**. Free to test.
+   very common failure on the 2009–2014 F-150, and Mustang 3.7 sources say
+   stuck-open is *the* failure mode. Frequently sets **no code**.
 2. **PCV valve, hose and elbow** — never inspected, 12 years of Jeddah heat.
 3. **VCT solenoid / cam phaser** — see the EGR note under *Careful*. Weak on
    two counts: no codes (P0010–P0024 expected) and no cold/hot difference.
+   `f150diag run vct-check` drives the FORScan handoff that measures it.
 4. **Vacuum leak elsewhere** — smoke test, but only after trims justify it.
+
+**Vacuum lines on this engine are hard plastic.** They cannot be clamped or
+pinched. Isolating one means disconnecting it and plugging the manifold port,
+**engine off** — opening a manifold port on a running engine will stall it.
+
+### Same engine, other models
+
+The 3.7 Ti-VCT is the engine in the **2011–2014 Mustang V6**. That community
+is much larger, so search it too. **Engine-level claims transfer** — phasers,
+chain, water pump, PCV, purge valve, fuel trim behaviour. **Vehicle-level
+ones do not** — mounts, driveline, exhaust, cab, NVH, installation and
+routing.
+
+Relevant finding from it: Mustang 3.7 owners raised a vibration complaint
+large enough to reach a public petition, and **Ford's stated position is that
+it is normal operation**. Their described symptom is 2200–2800 rpm and
+shifter vibration, which is not this truck's idle symptom — but Ford
+considering a 3.7 vibration normal bears directly on the first question above.
 
 **Eliminated with evidence:** throttle body (properly cleaned, no change) ·
 injectors (flow-tested) · MAF and intake (factory) · fuel delivery and fuel
@@ -149,11 +185,19 @@ records what it measures and reasons from the measurements. **Read
 
 ```
 python -m f150diag.cli selftest                     no vehicle needed
+python -m f150diag.cli run quick-wins               ten-minute hands-on checks
 python -m f150diag.cli --port /dev/ttyUSB0 run triage
 python -m f150diag.cli --port /dev/ttyUSB0 run idle-quality
+python -m f150diag.cli --port /dev/ttyUSB0 run vct-check    FORScan handoff
 python -m f150diag.cli analyze logs/<file>.csv
-python -m f150diag.cli kb list
+python -m f150diag.cli forscan <export>.csv         import a FORScan log
+python -m f150diag.cli kb list | verify
 ```
+
+FORScan is driven, not shared: a `handoff` step releases the adapter, launches
+FORScan, watches for its CSV export and imports it automatically. See
+[`docs/FORSCAN.md`](docs/FORSCAN.md). A serial port is opened by one process
+at a time — the two never hold it together.
 
 Rules that are not negotiable in this codebase:
 

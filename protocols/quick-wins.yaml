@@ -1,0 +1,152 @@
+id: quick-wins
+title: Quick wins — ten minutes, no scan tool needed for the first two
+description: |
+  Two hands-on tests and one phone call, aimed at the components on this truck
+  that have never been touched. Run this before the long protocol.
+
+  Both physical tests come from the Mustang 3.7 community, which is the same
+  Cyclone engine as this truck and a far larger source of engine-specific
+  knowledge than the F-150 3.7 community.
+
+  Neither test needs the engine running, so neither carries the stall risk
+  that makes vacuum work on this engine awkward. Nothing here is a substitute
+  for the rpm and fuel-trim measurements — but a positive result here ends the
+  diagnosis in ten minutes, and a negative one eliminates two of the top three
+  suspects with evidence.
+
+entry: intro
+
+steps:
+  - id: intro
+    type: prompt
+    text: |
+      QUICK WINS
+
+      You will need: hand tools, and a hand vacuum pump for the second test.
+      The engine can be off for both.
+
+      Expectation, stated honestly: six competent repairs on this truck have
+      already failed, so do not expect a quick win. Run these because they are
+      cheap and they target what has never been inspected — not because the
+      odds are good.
+    confirm: Press Enter to begin
+    next: pcv_shake
+
+  - id: pcv_shake
+    type: prompt
+    text: |
+      TEST 1 — PCV VALVE, SHAKE TEST
+
+      Location: passenger-side valve cover, roughly halfway towards the front
+      of the engine. [VERIFY on the F-150 — that position is documented for
+      the Mustang 3.7, which is the same engine but not the same installation]
+
+      Remove the valve and shake it.
+
+        - it rattles      → the valve is free
+        - no rattle       → it is clogged. Replace it.
+
+      While it is out, look at the hose and both elbows. Twelve years of heat
+      hardens the rubber; cracks open when flexed hot and close up cold, so
+      flex them rather than only looking.
+
+      Mustang 3.7 sources name PCV valve clogging and vacuum leaks as a known
+      cause of rough idle on this engine specifically.
+    ask: pcv_result
+    question: What did the PCV valve and hose show?
+    options:
+      - Rattles freely, hose sound
+      - No rattle - clogged
+      - Hose or elbow cracked or hardened
+      - Could not locate or access it
+    next: pcv_branch
+
+  - id: pcv_branch
+    type: branch
+    checks:
+      - when: pcv_result == "No rattle - clogged"
+        finding: pcv-leak
+        summary: "PCV valve is clogged - it does not rattle. Replace it, then re-assess the idle before doing anything else."
+        next: purge_hold
+      - when: pcv_result == "Hose or elbow cracked or hardened"
+        finding: pcv-leak
+        summary: "Cracked or hardened PCV hose found by inspection. That is an unmetered air leak and it fits this truck's load signature exactly."
+        next: purge_hold
+      - when: pcv_result == "Could not locate or access it"
+        finding: pcv-not-checked
+        summary: "PCV not inspected - it stays on the suspect list. Confirm the location for the F-150 before the next attempt."
+        next: purge_hold
+      - finding: pcv-clear
+        summary: "PCV valve free and hose sound. One of the top three suspects eliminated by inspection."
+        next: purge_hold
+
+  - id: purge_hold
+    type: prompt
+    text: |
+      TEST 2 — EVAP PURGE VALVE, VACUUM HOLD
+
+      Engine OFF for this test.
+
+      1. Unplug the valve's electrical connector, so the PCM cannot command
+         it open.
+      2. Disconnect the hose at the valve's inlet port.
+      3. Apply vacuum to that port with a hand pump.
+
+        - holds vacuum      → the valve seals. Good.
+        - bleeds down       → stuck open. That is a permanent unmetered leak,
+                              worst at idle and absent under load - this
+                              truck's symptom exactly.
+
+      Mustang 3.7 sources state that the common failure mode of Ford's purge
+      valve is to be stuck OPEN. On this truck it has never been inspected.
+    ask: purge_result
+    question: Did the purge valve hold vacuum?
+    options:
+      - Held vacuum - seals correctly
+      - Bled down - stuck open
+      - No vacuum pump available
+      - Could not locate the valve
+    next: purge_branch
+
+  - id: purge_branch
+    type: branch
+    checks:
+      - when: purge_result == "Bled down - stuck open"
+        finding: evap-purge-stuck-open
+        summary: "The purge valve does not hold vacuum. It is passing with no command - replace it, do not clean it, then re-assess the idle."
+        next: calibration
+      - when: purge_result == "Held vacuum - seals correctly"
+        finding: purge-clear
+        summary: "Purge valve seals. The top suspect is eliminated by direct test - a real result, not a guess."
+        next: calibration
+      - finding: purge-not-checked
+        summary: "Purge valve not tested - it remains the top suspect. The isolation test in idle-quality covers it if no vacuum pump is available."
+        next: calibration
+
+  - id: calibration
+    type: service
+    service: survey
+    text: |
+      TEST 3 — CALIBRATION CHECK
+
+      Reading the PCM calibration IDs. Ford has issued calibration updates for
+      idle quality on other engines, and a reflash is a repair with no parts.
+      Give these IDs and the VIN to a Ford dealer and ask whether a later
+      calibration exists for this vehicle.
+    next: closing
+
+  - id: closing
+    type: prompt
+    text: |
+      Quick checks complete.
+
+      If both physical tests came back clean, that is not a wasted morning:
+      two of the top three suspects are now eliminated with evidence rather
+      than assumed, and the diagnosis moves to measurement.
+
+      Next: f150diag run triage, then f150diag run idle-quality.
+
+      And the free test no tool performs - idle another vehicle with this
+      engine alongside and compare by hand and by seat.
+    confirm: Press Enter for the findings summary
+    next: END

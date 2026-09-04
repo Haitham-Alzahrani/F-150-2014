@@ -394,10 +394,80 @@ Smoke does the same job with none of the risk.
 
 ---
 
+## Quick checks — ten minutes, engine off, before anything else
+
+Both physical tests come from the **Mustang 3.7 community**: the same Cyclone
+engine as this truck, and a far larger source of engine-specific knowledge
+than the F-150 3.7 community. Run `f150diag run quick-wins` to be walked
+through them.
+
+| # | Test | Result that finds the fault |
+|---|---|---|
+| 1 | **PCV valve shake test.** Passenger-side valve cover, roughly halfway forward. Pull and shake. | **No rattle = clogged.** Mustang 3.7 sources name PCV clogging as a known rough-idle cause on this engine. |
+| 2 | **Purge valve vacuum hold.** Engine off, connector unplugged, hand pump on the inlet port. | **Bleeds down = stuck open.** Mustang sources say stuck-open is *the* failure mode of Ford's purge valve. |
+| 3 | **Calibration check.** `f150diag survey` reads the PCM calibration IDs. | A later calibration existing for this VIN would be a reflash with no parts. |
+
+Neither physical test needs the engine running, so neither carries the stall
+risk that makes vacuum work awkward on this engine.
+
+**Expectation, stated honestly:** six competent repairs have already failed,
+so a quick win is unlikely. Run these because they cost ten minutes and target
+the two components never inspected — and because a clean result eliminates two
+of the top three suspects with evidence rather than by assumption.
+
+### Documents worth fetching
+
+- **`MC-10184634-0001`** — an NHTSA bulletin titled *"Vibration/Rough Idle In
+  DRIVE Or REVERSE, Lack Of…"*. The title matches this truck's symptom pattern
+  closely. Applicability unknown; the document could not be opened from the
+  environment where this note was written. Highest-value single thing to fetch.
+  `https://static.nhtsa.gov/odi/tsbs/2020/MC-10184634-0001.pdf`
+
+### Ideas considered and rejected
+
+Recorded so they are not re-derived and re-tested at the owner's expense. See
+the knowledge base entries prefixed `dismissed-`.
+
+- **Oil change / viscosity** — the reported case was rough-when-cold, cured by
+  an oil change. This truck is identical cold and hot, so the mechanism cannot
+  be the same. (5W-30 against a 5W-20 spec is still worth correcting.)
+- **Carbon cleaning / Seafoam** — the 3.7 is **port** injected, so valve-back
+  carbon matters far less than on a direct-injected engine, and the injectors
+  here were already flow-tested and the throttle body properly cleaned.
+- **Aftermarket tune** — never tuned, no evidence of prior engine work.
+
+---
+
+## Vacuum testing on this engine
+
+**The lines are hard plastic. They cannot be clamped or pinched.** Isolating
+one means disconnecting it and plugging the manifold port.
+
+**And it must be done with the engine OFF** — opening a manifold port on a
+running engine is a leak large enough to stall it.
+
+Every isolation test therefore runs: engine off, disconnect, plug, restart,
+settle 30 s, measure. Because each test involves a restart, the comparison
+baseline is taken the same way, so all measurements are made under identical
+conditions.
+
+Order: **purge, then booster, then PCV.** Sealing the first two should change
+nothing on a healthy engine, so they give a clean signal. PCV is a metered air
+path in normal operation, so blocking it shifts the idle even when nothing is
+wrong — read the instability, not the rpm number.
+
+Check no plug is left in a port afterwards.
+
+---
+
 ## Recommended next actions
 
-1. **Establish whether there is a fault.** Control-sample another truck, and
-   log the rpm movement at warm idle. Free. Do this first.
+0. **Quick wins** — PCV shake test and purge valve vacuum hold. Ten minutes,
+   engine off, no scan tool. `f150diag run quick-wins`.
+1. **Establish whether there is a fault.** Control-sample another vehicle with
+   this engine, and log the rpm movement at warm idle. Free. Note that Ford's
+   stated position on a 2011-2014 Mustang 3.7 vibration complaint was that it
+   is normal operation of the engine.
 2. **Purge valve and PCV pinch tests.** Free, two minutes, no tools, and
    they target the two components never touched in twelve years.
 3. **Read permanent codes, fuel trims and misfire counters.**

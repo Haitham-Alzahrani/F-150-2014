@@ -11,6 +11,7 @@ f150diag --port /dev/ttyUSB0 dtc       stored, pending and permanent codes
 f150diag --port /dev/ttyUSB0 live --pids idle --seconds 120
 f150diag analyze logs/<file>.csv       statistics and causality on a log
 f150diag forscan <export>.csv          import a FORScan CSV and analyse it
+f150diag run quick-wins                ten-minute hands-on checks
 f150diag run triage --port /dev/ttyUSB0
 f150diag run idle-quality --port /dev/ttyUSB0
 f150diag run <protocol> --dry-run      rehearse the prompts, no adapter
@@ -97,6 +98,7 @@ Protocols are YAML graphs in `protocols/`. Steps:
 | `prompt` | Ask the operator to do something physical; optionally capture an answer with `ask:` and `options:` |
 | `measure` | Poll PIDs for `seconds`; metrics enter the context |
 | `service` | Run a read-only service: `survey`, `dtcs`, `mode06` |
+| `handoff` | Release the adapter to FORScan, collect its export, import it |
 | `branch` | Evaluate `checks` in order, take the first that matches |
 | `finding` | Record a conclusion |
 | `end` | Stop |

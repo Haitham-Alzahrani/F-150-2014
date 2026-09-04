@@ -112,11 +112,18 @@ the current ones are.
 - Mechanical oil pressure gauge, if the VCT branch comes up
 - Vacuum gauge
 - Smoke machine, if trims justify it
+- **Vacuum caps or plugs** sized to the manifold ports — the lines on this
+  engine are hard plastic and cannot be clamped, so every isolation test means
+  disconnecting and plugging, with the engine off
 
 ---
 
 ## 7. Order of work for the open idle question
 
+0. `run quick-wins` — PCV shake test and purge valve vacuum hold. Ten
+   minutes, engine off, no scan tool. Both target components never inspected
+   on this truck, and both come from the Mustang 3.7 community — the same
+   engine.
 1. `run triage` — establishes whether anything is abnormal at all
 2. If it says idle-abnormal: `run idle-quality`
 3. If that lands on **unmetered air**: the protocol's own clamp tests localise

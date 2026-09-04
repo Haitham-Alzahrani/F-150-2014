@@ -1,0 +1,157 @@
+# Two kinds of entry that are not faults but stop work being repeated:
+#
+#   LEADS      — documents worth fetching, recorded with their address so the
+#                next session with network access can settle them.
+#   DISMISSED  — plausible suggestions that were considered and rejected, with
+#                the reasoning. Without these, the same idea gets re-derived
+#                every few weeks and re-tested at the owner's expense.
+
+- id: tsb-vibration-drive-reverse
+  title: "Lead: NHTSA bulletin titled Vibration/Rough Idle In DRIVE Or REVERSE"
+  summary: >
+    A search surfaced a bulletin whose title matches this truck's symptom
+    pattern almost word for word. Which vehicles and engines it covers is
+    unknown - the document could not be opened from the environment where this
+    entry was written.
+  systems: [engine, documentation]
+  symptoms:
+    - vibration or rough idle in Drive or Reverse
+  load_signature: worst-at-idle
+  sets_code: unknown
+  tests:
+    - "Open the bulletin and check the vehicle and engine applicability first - if it does not cover the 2014 F-150 3.7, stop there"
+    - "If it does apply, follow its diagnostic procedure before anything else in this repository"
+  fix: Unknown until the document is read.
+  provenance:
+    - source: unverified
+      confidence: low
+      verified: false
+      note: >
+        Title only, from a search result. Nothing about its contents is known.
+        Recorded because the title is a close match to the symptom and it is
+        cheap to check.
+      check: >
+        Fetch the PDF and establish (1) which vehicles and engines it covers,
+        (2) what symptom it addresses, (3) what the remedy is. Then either
+        promote this to a real entry or delete it.
+      url: https://static.nhtsa.gov/odi/tsbs/2020/MC-10184634-0001.pdf
+  notes: >
+    Highest-value single document to fetch when network access allows.
+
+- id: pcm-calibration-update
+  title: "Lead: is a later PCM calibration available for this VIN?"
+  summary: >
+    Ford has issued PCM calibration updates addressing idle quality on other
+    engines. A reflash is a repair with no parts and no disassembly, so it is
+    worth one phone call before any further spending.
+  systems: [pcm]
+  symptoms:
+    - idle quality complaints with no mechanical fault found
+  load_signature: none
+  sets_code: unknown
+  tests:
+    - "Read the calibration IDs with `f150diag survey` (service 09) and give them plus the VIN to a Ford dealer"
+    - "Ask whether a later calibration exists for this VIN, and what it addresses"
+  fix: Reflash, if a newer calibration exists and addresses idle quality.
+  cost: Low - dealer labour only.
+  provenance:
+    - source: community
+      confidence: low
+      verified: false
+      note: >
+        Ford calibration updates for idle symptoms are documented on other
+        engines and model years. Nothing found indicates one exists for the
+        2014 F-150 3.7 specifically - this is a question to ask, not a claim.
+      check: >
+        Ask a dealer to run OASIS against this VIN. Record the answer here
+        either way, so the question is not asked twice.
+
+- id: dismissed-oil-viscosity
+  title: "Dismissed: oil change or viscosity as the fix"
+  summary: >
+    A 3.7 owner reported a rough idle cured by getting the factory blended oil
+    out at the first oil change. It does not fit this truck.
+  systems: [engine]
+  load_signature: none
+  temperature: cold-only
+  sets_code: never
+  tests:
+    - "Not applicable - this entry exists to record why the idea was rejected"
+  fix: Correct the viscosity at the next change regardless, but not as a repair for this symptom.
+  provenance:
+    - source: community
+      confidence: low
+      verified: false
+      note: >
+        Owner report of rough-idle-when-cold resolved by an oil change. From
+        search summaries.
+      check: >
+        Only worth revisiting if this truck's symptom ever becomes
+        temperature-dependent.
+    - source: measured
+      confidence: high
+      verified: true
+      note: >
+        DOES NOT FIT. The reported case was rough when cold and smooth when
+        warm. This truck is identical cold and hot, so the mechanism cannot be
+        the same. Separately, this truck currently runs 5W-30 against a 5W-20
+        spec - worth correcting at the next change, but a viscosity-driven
+        phaser problem would worsen under load and this truck is flawless
+        under load.
+      url: "owner report, this vehicle, VIN 1FTMF1EM1EFC80632"
+
+- id: dismissed-carbon-cleaning
+  title: "Dismissed: carbon cleaning, induction service or Seafoam"
+  summary: >
+    Suggested on the basis that the 3.7 is prone to rough idle from a dirty
+    engine. Weak for this truck on two counts.
+  systems: [intake]
+  load_signature: none
+  sets_code: never
+  tests:
+    - "Not applicable - this entry exists to record why the idea was rejected"
+  fix: None recommended.
+  provenance:
+    - source: community
+      confidence: low
+      verified: false
+      note: Owner suggestion to run Seafoam and change fuel brand. From search summaries.
+      check: >
+        Establish whether the 3.7 is port or direct injected in the source's
+        own account - the recommendation makes far more sense for a DI engine.
+    - source: measured
+      confidence: high
+      verified: true
+      note: >
+        WEAK HERE. The 3.7 is PORT injected, so fuel washes the intake valves
+        continuously and valve-back carbon is far less of an issue than on a
+        direct-injected engine. On this truck the injectors were already
+        removed, cleaned and flow-tested and the throttle body was removed and
+        hand-cleaned, both with no change to the symptom.
+      url: "owner report, this vehicle, VIN 1FTMF1EM1EFC80632"
+
+- id: dismissed-aftermarket-tune
+  title: "Dismissed: aftermarket tune causing the idle"
+  summary: >
+    A 3.7 Mustang owner had idle problems caused by an aftermarket race tune,
+    resolved when the tuner issued a corrected file. Not applicable here.
+  systems: [pcm]
+  load_signature: none
+  sets_code: never
+  tests:
+    - "Read calibration IDs with `f150diag survey` and confirm they are stock"
+  fix: Return to the stock calibration, where one has been applied.
+  provenance:
+    - source: community
+      confidence: low
+      verified: false
+      note: Mustang 3.7 owner report of a tune causing idle problems. From search summaries.
+      check: Not worth pursuing unless a tune is found on this vehicle.
+    - source: measured
+      confidence: high
+      verified: true
+      note: >
+        NOT APPLICABLE. This truck has never been tuned and shows no evidence
+        of prior engine work. Owner-reported, and checkable against the
+        calibration IDs read by `f150diag survey`.
+      url: "owner report, this vehicle, VIN 1FTMF1EM1EFC80632"
