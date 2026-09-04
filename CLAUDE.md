@@ -275,6 +275,62 @@ judge one (lowest flow and temperature), and the slow 3.4–4 s period argues
 *for* intact oxygen storage, not against it — less storage would make the loop
 run faster. The reading that matters is at steady 60–80 km/h cruise.
 
+### THE 2000 RPM LOAD TEST — lean ONLY at idle (2026-09, 01:18–01:20)
+
+**The strongest finding in this investigation.** Thirteen windows of `STFT B1`
+paired with `LTFT - B2`, idle → held ~2000 rpm → idle.
+
+| Graph clock | `LTFT - B2` | Event |
+|---|---|---|
+| 50:57–51:17 | **2.34 %** | Idle |
+| **51:17** | 2.34 → 0 | Throttle opened; `STFT B1` spikes **+9.38** (tip-in) |
+| 51:17–53:45 | **0.00 %** flat, 2 min 28 s | Held ~2000 rpm |
+| **53:45** | 0 → **2.34** | Throttle closed; `STFT B1` crashes **−11.72** (overrun) |
+
+**It returned to *exactly* 2.34 instantly** — not zero climbing back. That can
+only be the PCM switching back to a stored load cell it never lost. Ford indexes
+long term trim by load; this capture watched it change cells twice.
+
+| Condition | Learned correction, bank 2 |
+|---|---|
+| **Idle** | **+2.34 %** — adding fuel |
+| **~2000 rpm** | **0 %** — adding nothing |
+
+**The engine runs lean at idle and stops the moment the throttle opens.** That
+is unmetered air downstream of the MAF — **a vacuum leak.** A fixed hole is a
+large fraction of idle airflow and negligible at 2000 rpm; a MAF or baro
+calibration error would stay constant across both cells instead.
+
+**It matches the symptom's own load curve** — highest vacuum → worst shake,
+throttle open → gone. First measured finding whose shape matches the complaint.
+
+**Outstanding caveat:** the 0 % load cell could be un-learned rather than
+learned (only 101 km since the codes were cleared). **Close it by re-reading the
+load cell after 15–20 min of real driving.** Still ~0 % while idle sits at +2.3
+to +3.1 % confirms the leak; climbing to +3 % means it is proportional — MAF or
+baro — instead.
+
+**`STFT B1` during the hold is NOT interpreted:** wrong pairing (bank 1 short
+term against bank 2 long term gives no bank's total) and the throttle was
+hand-held with rpm unrecorded. The finding rests on the cell values alone.
+
+**Where to look, if it is a leak:** PCV valve, hose, grommet and elbow (never
+inspected, twelve years of Jeddah heat, hard plastic cracks) · brake booster
+line and check valve (never tested) · EVAP purge valve and line (never touched,
+and purge runs ~40 % at idle so it is actively flowing) · intake manifold
+gasket · throttle body gasket and injector O-rings (both joints disturbed during
+earlier work — they cannot be the *original* cause since the shake predates all
+repairs, but a disturbed joint can leak now).
+
+**A smoke test is now justified.** Earlier revisions said trims did not warrant
+one — correct then, when long term trim read 0 % and was believed un-learned.
+
+**If the leak is uneven, feeding one runner more than the others, it also
+explains the felt vibration:** the bank average moves only 2–3 %, far too little
+to code, while the affected cylinder runs materially leaner and contributes a
+weaker power stroke once per engine cycle — **~5.5 Hz at this idle**, which is
+what the accelerometer test detects and the injector-kill test names.
+
 ### Trims trade off — read BOTH halves of the SAME bank (2026-09, 01:13)
 
 ```

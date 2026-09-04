@@ -3,9 +3,13 @@
 Working log for VIN `1FTMF1EM1EFC80632`. Records what was checked, what it
 ruled out, and what is still open.
 
-**Status:** open — but the first open question is no longer *which fault*.
-It is **whether there is a fault at all.** See
-[Is this a fault?](#is-this-a-fault) before spending anything further.
+**Status:** open — but there is now a measured lead with the right shape.
+**Long term fuel trim reads +2.34 % at idle and 0 % at ~2000 rpm** — the lean
+correction exists only at idle and vanishes when the throttle opens. That is the
+signature of a vacuum leak, and it is the same load curve as the symptom itself.
+See [THE 2000 RPM LOAD TEST](#the-2000-rpm-load-test--the-lean-correction-exists-only-at-idle-2026-09-0118-0120).
+One confirmation is outstanding: re-read the load cell after a proper drive, to
+rule out its 0 % being un-learned rather than learned.
 
 ---
 
@@ -646,6 +650,150 @@ addresses the actual complaint.
 - `Knock retard` not yet captured paired with rpm.
 
 ---
+
+## THE 2000 RPM LOAD TEST — the lean correction exists ONLY at idle (2026-09, 01:18-01:20)
+
+Thirteen consecutive ~15 s windows pairing `STFT B1` with `LTFT - B2`, graph
+clock 50:57 through 53:57. Sequence: idle, then a held ~2000 rpm, then back to
+idle.
+
+**This is the most informative measurement taken in this investigation.**
+
+### The measurement
+
+| Graph clock | `LTFT - B2` | Event |
+|---|---|---|
+| 50:57-51:17 | **2.34 %** | Idle |
+| **51:17** | 2.34 → 0.78 → **0** | Throttle opened. `STFT B1` spikes to **+9.38** at the same instant — tip-in enrichment. |
+| 51:17-53:45 | **0.00 %**, flat for 2 min 28 s | Held ~2000 rpm |
+| **53:45** | 0 → 0.78 → **2.34** | Throttle closed. `STFT B1` crashes to **−11.72** at the same instant — overrun. |
+
+### Why this proves load cells, not a reset
+
+**Long term trim returned to exactly 2.34 %, instantly** — not to zero followed
+by a slow climb back. A reset would have to re-learn from zero over minutes. An
+instantaneous return to the identical value can only mean the PCM switched back
+to a **stored cell it had never lost**.
+
+Ford stores long term fuel trim in separate cells indexed by load and rpm. The
+displayed value is whichever cell is currently active. This capture watched the
+PCM change cells twice and come back to the same number, which establishes the
+mechanism beyond argument.
+
+**The two spikes in `STFT B1` are useful markers in their own right:** +9.38 %
+on tip-in and −11.72 % on throttle closure are ordinary transient enrichment and
+overrun behaviour, and they timestamp the throttle events precisely against the
+long term trim's cell changes.
+
+### What the two cells say
+
+| Condition | Learned correction, bank 2 |
+|---|---|
+| **Idle** | **+2.34 %** — adding fuel |
+| **~2000 rpm** | **0 %** — adding nothing |
+
+**The engine runs lean at idle and stops running lean as soon as the throttle
+opens.**
+
+That is the signature of **unmetered air entering downstream of the MAF** — a
+vacuum leak. The arithmetic is straightforward: a fixed-size opening is a large
+fraction of the very small airflow at idle and a negligible fraction of the
+airflow at 2000 rpm, so its fuelling effect shrinks in proportion. A MAF or
+barometric calibration error would behave the opposite way, staying roughly
+constant across both cells.
+
+### It matches the symptom's own shape
+
+| Condition | Manifold vacuum | Reported shake |
+|---|---|---|
+| P / N at standstill | Highest — leak draws hardest | **Worst** |
+| D / R at standstill | Slightly lower | **Less** |
+| Driving under load | Lowest — leak irrelevant | **Absent** |
+
+This is the load curve recorded at the top of this document from the owner's own
+description, arrived at independently. **It is the first measured finding in
+this investigation whose shape matches the complaint.**
+
+### The honest caveat, and how to close it
+
+`LTFT - B2` read exactly 0.00 in the higher-load cell. Two readings are possible:
+
+1. **The cell is learned, and it learned zero** — no correction needed at load.
+   This is the leak conclusion.
+2. **The cell is un-learned** and simply sits at its 0 % default. Only 101 km
+   and 3 warm-ups have elapsed since the codes were cleared, and the idle cell
+   got roughly three hours of exposure this session while the load cell got
+   whatever driving happened in 101 km.
+
+**Two things separate them, and both are already planned:**
+
+- **The drive.** After 15-20 minutes of ordinary driving with sustained cruise,
+  the load cell will be thoroughly learned. Re-read it. **If it is still at or
+  near 0 % while idle sits at +2.3 to +3.1 %, reading 1 is established and the
+  leak is confirmed.** If it has climbed to +3 %, the correction is proportional
+  and the answer is the MAF or the barometric reading instead.
+- **`Long term fuel % trim - Bank 1` paired with `Long term fuel % trim -
+  Bank 2`**, captured at idle and again at 2000 rpm. Both banks, both cells, one
+  capture. Bank 1's idle cell is already known at +3.13 %; its load cell is not.
+
+### `STFT B1` during the hold — recorded, not over-read
+
+| Window | `STFT B1` centre |
+|---|---|
+| 51:27-51:42 | −2.2 |
+| 51:47-52:02 | −2.6 |
+| 52:07-52:22 | −2.3 |
+| 52:18-52:33 | −0.1 |
+| 52:27-52:42 | −1.5 |
+| 52:37-52:52 | **−4.5** |
+| 52:47-53:02 | −1.8 |
+| 53:05-53:20 | **+2.8** |
+| 53:12-53:27 | +3.4 |
+| 53:28-53:43 | +3.5 |
+
+Short term trim on bank 1 ran negative for the first ~100 s of the hold and
+positive for the last ~40 s. **This is not interpreted here.** Two reasons:
+
+- **It is the wrong pairing.** `STFT B1` is bank 1; `LTFT - B2` is bank 2. A
+  total correction can only be computed from both halves of the *same* bank, so
+  neither bank's total is available from this capture.
+- **The throttle was held by hand.** Any rpm drift changes how much the leak
+  matters, and a drift downward late in the hold would produce exactly this
+  rising trend. That is consistent with the leak reading but it is not evidence
+  for it, because the rpm was not recorded.
+
+The finding rests on the long term cell values alone, which do not depend on
+either of those.
+
+### What to look at, if it is a leak
+
+The 3.7 has few vacuum connections, and the ones never inspected in twelve years
+of Jeddah heat are:
+
+- **PCV valve, its hose, grommet and elbow** — never inspected. Hard plastic
+  elbows crack with age and heat.
+- **Brake booster line and its check valve** — never tested.
+- **EVAP purge valve and its line** — never touched, and `Commanded evaporative
+  purge` runs at ~40 % at idle, so this circuit is actively flowing.
+- **Intake manifold gasket** — composite manifold, twelve years.
+- **Throttle body gasket** and **injector O-rings** — both joints were disturbed
+  during earlier work (the throttle body was removed and hand-cleaned; the
+  injectors were removed for flow testing). **They cannot be the original
+  cause** — the owner reports the shake predates all repair work — but a
+  disturbed joint can leak now regardless of what started it.
+
+**A smoke test is now justified.** Earlier revisions of this file said trims did
+not warrant one; that was correct at the time, when long term trim read 0 % and
+was believed un-learned. It now reads +2.34 % at idle and 0 % at load, which is
+precisely the pattern a smoke test is designed to locate.
+
+**If the leak is uneven — feeding one runner more than the others — it would
+also explain the felt vibration.** The bank average would move only two or three
+percent, far too little to code, while the affected cylinder runs materially
+leaner than its neighbours and contributes a weaker power stroke once per engine
+cycle. That appears at **half engine speed, ~5.5 Hz at this idle**, which is
+exactly what the phone accelerometer test is designed to detect and what the
+injector-kill balance test would name.
 
 ## Session 01:12-01:13 — the trims are handing off, total correction unchanged
 
