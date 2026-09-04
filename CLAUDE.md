@@ -275,7 +275,20 @@ judge one (lowest flow and temperature), and the slow 3.4–4 s period argues
 *for* intact oxygen storage, not against it — less storage would make the loop
 run faster. The reading that matters is at steady 60–80 km/h cruise.
 
-### Bank 2 trim runs +3.5 % where bank 1 runs 0 % (2026-09)
+### Bank 2 trim runs +3.5 % — but the COMPARISON is withdrawn (2026-09)
+
+**The offset is unproven.** The bank 1 half of it came from the scan app's
+**Avg** field, which is session-cumulative and already ruled inadmissible here.
+The bank 2 half came from reading the curve properly. A good number was
+compared against a bad one. What stands: nine consecutive windows of `Short
+term fuel % trim - Bank 2` stepping between 3.13 and 3.91 %. What does not:
+that bank 1 differs from it. **Nothing below may be acted on until `Short term
+fuel % trim - Bank 1` and `- Bank 2` are captured in one window.**
+
+**Dating rule — read the phone clock on every screenshot.** Sessions hours
+apart are not comparable; trims and adaptives move across a warm-up. Never set
+a reading from one session against a reading from another.
+
 
 Nine consecutive ~15 s windows of `STFT B2` paired with rpm. Bank 2's trace
 steps between **3.13 and 3.91 %** — two adjacent 0.78 % codes, so the true
@@ -396,14 +409,16 @@ made visible by young adaptives.
 
 ### Next — all physical, OBD is done
 
-0. **Charging voltage — NEW, and it now outranks the rest.** `ECU voltage`
-   averaged **12.62 V with the engine running**, in windows taken minutes
-   after other windows in the same session read 13.76–14.0 V. Either Ford's
-   smart-charging strategy dropping field excitation, or **the alternator has
-   stopped charging.** DMM on DC volts across the battery posts at warm idle:
-   13.5–14.5 V expected. 12.6 V means it is not charging. Settle this before
-   anything else on this list — a sagging or noisy supply moves every sensor
-   reference in the truck.
+0. **Charging voltage — largely explained, no longer urgent.** `ECU voltage`
+   averaged **12.62 V with the engine running** in one session. But the BCM
+   reports `Vehicle Battery Voltage` **13.8 V**, `Vehicle Battery Current`
+   **1 A**, `Battery SoC` **88 %** — so this truck has a battery monitor on the
+   negative cable and runs Ford's smart charging, which deliberately drops
+   charging voltage once the battery is full. Voltage falling to ~12.6 V for
+   periods is that strategy working, not a dead alternator. Confirm with a DMM
+   across the posts when convenient (13.5–14.5 V, dropping at times) — but the
+   ripple and ground-drop checks below are now the more useful electrical
+   tests.
 1. **AC ripple across the battery.** DMM on AC volts at idle: under 0.1 V.
    Above that an alternator diode is injecting ripple into every sensor
    reference.

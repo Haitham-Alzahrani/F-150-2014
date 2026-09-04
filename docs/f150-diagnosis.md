@@ -501,6 +501,32 @@ capture. It is not worth a converter.
 
 ### Bank 2 short-term trim runs +3.5 % where bank 1 runs 0 % (2026-09)
 
+**DOWNGRADED — THE OFFSET IS UNPROVEN. Read this before using it.**
+
+The bank 1 figure below came from the scan app's own **Avg** field, which is
+session-cumulative rather than per-window and which this project has already
+ruled inadmissible. The bank 2 figure came from reading the curve directly.
+A good number was compared against a bad one.
+
+The offset is withdrawn on that ground alone. It is not withdrawn because of
+the 10:26-10:33 value read — **those screenshots are from an earlier session,
+about two hours before the graphs, so they cannot contradict them.** Trims move
+between sessions and across a warm-up; readings from different sessions are not
+comparable and must not be set against each other. Recorded for completeness
+only, from that earlier session: `Short term fuel % trim - Bank 1` showed
+0.78 % on one screen and 3.13 % on another seconds later, with `Bank 2` at 0 %.
+That says trims move; it says nothing about the later graphs.
+
+**What still stands:** nine consecutive windows of `Short term fuel % trim -
+Bank 2` stepping between 3.13 and 3.91 %. That is a properly read curve and it
+is solid. What is *not* established is that bank 1 differs from it.
+
+**Nothing may be concluded from this until `Short term fuel % trim - Bank 1`
+and `Short term fuel % trim - Bank 2` are captured in the same window.** The
+leak and sensor-bias reasoning further down is contingent on that capture and
+must not be acted on before it.
+
+
 Nine consecutive ~15 s windows, `Engine RPM` paired with `STFT B2`, warm idle
 in Park.
 
@@ -613,6 +639,119 @@ addresses the actual complaint.
 - `Knock retard` not yet captured paired with rpm.
 
 ---
+
+## Full sensor list read from the app — 2026-09, 10:26-10:33
+
+Values as the app labels them, warm idle, 37 minutes of run time since start.
+This is a value read, not a graph, so every figure is one instant.
+
+**Dating rule — the phone clock is the only timestamp that matters.** This
+session reads 10:26-10:33 on the phone; the paired graph session reads
+12:48-12:51. They are about two hours apart. **Readings from different sessions
+must never be compared against each other** — trims, temperatures and adaptives
+all move across a warm-up and between sessions. Every screenshot in this
+project is dated by its phone clock, and any comparison must state that both
+sides came from the same session.
+
+### The charging concern is largely answered
+
+The BCM reports its own view of the electrical system:
+
+| App label | Value |
+|---|---|
+| `[BCM] Vehicle Battery Voltage` | **13.8 V** |
+| `[BCM] Vehicle Battery Current` | **1 A** |
+| `[BCM] Battery SoC` | **88 %** |
+| `Control module voltage` | 13.76 V |
+| `OBD Module Voltage` | 14 V |
+| `[BCM] Normalized cumulative charge when ignition is on` | 121.6 |
+| `[BCM] Normalized cumulative discharge, engine on` | 10.6 |
+| `[BCM] Normalized cumulative discharge, engine off` | 2.9 |
+
+The battery is 88 % charged and taking only **1 A**. This truck therefore has
+a battery monitoring sensor on the negative cable and runs Ford's smart
+charging strategy, which **deliberately reduces charging voltage once the
+battery is full** to reduce alternator drag. Under that strategy system voltage
+routinely falls to around 12.6 V for periods, then recovers.
+
+**That is the most likely explanation for the 12.62 V average seen in the
+later session, and it demotes "the alternator has stopped charging" from the
+top of the physical list.** Confirm with a meter when convenient; it is no
+longer urgent, and the AC-ripple and ground-drop checks are now the more
+useful electrical tests.
+
+### Monitors — the catalyst and oxygen sensor tests have not run
+
+`Monitor status since DTCs cleared`:
+
+| Monitor | State |
+|---|---|
+| Misfire | Available / **Completed** |
+| Fuel System | Available / **Not completed** |
+| Components | Available / Completed |
+| Catalyst | Available / **Not completed** |
+| Evaporative System | Available / **Not completed** |
+| Oxygen Sensor | Available / **Not completed** |
+| Oxygen Sensor Heater | Available / **Not completed** |
+| EGR system | Available / Completed |
+
+**Consequence: the on-board monitoring test results (Mode 06) will hold nothing
+useful about the catalysts or the oxygen sensors** — those tests have not
+executed since the codes were cleared, so there is no stored result to read.
+Only the misfire monitor has run, and it passed with DTC count 0.
+
+Running them requires a proper drive cycle: full warm-up then sustained steady
+cruise. The planned 60-80 km/h capture therefore does double duty — it supplies
+the readings wanted *and* it makes the PCM run its own catalyst and oxygen
+sensor tests, after which Mode 06 becomes worth reading.
+
+`Fuel System Status` reads **"Closed loop, using oxygen sensor feedback to
+determine fuel mix"** — confirming the engine was in closed loop for every
+measurement in this project.
+
+### Values that close out open questions
+
+| App label | Value | What it settles |
+|---|---|---|
+| `Catalyst temperature Bank 1 Sensor 1` | **458.9 °C** | Identical to bank 2 |
+| `Catalyst temperature Bank 2 Sensor 1` | **458.9 °C** | Both banks at the same exhaust temperature |
+| `Knock retard` | **0 °** | No knock. Does not need a paired graph. |
+| `Learned octane` | −0.6 | A small adaptive offset, nothing alarming |
+| `Barometric pressure` | **blank** | Not supported on this vehicle — drop from the list |
+| `Manifold absolute pressure (high resolution)` | **blank** | Not supported — drop from the list |
+| `Absolute pedal position D` / `E` | 14.9 % / 7.45 % | Resting values, foot off the pedal |
+| `PCM Odometer` | **131,313 km** | Matches the cluster — the history report's non-monotonic odometer is not reflected in the PCM |
+| `ATF temperature var.3` | 87.13 °C | Transmission fluid at normal operating temperature |
+| `Ambient air temperature` / `Intake air temperature` | 37 °C / 38 °C | 1 °C apart after 37 min idling — no intake heat soak |
+| `Run time since engine start` | 0:37:42 | Fully warmed for every reading here |
+| `Vehicle speed` | 0 km/h | Stationary |
+| `Oxygen sensor 2 Bank 1 Voltage` | 0.71 V | |
+| `Oxygen sensor 2 Bank 2 Voltage` | 0.73 V | Snapshots — no asymmetry visible in an instant |
+| `Oxygen sensor 1 Wide Range Equivalence ratio` | 14.92 | |
+| `Oxygen sensor 5 Wide Range Equivalence ratio` | 14.8 | |
+| `Commanded evaporative purge` | 41.18 % | |
+| `Ethanol fuel percent` | 16.08 % | Unchanged from the earlier read — still unexplained on E0 pump fuel |
+| `Calculated engine load value` | 27.06 % | |
+| `Absolute load value` | 14.12 % | |
+| `Throttle Position Desired` / `Actually` | 7.29° / 7.56° | Tracking within 0.27° |
+
+### Open question raised by this list
+
+`Gear (AT)` reads **1**. On the 6R80 the transmission commands first gear
+internally even with the selector in Park, so this does not by itself prove the
+truck was in Drive — but every reading in this project is recorded as "Park"
+and that should be confirmed rather than assumed, because Park and Drive are
+known to differ in this vehicle's symptom.
+
+### Tyre pressures, unrelated but real
+
+| Position | Reading | Label calls for 241 kPa (35 psi) |
+|---|---|---|
+| Left Front | 237.53 kPa | Close enough |
+| **Right Front** | **211.68 kPa** | **~4 psi low — inflate** |
+| Right Rear Outer | 247.88 kPa | Fine |
+| Left Rear Outer | 247.88 kPa | Fine |
+| Rear Inner (both) | 0 kPa | No inner wheels — single rear wheel truck, expected |
 
 ## Live data — 2026-09, warm idle in Park
 
