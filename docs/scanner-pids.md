@@ -9,9 +9,24 @@ Every name below was read off the app's **All sensors** screen on the phone,
 session 10:26–10:33. Names from graph headers are marked as such, because the
 graph screen abbreviates some labels differently from the list.
 
-**Values shown are one instant from that session** and are here only to mark
-which channels return data and which come back blank. For measured findings see
+**Values shown are one instant** and are here only to mark which channels
+return data and which come back blank. For measured findings see
 [`f150-diagnosis.md`](f150-diagnosis.md).
+
+## The red millisecond number is the response time — read it
+
+Each row carries a red figure in milliseconds at its right. **That is how long
+the truck took to answer that request.**
+
+- **A number (e.g. `453ms`) means the channel answered.** It is live.
+- **`0ms` with an empty value means the truck did not answer at all.** The
+  channel is unsupported on this vehicle, or the app never polled it.
+
+This matters because **a channel can be blank in one session and live in the
+next.** Barometric pressure, evaporative system vapor pressure and both wide
+range current channels all read blank at 10:26-10:33 and all returned real
+values at 01:00. Do not mark a channel unsupported from one blank reading —
+check the millisecond figure, and check twice.
 
 ---
 
@@ -32,7 +47,11 @@ which channels return data and which come back blank. For measured findings see
 | `Calculated engine load value` | 27.06 % |
 | `Absolute load value` | 14.12 % |
 | `Vehicle speed` | 0 km/h |
-| `Run time since engine start` | 0.00:37:42 |
+| `Run time since engine start` | 0.00:37:42, later 0.03:06:10 |
+| `Fan speed desired` | **blank, 0ms** |
+| `Engine fuel rate` | **blank, 0ms** |
+| `Engine oil pressure raw` | **blank, 0ms** |
+| `Barometric pressure` | 97 kPa |
 
 ## Fuel and mixture
 
@@ -149,14 +168,30 @@ has no start/stop: `[BCM] Battery Voltage too low for Start/Stop`,
 
 ## Returns blank on this vehicle — do not request these
 
-| Exact app label | Why |
+Confirmed over two sessions, blank with `0ms` in both:
+
+| Exact app label | Note |
 |---|---|
-| `Barometric pressure` | No value returned |
-| `Manifold absolute pressure (high resolution)` | No value returned |
-| `Evap. system vapor pressure` | No value returned |
-| `Oxygen sensor 1 Wide Range Current (mA)` | No value returned |
-| `Oil Life %` | No value returned |
-| `(ABS) Front left wheel speed` / `Front right wheel speed` | No value returned |
+| `Manifold absolute pressure (high resolution)` | 0ms both sessions |
+| `Oil Life %` | 0ms both sessions |
+| `(ABS) Front left / right / Rear left / Rear right wheel speed` | 0ms both sessions |
+| `Fan speed desired` | 0ms |
+| `Engine fuel rate` | 0ms |
+| `Engine oil pressure raw` | 0ms |
+| `[BCM] Vehicle Battery B Voltage` / `B Current` | 0ms — second battery, not fitted |
+| `[BCM] Battery Current: Predicted` | 0ms |
+| `[BCM] Battery Quinscent Current: low range` | 0ms |
+| `[BCM] Battery State Detection Status` | 0ms |
+
+**These were wrongly listed as unsupported and DO work** — they returned blank
+at 10:26-10:33 and real values at 01:00:
+
+| Exact app label | 01:00 value |
+|---|---|
+| `Barometric pressure` | **97 kPa** |
+| `Evap. system vapor pressure` | **−412.5 Pa** |
+| `Oxygen sensor 1 Wide Range Current (mA)` | **−0.07 mA** |
+| `Oxygen sensor 5 Wide Range Current (mA)` | **−0.09 mA** |
 | `DPF average distance between regen` | Diesel channel — not applicable |
 | `DPF failed regens` / `DPF failed regens (average)` | Diesel channel — not applicable |
 | `Vane position sensor` | Reads 0 V — variable-geometry turbo channel, not applicable |

@@ -501,7 +501,14 @@ capture. It is not worth a converter.
 
 ### Bank 2 short-term trim runs +3.5 % where bank 1 runs 0 % (2026-09)
 
-**DOWNGRADED — THE OFFSET IS UNPROVEN. Read this before using it.**
+**WITHDRAWN — see [Session 01:00-01:01](#session-0100-0101--long-term-trims-have-learned).
+Long term fuel trim has since learned to +3.13 % on bank 1 and +2.34 % on
+bank 2 — a difference of one quantisation step. The banks are fuelled the same.
+Everything in this section that depends on a bank difference is dead: the
+bank-specific vacuum leak, the exhaust leak upstream of one sensor, the
+one-sided sensor bias. Kept only as a record of how the error was made.**
+
+**Also downgraded on its own terms, before that measurement existed:**
 
 The bank 1 figure below came from the scan app's own **Avg** field, which is
 session-cumulative rather than per-window and which this project has already
@@ -639,6 +646,132 @@ addresses the actual complaint.
 - `Knock retard` not yet captured paired with rpm.
 
 ---
+
+## Session 01:00-01:01 — long term trims have LEARNED
+
+Phone clock 01:00-01:01. `Run time since engine start` **0.03:06:10** — the
+engine had been idling for over three hours. Warm idle, stationary, 640 rpm.
+
+This session settles two questions and opens one.
+
+### Long term fuel trim is no longer zero — and the banks match
+
+| Reading | Bank 1 | Bank 2 |
+|---|---|---|
+| `Long term fuel % trim` | **+3.13 %** | **+2.34 %** |
+| `Short term fuel % trim` (instant) | 0 %, later 0.78 % | 4.69 % |
+
+**The un-relearned caveat is closed.** Earlier readings had both long term trims
+at exactly 0 %, which this file recorded as probably un-learned rather than
+learned-and-perfect. They have now learned, and they read +3.13 and +2.34.
+
+**The bank asymmetry is dead.** The two banks differ by 0.79 % — exactly one
+quantisation step, the smallest difference the PID can express. Long term trim
+is the *learned average*; it is far better evidence than snapshots of a short
+term trim that swings every second. **The engine fuels both banks the same.**
+
+Everything built on a bank difference is withdrawn: the bank-specific vacuum
+leak, the exhaust leak upstream of one sensor, the one-sided sensor bias. None
+of them survive two long term trims within one LSB of each other.
+
+### What replaces it: a small, EVEN, lean bias across the whole engine
+
+Both banks learned **positive**, both about **+2.3 to +3.1 %**. The PCM has
+settled on adding roughly 3 % more fuel than its base calculation, equally on
+both sides.
+
+That is small — anything within ±10 % is normal and sets no code — but it is
+now a *learned* value rather than a snapshot, and it is even. An even lean bias
+has different candidates from a one-sided one:
+
+- **A leak the intake shares equally** — the brake booster line, the PCV
+  circuit, the throttle body gasket, or a manifold gasket that feeds the plenum
+  rather than one runner.
+- **The MAF reading slightly low**, so the PCM calculates less air than is
+  actually entering and under-fuels, and the oxygen sensors add it back.
+- **Barometric pressure reading low** — see below.
+- **Normal drift** on a twelve-year-old engine. +3 % is genuinely unremarkable.
+
+**The test that separates a leak from a calibration offset is load.** A leak is
+a fixed hole: it is a large fraction of the air entering at idle and a small
+fraction at 2000 rpm, so its trim contribution shrinks as the throttle opens. A
+MAF or barometric error is proportional and stays roughly constant at every
+load. Ford stores long term trim in separate cells by load, so reading it at
+idle and again after sustained driving reads both cells directly.
+
+### Barometric pressure reads 97 kPa — worth checking
+
+`Barometric pressure` returned **97 kPa**. Jeddah is at sea level, where
+standard pressure is 101.3 kPa and ordinary weather variation is a couple of
+kPa either side. 97 kPa is about 4 % low for this location.
+
+Ford derives barometric pressure from the MAP sensor. If that reading is low,
+the PCM's air estimate is low, it under-fuels, and the oxygen sensors correct
+it back — **which is the direction and roughly the magnitude of the +2.3 to
++3.1 % long term trim just measured.**
+
+[VERIFY] This is suggestive, not established. Two things are unchecked: the
+actual barometric pressure in Jeddah at that hour, and how heavily this PCM
+weights barometric pressure against the MAF on a mass-flow-based fuelling
+strategy — on a MAF system the barometric term is a correction, not the primary
+input, so a 4 % error there should not produce a full 4 % fuelling error. Do
+not act on it until the local pressure is confirmed against a second source.
+
+### The charging question is answered — smart charging, not a failed alternator
+
+| Reading | 10:26-10:33 | 01:00-01:01 |
+|---|---|---|
+| `[BCM] Vehicle Battery Voltage` | 13.8 V | **12.8 V** |
+| `[BCM] Vehicle Battery Current` | 1 A | **0 A** |
+| `[BCM] Battery SoC` | 88 % | **90 %** |
+| `Control module voltage` | 13.76 V | 12.7-12.75 V |
+| `OBD Module Voltage` | 14 V | 12.9 V |
+
+**The state of charge went UP, from 88 % to 90 %, and then charging stopped.**
+A failed alternator cannot raise the state of charge. The system charged the
+battery, the battery reached 90 %, current fell to zero and voltage settled to
+battery level.
+
+That is precisely Ford's smart charging strategy: reduce alternator output once
+the battery is full, to cut the drag on the engine. **The 12.62 V average that
+was once at the top of the physical test list is normal operation.** The item is
+closed. A meter check across the posts is still welcome for completeness, but
+nothing hangs on it, and the AC ripple and ground drop tests remain worth doing
+on their own merits.
+
+### Downstream oxygen sensor snapshots — the asymmetry does not survive them
+
+| Reading | Bank 1 | Bank 2 |
+|---|---|---|
+| One screen | 0.79 V | 0.67 V |
+| Seconds later | — | 0.79 V |
+
+Bank 2 moved from 0.67 to 0.79 between two screens. **These signals swing
+constantly; a single value carries no information.** The graph capture that gave
+bank 1 an average of 0.58-0.63 against bank 2's 0.70-0.72 remains the better
+measurement, but the ranges overlap heavily and these snapshots show both banks
+reaching the same values. **Treat the downstream asymmetry as weak and
+unconfirmed**, not as a finding.
+
+### Other values from this session
+
+| App label | Value | Note |
+|---|---|---|
+| `Engine coolant temperature` | **98 °C** | Up from 93-94. Three hours idling at 36 °C ambient. Within normal; fan should cycle around 100-105. |
+| `Evap. system vapor pressure` | −412.5 Pa | Slight tank vacuum, consistent with purge commanded at 40 % — confirms purge is actually flowing |
+| `Commanded evaporative purge` | 40.39 % | Unchanged |
+| `Calculated engine load value` | 29.02 % | Up from 27.06 |
+| `Timing advance` | 13 ° | Within the 10-13.5 ° band measured on the graphs |
+| `MAF air flow rate` | 2.97 g/sec | Unchanged |
+| `Catalyst temperature Bank 1 / Bank 2 Sensor 1` | 459.9 / 459.9 °C | Still identical |
+| `Throttle Position Desired` / `Actually` | 8.28 ° / 7.85 ° | Tracking within 0.43 ° |
+| `ATF temperature var.3` | 76.69 °C | Down from 87.13 — three hours stationary, cooler doing its job |
+| `Ambient air temperature` | 36 °C | |
+| `Variable camshaft actual advance #1` | −0.06 ° | Still parked |
+| `Knock retard` | 0 ° | Still zero |
+| `Ethanol fuel percent` | 16.08 % | Unchanged and still unexplained |
+| `Fuel System Status` | Closed loop | |
+| Monitors | Catalyst, Oxygen Sensor, Fuel System all **Not completed** | Unchanged — still needs a drive cycle |
 
 ## Full sensor list read from the app — 2026-09, 10:26-10:33
 

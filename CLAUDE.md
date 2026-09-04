@@ -275,7 +275,68 @@ judge one (lowest flow and temperature), and the slow 3.4–4 s period argues
 *for* intact oxygen storage, not against it — less storage would make the loop
 run faster. The reading that matters is at steady 60–80 km/h cruise.
 
-### Bank 2 trim runs +3.5 % — but the COMPARISON is withdrawn (2026-09)
+### Long term trims have LEARNED — and the banks match (2026-09, 01:00)
+
+After 3 h 06 m of run time, with the engine warm at 640 rpm:
+
+| | Bank 1 | Bank 2 |
+|---|---|---|
+| `Long term fuel % trim` | **+3.13 %** | **+2.34 %** |
+
+**Two things close here.**
+
+**1. The un-relearned caveat is gone.** Long term trim previously read exactly
+0 % on both banks, which this file recorded as probably un-learned rather than
+learned-and-perfect. It has now learned.
+
+**2. THE BANK ASYMMETRY IS DEAD.** The banks differ by 0.79 % — one
+quantisation step, the smallest difference the PID can express. Long term trim
+is the *learned average*, far better evidence than snapshots of a short term
+trim that swings every second. **Both banks are fuelled the same.** Everything
+built on a bank difference is withdrawn: the bank-specific vacuum leak, the
+exhaust leak upstream of one sensor, the one-sided sensor bias. The downstream
+O2 asymmetry is also weak — snapshots at 01:00 show B1 at 0.79 V and B2 moving
+0.67 → 0.79 between screens, so the ranges overlap heavily.
+
+**What replaces it: a small, EVEN, lean bias.** Both banks learned positive at
+about +2.3 to +3.1 %. Small — ±10 % is normal — but learned, and even. An even
+bias has different candidates from a one-sided one: a leak the intake shares
+equally (booster line, PCV circuit, throttle body or plenum gasket), the MAF
+reading slightly low, barometric pressure reading low, or ordinary drift on a
+twelve-year-old engine.
+
+**Load separates a leak from a calibration offset.** A leak is a fixed hole —
+a large fraction of idle airflow, a small fraction at 2000 rpm — so its trim
+contribution shrinks as the throttle opens. A MAF or baro error is proportional
+and stays constant. Ford stores long term trim in separate cells by load, so
+reading it at idle and again after sustained driving reads both cells directly.
+
+### Barometric pressure reads 97 kPa — [VERIFY]
+
+Jeddah is at sea level, where standard is 101.3 kPa and weather moves it a
+couple of kPa. 97 kPa is ~4 % low. Ford derives it from the MAP sensor; a low
+reading makes the PCM under-estimate air, under-fuel, and the O2 sensors add it
+back — the direction and roughly the size of the +2.3–3.1 % trim just measured.
+**Suggestive, not established.** Unchecked: the actual local pressure at that
+hour, and how heavily a MAF-based strategy weights the baro term (on a mass-flow
+system it is a correction, not the primary input, so 4 % there should not give
+4 % of fuelling error). Confirm local pressure before acting.
+
+### Charging: ANSWERED — smart charging, not a failed alternator (2026-09)
+
+| | 10:26–10:33 | 01:00–01:01 |
+|---|---|---|
+| `[BCM] Vehicle Battery Voltage` | 13.8 V | 12.8 V |
+| `[BCM] Vehicle Battery Current` | 1 A | **0 A** |
+| `[BCM] Battery SoC` | 88 % | **90 %** |
+
+**State of charge rose 88 → 90 %, then charging stopped.** A failed alternator
+cannot raise state of charge. The system charged the battery, it filled, current
+fell to zero, voltage settled to battery level — exactly Ford's smart charging
+strategy cutting alternator drag. **The 12.62 V is normal operation and the item
+is closed.** Ripple and ground drops are still worth doing on their own merits.
+
+### Superseded: bank 2 trim +3.5 % (2026-09)
 
 **The offset is unproven.** The bank 1 half of it came from the scan app's
 **Avg** field, which is session-cumulative and already ruled inadmissible here.
@@ -456,6 +517,11 @@ on the seat, warm idle. At ~660 rpm:
 - **~33 Hz (3rd order)** → the V6 firing pulse felt through a bare regular-cab
   floor. Normal. Nothing to fix.
 - **~11 Hz (1st order)** → rotational imbalance: damper, pulley, flexplate.
+- **~5.5 Hz (half order)** → **one cylinder contributing differently from the
+  other five.** A single weak cylinder repeats once per full engine cycle, which
+  is half crank speed — not firing frequency. Correcting an earlier slip in this
+  file: an uneven cylinder does NOT show up at 33 Hz. The test that names the
+  cylinder is the injector-kill balance test.
 
 ### Still unmeasured
 
