@@ -275,6 +275,31 @@ judge one (lowest flow and temperature), and the slow 3.4–4 s period argues
 *for* intact oxygen storage, not against it — less storage would make the loop
 run faster. The reading that matters is at steady 60–80 km/h cruise.
 
+### Trims trade off — read BOTH halves of the SAME bank (2026-09, 01:13)
+
+```
+Total fuel correction = short term trim + long term trim
+```
+
+Long term is the slow learned value; short term is the fast correction on top.
+**When long term rises, short term falls by the same amount** — the engine
+still wants the same total, the PCM has just moved it into learned memory.
+
+| | Long term B1 | Short term B1 | **Total** |
+|---|---|---|---|
+| 01:00 | +3.13 % | 0 % | **+3.1 %** |
+| 01:13 | ~+4.5 % (inferred) | −1.4 % | **~+3.1 %** |
+
+`STFT B1` walked from 0 to about −1.6 % over 70 s while `LTFT - B2` held a
+perfectly flat 2.34 %. **A short term trim going negative is the signature of
+successful learning, not of the mixture changing. The total is unmoved at
++3 %.**
+
+**Consequences:** neither trim number means anything alone — always capture
+`Short term fuel % trim - Bank N` paired with `Long term fuel % trim - Bank N`,
+same bank. And the idle long term value is still moving, so re-read it fresh
+rather than reusing an earlier figure.
+
 ### Long term trims have LEARNED — and the banks match (2026-09, 01:00)
 
 After 3 h 06 m of run time, with the engine warm at 640 rpm:

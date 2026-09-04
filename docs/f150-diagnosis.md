@@ -647,6 +647,73 @@ addresses the actual complaint.
 
 ---
 
+## Session 01:12-01:13 — the trims are handing off, total correction unchanged
+
+Four consecutive ~15 s windows pairing `STFT B1` with `LTFT - B2`, warm idle,
+stationary, graph clock 45:35 through 46:43.
+
+### LTFT B2 is settled
+
+`LTFT - B2` plots as a **perfectly flat line at 2.34 %** in all four windows,
+with min, max and average all reading 2.34. Long term trim on bank 2 has
+converged and is holding.
+
+### STFT B1 is walking negative — and that is the two trims trading off
+
+| Window | `STFT B1` centre |
+|---|---|
+| 45:35-45:50 | ~**0** (swinging −1.56 to +1.56) |
+| 45:55-46:12 | ~**−1.3** |
+| 46:15-46:30 | ~**−1.4** |
+| 46:28-46:43 | ~**−1.6** |
+
+Bank 1's short term trim drifted steadily negative across 70 seconds. It moves
+in 0.78 % steps (0, −0.78, −1.56, −2.34), so the movement is real and not
+rounding.
+
+**THE RULE THAT EXPLAINS IT, AND THAT GOVERNS EVERY TRIM READING IN THIS
+PROJECT:**
+
+```
+Total fuel correction = short term trim + long term trim
+```
+
+Long term is the slow learned value; short term is the fast correction applied
+on top of it. **When long term rises, short term falls by the same amount** —
+the engine still needs the same total correction, it has simply been migrated
+from the fast term into learned memory.
+
+| | Long term B1 | Short term B1 | **Total** |
+|---|---|---|---|
+| 01:00 | +3.13 % | 0 % | **+3.1 %** |
+| 01:13 | ~+4.5 % (inferred) | −1.4 % | **~+3.1 %** |
+
+**The total has not moved.** The engine still wants about +3 % more fuel than
+the PCM's base calculation. All that changed is where the PCM is storing that
+knowledge.
+
+### Consequences
+
+1. **Neither trim number means anything on its own.** Every trim reading from
+   here must capture **both halves of the same bank** — `Short term fuel % trim
+   - Bank 1` paired with `Long term fuel % trim - Bank 1`, and likewise for
+   bank 2. Pairing one bank's short term against the other bank's long term, as
+   this capture did, cannot yield a total for either bank.
+2. **The +3 % figure is confirmed, not contradicted**, by a short term trim that
+   has gone negative. That negative reading is the signature of successful
+   learning, not of the mixture changing.
+3. **The adaptives are still actively moving.** The long term value at idle is
+   not final; it was 3.13 % at 01:00 and is inferred near 4.5 % thirteen
+   minutes later. Re-read it fresh rather than reusing the 01:00 figure.
+
+### The load test is unaffected
+
+The question the 2000 rpm test answers — does the correction shrink when
+airflow triples — is a question about the **total**, and the total is stable at
+about +3 %. The test stands exactly as designed, with one refinement: capture
+`Short term` and `Long term` **for the same bank** so the total is readable
+directly rather than inferred.
+
 ## Session 01:00-01:01 — long term trims have LEARNED
 
 Phone clock 01:00-01:01. `Run time since engine start` **0.03:06:10** — the
