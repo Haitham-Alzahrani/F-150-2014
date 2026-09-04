@@ -26,9 +26,9 @@ way an inline-six or a cross-plane V8 is. A small idle vibration reaching
 the seat may simply be what this truck is.
 
 Supporting the "no fault" reading: never smooth in the owner's entire
-ownership, no code in years, normal idle rpm, perfect under load, and
-**six competent repairs aimed at six different systems, every one of which
-changed nothing.**
+ownership, **zero powertrain codes on a complete multi-module scan**, normal
+idle rpm, perfect under load, and **six competent repairs aimed at six
+different systems, every one of which changed nothing.**
 
 Two tests settle it, both free:
 
@@ -130,12 +130,38 @@ quality · ignition · compression, cam timing and phasers *in their
 stuck-in-position mode* (all worsen under load) · mounts and driveline ·
 thermostat · coolant intrusion · PCM tune · adaptive memory.
 
+### Codes — read 2026-09, complete multi-module scan
+
+**No P-code of any kind.** No misfire, fuel trim, VCT or lean code. The PCM's
+own monitors have nothing to say about how this engine runs — a second
+independent line of evidence alongside the load curve.
+
+Four codes exist, **all inactive (archive)**, none powertrain:
+
+| Module | Code | Meaning |
+|---|---|---|
+| OBD-II + PCM | U0422 | Invalid data received from BCM |
+| OCS | U0140 | No communication with BCM |
+| RCM | B11D8(14) | Restraints event notification |
+
+Three modules complaining about the BCM, all inactive, is the signature of a
+**voltage event rather than four faults** — and this truck had its battery
+disconnected. U0422 reads "test failed since last DTC clear", which fits.
+**No airbag warning light**, so the RCM entry is historical, not an active
+restraint fault.
+
+Do not describe this truck as having "no codes" — it has no *powertrain*
+codes, which is the claim the diagnosis actually rests on.
+
+[VERIFY] Ford's exact definition of B11D8 and the (14) sub-code were not
+confirmed — the sources were unreachable.
+
 ### Blocked on
 
 Scan data: fuel trims (LTFT both banks, idle in P/N vs D vs 2,500 rpm),
-per-cylinder misfire counters, VCT commanded vs actual at idle, and codes
-(stored, pending **and permanent** — the battery disconnect wiped stored and
-pending, so permanent codes are the only surviving history).
+per-cylinder misfire counters, VCT commanded vs actual at idle, and
+**permanent codes (Mode 0A)** — not yet read, and the only code history a
+clear cannot destroy.
 
 Two numbers collapse most of the diagnosis — fuel trims say whether it's a
 mixture problem, misfire counters say whether it's one cylinder or all six.

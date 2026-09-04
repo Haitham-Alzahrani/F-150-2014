@@ -96,10 +96,82 @@ tachometer. Refined description from the owner:
 - **Identical cold and hot.**
 - Present **since purchase** — the truck has never been smooth in this
   owner's hands.
-- **No check engine light, ever.**
+- **No check engine light, ever**, and a complete multi-module scan shows
+  **no powertrain code of any kind** — see *Codes read* below.
 
 That description matters. A charge-dilution or vacuum-leak fault severe
 enough to shake a cab produces an *audibly* uneven idle. This one does not.
+
+---
+
+## Codes read — 2026-09
+
+First real scan data on this vehicle. Complete multi-module scan, generic
+scan app, engine warm.
+
+| Module | Code | Meaning | State |
+|---|---|---|---|
+| OBD-II + engine control unit | **U0422(00)** | Invalid data received — body control module | Archive (inactive). "Confirmed, test failed since last DTC clear" |
+| OCS | **U0140(00)** | Data bus, body control module — no communication | Archive (inactive), confirmed |
+| RCM | **B11D8(14)** | Restraints event notification | Archive (inactive), confirmed |
+
+### What matters most is what is absent
+
+**Not one P-code.** No misfire, no fuel trim, no VCT, no lean or rich code,
+across a scan that covered every module. The PCM's own monitors have nothing
+to say about how this engine runs.
+
+That is a second independent line of evidence pointing where the load curve
+already pointed: whatever is felt in the cab, the engine management system
+does not consider it a fault.
+
+### What the codes that are present mean
+
+Three modules complaining about the **body control module** — invalid data
+from it, no communication with it — plus a restraint entry, **and every one
+of them inactive**. That is the signature of a **voltage event**, not four
+independent faults. Modules drop off the bus when supply voltage sags and
+each logs what it saw.
+
+This truck had its battery disconnected. U0422 reports "test failed since
+last DTC clear", so a clear happened and this logged after it. The timeline
+fits.
+
+**None of it explains the vibration.** These are body-network and restraint
+codes, they are not currently active, and the vibration has been constant
+since purchase — long before the battery was disconnected. An inactive code
+cannot produce a continuously present symptom.
+
+### The restraint entry, on its own account
+
+`B11D8` in the RCM alongside an OCS module that lost communication is worth
+separating from the idle question.
+
+- **No airbag warning light** — confirmed by the owner. So this is
+  historical, consistent with the voltage-event reading, and not an active
+  restraint fault.
+- The purchased history report claims **no accident history**. A restraints
+  event entry does not contradict that on its own, since a voltage drop can
+  log one — but that same report also got the fuel type and drivetrain wrong,
+  so it is not strong evidence either way.
+
+[VERIFY] Ford's exact definition of B11D8 and the meaning of the `(14)`
+sub-code were not confirmed — the sources were unreachable from the
+environment where this was written. Look both up before acting on them.
+
+### Next step on codes
+
+1. **Read permanent codes (Mode `0A`) before clearing anything.** They
+   survive a clear and a battery disconnect, and they are the only code
+   history that cannot be destroyed. Not yet read.
+2. Then clear these four and drive normally for a week. What returns is real;
+   what does not was the voltage event.
+
+Clearing is normally refused in this project because it destroys freeze-frame
+and misfire history. That objection does not apply here: there are no
+powertrain codes, so there is nothing of diagnostic value to lose, and
+return-after-clear is the only way to separate a live fault from a logged
+past event.
 
 ---
 

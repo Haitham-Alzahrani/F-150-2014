@@ -1,0 +1,101 @@
+# Network, body and restraint codes. Kept separate from the powertrain
+# entries because they answer a different question — and because the most
+# common cause of a cluster of them is not a fault at all.
+
+- id: bcm-voltage-event-codes
+  title: Inactive U-codes across several modules after a voltage event
+  summary: >
+    Several modules logging communication faults about the same module — with
+    every entry inactive — is usually one voltage event rather than several
+    faults. Modules drop off the bus when supply voltage sags, and each logs
+    what it saw from its own point of view.
+  systems: [network, bcm, electrical]
+  symptoms:
+    - multiple modules reporting lost communication or invalid data
+    - all entries inactive or archived
+    - no driveability symptom accompanying them
+    - follows a battery disconnect, a jump start, a weak battery or a crank
+  codes: [U0140, U0422, U0155, U0100, U0101]
+  load_signature: none
+  temperature: independent
+  sets_code: always
+  tests:
+    - "Check whether every entry is inactive. Live communication faults behave differently and are a real fault"
+    - "Establish whether a battery disconnect, jump start or flat battery preceded them"
+    - "Read permanent codes (Mode 0A) BEFORE clearing - they survive a clear and are the only history that cannot be destroyed"
+    - "Clear, then drive normally for a week. What returns is real; what does not was the event"
+    - "Load-test the battery and check the ground straps if they return"
+  fix: >
+    Usually nothing. If they return after clearing, chase the battery, the
+    charging system, the grounds and the BCM connectors in that order.
+  cost: Free to establish.
+  provenance:
+    - source: measured
+      confidence: high
+      verified: true
+      note: >
+        Read on this vehicle 2026-09, complete multi-module scan: U0422 in
+        both OBD-II and the engine control unit, U0140 in the OCS, B11D8 in
+        the RCM. Every one inactive. U0422 reported "test failed since last
+        DTC clear", and this truck is documented as having had its battery
+        disconnected - so the timeline fits a voltage event.
+      url: "owner scan, this vehicle, VIN 1FTMF1EM1EFC80632, 2026-09"
+    - source: inferred
+      confidence: medium
+      verified: false
+      note: >
+        The reasoning that several modules blaming one module points at a
+        shared electrical event rather than several faults.
+      check: >
+        Confirm against a network diagnosis reference that this is the
+        standard interpretation of a cluster of inactive U-codes.
+  notes: >
+    Does NOT explain this truck's idle vibration. These are inactive, and the
+    vibration is continuously present and predates the battery disconnect by
+    years. An inactive code cannot cause a constant symptom.
+
+- id: rcm-restraints-event
+  title: Restraints event notification stored in the RCM
+  summary: >
+    The restraints control module has logged a restraint-related event. This
+    can follow a genuine crash event, or simply a voltage drop during which
+    the module saw something implausible.
+  systems: [restraints, safety]
+  symptoms:
+    - stored restraint code with or without an airbag warning lamp
+    - often accompanied by occupant classification module communication codes
+  codes: [B11D8]
+  load_signature: none
+  temperature: independent
+  sets_code: always
+  tests:
+    - "Check the airbag warning lamp: it should light briefly at key-on then go out. Staying on means an active fault and the system may not deploy"
+    - "Check whether the entry is active or archived - archived with no lamp is historical"
+    - "Look for occupant classification (OCS) communication codes alongside it - the connector under the passenger seat is a common cause and is easily disturbed"
+    - "Clear and re-check after a week of normal driving"
+  fix: Depends entirely on whether it returns and whether the lamp is lit.
+  provenance:
+    - source: measured
+      confidence: high
+      verified: true
+      note: >
+        On this vehicle: B11D8(14) archived in the RCM with U0140 in the OCS.
+        The owner confirms NO airbag warning light and a normal cluster, so
+        this is historical rather than an active restraint fault.
+      url: "owner scan, this vehicle, VIN 1FTMF1EM1EFC80632, 2026-09"
+    - source: unverified
+      confidence: low
+      verified: false
+      note: >
+        Ford's exact definition of B11D8 and the meaning of the (14) sub-code
+        were NOT confirmed - the sources were unreachable. Do not act on any
+        assumed meaning.
+      check: >
+        Look up B11D8 for the 2014 F-150 RCM and establish what the (14)
+        failure-type byte denotes. Then record whether it indicates a stored
+        crash event or a circuit fault - the two lead in very different
+        directions.
+  notes: >
+    Unrelated to the idle question, but not to be filed away. The purchased
+    history report claims no accident history; that report also got the fuel
+    type and drivetrain wrong, so it is weak evidence in either direction.
