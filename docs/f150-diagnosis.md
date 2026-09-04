@@ -150,6 +150,51 @@ dropped frame. Something loaded the engine momentarily — cooling fan
 engagement is the obvious candidate — and the PCM caught it. One occurrence in
 five windows.
 
+### Paired traces — what has now been eliminated (2026-09)
+
+Two parameters captured against rpm on a shared timebase, 15-second screen
+width, warm idle in Park.
+
+**Test A — rpm against short-term fuel trim, bank 1.**
+
+STFT is quantised in 0.78 % steps (one LSB of the PID) and never leaves the
+band between −1.56 % and +1.56 %. Session averages across eight captures:
+−0.92, −0.44, −0.17, −0.39, −0.34, −0.25, −0.61, −0.47.
+
+That is essentially zero correction, continuously. **If the closed-loop fuel
+loop were hunting, STFT would swing ±10-20 % in rhythm with the rpm. It does
+not.** The loop is dithering at its resolution floor.
+
+**The oxygen sensor hypothesis is eliminated.** Those sensors are producing
+corrections far too small to move the idle 40 rpm. They may still be worth
+replacing on their own merits; they are not causing this.
+
+**Test B — rpm against commanded evaporative purge.**
+
+Purge is **flat**: 40.78 % holding steady, then stepping down one resolution
+unit at a time (40.78 → 40.39 → 40.30 → 40.00) across about two minutes.
+Those steps are 0.39 % apart, exactly one LSB. A slow drift, not a cycle.
+
+**A flat command cannot drive an oscillation. Purge is eliminated.** This also
+withdraws an earlier over-reading: the consistently slightly-negative STFT
+average was taken as a possible vapour signature, but at half a percent that
+was reading meaning into a rounding step.
+
+### Amplitude — stated honestly
+
+In the paired captures the band is **24-34 rpm**, tighter than the 30-53
+measured earlier. That is ±12-17 rpm around 650.
+
+That is small. This project's own tooling gates a "hunt" at 30 rpm
+peak-to-peak, so the truck sits on the line. **A limit cycle of ±15 rpm is
+something many healthy engines do** — the idle governor has finite bandwidth
+and hunts slightly by design.
+
+Two readings remain alive and rpm alone cannot separate them:
+
+1. A real fault
+2. A normal governor limit cycle that happens to be visible in the needle
+
 ### What oscillates with a period of a few seconds
 
 A 2.5-4 second cycle is characteristic of the **closed-loop fuel control
@@ -188,10 +233,15 @@ them as one.
 watch the needle for a minute. De-energised the valve closes. No hose is
 disconnected, so there is no stall risk. If the breathing stops, it is purge.
 
-**Instrumented test:** log rpm and short-term fuel trim on the same timebase
-and cross-correlate them. If trim leads rpm, fuel control is driving the
-oscillation. If rpm leads trim, something else disturbs the engine and fuel
-control is only reacting. `f150diag analyze` performs exactly this.
+**The trace that separates them — rpm against throttle position actual:**
+
+| Observation | Meaning |
+|---|---|
+| Throttle angle oscillating in rhythm with rpm | The PCM is actively moving the throttle — idle governor cycling. Normal, or at worst an idle relearn / throttle body matter. |
+| Throttle angle steady while rpm oscillates | The PCM is holding still and something is *disturbing* the engine. Mechanical or combustion. |
+
+Then rpm against timing advance. If advance is swinging, the PCM is fighting a
+disturbance with spark, which points the same way as a steady throttle.
 
 ### Does this explain the felt vibration?
 

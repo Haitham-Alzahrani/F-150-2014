@@ -213,28 +213,46 @@ Bare idle: **30–53 rpm band around 650, 4–6 cycles per 15 s screen.** A/C
 roughly doubles the amplitude but the oscillation is present either way, so
 the compressor is not its cause.
 
-### What oscillates at 2.5–4 seconds
+### Paired traces — two candidates eliminated (2026-09)
 
-That period is characteristic of the **closed-loop fuel control loop**, whose
-speed is set by upstream O2 switching. A slow sensor lengthens the loop and
-increases overshoot.
+**Fuel control: OUT.** STFT bank 1 stays within ±1.56 % (one LSB is 0.78 %),
+averaging −0.2 to −0.9 %, while rpm swings ±20. A hunting fuel loop would
+swing ±10–20 %. **The O2 sensor hypothesis is dead** — those sensors cannot
+move the idle 40 rpm with corrections that small.
 
-**The O2 sensors on this truck were "cleaned" by an unknown method.** Carried
-as housekeeping all project; now the leading suspect. Other candidates: purge
-cycling (commanded 41 % at idle, measured) and idle air control.
+**EVAP purge: OUT.** Commanded purge is flat at ~40 %, drifting down one LSB
+at a time (40.78 → 40.39 → 40.30 → 40.00) over two minutes. A flat command
+cannot drive an oscillation.
 
-### Free tests that separate them
+**A/C compressor: OUT** — the hunt is present with A/C off.
 
-1. **Watch the needle on a COLD start.** Cold = open loop, O2 sensors ignored.
-   Breathing absent cold and present warm → closed-loop fuel control → O2
-   sensors. Breathing present in both → purge or idle air.
-   **Note: the owner reports the felt SHAKE is identical cold and hot. Nobody
-   has asked whether the NEEDLE BREATHING is. Different observations.**
-2. **Unplug the purge valve connector** at warm idle. De-energised it closes.
-   No hose disconnected, no stall risk. Breathing stops → purge.
-3. **Instrumented:** log rpm and STFT on one timebase and cross-correlate.
-   Trim leading rpm = fuel control driving it. Rpm leading = fuel control only
-   reacting. `f150diag analyze` does this.
+That leaves **air path or spark**.
+
+### Amplitude — do not overstate it
+
+Paired captures show a **24–34 rpm** band, tighter than the earlier 30–53.
+That is ±12–17 rpm. This project's own tooling gates a hunt at 30 rpm p2p, so
+the truck sits **on the line**. A ±15 rpm limit cycle is something many
+healthy engines do — the idle governor has finite bandwidth.
+
+Two readings remain and rpm alone cannot separate them: a real fault, or a
+normal governor limit cycle that happens to be visible in the needle.
+
+### The trace that separates them
+
+**`Engine RPM` + `Throttle Position Actually`**
+
+- Throttle oscillating in rhythm → PCM actively moving it → governor cycling,
+  normal or an idle relearn matter
+- Throttle steady while rpm moves → something is *disturbing* the engine →
+  mechanical or combustion
+
+Then `Engine RPM` + `Timing advance`. Advance swinging = the PCM fighting a
+disturbance with spark, which points the same way as a steady throttle.
+
+Still worth doing: **watch the needle on a COLD start.** The owner reports the
+felt SHAKE is identical cold and hot; nobody has asked whether the NEEDLE
+BREATHING is. Different observations.
 
 ### This probably does not explain the felt vibration
 
