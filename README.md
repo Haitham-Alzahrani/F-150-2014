@@ -122,6 +122,7 @@ filename. See [`docs/FORSCAN.md`](docs/FORSCAN.md).
 | [`docs/f150-diagnosis.md`](docs/f150-diagnosis.md) | The diagnostic log — symptom, load relationship, elimination record with evidence, ranked suspects, test procedures |
 | [`docs/f150-specs.md`](docs/f150-specs.md) | Vehicle reference — identification, engine, transmission, capacities, fluids, bus layout, intervals, part numbers. Every figure marked verified, spec, or verify-before-use |
 | [`docs/TOOL.md`](docs/TOOL.md) | Tool architecture, how to write a protocol, how to add a knowledge entry |
+| [`docs/DATA-REQUESTS.md`](docs/DATA-REQUESTS.md) | Every scan capture taken and still outstanding, with what each one answers |
 | [`docs/LOCAL-SETUP.md`](docs/LOCAL-SETUP.md) | Running it at the truck with Claude Code |
 | [`docs/FORSCAN.md`](docs/FORSCAN.md) | Working alongside FORScan, and the handoff mechanism |
 | [`docs/ENHANCED-PIDS.md`](docs/ENHANCED-PIDS.md) | Why the DID registry is empty and how to fill it honestly |

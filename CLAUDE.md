@@ -377,6 +377,10 @@ identification, engine, transmission, capacities, fluids, OBD-II buses,
 intervals, part numbers. Figures are marked [VIN] / [SPEC] / [VERIFY];
 never act on a [VERIFY] torque or capacity without checking the manual.
 
+**Data still wanted: [`docs/DATA-REQUESTS.md`](docs/DATA-REQUESTS.md)** — every
+scan capture taken and still outstanding, what each one answers, and the
+physical tests that now outrank further scanning.
+
 **Diagnostic detail: [`docs/f150-diagnosis.md`](docs/f150-diagnosis.md)** — history
 report findings, the elimination record with evidence, ranked suspects with
 the test that isolates each, and reference values for reading scan data.
