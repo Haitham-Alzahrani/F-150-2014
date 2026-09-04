@@ -30,6 +30,10 @@ ownership, **zero powertrain codes on a complete multi-module scan**, normal
 idle rpm, perfect under load, and **six competent repairs aimed at six
 different systems, every one of which changed nothing.**
 
+**But a rhythmic idle hunt of 2.5–4 seconds HAS now been measured** — see the
+RPM stability section. That is a real, reproducible finding, and it means the
+answer to "is this a fault at all" is no longer a clean no.
+
 Two tests settle it, both free:
 
 1. **Compare against another 2014-ish F-150 regular cab 3.7 at idle.** Hand
@@ -189,37 +193,54 @@ load curve and the absence of powertrain codes.
 - "EGR system" monitor available and completed — on this engine that covers the
   internal EGR done by cam overlap. Does not prove a valve exists.
 
-### RPM stability — measured 2026-09, six windows of 10–15 min, **A/C ON**
+### RPM stability — A RHYTHMIC IDLE HUNT IS PRESENT (2026-09)
 
-Mean 650–660. Raw peak-to-peak 64–81 rpm, but **the raw span overstates it**:
-the vertical drops to 621–626 are one sample wide, so they are adapter frame
-losses rather than engine events. Excluding those, the body of every trace
-sits **638–668 rpm, a band about 30 rpm wide** — normal closed-loop control.
+**The scan app's graph screen width is ~15 seconds**, timed against the phone
+clock — not the 15 minutes an earlier revision of this file assumed. The
+repeating pattern therefore has a period of about **2.5–4 seconds**, and the
+owner confirms the **tachometer needle visibly breathes** at idle.
 
-There is a slow cycle of roughly **4–5 minutes**, and the **A/C compressor
-cycling** is the leading candidate: the A/C was running throughout and is
-confirmed to cool properly, so the load is real. **That is not a hunt** — a
-hunting idle oscillates over seconds. Holding 650–660 through repeated
-compressor engagement at 37 °C ambient is competent idle control.
+That is a rhythmic hunt. **The earlier verdict of "idle control working
+correctly" is withdrawn** — it was one of four independent lines of evidence
+for there being no fault, and it was based on a misread axis.
 
-**These are therefore not a bare-idle measurement.** A cyclic load was present
-throughout. A 3-minute A/C-off trace is still owed.
+| Condition | Spans (max − min per screen) |
+|---|---|
+| **A/C OFF** | 37, 74, 38, 30, 53 rpm |
+| **A/C ON** | 64, 76, 64, 81, 75, 68 rpm |
 
-**It also separates the tachometer from the shake.** The rpm pattern changes
-with A/C; the owner reports the shake does not. A pattern that changes with
-A/C cannot cause a symptom that doesn't.
+Bare idle: **30–53 rpm band around 650, 4–6 cycles per 15 s screen.** A/C
+roughly doubles the amplitude but the oscillation is present either way, so
+the compressor is not its cause.
 
-**Two corrections this forced:**
+### What oscillates at 2.5–4 seconds
 
-1. **No OBD log can resolve this vibration.** At 660 rpm a V6 fires at
-   **33 Hz**; these recordings sample at about **0.3 Hz**. Tachometer movement
-   and felt vibration are different phenomena and earlier revisions of this
-   file wrongly treated them as one symptom.
-2. The ±25–50 rpm figure above is for a **120-second** window. Judging a
-   10-minute span by it is not like-for-like — slow load drift accumulates.
+That period is characteristic of the **closed-loop fuel control loop**, whose
+speed is set by upstream O2 switching. A slow sensor lengthens the loop and
+increases overshoot.
 
-**Fourth independent line of evidence that there is no engine fault**, after
-the load curve, the absent powertrain codes, and the live fuel data.
+**The O2 sensors on this truck were "cleaned" by an unknown method.** Carried
+as housekeeping all project; now the leading suspect. Other candidates: purge
+cycling (commanded 41 % at idle, measured) and idle air control.
+
+### Free tests that separate them
+
+1. **Watch the needle on a COLD start.** Cold = open loop, O2 sensors ignored.
+   Breathing absent cold and present warm → closed-loop fuel control → O2
+   sensors. Breathing present in both → purge or idle air.
+   **Note: the owner reports the felt SHAKE is identical cold and hot. Nobody
+   has asked whether the NEEDLE BREATHING is. Different observations.**
+2. **Unplug the purge valve connector** at warm idle. De-energised it closes.
+   No hose disconnected, no stall risk. Breathing stops → purge.
+3. **Instrumented:** log rpm and STFT on one timebase and cross-correlate.
+   Trim leading rpm = fuel control driving it. Rpm leading = fuel control only
+   reacting. `f150diag analyze` does this.
+
+### This probably does not explain the felt vibration
+
+A 3-second breathing is ~0.3 Hz; the felt vibration at 660 rpm is firing
+frequency, ~33 Hz. Likely **two separate observations**: a slow idle breathing
+now measured, and a fast vibration no OBD log can resolve.
 
 ### The remaining test is not electronic
 
@@ -232,8 +253,9 @@ on the seat, warm idle. At ~660 rpm:
 
 ### Still unmeasured
 
-1. **Bare idle, A/C OFF** — 3 minutes, then 3 minutes A/C ON for comparison.
-   Every rpm trace so far was taken under compressor load.
+1. **Is the needle breathing present on a COLD start?** The single most
+   valuable free observation available — it separates the fuel loop from
+   everything else.
 2. **Permanent codes (Mode 0A)** — the only code history a clear cannot destroy.
 3. LTFT after several hundred km, since the current 0 % is probably un-relearned.
 4. Whether the A/C was running during the live-data scan. If it was, those

@@ -104,129 +104,104 @@ enough to shake a cab produces an *audibly* uneven idle. This one does not.
 
 ---
 
-## RPM stability — 2026-09, six windows at warm idle in Park
+## RPM stability — 2026-09 — A RHYTHMIC IDLE HUNT IS PRESENT
 
-Six recordings of 10–15 minutes each, warm, in Park, **with the air
-conditioning ON** — established after the fact, and it changes how the traces
-read. See the correction below.
+**This section reverses an earlier conclusion. Read the correction first.**
 
-| Window | Min | Max | Span |
-|---|---|---|---|
-| 16:50–17:02 | 622 | 690 | 68 |
-| 17:05–17:15 | 625 | 701 | 76 |
-| 17:15–17:28 | 634 | 698 | 64 |
-| 17:32–17:45 | 621 | 702 | 81 |
-| 17:45–17:58 | 622 | 697 | 75 |
-| 18:00–18:12 | 626 | 704 | 78 |
+### The correction
 
-Mean 650–660 rpm. Raw peak-to-peak 64–81 rpm.
+Earlier revisions of this document read the scan app's graph x-axis as
+wall-clock time and concluded that the rpm pattern had a 3-5 minute period,
+which was attributed to load tracking and called normal idle control.
 
-### Reading the trace properly
+**The screen width is about 15 seconds, timed against the phone clock.** The
+repeating pattern therefore has a period of roughly **2.5-4 seconds**, not
+minutes. The owner also confirms the tachometer needle **visibly breathes** at
+idle, which independently establishes the timescale without reference to the
+app at all.
 
-**The raw span overstates the movement, for two reasons.**
+A rhythmic oscillation of a few seconds is exactly what this file's own
+threshold names as a fault: *"±100 rpm or a rhythmic hunt is a real fault."*
+The amplitude is modest, but the structure is unmistakable.
 
-*Single-sample dropouts.* The vertical excursions to 621–626 are one sample
-wide — straight down and straight back. An engine cannot drop 40 rpm and
-recover between consecutive samples. Those are adapter frame losses, not
-engine events, and they should be excluded.
+**The previous verdict of "idle speed control is working correctly" was wrong,
+and it was one of four independent lines of evidence for there being no fault.
+That line is withdrawn.**
 
-*The real band is narrower.* Excluding artifacts, the body of every trace sits
-between roughly **638 and 668 rpm — about 30 rpm wide**. That is well inside
-normal closed-loop idle control.
+### The measurement
 
-### The slow cycle is not a hunt — and its cause is now known
+Amplitude, measured as max minus min per screen:
 
-There is a repeating structure: rpm climbs to 670–700, falls to about 635,
-climbs again, on a period of roughly **four to five minutes**.
-
-That is not an idle control hunt. A hunting idle oscillates over *seconds* and
-is visible and felt.
-
-**These traces were recorded with the air conditioning ON**, so the compressor
-cycling is the leading candidate for the multi-minute pattern — a real,
-repeating mechanical load being applied and removed. The A/C is confirmed to
-cool properly, so the compressor is doing genuine work and the load is real.
-
-An earlier revision of this section attributed the cycle to cooling fan,
-purge and alternator load. That was written before the A/C state was known and
-should not be relied on.
-
-**This reads better for the engine, not worse.** Holding 650–660 rpm through
-repeated compressor engagement at 37 °C ambient is competent idle control.
-
-**But it also means these traces are not a bare-idle measurement.** The
-cyclic load was present throughout, so they cannot be read as showing what the
-idle does when nothing is loading it.
-
-### The important limitation — and a correction
-
-**This measurement cannot resolve the reported vibration, and no OBD log can.**
-
-At 660 rpm a V6 fires three times per crankshaft revolution: **33 Hz**. That is
-the frequency of what is felt in the cab.
-
-These recordings span 10–15 minutes with a few hundred points — roughly one
-sample every 2–4 seconds, about 0.3 Hz. **The vibration is four orders of
-magnitude faster than this data can see.** Tachometer movement and felt
-vibration are two different phenomena; earlier revisions of this document
-treated them as one symptom, and that was wrong.
-
-**Threshold correction.** This file states ±25–50 rpm as normal for a
-**120-second** window. Comparing a 10-minute span against that figure is not
-like-for-like: slow load drift accumulates over ten minutes and inflates the
-peak-to-peak. On its proper timescale this idle is normal.
-
-### It separates the tachometer from the shake
-
-The owner reports the shake feels **identical with A/C on and off**. These
-traces show the rpm pattern clearly **does** change with A/C — the compressor
-cycle is visible in them.
-
-A pattern that changes with A/C cannot be the cause of a symptom that does
-not. That is direct evidence, from this vehicle, that the tachometer movement
-and the felt vibration are two separate phenomena.
-
-### Verdict
-
-**Idle speed control is working correctly**, under load. This is the fourth
-independent line of evidence that there is no engine fault, after the load
-curve, the absence of powertrain codes, and the live fuel and combustion data.
-
-### Still to record
-
-Two short traces, back to back, warm and in Park:
-
-1. **3 minutes with A/C OFF** — the bare-idle baseline, never yet measured
-2. **3 minutes with A/C ON**, max cold, high blower
-
-If the multi-minute cycle disappears in the first and returns in the second,
-the compressor is confirmed as its cause and bare idle stability is finally
-measured cleanly. Also worth noting whether the felt shake changes at the
-moment the compressor engages — the owner reports it does not, and that
-observation is worth making deliberately rather than in passing.
-
-**Also unresolved:** whether the A/C was running during the live-data scan
-that produced the fuel trims and the 661 rpm reading. If it was, those numbers
-were taken under compressor load, which makes them stronger evidence rather
-than weaker — an engine metering correctly while loaded is healthier than one
-measured at no load. The A/C pressure PID read 0 kPa in that scan, but since
-the system cools properly that is almost certainly an unsupported parameter
-rather than a fault.
-
-### The remaining test is not electronic
-
-The complaint is a vibration, so measure the vibration rather than a proxy for
-it. A phone accelerometer or spectrum app, phone flat on the seat or console,
-warm idle. Read the dominant frequency and compare against engine orders at
-the observed idle speed:
-
-| Dominant frequency at ~660 rpm | Meaning |
+| Condition | Spans |
 |---|---|
-| **~33 Hz** (3rd order — V6 firing frequency) | The firing pulse itself, felt through a bare regular-cab floor. Normal for a 60° V6. Nothing to fix. |
-| **~11 Hz** (1st order — rotational) | Rotational imbalance: damper, pulley, flexplate. Something to chase. |
+| **A/C OFF** | 37, 74, 38, 30, 53 rpm |
+| **A/C ON** | 64, 76, 64, 81, 75, 68 rpm |
 
-That single number separates "this truck vibrates because of what it is" from
-"something is out of balance", and it measures the actual complaint.
+Bare idle sits in a **30-53 rpm band around 650**, with 4-6 cycles per
+15-second screen — a period of about **2.5-4 seconds**.
+
+A/C on roughly doubles the amplitude, as expected from compressor cycling
+adding load on top of the underlying oscillation. **The oscillation is present
+in both conditions**, so the compressor is not its cause.
+
+**One discrete event:** in one A/C-off window rpm dips to 606-612, holds
+briefly, then recovers with an overshoot to 680. It has width, so it is not a
+dropped frame. Something loaded the engine momentarily — cooling fan
+engagement is the obvious candidate — and the PCM caught it. One occurrence in
+five windows.
+
+### What oscillates with a period of a few seconds
+
+A 2.5-4 second cycle is characteristic of the **closed-loop fuel control
+loop**, whose speed is set by how fast the upstream oxygen sensors switch. A
+slow sensor lengthens the loop and increases its overshoot: mixture goes rich,
+the sensor reports late, the correction overshoots lean, and repeats. Each
+cycle moves the idle slightly.
+
+**The oxygen sensors on this truck were "cleaned" by an unknown method.** That
+has been carried as a separate housekeeping item throughout this project. It
+is now the leading suspect for this oscillation.
+
+Other candidates at this period:
+
+- **EVAP purge cycling** — commanded at 41 % at warm idle, measured
+- **Idle air control instability**
+
+### The test that separates them, and it is free
+
+**Watch the tachometer on a cold start, before the engine warms.**
+
+A cold engine runs **open loop** — the PCM ignores the oxygen sensors entirely
+and fuels from a table.
+
+| Observation | Conclusion |
+|---|---|
+| Breathing **absent cold**, appears once warm | Closed-loop fuel control. The O2 sensors are the cause. |
+| Breathing **present cold and warm alike** | Not the fuel loop. Look at purge and idle air control. |
+
+Note carefully: the owner reports the *felt shake* is identical cold and hot.
+**Nobody has yet asked whether the needle breathing is identical cold and hot.**
+Those are different observations and earlier revisions of this file treated
+them as one.
+
+**Second free test, warm:** unplug the purge valve's electrical connector and
+watch the needle for a minute. De-energised the valve closes. No hose is
+disconnected, so there is no stall risk. If the breathing stops, it is purge.
+
+**Instrumented test:** log rpm and short-term fuel trim on the same timebase
+and cross-correlate them. If trim leads rpm, fuel control is driving the
+oscillation. If rpm leads trim, something else disturbs the engine and fuel
+control is only reacting. `f150diag analyze` performs exactly this.
+
+### Does this explain the felt vibration?
+
+**Probably not on its own.** A 3-second breathing is about 0.3 Hz. The felt
+vibration at 660 rpm is the firing frequency, 33 Hz. Those remain different
+phenomena.
+
+It is likely there are **two separate observations** here: a slow idle
+breathing, now measured and worth chasing, and a fast vibration that no OBD
+log can resolve. The frequency test described below addresses the second.
 
 ---
 
