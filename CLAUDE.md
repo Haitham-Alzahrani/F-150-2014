@@ -156,12 +156,46 @@ codes, which is the claim the diagnosis actually rests on.
 [VERIFY] Ford's exact definition of B11D8 and the (14) sub-code were not
 confirmed — the sources were unreachable.
 
-### Blocked on
+### Live data — read 2026-09, warm idle in Park
 
-Scan data: fuel trims (LTFT both banks, idle in P/N vs D vs 2,500 rpm),
-per-cylinder misfire counters, VCT commanded vs actual at idle, and
-**permanent codes (Mode 0A)** — not yet read, and the only code history a
-clear cannot destroy.
+**Largely unblocked.** The engine measures healthy on every parameter available:
+
+- **STFT 0.78–3.13 % B1, 0 % B2** — no air leak of any significance. Short-term
+  trim corrects a leak *immediately*, before long-term trim learns anything,
+  so this eliminates the whole leak family: purge, PCV, booster, gaskets.
+- **Misfire monitor: available and COMPLETED, DTC count 0** — it ran, it passed.
+- Lambda 0.99, AFR 14.52, knock retard 0°, timing 11.5°, RPM 661, ECT 93–94 °C
+- Cam actual advance −0.06° (rest position, expected at idle)
+- Throttle desired 7.29° vs actual 7.56° — tracking within 0.27°
+- Catalyst temps identical both banks; charging 13.8–14.0 V
+
+**Caveat:** only 101 km and 3 warm-ups since codes were cleared, and the Fuel
+System monitor reads "not completed". **LTFT 0 % / 0 % is probably
+un-relearned rather than learned-and-perfect** — re-read after several hundred
+km. The short-term reading does not depend on learning and stands on its own.
+
+**Third independent line of evidence that there is no engine fault**, after the
+load curve and the absence of powertrain codes.
+
+### Anomalies from that scan
+
+- **Ethanol fuel percent 16.08 %** on a flex-fuel truck where the content is
+  *inferred*, not sensed, and Saudi pump fuel is normally E0. Affects open-loop
+  fuelling only. The inference depends on the O2 sensors, which were "cleaned"
+  by an unknown method. [VERIFY against a second tool]
+- **Commanded purge 41 % at warm idle** — normal, but it broke an assumption in
+  the idle-quality protocol. Sealing the purge port DOES change a healthy idle.
+- Right front tyre 211.7 kPa against a 241 kPa label. Unrelated, but real.
+- "EGR system" monitor available and completed — on this engine that covers the
+  internal EGR done by cam overlap. Does not prove a valve exists.
+
+### Still unmeasured
+
+1. **RPM stability over time** — the last measurable thing, and the one that
+   decides the open question. A single 661 rpm sample says nothing about
+   wander. Log 120 s: `f150diag live --pids idle --seconds 120`.
+2. **Permanent codes (Mode 0A)** — the only code history a clear cannot destroy.
+3. VCT commanded vs actual, via the FORScan handoff, if anything still points there.
 
 Two numbers collapse most of the diagnosis — fuel trims say whether it's a
 mixture problem, misfire counters say whether it's one cylinder or all six.

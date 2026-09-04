@@ -230,7 +230,7 @@ steps:
     type: measure
     label: base_ref
     seconds: 60
-    pids: [idle]
+    pids: [idle, evap_purge]
     next: purge_isolate
 
   - id: purge_isolate
@@ -244,9 +244,16 @@ steps:
       4. Leave the hose end from the purge valve open to atmosphere.
       5. Start the engine and let it idle 30 seconds.
 
-      The purge valve should contribute nothing at idle on a healthy system,
-      so sealing this port should change nothing at all. If the idle improves,
-      the valve was passing.
+      IMPORTANT — read this before interpreting the result. On this truck the
+      PCM commands evaporative purge at around 41% at warm idle, measured. So
+      purge flow into the manifold at idle is NORMAL and DESIGNED, not a
+      fault, and sealing this port WILL change the idle on a healthy engine.
+
+      What the test actually distinguishes is a valve that flows more than it
+      is commanded to. Watch commanded purge alongside the result: a large
+      change while commanded purge is low points at a valve passing on its
+      own. A change proportional to a high commanded value is the system
+      working.
     confirm: Confirm purge port plugged, engine running and settled
     next: measure_purge
 
@@ -254,15 +261,19 @@ steps:
     type: measure
     label: purge_plugged
     seconds: 60
-    pids: [idle]
+    pids: [idle, evap_purge]
     next: purge_branch
 
   - id: purge_branch
     type: branch
     checks:
+      - when: base_ref.evap_purge_mean > 5 and purge_plugged.rpm_p2p < base_ref.rpm_p2p * 0.6
+        finding: purge-flow-normal
+        summary: "Sealing the purge port changed the idle, but purge was being actively commanded — that is the system working, not a stuck valve. Repeat with commanded purge at zero before drawing a conclusion."
+        next: booster_isolate
       - when: purge_plugged.rpm_p2p < base_ref.rpm_p2p * 0.6
         finding: evap-purge-stuck-open
-        summary: "Sealing the purge port cut the rpm instability substantially. The purge valve was leaking."
+        summary: "Sealing the purge port cut the rpm instability while purge was NOT being commanded. The valve was passing on its own."
         next: booster_isolate
       - when: purge_plugged.ltft_mean < base_ref.ltft_mean - 5
         finding: evap-purge-stuck-open

@@ -104,6 +104,87 @@ enough to shake a cab produces an *audibly* uneven idle. This one does not.
 
 ---
 
+## Live data — 2026-09, warm idle in Park
+
+Read on the vehicle, engine warm (ECT 93–94 °C), 37 minutes running, A/C off,
+ambient 37 °C. **This is the data the diagnosis was blocked on.**
+
+### The decisive numbers
+
+| Parameter | Reading | Reading of it |
+|---|---|---|
+| **Short-term fuel trim B1** | **0.78 % / 3.13 %** | Tiny. The engine needs almost no correction |
+| **Short-term fuel trim B2** | **0 %** | Same |
+| **Long-term fuel trim B1 / B2** | **0 % / 0 %** | See caveat below |
+| **Misfire monitor** | **Available / COMPLETED**, DTC count 0 | The monitor ran and passed |
+| Lambda | 0.99 | 1 % rich of stoichiometric — correct |
+| Air:fuel ratio | 14.52 | Correct |
+| Knock retard | 0° | No knock |
+| Timing advance | 11.5° | Normal at idle |
+| Engine RPM | 661 | Normal |
+| ECT | 93–94 °C | Thermostat confirmed good |
+| Cam actual advance #1 | −0.06° | At rest position, as expected at idle |
+| Throttle desired / actual | 7.29° / 7.56° | Tracking within 0.27° — the electronic throttle is fine |
+| Catalyst temp B1 / B2 | 458.9 / 458.9 °C | Identical — no bank imbalance |
+| Charging voltage | 13.8–14.0 V | Charging system fine |
+
+**Short-term trim is the strong evidence here, and it does not depend on
+adaptive learning.** An unmetered air leak makes the mixture lean the instant
+it exists, and short-term trim corrects positive immediately — before
+long-term trim learns anything. STFT sitting between 0 % and 3 % at idle means
+**there is no air leak of any significance.**
+
+That eliminates the entire leak family by measurement: purge valve, PCV,
+brake booster, intake gaskets.
+
+**Caveat on long-term trim.** Only 101 km and 3 warm-ups since codes were
+cleared, and the Fuel System monitor reads "not completed". Long-term trim of
+exactly 0.0 % on both banks is more likely *not yet re-learned* than *learned
+and perfect*. Re-read it after several hundred kilometres before treating it
+as confirmation. The short-term reading stands on its own regardless.
+
+### What this means
+
+Every measurement available says the engine is running correctly. No misfire —
+the monitor completed and passed. No mixture error. No leak. No knock. Cam at
+its expected idle position. Throttle tracking its target. Temperature normal.
+
+**Combined with the load curve and the absence of any powertrain code, this is
+a third independent line of evidence that there is no engine fault to find.**
+
+### Anomalies worth noting
+
+- **Ethanol fuel percent: 16.08 %.** This is a flex-fuel truck, and on a 2014
+  Ford the ethanol content is *inferred*, not measured by a sensor. Saudi pump
+  fuel is normally E0. A PCM that believes the tank holds E16 will calculate
+  base fuelling richer than needed — closed loop corrects that, but open loop
+  (cold start, wide-open throttle) does not. Worth watching, particularly
+  given the O2 sensors were "cleaned" by an unknown method and the inference
+  depends on them. [VERIFY the reading against a second tool before acting]
+- **Commanded evaporative purge: 41 % at warm idle.** Normal and designed —
+  but it invalidated an assumption in the idle-quality protocol. See below.
+- **MAF 2.93 g/s at 661 rpm** — low-normal for a 3.7 at this idle speed. Not
+  alarming on its own; worth a second look if anything else points at metering.
+- **Right front tyre 211.7 kPa (30.7 psi)** against a 241 kPa (35 psi) door
+  label — about 4 psi low. Unrelated to the idle, but real.
+- **PCM odometer 131,313 km**, consistent with the recorded distance.
+- **"EGR system" monitor: Available / Completed.** Notable given this engine
+  has no external EGR valve. On this engine that monitor covers the internal
+  EGR function performed by cam overlap. It ran and passed. It does not prove
+  a valve exists.
+
+### Correction this forced to the idle-quality protocol
+
+The protocol said sealing the purge port "should change nothing at all on a
+healthy system". **That was wrong.** With purge commanded at 41 % at warm
+idle, sealing the port changes the idle on a perfectly healthy engine.
+
+The protocol now records commanded purge alongside the measurement, and
+distinguishes a valve flowing when it is *not* commanded — which is a fault —
+from flow proportional to a high commanded value, which is the system working.
+
+---
+
 ## Codes read — 2026-09
 
 First real scan data on this vehicle. Complete multi-module scan, generic
