@@ -491,6 +491,15 @@ only find leaks too small to explain anything.
   coolant disappears with no external leak, check the oil for coolant before
   chasing anything else. (Level is currently steady.)
 
+**Sensor names as the scan app shows them:
+[`docs/scanner-pids.md`](docs/scanner-pids.md)** — **when asking the owner for a
+reading, use the exact label from that file.** Not an abbreviation, not the
+engineering term, not the SAE PID name. He navigates a list on a phone; a name
+that does not match the list wastes his time at the truck. The file also records
+which channels return blank on this vehicle (barometric pressure, high-res MAP,
+evap vapor pressure) so they are never requested again, and which are the app's
+own arithmetic rather than readings from the truck.
+
 **Specs and technical data: [`docs/f150-specs.md`](docs/f150-specs.md)** —
 identification, engine, transmission, capacities, fluids, OBD-II buses,
 intervals, part numbers. Figures are marked [VIN] / [SPEC] / [VERIFY];
