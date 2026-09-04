@@ -218,6 +218,62 @@ Two readings remain alive and rpm alone cannot separate them:
 1. A real fault
 2. A normal governor limit cycle that happens to be visible in the needle
 
+### Test C — rpm against timing advance: the governor is using spark
+
+Axis check first: the timing axis spans 9.5-13.5 degrees in most windows, a
+real 3-4 degree range rather than a zoom artifact.
+
+**Spark advance oscillates between about 10 and 13.5 degrees, continuously,
+in rhythm with the rpm.**
+
+The clearest evidence is a transient at 59:49. Rpm surges to 723 and timing is
+driven down to **6 degrees**; rpm then falls through to 614 and timing jumps
+to **15 degrees**. That is a governor behaving exactly as designed — retard
+spark to remove torque when speed is high, advance it to add torque when speed
+is low.
+
+**The PCM is controlling idle speed with spark, not air.** That is why the
+throttle sat motionless: it is not the actuator in use. The earlier
+discriminator therefore needs restating — a static throttle did not mean the
+PCM was passive, it meant the PCM was using the other lever.
+
+### Why this is a control loop and not a mechanical disturbance
+
+The decisive argument is arithmetic rather than graphical. **Nothing in this
+engine cycles at 3.5-4 seconds.**
+
+| Process | Frequency at 650 rpm |
+|---|---|
+| Firing events | ~33 Hz |
+| Crankshaft rotation | ~11 Hz |
+| Camshaft rotation | ~5.5 Hz |
+| **The observed oscillation** | **~0.28 Hz** |
+
+A mechanical or combustion disturbance must originate in something that moves.
+Nothing in the engine moves at a quarter of a hertz. That period belongs to a
+feedback loop with lag in it, not to a rotating assembly.
+
+**Reading: the idle governor is limit-cycling.** Not a mechanical fault.
+
+**Honest limit:** lead versus lag cannot be determined by eye from
+screenshots. Spark and rpm are locked in a closed loop, and separating cause
+from effect requires the two cross-correlated on a synchronised log — which is
+what `f150diag analyze` exists to do and what the phone app cannot provide.
+
+### A likely contributor: the adaptives are young
+
+Only **101 km and 3 warm-ups since codes were cleared**, with LTFT at exactly
+0.0 % on both banks — almost certainly un-relearned rather than perfect. The
+idle adaptive tables live in the same keep-alive memory the battery disconnect
+wiped. A governor working from un-relearned adaptives hunts more than one that
+has settled.
+
+### Amplitude, in perspective
+
+A 3.5 degree spark swing at idle is modest; many PCMs modulate considerably
+more for idle control. Combined with a ±12-17 rpm result, this may well be
+normal governor behaviour made visible by young adaptives.
+
 ### What oscillates with a period of a few seconds
 
 A 2.5-4 second cycle is characteristic of the **closed-loop fuel control

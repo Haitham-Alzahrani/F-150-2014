@@ -238,17 +238,47 @@ healthy engines do — the idle governor has finite bandwidth.
 Two readings remain and rpm alone cannot separate them: a real fault, or a
 normal governor limit cycle that happens to be visible in the needle.
 
-### The trace that separates them
+### Measured: the governor is limit-cycling on SPARK
 
-**`Engine RPM` + `Throttle Position Actually`**
+**Throttle: static.** In four windows with a wide axis (6.2–8.2°) the throttle
+reads min = max, dead flat, while rpm swings 40. The apparent movement in
+other windows is monotonic drift of 0.03–0.06° on a zoomed axis.
 
-- Throttle oscillating in rhythm → PCM actively moving it → governor cycling,
-  normal or an idle relearn matter
-- Throttle steady while rpm moves → something is *disturbing* the engine →
-  mechanical or combustion
+**Timing advance: swinging 10–13.5°**, ~3.5° peak-to-peak, in rhythm with rpm.
+On a transient at 59:49 rpm surged to 723 and timing was driven to **6°**;
+rpm then fell to 614 and timing jumped to **15°**. Textbook governor action.
 
-Then `Engine RPM` + `Timing advance`. Advance swinging = the PCM fighting a
-disturbance with spark, which points the same way as a steady throttle.
+**So the PCM trims idle with spark, not air** — which is why the throttle sat
+still. A static throttle did not mean a passive PCM; it meant the other lever.
+
+**Why this is a control loop, not a mechanical fault — the decisive argument
+is arithmetic.** Nothing in this engine cycles at 3.5–4 s. Firing is ~33 Hz,
+crank ~11 Hz, cam ~5.5 Hz; the oscillation is **~0.28 Hz**. A mechanical
+disturbance must come from something that *moves*, and nothing moves at a
+quarter of a hertz. That period belongs to a feedback loop with lag.
+
+**Honest limit:** lead vs lag cannot be judged by eye from screenshots. Spark
+and rpm are in a closed loop; separating cause from effect needs them
+cross-correlated on a synchronised log — what `f150diag analyze` is for.
+
+**Likely contributor: the adaptives are young.** 101 km and 3 warm-ups since
+codes were cleared, LTFT exactly 0.0 % on both banks. The idle adaptive tables
+sit in the same keep-alive memory the battery disconnect wiped. A governor
+running on un-relearned adaptives hunts more than a settled one.
+
+**Perspective:** 3.5° of spark swing at idle is modest — many PCMs modulate
+more. With a ±12–17 rpm result this may simply be normal governor behaviour
+made visible by young adaptives.
+
+### Next
+
+1. **Drive it several hundred km**, then re-measure rpm and LTFT. Free, owed
+   anyway, and the change most likely to move the numbers.
+2. **Compare against another 3.7** — still the only way to know if ±20 rpm is
+   abnormal on this engine.
+3. **The felt vibration remains unexplained by any of this.** 0.28 Hz cannot
+   be what is felt at 33 Hz. The phone accelerometer test is the only thing
+   that addresses the actual complaint.
 
 Still worth doing: **watch the needle on a COLD start.** The owner reports the
 felt SHAKE is identical cold and hot; nobody has asked whether the NEEDLE
