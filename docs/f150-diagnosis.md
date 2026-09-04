@@ -104,6 +104,85 @@ enough to shake a cab produces an *audibly* uneven idle. This one does not.
 
 ---
 
+## RPM stability — 2026-09, six windows at warm idle in Park
+
+Six recordings of 10–15 minutes each, warm, in Park.
+
+| Window | Min | Max | Span |
+|---|---|---|---|
+| 16:50–17:02 | 622 | 690 | 68 |
+| 17:05–17:15 | 625 | 701 | 76 |
+| 17:15–17:28 | 634 | 698 | 64 |
+| 17:32–17:45 | 621 | 702 | 81 |
+| 17:45–17:58 | 622 | 697 | 75 |
+| 18:00–18:12 | 626 | 704 | 78 |
+
+Mean 650–660 rpm. Raw peak-to-peak 64–81 rpm.
+
+### Reading the trace properly
+
+**The raw span overstates the movement, for two reasons.**
+
+*Single-sample dropouts.* The vertical excursions to 621–626 are one sample
+wide — straight down and straight back. An engine cannot drop 40 rpm and
+recover between consecutive samples. Those are adapter frame losses, not
+engine events, and they should be excluded.
+
+*The real band is narrower.* Excluding artifacts, the body of every trace sits
+between roughly **638 and 668 rpm — about 30 rpm wide**. That is well inside
+normal closed-loop idle control.
+
+### The slow cycle is not a hunt
+
+There is a repeating structure: rpm climbs to 670–700, falls to about 635,
+climbs again, on a period of roughly **four to five minutes**.
+
+That is not an idle control hunt. A hunting idle oscillates over *seconds* and
+is visible and felt. A four-minute cycle is the PCM tracking slowly changing
+loads — cooling fan cycling at 37 °C ambient, evaporative purge cycling
+(commanded at 41 %, measured), alternator load. Normal idle management.
+
+### The important limitation — and a correction
+
+**This measurement cannot resolve the reported vibration, and no OBD log can.**
+
+At 660 rpm a V6 fires three times per crankshaft revolution: **33 Hz**. That is
+the frequency of what is felt in the cab.
+
+These recordings span 10–15 minutes with a few hundred points — roughly one
+sample every 2–4 seconds, about 0.3 Hz. **The vibration is four orders of
+magnitude faster than this data can see.** Tachometer movement and felt
+vibration are two different phenomena; earlier revisions of this document
+treated them as one symptom, and that was wrong.
+
+**Threshold correction.** This file states ±25–50 rpm as normal for a
+**120-second** window. Comparing a 10-minute span against that figure is not
+like-for-like: slow load drift accumulates over ten minutes and inflates the
+peak-to-peak. On its proper timescale this idle is normal.
+
+### Verdict
+
+**Idle speed control is working correctly.** This is the fourth independent
+line of evidence that there is no engine fault, after the load curve, the
+absence of powertrain codes, and the live fuel and combustion data.
+
+### The remaining test is not electronic
+
+The complaint is a vibration, so measure the vibration rather than a proxy for
+it. A phone accelerometer or spectrum app, phone flat on the seat or console,
+warm idle. Read the dominant frequency and compare against engine orders at
+the observed idle speed:
+
+| Dominant frequency at ~660 rpm | Meaning |
+|---|---|
+| **~33 Hz** (3rd order — V6 firing frequency) | The firing pulse itself, felt through a bare regular-cab floor. Normal for a 60° V6. Nothing to fix. |
+| **~11 Hz** (1st order — rotational) | Rotational imbalance: damper, pulley, flexplate. Something to chase. |
+
+That single number separates "this truck vibrates because of what it is" from
+"something is out of balance", and it measures the actual complaint.
+
+---
+
 ## Live data — 2026-09, warm idle in Park
 
 Read on the vehicle, engine warm (ECT 93–94 °C), 37 minutes running, A/C off,

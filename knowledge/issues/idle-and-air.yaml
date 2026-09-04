@@ -305,3 +305,50 @@
       check: >
         Low value now that the on-vehicle test is negative. Verify only if the
         entry is reused for a different vehicle.
+
+- id: vibration-frequency-test
+  title: Measure the vibration's frequency, not the tachometer
+  summary: >
+    A felt vibration and a moving tachometer are different phenomena on
+    different timescales, and an OBD log cannot resolve the first. At 660 rpm
+    a V6 fires three times per revolution - 33 Hz. A generic scan tool samples
+    rpm at around 0.3 Hz. The vibration is four orders of magnitude faster
+    than the measurement.
+  systems: [nvh, engine]
+  symptoms:
+    - vibration felt in the cab with no fault found electronically
+    - normal idle rpm and normal fuel trims alongside a felt shake
+  load_signature: worst-at-idle
+  temperature: independent
+  sets_code: never
+  tests:
+    - "Phone accelerometer or spectrum app, phone flat on the seat or console, warm idle. Read the dominant frequency"
+    - "Compare against engine orders at the observed idle speed. For a V6 at 660 rpm: 1st order (rotational) is 11 Hz, firing frequency (3 per revolution) is 33 Hz"
+    - "Dominant at firing frequency means the combustion pulse itself is being felt - normal, especially in a cab with little sound deadening"
+    - "Dominant at 1st order means rotational imbalance - harmonic balancer, pulley, flexplate"
+    - "Repeat on a second vehicle of the same model and engine for a reference reading"
+  fix: >
+    Nothing, if it is at firing frequency. If at 1st order, chase the rotating
+    assembly.
+  cost: Free - the phone is the instrument.
+  provenance:
+    - source: measured
+      confidence: high
+      verified: true
+      note: >
+        Established on this vehicle. Six rpm recordings of 10-15 minutes at
+        warm idle show a 30 rpm band once single-sample adapter dropouts are
+        excluded, with a slow 4-5 minute cycle attributable to cooling fan and
+        purge cycling. Normal idle control - and at roughly 0.3 Hz sampling,
+        incapable of showing a 33 Hz vibration. The measurement and the
+        complaint were on different timescales.
+      url: "owner scan, this vehicle, VIN 1FTMF1EM1EFC80632, 2026-09"
+    - source: inferred
+      confidence: high
+      verified: false
+      note: >
+        Engine order arithmetic: a four-stroke V6 fires three times per
+        crankshaft revolution, so firing frequency in Hz is rpm/60 x 3.
+      check: >
+        Confirm the firing-order arithmetic and typical idle NVH frequencies
+        against an NVH reference before quoting the numbers to anyone else.

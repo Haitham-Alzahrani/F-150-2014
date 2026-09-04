@@ -189,12 +189,42 @@ load curve and the absence of powertrain codes.
 - "EGR system" monitor available and completed — on this engine that covers the
   internal EGR done by cam overlap. Does not prove a valve exists.
 
+### RPM stability — measured 2026-09, six windows of 10–15 min
+
+Mean 650–660. Raw peak-to-peak 64–81 rpm, but **the raw span overstates it**:
+the vertical drops to 621–626 are one sample wide, so they are adapter frame
+losses rather than engine events. Excluding those, the body of every trace
+sits **638–668 rpm, a band about 30 rpm wide** — normal closed-loop control.
+
+There is a slow cycle of roughly **4–5 minutes** — the PCM tracking cooling
+fan cycling, purge cycling and alternator load. **That is not a hunt.** A
+hunting idle oscillates over seconds.
+
+**Two corrections this forced:**
+
+1. **No OBD log can resolve this vibration.** At 660 rpm a V6 fires at
+   **33 Hz**; these recordings sample at about **0.3 Hz**. Tachometer movement
+   and felt vibration are different phenomena and earlier revisions of this
+   file wrongly treated them as one symptom.
+2. The ±25–50 rpm figure above is for a **120-second** window. Judging a
+   10-minute span by it is not like-for-like — slow load drift accumulates.
+
+**Fourth independent line of evidence that there is no engine fault**, after
+the load curve, the absent powertrain codes, and the live fuel data.
+
+### The remaining test is not electronic
+
+Measure the vibration, not a proxy. Phone accelerometer or spectrum app, flat
+on the seat, warm idle. At ~660 rpm:
+
+- **~33 Hz (3rd order)** → the V6 firing pulse felt through a bare regular-cab
+  floor. Normal. Nothing to fix.
+- **~11 Hz (1st order)** → rotational imbalance: damper, pulley, flexplate.
+
 ### Still unmeasured
 
-1. **RPM stability over time** — the last measurable thing, and the one that
-   decides the open question. A single 661 rpm sample says nothing about
-   wander. Log 120 s: `f150diag live --pids idle --seconds 120`.
-2. **Permanent codes (Mode 0A)** — the only code history a clear cannot destroy.
+1. **Permanent codes (Mode 0A)** — the only code history a clear cannot destroy.
+2. LTFT after several hundred km, since the current 0 % is probably un-relearned.
 3. VCT commanded vs actual, via the FORScan handoff, if anything still points there.
 
 Two numbers collapse most of the diagnosis — fuel trims say whether it's a
