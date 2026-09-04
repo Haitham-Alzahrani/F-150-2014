@@ -1,0 +1,200 @@
+# Issues whose effect scales with manifold vacuum: worst at idle and light
+# load, absent under real load. Load signature is the primary discriminator.
+
+- id: idle-normal
+  title: Idle vibration within normal limits for the vehicle
+  summary: >
+    Not every felt vibration is a fault. A base regular cab has minimal sound
+    deadening and sits close to the engine, and a 60-degree V6 is not
+    inherently balanced the way an inline-six or a cross-plane V8 is.
+  systems: [nvh]
+  symptoms:
+    - small vibration felt in the cab at idle
+    - inaudible from under the hood
+    - normal idle rpm
+    - no codes
+    - unchanged by every repair attempted
+  load_signature: worst-at-idle
+  temperature: independent
+  sets_code: never
+  tests:
+    - "Log rpm for 120 s at warm idle: peak-to-peak under about 60 rpm with no periodic structure is normal control behaviour"
+    - "Idle a second vehicle of the same cab and engine alongside and compare by hand and by seat"
+  fix: None required.
+  cost: Free to establish.
+  provenance:
+    - source: inferred
+      confidence: medium
+      verified: false
+      note: >
+        Reasoned from this truck's own evidence: never smooth in the owner's
+        ownership, no code in years, normal idle rpm, flawless under load, and
+        six competent repairs across six systems that each changed nothing.
+  notes: >
+    Always test this before spending. A fault that resists every repair is
+    often not a fault.
+
+- id: evap-purge-stuck-open
+  title: EVAP purge valve stuck partly open
+  summary: >
+    The purge valve is normally closed when de-energised. Held open by debris
+    or a failed solenoid it becomes a permanent unmetered leak of air and fuel
+    vapour into the intake, worst at idle where it is a large fraction of
+    total airflow.
+  systems: [evap, intake]
+  symptoms:
+    - rough or shaking idle when stopped
+    - unstable rpm at idle
+    - can stall at low speed in severe cases
+    - hard starting after refuelling
+    - often no code at all
+  codes: [P0441, P0443, P0446, P0496]
+  load_signature: worst-at-idle
+  temperature: independent
+  sets_code: sometimes
+  tests:
+    - "Clamp the hose from the purge valve to the intake manifold at idle; a steadier idle means it was leaking"
+    - "Engine off: hand vacuum pump on the inlet port with the connector unplugged - it must hold vacuum"
+    - "Engine running, connector unplugged: feel for vacuum at the canister-side port; flow with no command means stuck open"
+    - "Scan tool: command purge duty 0% then 100% and confirm rpm and short-term trim react only when commanded open"
+  fix: Replace the valve. Cleaning a valve that has failed to seal is not a repair.
+  cost: Part typically inexpensive.
+  applies_to:
+    models: [Ford F-150]
+    years: [2009, 2014]
+  provenance:
+    - source: community
+      confidence: medium
+      verified: false
+      note: >
+        Reported as a very common failure point on the 2009-2014 F-150, with
+        rough idle and hard starting after refuelling, and noted as sometimes
+        setting no code. Read from search-engine summaries only - the forum
+        and parts sources are blocked from the environment where this entry
+        was written and were never opened.
+  notes: >
+    On this truck: never inspected in twelve years. Top candidate if the idle
+    measurement shows a genuine fault.
+
+- id: pcv-leak
+  title: PCV valve, hose or elbow cracked
+  summary: >
+    Crankcase ventilation rubber hardens with heat and age. A split elbow or
+    hose is an unmetered air leak with exactly the load signature of any other
+    vacuum leak.
+  systems: [pcv, intake]
+  symptoms:
+    - rough idle
+    - unstable rpm
+    - lean fuel trims at idle
+  codes: [P0171, P0174]
+  load_signature: worst-at-idle
+  temperature: independent
+  sets_code: sometimes
+  tests:
+    - "Flex the hose and both elbows by hand with the engine hot and running - heat-hardened rubber opens when flexed and closes cold, so a cold inspection misses it"
+    - "Clamp the PCV hose briefly at idle and watch whether the roughness reduces"
+    - "Oil filler cap test at idle: a large idle drop means restricted ventilation, a smoothing means crankcase pressure"
+  fix: Replace the cracked component.
+  cost: Very low.
+  provenance:
+    - source: community
+      confidence: medium
+      verified: false
+      note: >
+        Multiple owner reports name a cracked PCV hose or a rotted elbow as
+        the entire fix for a months-long rough idle with no check engine
+        light. From search summaries; sources not opened.
+  notes: >
+    Confirm whether this engine has a serviceable PCV valve at all - several
+    Ford engines of the era integrate a fixed orifice into the valve cover.
+    [VERIFY against the parts catalogue]
+
+- id: unmetered-air
+  title: Unmetered air entering downstream of the mass air flow sensor
+  summary: >
+    Any air that enters after the MAF is unmeasured, so the mixture goes lean
+    and fuel trim corrects positive. The correction is large at idle and small
+    at higher airflow, which is what makes the idle-versus-2500-rpm comparison
+    diagnostic.
+  systems: [intake]
+  symptoms:
+    - positive long-term fuel trim at idle that shrinks at higher rpm
+    - unstable idle
+  codes: [P0171, P0174]
+  load_signature: worst-at-idle
+  temperature: independent
+  sets_code: sometimes
+  tests:
+    - "Compare long-term trim at idle against 2500 rpm no load; a fall of more than about 5% points at a leak"
+    - "Smoke test the intake with the PCV and purge lines clamped off first, then again unclamped - the difference isolates the valves from the manifold"
+    - "Vacuum gauge at idle: steady 18-22 inHg near sea level is healthy; low-and-steady suggests a leak"
+  fix: Locate and seal. Suspect the purge valve, PCV and booster hoses before the manifold gaskets.
+  cost: Depends entirely on location.
+  provenance:
+    - source: inferred
+      confidence: high
+      verified: false
+      note: >
+        Standard fuel-trim interpretation - the shrinking-correction test is
+        general engine management theory, not a vehicle-specific claim.
+  notes: >
+    Trims decide whether a smoke test is worth doing. Within about ±10% at
+    idle, no leak present is large enough to explain a shake, and a smoke test
+    only surfaces leaks too small to matter.
+
+- id: booster-leak
+  title: Brake booster or check valve leaking
+  summary: >
+    The booster is a large vacuum consumer connected straight to the manifold.
+    A leaking diaphragm or check valve is an unmetered air leak.
+  systems: [brakes, intake]
+  symptoms:
+    - unstable idle
+    - lean trims
+    - sometimes a hiss from the pedal area
+  load_signature: worst-at-idle
+  temperature: independent
+  sets_code: sometimes
+  tests:
+    - "Clamp the booster hose at idle with the vehicle stationary; a change in idle means the booster or its check valve leaks. Brake assist is absent while clamped and returns on release"
+  fix: Replace the check valve or the booster.
+  cost: Low for a check valve.
+  provenance:
+    - source: inferred
+      confidence: high
+      verified: false
+      note: Standard vacuum-leak diagnosis; no vehicle-specific claim made.
+
+- id: throttle-body-carbon
+  title: Carbon around the throttle plate
+  summary: >
+    Deposits on the plate edge and bore distort the small airflow the PCM
+    meters at idle. Matters only at small plate openings, so it disappears
+    under load.
+  systems: [intake]
+  symptoms:
+    - unstable idle
+    - idle drops on deceleration
+  load_signature: worst-at-idle
+  temperature: independent
+  sets_code: rarely
+  tests:
+    - "Remove the intake duct and inspect the plate edge and the bore behind it - spraying cleaner through the duct leaves the downstream edge untouched, which is the part that matters"
+    - "After any cleaning, run the idle relearn or the idle will be worse than before"
+  fix: Remove the throttle body and clean by hand, then relearn.
+  cost: Low.
+  provenance:
+    - source: community
+      confidence: medium
+      verified: false
+      note: >
+        Widely reported as a rough-idle cause and a common first repair.
+        From search summaries; sources not opened.
+    - source: measured
+      confidence: high
+      verified: false
+      note: >
+        ELIMINATED ON THIS TRUCK. Removed from the manifold, hand-cleaned, and
+        the symptom did not change. That is a properly conducted test with a
+        negative result.

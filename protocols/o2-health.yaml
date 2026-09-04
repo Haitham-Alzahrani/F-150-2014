@@ -1,0 +1,73 @@
+id: o2-health
+title: Oxygen sensor health
+description: |
+  Measures how fast the upstream sensors actually switch, which is the only
+  way to tell a working sensor from a slow one. Relevant to any vehicle whose
+  sensors have been "cleaned": solvent attacks the platinum layer and the
+  ceramic element, mechanical cleaning wrecks the shroud's diffusion slots,
+  and neither is reversible. A slow sensor cannot be cleaned back to health.
+
+entry: intro
+
+steps:
+  - id: intro
+    type: prompt
+    text: |
+      OXYGEN SENSOR HEALTH
+
+      Engine at full operating temperature and in closed loop. A cold engine
+      runs open loop and ignores these sensors entirely, so a cold test
+      measures nothing.
+    confirm: Confirm engine fully warm
+    next: idle_o2
+
+  - id: idle_o2
+    type: measure
+    label: o2_idle
+    seconds: 45
+    pids: [o2]
+    next: rev
+
+  - id: rev
+    type: prompt
+    text: |
+      Hold a steady 2500 rpm, no load, for the next minute.
+
+      Switching is measured here rather than at idle because the higher
+      exhaust flow makes a lazy sensor obvious.
+    confirm: Confirm holding 2500 rpm
+    next: rev_o2
+
+  - id: rev_o2
+    type: measure
+    label: o2_2500
+    seconds: 60
+    pids: [o2]
+    next: verdict
+
+  - id: verdict
+    type: branch
+    checks:
+      - when: o2_b1s1_v_parked or o2_b2s1_v_parked
+        finding: o2-parked
+        summary: "An upstream sensor never crossed the stoichiometric line. It is parked, not switching — replace it."
+        next: downstream
+      - when: o2_b1s1_v_switch_hz < 1.0 or o2_b2s1_v_switch_hz < 1.0
+        finding: o2-lazy
+        summary: "An upstream sensor switches below one crossing per second at 2500 rpm. That is a lazy sensor — replace rather than clean."
+        next: downstream
+      - finding: o2-healthy
+        summary: "Both upstream sensors switch at a healthy rate."
+        next: downstream
+
+  - id: downstream
+    type: prompt
+    text: |
+      Downstream sensors should sit relatively steady — they read what the
+      catalyst has finished with. A downstream sensor mirroring the upstream
+      one indicates catalyst efficiency loss rather than a sensor fault.
+
+      This protocol measures rather than judges that: read the recorded
+      values before condemning a catalyst.
+    confirm: Press Enter to finish
+    next: END

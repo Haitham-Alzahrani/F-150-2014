@@ -140,6 +140,39 @@ the test that isolates each, and reference values for reading scan data.
 - Don't present links or data as verified unless you actually checked them.
   Say plainly what was confirmed and what was not.
 
+## The diagnostic tool
+
+`src/f150diag/` is a read-only OBD-II tool that walks adaptive protocols,
+records what it measures and reasons from the measurements. **Read
+[`docs/TOOL.md`](docs/TOOL.md) before changing it** and
+[`docs/LOCAL-SETUP.md`](docs/LOCAL-SETUP.md) before running it at the truck.
+
+```
+python -m f150diag.cli selftest                     no vehicle needed
+python -m f150diag.cli --port /dev/ttyUSB0 run triage
+python -m f150diag.cli --port /dev/ttyUSB0 run idle-quality
+python -m f150diag.cli analyze logs/<file>.csv
+python -m f150diag.cli kb list
+```
+
+Rules that are not negotiable in this codebase:
+
+- **Read-only.** Service 04 (clear codes) is deliberately absent — clearing
+  destroys the freeze frame and the permanent-code history. No blind writes to
+  any module: a bricked PCM is a dead truck.
+- **`DID_REGISTRY` stays empty** until an entry is verified against FORScan on
+  this VIN. A wrong Mode 22 address returns a plausible number rather than an
+  error, and that number will condemn a good part.
+- **Every knowledge-base entry needs provenance and a test.** `verified: true`
+  means somebody opened the source, not that it appeared in a search summary.
+  Currently no entry qualifies — the container where they were written could
+  not reach the sources.
+- **Protocol labels use underscores.** `idle_park.ltft_mean` is an attribute
+  lookup; `idle-park.ltft_mean` is a subtraction.
+- Run `python -m f150diag.cli selftest` after touching protocols, the
+  knowledge base, decoders or the condition evaluator. It validates all of
+  them.
+
 ## Python Environment & Commands
 
 This is a Linux host.
@@ -149,3 +182,5 @@ This is a Linux host.
   directly.
 - **Run a script:** `/home/user/f-150-2014/.venv/bin/python <filename>.py`
 - **Install packages:** `/home/user/f-150-2014/.venv/bin/pip install <package>`
+- The package lives under `src/`, so run it as
+  `PYTHONPATH=src /home/user/f-150-2014/.venv/bin/python -m f150diag.cli ...`

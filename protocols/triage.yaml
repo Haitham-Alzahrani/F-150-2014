@@ -1,0 +1,112 @@
+id: triage
+title: Whole-vehicle triage — start here
+description: |
+  The opening pass on an unknown complaint. Establishes what the vehicle is,
+  what it reports, whether anything is stored, and whether the idle is
+  abnormal. Ends by naming which deeper protocol to run.
+
+  Fast on purpose: about five minutes, and it stops you running a long
+  protocol against the wrong system.
+
+entry: intro
+
+steps:
+  - id: intro
+    type: prompt
+    text: |
+      TRIAGE
+
+      Engine at operating temperature, in Park, A/C off.
+    confirm: Press Enter to begin
+    next: survey
+
+  - id: survey
+    type: service
+    service: survey
+    text: "Vehicle identification and supported parameters…"
+    next: codes
+
+  - id: codes
+    type: service
+    service: dtcs
+    text: "Codes — stored, pending and permanent…"
+    next: codes_branch
+
+  - id: codes_branch
+    type: branch
+    checks:
+      - when: dtc_total > 0
+        finding: codes-present
+        summary: "Codes are stored. Work them before chasing an uncoded symptom — a code names its own system."
+        next: quick_idle
+      - next: quick_idle
+
+  - id: quick_idle
+    type: measure
+    label: triage_idle
+    seconds: 60
+    pids: [idle]
+    next: idle_branch
+
+  - id: idle_branch
+    type: branch
+    checks:
+      - when: rpm_periodic or rpm_p2p > 100
+        finding: idle-abnormal
+        summary: "Idle is genuinely unstable. Run: f150diag run idle-quality"
+        next: complaint
+      - when: ltft_mean > 10 or ltft_mean < -10
+        finding: trim-abnormal
+        summary: "Fuel trims are outside ±10% at idle. Run: f150diag run idle-quality"
+        next: complaint
+      - when: ltft_split > 8
+        finding: bank-split
+        summary: "The banks disagree by more than 8%. One bank — three cylinders. Run: f150diag run idle-quality"
+        next: complaint
+      - finding: idle-within-limits
+        summary: "Idle stability and fuel trims are both within normal limits."
+        next: complaint
+
+  - id: complaint
+    type: prompt
+    text: |
+      Record the complaint as the driver describes it, so the next session
+      starts from the symptom and not from the last theory.
+    ask: complaint
+    question: What is the complaint, in one line?
+    next: load_question
+
+  - id: load_question
+    type: prompt
+    text: |
+      The single most useful question about any driveability complaint:
+      how does it behave under load?
+
+      A fault that worsens under load and one that vanishes under load have
+      almost no suspects in common.
+    ask: load_behaviour
+    question: How does the symptom behave under load?
+    options:
+      - Worse under load
+      - Unchanged under load
+      - Better or absent under load
+      - Only at idle or standstill
+      - Not driven / unknown
+    next: load_branch
+
+  - id: load_branch
+    type: branch
+    checks:
+      - when: load_behaviour == "Worse under load"
+        finding: load-positive
+        summary: "Worsens under load — look at fuel delivery, ignition under demand, compression, cam timing, exhaust restriction."
+        next: END
+      - when: load_behaviour == "Better or absent under load"
+        finding: load-negative
+        summary: "Absent under load — look at high-vacuum faults: unmetered air, charge dilution, idle control. Rules out the whole worsens-under-load family."
+        next: END
+      - when: load_behaviour == "Only at idle or standstill"
+        finding: load-negative
+        summary: "Idle only — same family as above: unmetered air, dilution, idle control."
+        next: END
+      - next: END

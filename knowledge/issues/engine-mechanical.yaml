@@ -1,0 +1,191 @@
+# Cam timing, ignition, sensors and the mechanical end. Most of these worsen
+# under load, which is what separates them from the idle-and-air family.
+
+- id: dilution-or-mechanical
+  title: Rough idle with normal fuel trims
+  summary: >
+    When the engine runs rough while fuel trims sit near zero, fuel control is
+    not the cause. Trims correct mixture; they do not correct dilution or a
+    mechanical problem, and they stay near normal while either wrecks
+    combustion stability.
+  systems: [engine]
+  symptoms:
+    - unstable idle with long-term trims inside about ±10%
+    - no misfire code
+  load_signature: worst-at-idle
+  temperature: unknown
+  sets_code: rarely
+  tests:
+    - "Confirm trims really are normal at idle, in gear and at 2500 rpm before accepting this branch"
+    - "Check per-cylinder misfire counters - an even spread across all cylinders supports a global cause, one outlier refutes it"
+    - "Move to variable cam timing: commanded against actual cam position at idle"
+  fix: Depends on which mechanism the next branch identifies.
+  provenance:
+    - source: inferred
+      confidence: high
+      verified: false
+      note: >
+        Follows from what fuel trim measures. Inert exhaust dilution does not
+        move the mixture away from stoichiometric, so it does not move trims.
+
+- id: vct-solenoid-phaser
+  title: VCT solenoid or cam phaser misbehaving at idle
+  summary: >
+    This engine has no external EGR valve - twin independent cam phasing
+    creates internal EGR through valve overlap instead. A phaser or solenoid
+    that loses control authority at idle, where oil pressure is lowest, can
+    dilute the charge exactly where the symptom lives and recover as load and
+    pressure rise.
+  systems: [vct, engine]
+  symptoms:
+    - rough idle
+    - wandering rpm
+    - rattle at cold start in advanced cases
+    - classically rough when cold and smoother when warm
+  codes: [P0010, P0011, P0013, P0014, P0016, P0021, P0024]
+  load_signature: worst-at-idle
+  temperature: cold-only
+  sets_code: sometimes
+  tests:
+    - "Commanded against actual cam position at idle, both banks - erratic or lagging actual condemns solenoid or phaser (Ford enhanced parameter, needs FORScan)"
+    - "Swap the VCT solenoids bank to bank: if the misbehaviour follows the solenoid it is the solenoid, if it stays it is the phaser, chain or oil supply"
+    - "Inspect the solenoid screens for debris or a holed screen"
+    - "Measure oil pressure at hot idle with a mechanical gauge"
+  fix: Solenoid first - it is the cheap half and the bank swap identifies it definitively.
+  cost: Solenoid low; phaser and chain high.
+  provenance:
+    - source: community
+      confidence: medium
+      verified: false
+      note: >
+        "Rough idle that smooths under load aligns with typical VCT solenoid
+        behavior", and reports that most stalling-at-idle F-150 cases trace to
+        VCT. From search summaries; sources not opened.
+    - source: unverified
+      confidence: low
+      verified: false
+      note: >
+        A TSB summary reportedly gives VCT_INT_ACT1 at idle of +6 degrees or
+        more as indicating a worn chain, more than 5 teeth of tensioner
+        extension as confirming it, and at least 25 psi at hot idle as the
+        phaser oil pressure requirement. NONE of these figures were read from
+        the bulletin itself. Do not act on them without the service manual.
+  notes: >
+    On this truck two things argue against it: no codes have ever appeared,
+    and the symptom is identical cold and hot rather than better when warm.
+
+- id: no-external-egr
+  title: The 3.7 Ti-VCT has no external EGR valve
+  summary: >
+    Ford's twin independent cam phasing produces internal EGR by controlling
+    valve overlap; retarding the exhaust cam does the job an EGR valve used to
+    do, so the valve was deleted. Do not send anyone looking for one, and do
+    not request an EGR position parameter.
+  systems: [emissions, vct]
+  load_signature: none
+  sets_code: never
+  tests:
+    - "Read the supported-PID bitmap: if PIDs 2C and 2D come back unsupported the vehicle has confirmed this itself - a measurement rather than a claim"
+  fix: Not applicable - this is a fact about the engine, not a fault.
+  provenance:
+    - source: community
+      confidence: medium
+      verified: false
+      note: >
+        Two independent sources state Ti-VCT with exhaust cam phasing removes
+        the need for EGR. A parts catalogue listing an EGR valve control
+        solenoid for the 2014 F-150 3.5L EcoBoost but not the 3.7L is
+        consistent. All from search summaries; nothing opened.
+    - source: unverified
+      confidence: low
+      verified: false
+      note: "[VERIFY] Confirm against the service manual before relying on it."
+
+- id: coil-boot-carbon-tracking
+  title: Coil boot breakdown and carbon tracking
+  summary: >
+    Boots harden with heat, the spring loses tension, and spark arcs to the
+    head down a carbon track instead of jumping the plug gap.
+  systems: [ignition]
+  symptoms:
+    - misfire under load
+    - rough running
+    - rough idle after a plug change if a boot was damaged or a gap is wrong
+  codes: [P0300, P0301, P0302, P0303, P0304, P0305, P0306]
+  load_signature: worse-under-load
+  temperature: independent
+  sets_code: always
+  tests:
+    - "Pull each coil and look for a grey or black burn trail down the side of the boot"
+    - "Check the well for oil - a leaking valve cover gasket or plug tube seal drowns the boot"
+    - "Re-check the gap on every plug with a wire gauge; out-of-box gap is not guaranteed"
+  fix: Replace boots and plugs together.
+  cost: Low.
+  provenance:
+    - source: community
+      confidence: medium
+      verified: false
+      note: >
+        Reported as a very common misfire cause on 2010-2016 F-150, with a
+        Ford TSB cited for boots and gap. From search summaries; the bulletin
+        itself was not read.
+  notes: >
+    On this truck: ignition faults worsen under load, and this truck is
+    flawless under load. Low priority here despite the general frequency.
+
+- id: o2-cleaned-damage
+  title: Oxygen sensor damaged by cleaning
+  summary: >
+    Heated oxygen sensors are not serviceable. Solvent attacks the platinum
+    layer and the ceramic element; mechanical cleaning wrecks the shroud's
+    diffusion slots. A slow sensor cannot be cleaned back to health because
+    the loss is physical.
+  systems: [fuel, emissions]
+  symptoms:
+    - slow or narrow switching
+    - sensor parked mid-range
+    - fuel control hunting
+  codes: [P0133, P0153, P0135, P0155]
+  load_signature: none
+  temperature: hot-only
+  sets_code: sometimes
+  tests:
+    - "Measure upstream switching at 2500 rpm - a healthy sensor crosses the stoichiometric line several times a second"
+    - "A sensor that never crosses is parked and is finished"
+  fix: Replace. Do not clean again.
+  provenance:
+    - source: community
+      confidence: high
+      verified: false
+      note: >
+        Multiple sources agree that chemical cleaners degrade the platinum and
+        ceramic, that the protective shroud is easily damaged, and that a lazy
+        sensor's platinum depletion cannot be restored. From search summaries.
+  notes: >
+    On this truck the sensors were "cleaned" by an unknown method. They are
+    NOT the cause of the idle symptom - it is identical cold, where the PCM
+    runs open loop and ignores them - but they may well be damaged and are
+    worth measuring on their own account.
+
+- id: internal-water-pump
+  title: Internal timing-chain-driven water pump failure
+  summary: >
+    The 3.7 Cyclone drives its water pump off the timing chain, inside the
+    engine. When the seal fails it puts coolant into the oil rather than onto
+    the ground, so there is nothing to see underneath.
+  systems: [cooling, engine]
+  symptoms:
+    - coolant level falling with no external leak
+    - milky oil or a rising oil level
+  load_signature: none
+  sets_code: rarely
+  tests:
+    - "If coolant disappears with no external leak, check the dipstick for milky oil or an over-full pan before chasing anything else"
+  fix: Major - the pump is behind the timing cover.
+  cost: High.
+  provenance:
+    - source: community
+      confidence: high
+      verified: false
+      note: Widely documented characteristic of the Ford Cyclone V6 family.
+  notes: "On this truck: coolant level is currently steady."
