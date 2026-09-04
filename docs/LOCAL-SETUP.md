@@ -121,8 +121,11 @@ the current ones are.
 2. If it says idle-abnormal: `run idle-quality`
 3. If that lands on **unmetered air**: the protocol's own clamp tests localise
    it — purge valve, PCV, booster, in that order
-4. If it lands on **dilution or mechanical** with normal trims: FORScan for
-   cam position, and swap the VCT solenoids bank to bank
+4. If it lands on **dilution or mechanical** with normal trims: disconnect
+   this tool, run FORScan, log VCT desired and actual for both banks plus
+   rpm, export as CSV, then `f150diag forscan <file>.csv` to analyse the cam
+   tracking. Swap the VCT solenoids bank to bank if it shows error.
+   The two tools cannot hold the adapter at once — see `docs/FORSCAN.md`
 5. `run o2-health` regardless — the sensors were "cleaned" by an unknown
    method and that question is owed an answer on its own account
 

@@ -10,6 +10,7 @@ f150diag --port /dev/ttyUSB0 survey    what the vehicle supports
 f150diag --port /dev/ttyUSB0 dtc       stored, pending and permanent codes
 f150diag --port /dev/ttyUSB0 live --pids idle --seconds 120
 f150diag analyze logs/<file>.csv       statistics and causality on a log
+f150diag forscan <export>.csv          import a FORScan CSV and analyse it
 f150diag run triage --port /dev/ttyUSB0
 f150diag run idle-quality --port /dev/ttyUSB0
 f150diag run <protocol> --dry-run      rehearse the prompts, no adapter
@@ -54,6 +55,7 @@ document claiming it.
 | `src/f150diag/recorder.py` | Sampling to CSV and JSON Lines |
 | `src/f150diag/analysis.py` | Statistics, periodicity, causality, thresholds |
 | `src/f150diag/runner.py` | Protocol graph execution, condition evaluation |
+| `src/f150diag/forscan.py` | FORScan CSV import and column mapping |
 | `src/f150diag/knowledge.py` | Issue base with provenance |
 | `src/f150diag/cli.py` | Commands |
 | `protocols/*.yaml` | Diagnostic protocols (data, not code) |
@@ -186,6 +188,11 @@ verified sources and mark provenance honestly. See `docs/ENHANCED-PIDS.md`.
 
 **No bidirectional control.** Commanding an actuator or running a
 manufacturer routine needs write access this tool does not have.
+
+**FORScan cannot be run concurrently.** A serial port is exclusive, so the
+two tools take turns on the adapter and meet in the filesystem — see
+`docs/FORSCAN.md`. Importing a FORScan export gives us its *measurements*,
+never its data identifiers.
 
 **Mode 06 unit scaling is not decoded.** Values are reported raw against
 their raw limits, which is enough to see pass/fail and margin. The UAS

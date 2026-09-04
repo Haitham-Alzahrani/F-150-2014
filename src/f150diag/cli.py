@@ -9,7 +9,7 @@ import logging
 import sys
 from pathlib import Path
 
-from . import analysis, knowledge, pids as pidmod, runner, services
+from . import analysis, forscan, knowledge, pids as pidmod, runner, services
 from .transport import Elm327, available_ports
 
 REPO = Path(__file__).resolve().parents[2]
@@ -116,6 +116,61 @@ def cmd_analyze(args) -> int:
         if ll:
             print(f"\n{a} vs {b}: lag {ll.lag_s}s  r={ll.correlation}")
             print(f"  {ll.verdict}")
+    return 0
+
+
+def cmd_forscan(args) -> int:
+    """Import a FORScan CSV export and run the same analysis as a native log."""
+    result = forscan.load(Path(args.file))
+    print(result.report())
+    if not result.samples:
+        return 1
+
+    m = analysis.metrics(result.samples)
+    _print_metrics(m)
+
+    dt = analysis.sample_interval(result.samples)
+    for a, b in (("stft_b1", "rpm"), ("stft_b2", "rpm")):
+        ll = analysis.lead_lag(result.samples, a, b, dt)
+        if ll:
+            print(f"\n{a} vs {b}: lag {ll.lag_s}s  r={ll.correlation}")
+            print(f"  {ll.verdict}")
+
+    pairs = forscan.vct_channels(result.samples)
+    if not pairs:
+        print("\nNo cam position channels found in this export.")
+        print("Log VCT desired and actual for both banks in FORScan — tracking")
+        print("error at idle is the one thing this tool cannot measure itself.")
+        return 0
+
+    print("\nCAM TIMING TRACKING")
+    for desired, actual in pairs:
+        des = analysis.describe(result.samples, desired)
+        act = analysis.describe(result.samples, actual)
+        if not des or not act:
+            continue
+        errors = [s[actual] - s[desired] for s in result.samples
+                  if s.get(actual) is not None and s.get(desired) is not None]
+        if not errors:
+            continue
+        worst = max(abs(e) for e in errors)
+        mean_err = sum(errors) / len(errors)
+        act_per = analysis.find_periodicity(
+            [s[actual] for s in result.samples if s.get(actual) is not None], dt)
+        print(f"\n  {desired} -> {actual}")
+        print(f"    desired mean {des.mean}  actual mean {act.mean}")
+        print(f"    tracking error: mean {mean_err:.2f}  worst {worst:.2f}")
+        print(f"    actual position sd {act.sd}, periodic={act_per.periodic}")
+        if worst > 5:
+            print("    → actual departs from commanded by more than 5 degrees.")
+            print("      Swap the VCT solenoids bank to bank: if it follows the")
+            print("      solenoid it is the solenoid, if it stays it is the")
+            print("      phaser, chain or oil supply.")
+        elif act_per.periodic:
+            print(f"    → cam position oscillates ({act_per.period_s}s period)")
+            print("      while commanded is steady — hunting phaser control.")
+        else:
+            print("    → tracks commanded position. No VCT fault evident here.")
     return 0
 
 
@@ -293,6 +348,41 @@ def cmd_selftest(args) -> int:
         failures += 0 if ok else 1
         print(f"  {'ok  ' if ok else 'FAIL'} p2p={p2p} periodic={periodic} -> {verdict}")
 
+    print("\nFORScan import")
+    import tempfile as _tempfile
+    sample = (
+        "Time (s),RPM (1/min),Long FT1 (%),VCT_INT_ACT1 (deg),Mystery (x)\n"
+        "0.00,700,3.1,4.0,7\n"
+        "0.20,705,3.1,4.2,7\n"
+        "0.40,698,3.2,4.1,7\n"
+    )
+    with _tempfile.NamedTemporaryFile("w", suffix=".csv", delete=False) as fh:
+        fh.write(sample)
+        sample_path = Path(fh.name)
+    imported = forscan.load(sample_path)
+    sample_path.unlink(missing_ok=True)
+
+    fs_checks = [
+        ("row count", len(imported.samples), 3),
+        ("time column found", bool(imported.time_column), True),
+        ("rpm mapped", imported.mapped.get("RPM (1/min)"), "rpm"),
+        ("trim mapped", imported.mapped.get("Long FT1 (%)"), "ltft_b1"),
+        ("cam mapped", imported.mapped.get("VCT_INT_ACT1 (deg)"), "vct_int_act_b1"),
+        ("unknown column reported", "Mystery (x)" in imported.unmapped, True),
+        ("elapsed normalised", imported.samples[1]["elapsed_s"], 0.2),
+    ]
+    for name, got, want in fs_checks:
+        ok = got == want
+        failures += 0 if ok else 1
+        print(f"  {'ok  ' if ok else 'FAIL'} {name:<26} {got!r} (want {want!r})")
+
+    for header, expected in (("Long FT1 (%)", "LONGFT1"), ("RPM(1/min)", "RPM"),
+                             ("vct_int_act1", "VCTINTACT1")):
+        got = forscan.normalise(header)
+        ok = got == expected
+        failures += 0 if ok else 1
+        print(f"  {'ok  ' if ok else 'FAIL'} normalise {header!r} -> {got!r}")
+
     print("\nProtocols")
     protos = runner.load_all(PROTOCOL_DIR)
     if not protos:
@@ -383,6 +473,11 @@ def build_parser() -> argparse.ArgumentParser:
     live.add_argument("--seconds", type=float, default=60)
     live.add_argument("--label", default="live")
     live.set_defaults(fn=cmd_live)
+
+    fs = sub.add_parser("forscan",
+                        help="import and analyse a FORScan CSV export")
+    fs.add_argument("file")
+    fs.set_defaults(fn=cmd_forscan)
 
     ana = sub.add_parser("analyze", help="analyse a recorded log")
     ana.add_argument("file")
