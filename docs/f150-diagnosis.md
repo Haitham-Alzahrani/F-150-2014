@@ -260,13 +260,61 @@ screenshots. Spark and rpm are locked in a closed loop, and separating cause
 from effect requires the two cross-correlated on a synchronised log — which is
 what `f150diag analyze` exists to do and what the phone app cannot provide.
 
-### A likely contributor: the adaptives are young
+### Test D — cam phaser: parked, eliminated
 
-Only **101 km and 3 warm-ups since codes were cleared**, with LTFT at exactly
-0.0 % on both banks — almost certainly un-relearned rather than perfect. The
-idle adaptive tables live in the same keep-alive memory the battery disconnect
-wiped. A governor working from un-relearned adaptives hunts more than one that
-has settled.
+`Variable camshaft actual advance #1` reads between 0.00 and −0.06 degrees.
+The axis spans six hundredths of a degree and those two values are adjacent
+quantisation steps, so the dense vertical lines are the auto-scaling artifact
+recorded above, not movement. **The phaser sits at its rest position and does
+not move.** VCT is eliminated as the source of the oscillation.
+
+Limit: this is intake bank 1 only, one of four phasers. At idle all four
+would be parked together, but only one was measured.
+
+### The scoreboard: every PCM output is static except spark
+
+| PCM output | State at warm idle |
+|---|---|
+| Throttle position | static |
+| Fuel trim | static, ±1.5 % |
+| Commanded purge | static |
+| Cam phaser | parked |
+| **Spark advance** | **swinging 10-13.5°** |
+
+The governor holds idle with its fast fine-trim lever alone, everything else
+frozen. **The OBD investigation is exhausted** — there is nothing further to
+ask the PCM.
+
+### Untested hypothesis that would explain the whole data set
+
+**Is the rpm signal itself true?**
+
+Every rpm figure in this investigation is the PCM's own measurement, taken
+from the crankshaft position sensor. If that signal is noisy — a marginal
+sensor, a damaged connector, a reluctor wheel defect, twelve years of Jeddah
+heat on a harness — then the PCM *believes* rpm is wandering, modulates spark
+to correct a disturbance that does not exist, and **that spark modulation
+makes the engine genuinely oscillate.**
+
+One fault, producing every observation recorded here: static air, static fuel,
+parked cam, swinging spark, wandering rpm, and a felt roughness.
+
+**Test by measuring engine speed independently of the PCM:**
+
+- A timing light with a tach function, or an inductive tach on a plug lead
+- The phone accelerometer: firing frequency should equal rpm/60 × 3
+
+If the independent reading is steadier than the app's, the crank signal is
+lying and the sensor or its wiring is the fault.
+
+### Withdrawn: the adaptives hypothesis
+
+An earlier revision proposed that young adaptives were the likely contributor,
+on the basis of 101 km and 3 warm-ups since codes were cleared with LTFT at
+exactly 0.0 % on both banks.
+
+**The owner has since confirmed a relearn was performed and 300 km driven,
+with no change to the symptom. The hypothesis is withdrawn.**
 
 ### Amplitude, in perspective
 

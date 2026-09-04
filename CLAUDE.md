@@ -261,24 +261,63 @@ quarter of a hertz. That period belongs to a feedback loop with lag.
 and rpm are in a closed loop; separating cause from effect needs them
 cross-correlated on a synchronised log — what `f150diag analyze` is for.
 
-**Likely contributor: the adaptives are young.** 101 km and 3 warm-ups since
-codes were cleared, LTFT exactly 0.0 % on both banks. The idle adaptive tables
-sit in the same keep-alive memory the battery disconnect wiped. A governor
-running on un-relearned adaptives hunts more than a settled one.
+**Adaptives ELIMINATED.** The owner performed a relearn and drove 300 km with
+no change. An earlier revision proposed young adaptives as the likely
+contributor; that is withdrawn.
+
+**VCT ELIMINATED.** `Variable camshaft actual advance #1` reads 0.00 to
+−0.06° — two adjacent quantisation steps, an axis spanning six hundredths of
+a degree. The phaser is parked and does not move. (Intake bank 1 only, but at
+idle all four would be parked together.)
+
+**Every PCM output is static except spark:** throttle static, fuel trim ±1.5 %,
+purge flat, cam parked, spark swinging 10–13.5°. The governor holds idle with
+its fast fine-trim lever alone. **OBD is exhausted** — there is nothing left to
+ask the PCM.
+
+**Correction to an over-claim.** An earlier revision argued "nothing moves at
+0.28 Hz, therefore this is a control loop." That holds for *rotating* parts —
+crank, cam, firing — but NOT for actuated or fluttering components, which can
+oscillate on a seconds timescale. The mechanical door was closed too early.
+
+### Untested hypothesis that fits everything: is the rpm signal itself true?
+
+Every rpm figure in this investigation is the PCM's own measurement from the
+crank sensor. If that signal is noisy — marginal sensor, damaged connector,
+reluctor defect, twelve years of heat — the PCM would *believe* rpm is
+wandering, modulate spark to correct a phantom, and **that spark modulation
+would make the engine genuinely oscillate.** One fault, explaining the whole
+data set.
+
+**Test it by measuring engine speed independently of the PCM:** a timing light
+with a tach function, or the phone accelerometer (firing frequency = rpm/60 ×
+3). If the independent reading is steadier than the app's, the crank signal
+is lying.
 
 **Perspective:** 3.5° of spark swing at idle is modest — many PCMs modulate
 more. With a ±12–17 rpm result this may simply be normal governor behaviour
 made visible by young adaptives.
 
-### Next
+### Next — all physical, OBD is done
 
-1. **Drive it several hundred km**, then re-measure rpm and LTFT. Free, owed
-   anyway, and the change most likely to move the numbers.
-2. **Compare against another 3.7** — still the only way to know if ±20 rpm is
-   abnormal on this engine.
-3. **The felt vibration remains unexplained by any of this.** 0.28 Hz cannot
-   be what is felt at 33 Hz. The phone accelerometer test is the only thing
-   that addresses the actual complaint.
+1. **AC ripple across the battery.** DMM on AC volts at idle: under 0.1 V.
+   Above that an alternator diode is injecting ripple into every sensor
+   reference.
+2. **Ground voltage drops.** DMM on DC mV, idling with loads on: battery
+   negative → block, block → chassis, battery negative → chassis. Each under
+   0.1 V.
+3. **Wiggle test.** Idling with the rpm graph visible, flex and tap the crank
+   sensor connector and harness first, then cam sensors, MAF, coils. Any rpm
+   response is the fault.
+4. **Independent rpm** — timing-light tach against the app's reading.
+5. **Vacuum gauge** — not for leaks (STFT rules those out) but for combustion
+   character at a bandwidth OBD cannot reach.
+6. **Cylinder balance** — unplug one injector at a time, note each rpm drop.
+   Six numbers; unequal drops name the cylinder.
+7. **Compare against another 3.7** — still the only way to know whether
+   ±15 rpm is abnormal on this engine.
+8. **The felt vibration remains unexplained.** 0.28 Hz cannot be what is felt
+   at 33 Hz. The phone accelerometer test addresses the actual complaint.
 
 Still worth doing: **watch the needle on a COLD start.** The owner reports the
 felt SHAKE is identical cold and hot; nobody has asked whether the NEEDLE
