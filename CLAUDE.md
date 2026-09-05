@@ -314,6 +314,55 @@ fan is cycling and loading the engine. Does not touch the trim finding, which
 rests on learned cell values. Worth its own capture: `Engine RPM` +
 `Throttle Position Actually` at a held 2000 rpm.
 
+### WIDE OPEN THROTTLE — the engine breathes PERFECTLY (2026-09, 04:02–04:03)
+
+| Channel | Peak | Healthy target |
+|---|---|---|
+| `Abs. load` | **96.47 %**, sustained 91–94 % | 90–100 % on a healthy NA engine |
+| `MAF` | **215.27 g/sec** | ~170–210 for 302 hp [rule of thumb] |
+| `Engine RPM` | clean pull to **6832** | — |
+
+**The curve shape matters as much as the peak.** MAF rose smoothly and linearly
+from 10 to 215 g/s all the way to the limiter with **no plateau**, falling only
+on lift. A restriction shows as airflow going flat while rpm keeps rising. This
+engine does not do that. Cross-check: 215 g/s × ~1.4 ≈ 301 hp against a 302 hp
+rating.
+
+**ELIMINATED OUTRIGHT:** blocked or restricted **catalytic converter** (a live
+suspect from the downstream O2 asymmetry — it cannot hide from this test) ·
+restricted exhaust · restricted intake · poor volumetric efficiency from wear,
+valve sealing or cam timing. **An engine with a breathing problem cannot reach
+96 % absolute load.**
+
+### Long term trims after the drive (04:04–04:05)
+
+`LTFT - B1` **−1.56 %** flat · `LTFT - B2` **−0.78 %** flat — min = avg = max on
+both, one quantisation step apart, both essentially zero and slightly negative.
+**The +3.13 / +2.34 % lean bias is gone.** No leak signature remains.
+
+[VERIFY] the operating condition was not recorded. **Re-read both long term
+trims at warm idle in Park** — the idle cell is the one that matters for a
+symptom that only appears at idle.
+
+### WHERE THE DIAGNOSIS NOW STANDS
+
+| System | Verdict |
+|---|---|
+| Fuel delivery | **Eliminated** — both banks seal on cut, 12.3:1 at WOT |
+| Upstream O2 sensors | **Eliminated** — both full range, fast |
+| Fuel trims | **Clean** — near zero, banks matched |
+| Vacuum leak / unmetered air | **Clean** — lean bias gone after the purge valve |
+| Engine breathing | **Excellent** — 96 % load, 215 g/s, no plateau |
+| Catalytic converters | **Eliminated** — no restriction |
+| Ignition / knock | Clean — 0° retard |
+| Misfire monitor | Passed |
+| Codes | None, ever |
+
+**And the shake in P and N is still there.** The scan tool has been exhausted
+honestly, and what it establishes is that **the engine is sound.** What remains
+is either per-cylinder contribution (**Mode 06 — the one ECU item never read**)
+or mechanical isolation and contact, which produce no ECU signature at all.
+
 ### FUEL CUT TEST — bank 1 injectors SEALED (2026-09, 03:49–03:50)
 
 Coasting in gear from ~100 km/h to 30 with the throttle shut, `Engine RPM` +

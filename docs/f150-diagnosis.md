@@ -655,6 +655,86 @@ addresses the actual complaint.
 
 ---
 
+## WIDE OPEN THROTTLE — the engine breathes perfectly (2026-09, 04:02-04:03)
+
+Full-throttle pulls captured as `Abs. load` + `Engine RPM`, then `MAF` +
+`Engine RPM`.
+
+| Channel | Peak measured | Healthy target |
+|---|---|---|
+| `Abs. load` | **96.47 %**, sustained 91-94 % through the pull | 90-100 % on a healthy NA engine |
+| `MAF` | **215.27 g/sec** | ~170-210 g/s for a 302 hp engine [rule of thumb] |
+| `Engine RPM` | pulled cleanly to **6832** | — |
+
+**The shape of the MAF curve matters as much as the peak.** It rose smoothly and
+essentially linearly from 10 g/s to 215 g/s all the way to the rev limit, with
+**no flattening or plateau**, and fell only when the throttle was lifted. A
+restriction anywhere in the intake or exhaust shows itself as the airflow curve
+going flat while engine speed continues to rise. This engine does not do that.
+
+**Cross-check:** on a naturally aspirated petrol engine, peak airflow in g/s
+multiplied by roughly 1.4 approximates crank horsepower. 215 × 1.4 ≈ 301 hp
+against a factory rating of 302. [Rule of thumb, not a verified specification.]
+
+### What this eliminates outright
+
+- **Blocked or restricted catalytic converter — ELIMINATED.** This was a live
+  suspect because the two downstream sensors behaved differently at idle. A
+  restricted converter chokes the engine at high flow and cannot hide from this
+  test. Absolute load reaching 96 % rules it out on both banks.
+- **Restricted exhaust — eliminated.**
+- **Restricted intake, air filter, intake tract — eliminated.**
+- **Poor volumetric efficiency from wear, valve sealing or cam timing —
+  eliminated.** An engine with a mechanical breathing problem cannot reach 96 %
+  absolute load.
+
+### Long term trims after the drive (04:04-04:05)
+
+| | Long term |
+|---|---|
+| `LTFT - B1` | **−1.56 %**, flat, min = avg = max |
+| `LTFT - B2` | **−0.78 %**, flat, min = avg = max |
+
+Both flat, both within one quantisation step of each other, both essentially
+zero and very slightly negative. In a later window they drift one step closer to
+zero still (−0.78 and 0).
+
+**The +3.13 / +2.34 % lean bias measured before the purge valve replacement is
+gone.** No leak signature remains anywhere in the learned trims.
+
+[VERIFY] The operating condition during this capture was not recorded — steady
+cruise was the instruction, but the graph does not carry rpm or speed. **Re-read
+`Long term fuel % trim - Bank 1` and `- Bank 2` at warm idle in Park** to get
+the idle cell, which is the one that matters for a symptom that only appears at
+idle.
+
+### Consolidated state of the diagnosis after this session
+
+Every system the scan tool can measure now reads healthy:
+
+| System | Verdict | Evidence |
+|---|---|---|
+| Fuel delivery | **Eliminated** | Both banks seal on fuel cut; 12.3:1 commanded and delivered at WOT |
+| Upstream O2 sensors | **Eliminated** | Both proven across full range, fast, both directions |
+| Fuel trims | **Clean** | Near zero, both banks within one step |
+| Unmetered air / vacuum leak | **Clean** | The lean bias is gone after the purge valve |
+| Engine breathing | **Excellent** | 96.47 % absolute load, 215 g/s MAF, no plateau |
+| Catalytic converters | **Eliminated** | No restriction at high flow |
+| Ignition and knock | Clean | Knock retard 0° |
+| Misfire monitor | Passed | Completed, DTC count 0 |
+| Codes | None | No powertrain code of any kind, ever |
+
+**And the shake in P and N is still there.**
+
+That is not a failure of the investigation — it is a result. The scan tool has
+been exhausted honestly, and what it has established is that **the engine is
+mechanically and electronically sound.** What remains must be either
+per-cylinder contribution (the one thing the ECU holds that has never been read
+— Mode 06), or mechanical isolation and contact, which produce no ECU signature
+at all.
+
+---
+
 ## DECELERATION FUEL CUT — bank 1 injectors are sealed (2026-09, 03:49-03:50)
 
 `Engine RPM` paired with `O2S1 air:fuel` (upstream bank 1), coasting in gear from
