@@ -50,16 +50,21 @@ SCHEMA: dict[str, list[str]] = {
 VOCAB: dict[tuple[str, str], set[str]] = {
     ("readings.csv", "gear"): {"P", "N", "D", "R", "driving", "unknown", "n/a"},
     ("readings.csv", "capture_type"): {
-        "graph_paired", "value_read", "mode06", "monitor_status", "dtc",
-        "physical", "subjective", "calculation",
+        "graph_paired", "graph_single", "value_read", "mode06", "monitor_status",
+        "dtc", "physical", "subjective", "calculation",
     },
     ("readings.csv", "admissible"): {"yes", "no", "unknown"},
     ("readings.csv", "epoch"): {
         "pre_purge_valve", "post_purge_valve_pre_drive", "post_drive", "unknown",
     },
     ("readings.csv", "reading_method"): {
-        "curve_read", "app_minmaxavg", "instantaneous", "menu", "owner_report",
-        "unknown",
+        # curve_read   - read off the plotted trace, the only admissible graph source
+        # app_minmaxavg- the app's session-cumulative Min/Avg/Max fields, inadmissible
+        # value_read   - a numeric list screen, neither a curve nor a cumulative field
+        # menu         - Mode 06 / monitor / DTC menus
+        # owner_report - the owner's own answer, a distinct grade of evidence
+        "curve_read", "app_minmaxavg", "value_read", "instantaneous", "menu",
+        "owner_report", "unknown",
     },
     ("subjective.csv", "category"): {
         "symptom", "symptom_change", "method_correction", "vehicle_fact",
