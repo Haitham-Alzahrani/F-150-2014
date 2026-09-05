@@ -1,0 +1,37 @@
+### status bar
+stc 10:32
+
+### page
+Fuel used (total)
+
+0.02 L
+Fuel used (Week)
+0.02 L
+Fuel used price
+0.02$
+Fuel used price (Today)
+0.02$
+Fuel used price (total)
+0.02$
+Fuel used price (Week)
+0.02$
+Instant engine power (based on fuel consumption)
+3.86 hp
+Power from MAF
+3.48 hp
+Vehicle acceleration
+Og
+ATF temperature var.3
+87.13 °C
+PCM Odometer
+131313 km
+Throttle Position Desired
+7.29 °
+Throttle Position Actually
+7.56 °
+
+Il aarnad anntana
+
+Ads:
+
+< ‘O) ©

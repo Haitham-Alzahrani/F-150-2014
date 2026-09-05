@@ -1,0 +1,36 @@
+### status bar
+stc 10:32
+
+### page
+Learned octane
+
+-0.6
+Knock retard
+@ °
+Variable camshaft actual advance #1
+-0.06 °
+Gear (AT)
+1
+Manifold absolute pressure (high resolution)
+kPa
+DPF average distance between regen
+km
+DPF failed regens
+DPF failed regens (average)
+Vane position sensor
+OV
+A/C pressure
+0 kPa
+Lambda
+0.99
+Air:fuel ratio
+14.52
+Oil Life %
+%
+(ABS) Front left wheel speed
+km/h
+
+(ABS) Front riqht wheel speed
+—________________ pgs:
+
+< ‘O) Oo

@@ -1,0 +1,51 @@
+### status bar
+stc 10:31
+
+### page
+OBD Module Voltage
+
+14V
+Reset distance, fuel used, avg.speed, avg. fuel
+consumption
+Current time
+22:31
+Monitor status since DTCs cleared.
+MIL:OFF
+DTC count:0
+
+Misfire: Available/Completed
+
+Fuel System: Available/Not completed
+Components: Available/Completed
+
+Catalyst: Available/Not completed
+
+Heated Catalyst: Not available/Completed
+Evaporative System: Available/Not completed
+Secondary Air System: Not available/Completed
+A/C refrigerant: Not available/Completed
+Oxygen Sensor: Available/Not completed
+Oxygen Sensor Heater: Available/Not completed
+EGR system: Available/Completed
+
+Fuel System Status
+
+Closed loop, using oxygen sensor feedback to
+determine fuel mix
+
+Calculated engine load value
+
+27.06 %
+Engine coolant temperature
+93 °C
+Short term fuel % trim - Bank 1
+
+212%
+
+‘Ads:
+
+e i) OBD2 Car Scanner
+
+iS
+
+@

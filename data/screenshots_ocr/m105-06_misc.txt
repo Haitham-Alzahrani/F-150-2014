@@ -1,0 +1,35 @@
+### status bar
+stc 10:32
+
+### page
+Fuel/Air commanded equivalence ratio
+
+14.41
+Relative throttle position
+0.78 %
+Ambient air temperature
+37 °C
+Absolute throttle position B
+13.73 %
+Absolute pedal position D
+14.9 %
+Absolute pedal position E
+7.45 %
+Commanded throttle actuator
+1.18 %
+Ethanol fuel percent
+16.08 %
+Average fuel consumption
+oo L/100km
+Average fuel consumption (Today)
+oo L/100km
+Average fuel consumption (total)
+oo L/100km
+Average fuel consumption (Week)
+oo L/100km
+Average fuel consumption 10 sec
+oo L/100km
+
+Ads:
+
+< ‘O) ©

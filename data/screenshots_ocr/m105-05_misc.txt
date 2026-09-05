@@ -1,0 +1,37 @@
+### status bar
+stc 10:32
+
+### page
+Average speed
+
+0 km/h
+Calculated boost
+0.22 bar
+Calculated instant fuel consumption
+00 L/100km
+Calculated instant fuel rate
+1 L/h
+Distance to empty
+n/a km
+Distance travelled
+Okm
+Distance travelled (Today)
+Okm
+Distance travelled (total)
+0 km
+Distance travelled (Week)
+0 km
+Engine RPM x1000
+0.7 rpm
+Free space in fuel tank
+23.53 L
+
+Fuel economizer (based on fuel system status and
+throttle position)
+
+Fuel level input (V)
+
+26.47 L
+Ads:
+
+< ‘O) ©

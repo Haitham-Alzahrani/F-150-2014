@@ -1,0 +1,41 @@
+### status bar
+stc 10:31
+
+### page
+Oxygen sensor 2 Bank 2 Voltage
+
+0.73 V
+
+Oxygen sensor 2 Bank 2 Short term fuel trim
+n/a %
+
+OBD standards this vehicle conforms to
+OBD as defined by the EPA
+
+Auxillary Input Status
+Power take off: not active
+
+Run time since engine start
+
+0.00:37:42
+Distance traveled with MIL on
+0 km
+Commanded evaporative purge
+41.18%
+Fuel level input (%)
+52.94 %
+# warm-ups since codes cleared
+2
+Distance traveled since codes cleared
+101 km
+Evap. system vapor pressure
+Pa
+Barometric pressure
+kPa
+
+Oxygen sensor 1 Wide Range Current (mA)
+mA
+
+Ads:
+
+< © wo

@@ -1,0 +1,13 @@
+### status bar
+stc 11:04 @ :::
+
+### page
+Engine RPM 651 rpm SO?
+
+Min: 617.00 | Avg: 652.98 | Max: 703.00
+STFT B1 0.78 % 09
+
+41:09 41:10 41:19
+Min: -1.56 Avg: -0.47 Max: 1.56
+
+< © Oo

@@ -1,0 +1,37 @@
+### status bar
+stc 10:31
+
+### page
+Engine coolant temperature
+
+94°C
+Short term fuel % trim - Bank 1
+0.78 %
+Long term fuel % trim - Bank 1
+0%
+Short term fuel % trim - Bank 2
+0%
+Long term fuel % trim - Bank 2
+0%
+Engine RPM
+661 rpm
+Vehicle speed
+0 km/h
+Timing advance
+11.5 °
+Intake air temperature
+38 °C
+MAF air flow rate
+2.93 g/sec
+Throttle position
+12.55 %
+Oxygen sensor 2 Bank 1 Voltage
+0.71 V
+Oxygen sensor 2 Bank 1 Short term fuel trim
+n/a %
+
+AMA. AAAI Hw
+
+Ads:
+
+< © wo
