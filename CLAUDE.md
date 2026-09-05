@@ -41,29 +41,44 @@ to a mixture change that already happened. It is not driving anything.
 against rpm: total movement **0.062°**, one quantisation step, correlation
 **+0.05**. The earlier elimination rested on a screenshot of a parked needle.
 
-### THE HUNT IS TEMPERATURE DEPENDENT — new, and nobody looked
+### THE AMPLITUDE HALVED ONCE, EARLY IN THE NIGHT — cause not established
 
-Ten-second spans through one continuous 3.2-hour idle, engine never switched off:
+**835 ten-second idle windows across all four logs, in
+[`data/analysis/idle_windows.csv`](data/analysis/idle_windows.csv).** Restricted
+to Park/Neutral, engine never switched off, A/C off:
 
-| Clock | Median span | ECT |
+| Minutes into the session | Median span | ECT |
 |---|---|---|
-| 22:39–23:04 | **70, 68, 61 rpm** | **82–83 °C** |
-| 23:04–00:45 | **31, 38, 39, 34, 38, 41, 38, 40, 40, 38** | **91–97 °C** |
+| 10–40 | **67, 69, 61 rpm** | **81–83 °C** |
+| 40–50 | **31.5** | **81 → 91 °C** |
+| 50–200 | **38, 39, 34, 38, 41, 38, 40, 40, 36, 40, 30** | **93–98 °C** |
 
-**The amplitude halves as coolant goes 82 → 91 °C, and then holds flat for a
-hundred minutes.** Same session, same engine, A/C off, nothing touched.
+**Something changed once, around minute 40–50, and the halving held for the next
+two and a half hours.** It is the first change in the hunt this project has
+observed that no repair caused.
 
-**This is the first variable found that changes the hunt.** Six repairs, a KAM
-wipe and a purge valve did not. Coolant temperature does, and 82 °C is not cold —
-it is a warm engine that has not fully soaked.
+**But coolant temperature is NOT established as the cause, and an earlier
+revision of this file said it was. Withdrawn.** Three reasons:
 
-It also answers a question this file has carried as unmeasured: *is the needle
-breathing worse cold?* **Yes — and "cold" here means only 10 °C below soaked.**
+1. **Above 88 °C the correlation reverses** — r = **+0.41**, hotter meaning
+   *more* movement. A real temperature law would not change sign in the middle.
+2. **ECT and elapsed time are 88 % collinear** in this session (r = +0.884).
+   They rose together, so nothing here can separate them.
+3. **It rests on one session.** Of 189 Park windows carrying a coolant reading,
+   **all 189 come from the same log.** The other three barely sampled ECT.
 
-**What it points at:** anything the PCM schedules on ECT — idle target, spark
-schedule, the closed-loop entry point — or a physical clearance that closes up as
-the block reaches temperature. **Do not read it as a thermostat fault**; the
-engine reaches and holds 94–97 °C, which this file already established.
+Overall r = −0.455, which is real but is carried almost entirely by the
+first-40-minutes block being worse than everything after it.
+
+**A better candidate than temperature: the cooling fan.** ECT sat at 81–83 °C for
+forty minutes of idling and then *rose* to 91–98 °C, which is the shape of a fan
+switching off, not of an engine warming up. The fan is an engine load, and this
+project has already noted it cycling. **Load changing is a mechanism; temperature
+alone is only a correlate.**
+
+**How to settle it, and it is free:** idle from cold with `Engine coolant
+temperature` on the graph beside `Engine RPM`, and watch whether the amplitude
+steps at the same coolant value twice. One repeat in a second session decides it.
 
 ## SPARK FOLLOWS RPM — measured, not inferred (2026-09-05, from logged data)
 

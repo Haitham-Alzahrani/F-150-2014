@@ -1,0 +1,836 @@
+log,gear_proxy,t_start_s,clock,rpm_mean,rpm_span,rpm_sd,n_samples,ect_c,ect_age_s,speed_kmh,event_id,condition,being_tested,epoch
+2026-09-04 22-23-38.zip,park_neutral,80641.51,22:24:01.51,651.6,22.0,4.99,74,88.0,0.1,0.0,N-01,standstill idle warm ECT 81-83,baseline idle characterisation,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,81571.51,22:39:31.51,656.8,23.0,5.26,92,83.0,0.1,,N-01,standstill idle warm ECT 81-83,baseline idle characterisation,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,81581.51,22:39:41.51,653.8,79.0,15.45,330,83.0,8.9,0.0,N-01,standstill idle warm ECT 81-83,baseline idle characterisation,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,81591.51,22:39:51.51,655.2,67.0,10.67,322,83.0,18.9,0.0,N-01,standstill idle warm ECT 81-83,baseline idle characterisation,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,81601.51,22:40:01.51,654.2,73.0,14.63,318,83.0,28.9,0.0,N-01,standstill idle warm ECT 81-83,baseline idle characterisation,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,81611.51,22:40:11.51,653.9,80.0,16.29,322,83.0,38.9,0.0,N-01,standstill idle warm ECT 81-83,baseline idle characterisation,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,81621.51,22:40:21.51,652.1,58.0,11.75,278,83.0,48.9,0.0,N-01,standstill idle warm ECT 81-83,baseline idle characterisation,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,81631.51,22:40:31.51,657.5,65.0,11.59,278,83.0,58.9,0.0,N-01,standstill idle warm ECT 81-83,baseline idle characterisation,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,81641.51,22:40:41.51,649.9,73.0,12.57,218,83.0,68.9,0.0,N-01,standstill idle warm ECT 81-83,baseline idle characterisation,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,81651.51,22:40:51.51,652.1,43.0,9.12,220,83.0,78.9,0.0,N-01,standstill idle warm ECT 81-83,baseline idle characterisation,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,81661.51,22:41:01.51,655.8,77.0,14.73,233,83.0,88.9,0.0,N-01,standstill idle warm ECT 81-83,baseline idle characterisation,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,81671.51,22:41:11.51,650.7,73.0,14.87,242,83.0,98.9,0.0,N-01,standstill idle warm ECT 81-83,baseline idle characterisation,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,81681.51,22:41:21.51,651.3,58.0,11.12,221,83.0,108.9,0.0,N-01,standstill idle warm ECT 81-83,baseline idle characterisation,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,81691.51,22:41:31.51,656.0,71.0,12.61,223,83.0,118.9,0.0,N-01,standstill idle warm ECT 81-83,baseline idle characterisation,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,81701.51,22:41:41.51,651.5,71.0,14.95,246,83.0,128.9,,N-01,standstill idle warm ECT 81-83,baseline idle characterisation,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,81711.51,22:41:51.51,651.5,49.0,10.12,209,83.0,138.9,,N-01,standstill idle warm ECT 81-83,baseline idle characterisation,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,81721.51,22:42:01.51,656.0,73.0,13.71,235,83.0,148.9,,N-01,standstill idle warm ECT 81-83,baseline idle characterisation,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,81731.51,22:42:11.51,651.9,76.0,16.86,286,83.0,158.9,,N-01,standstill idle warm ECT 81-83,baseline idle characterisation,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,81741.51,22:42:21.51,651.6,53.0,9.51,300,83.0,168.9,,N-01,standstill idle warm ECT 81-83,baseline idle characterisation,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,81751.51,22:42:31.51,655.2,81.0,16.18,304,83.0,178.9,,N-01,standstill idle warm ECT 81-83,baseline idle characterisation,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,81761.51,22:42:41.51,651.6,77.0,15.98,291,83.0,188.9,,N-01,standstill idle warm ECT 81-83,baseline idle characterisation,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,81771.51,22:42:51.51,653.3,52.0,10.7,298,83.0,198.9,,N-01,standstill idle warm ECT 81-83,baseline idle characterisation,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,81781.51,22:43:01.51,657.2,80.0,16.86,243,83.0,208.9,,N-01,standstill idle warm ECT 81-83,baseline idle characterisation,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,81791.51,22:43:11.51,649.5,52.0,10.29,264,83.0,218.9,,N-01,standstill idle warm ECT 81-83,baseline idle characterisation,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,81801.51,22:43:21.51,652.2,34.0,7.64,268,83.0,228.9,,N-01,standstill idle warm ECT 81-83,baseline idle characterisation,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,81811.51,22:43:31.51,653.6,33.0,5.62,256,83.0,238.9,,N-01,standstill idle warm ECT 81-83,baseline idle characterisation,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,81821.51,22:43:41.51,651.1,35.0,7.85,239,83.0,248.9,,N-01,standstill idle warm ECT 81-83,baseline idle characterisation,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,81831.51,22:43:51.51,653.3,40.0,7.62,247,83.0,258.9,,N-01,standstill idle warm ECT 81-83,baseline idle characterisation,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,81841.51,22:44:01.51,652.3,37.0,9.04,230,83.0,268.9,,N-01,standstill idle warm ECT 81-83,baseline idle characterisation,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,81851.51,22:44:11.51,646.8,42.0,8.74,229,83.0,278.9,,N-01,standstill idle warm ECT 81-83,baseline idle characterisation,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,81861.51,22:44:21.51,652.8,30.0,6.34,208,83.0,288.9,,N-01,standstill idle warm ECT 81-83,baseline idle characterisation,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,81871.51,22:44:31.51,650.1,31.0,7.24,220,83.0,298.9,,N-01,standstill idle warm ECT 81-83,baseline idle characterisation,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,81881.51,22:44:41.51,654.7,36.0,8.4,248,,308.9,,N-01,standstill idle warm ECT 81-83,baseline idle characterisation,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,81891.51,22:44:51.51,646.8,74.0,14.21,246,,318.9,,N-01,standstill idle warm ECT 81-83,baseline idle characterisation,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,81901.51,22:45:01.51,654.0,38.0,6.78,214,,328.9,,N-01,standstill idle warm ECT 81-83,baseline idle characterisation,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,81911.51,22:45:11.51,650.4,37.0,7.08,208,,338.9,,N-01,standstill idle warm ECT 81-83,baseline idle characterisation,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,81921.51,22:45:21.51,661.1,180.0,33.6,197,,348.9,,N-01,standstill idle warm ECT 81-83,baseline idle characterisation,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,81931.51,22:45:31.51,658.3,58.0,14.03,252,,358.9,,N-01,standstill idle warm ECT 81-83,baseline idle characterisation,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,81941.51,22:45:41.51,659.5,65.0,8.86,311,,368.9,,N-01,standstill idle warm ECT 81-83,baseline idle characterisation,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,81951.51,22:45:51.51,657.9,82.0,18.42,312,,378.9,,N-01,standstill idle warm ECT 81-83,baseline idle characterisation,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,81961.51,22:46:01.51,658.5,97.0,18.06,319,,388.9,,N-01,standstill idle warm ECT 81-83,baseline idle characterisation,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,81971.51,22:46:11.51,651.2,63.0,10.55,310,,398.9,,N-01,standstill idle warm ECT 81-83,baseline idle characterisation,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,81981.51,22:46:21.51,655.6,80.0,15.38,312,,408.9,,N-01,standstill idle warm ECT 81-83,baseline idle characterisation,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,81991.51,22:46:31.51,654.8,73.0,14.16,309,,418.9,,N-01,standstill idle warm ECT 81-83,baseline idle characterisation,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,82001.51,22:46:41.51,657.0,88.0,16.59,310,,428.9,,N-01,standstill idle warm ECT 81-83,baseline idle characterisation,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,82011.51,22:46:51.51,649.9,62.0,12.02,288,,438.9,,N-01,standstill idle warm ECT 81-83,baseline idle characterisation,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,82021.51,22:47:01.51,657.0,74.0,14.45,234,,448.9,,N-01,standstill idle warm ECT 81-83,baseline idle characterisation,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,82031.51,22:47:11.51,656.6,71.0,14.12,256,,458.9,,N-01,standstill idle warm ECT 81-83,baseline idle characterisation,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,82041.51,22:47:21.51,648.7,56.0,10.68,293,,468.9,,N-01,standstill idle warm ECT 81-83,baseline idle characterisation,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,82051.51,22:47:31.51,653.5,80.0,16.26,292,,478.9,,N-01,standstill idle warm ECT 81-83,baseline idle characterisation,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,82061.51,22:47:41.51,657.0,82.0,12.62,284,,488.9,,N-01,standstill idle warm ECT 81-83,baseline idle characterisation,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,82071.51,22:47:51.51,649.5,57.0,10.57,288,,498.9,,N-01,standstill idle warm ECT 81-83,baseline idle characterisation,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,82081.51,22:48:01.51,653.1,82.0,16.08,310,,508.9,,N-01,standstill idle warm ECT 81-83,baseline idle characterisation,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,82091.51,22:48:11.51,655.1,92.0,16.75,312,,518.9,,N-01,standstill idle warm ECT 81-83,baseline idle characterisation,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,82101.51,22:48:21.51,648.3,64.0,10.67,317,,528.9,,N-01,standstill idle warm ECT 81-83,baseline idle characterisation,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,82111.51,22:48:31.51,652.5,78.0,14.37,313,,538.9,,N-01,standstill idle warm ECT 81-83,baseline idle characterisation,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,82121.51,22:48:41.51,656.4,76.0,14.67,316,,548.9,,N-01,standstill idle warm ECT 81-83,baseline idle characterisation,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,82131.51,22:48:51.51,650.3,70.0,14.23,308,,558.9,,N-01,standstill idle warm ECT 81-83,baseline idle characterisation,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,82141.51,22:49:01.51,653.1,78.0,16.13,310,,568.9,,N-01,standstill idle warm ECT 81-83,baseline idle characterisation,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,82151.51,22:49:11.51,654.8,64.0,9.64,306,,578.9,,N-01,standstill idle warm ECT 81-83,baseline idle characterisation,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,82161.51,22:49:21.51,655.5,80.0,16.53,302,,588.9,,N-01,standstill idle warm ECT 81-83,baseline idle characterisation,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,82171.51,22:49:31.51,653.9,68.0,15.26,317,,598.9,,N-01,standstill idle warm ECT 81-83,baseline idle characterisation,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,82181.51,22:49:41.51,654.5,59.0,11.02,321,,608.9,,N-01,standstill idle warm ECT 81-83,baseline idle characterisation,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,82191.51,22:49:51.51,652.3,81.0,15.26,302,,618.9,,N-01,standstill idle warm ECT 81-83,baseline idle characterisation,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,82201.51,22:50:01.51,656.6,63.0,12.74,309,,628.9,,N-01,standstill idle warm ECT 81-83,baseline idle characterisation,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,82211.51,22:50:11.51,655.1,54.0,8.75,310,,638.9,,N-01,standstill idle warm ECT 81-83,baseline idle characterisation,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,82221.51,22:50:21.51,654.1,80.0,16.05,310,,648.9,,N-01,standstill idle warm ECT 81-83,baseline idle characterisation,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,82231.51,22:50:31.51,652.9,64.0,10.82,79,82.0,0.3,,N-01,standstill idle warm ECT 81-83,baseline idle characterisation,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,82461.51,22:54:21.51,652.7,52.0,10.96,192,82.0,1.7,0.0,N-01,standstill idle warm ECT 81-83,baseline idle characterisation,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,82471.51,22:54:31.51,652.3,69.0,13.16,291,82.0,11.7,0.0,N-01,standstill idle warm ECT 81-83,baseline idle characterisation,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,82481.51,22:54:41.51,653.3,46.0,7.87,312,82.0,21.7,0.0,N-01,standstill idle warm ECT 81-83,baseline idle characterisation,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,82491.51,22:54:51.51,656.0,79.0,14.26,299,82.0,31.7,0.0,N-01,standstill idle warm ECT 81-83,baseline idle characterisation,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,82501.51,22:55:01.51,651.3,67.0,14.15,291,82.0,41.7,0.0,N-01,standstill idle warm ECT 81-83,baseline idle characterisation,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,82511.51,22:55:11.51,653.1,55.0,9.21,298,82.0,51.7,0.0,N-01,standstill idle warm ECT 81-83,baseline idle characterisation,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,82521.51,22:55:21.51,653.7,70.0,14.51,321,82.0,61.7,0.0,N-01,standstill idle warm ECT 81-83,baseline idle characterisation,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,82531.51,22:55:31.51,656.1,70.0,14.6,323,82.0,71.7,0.0,N-01,standstill idle warm ECT 81-83,baseline idle characterisation,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,82541.51,22:55:41.51,650.6,60.0,12.41,318,82.0,81.7,0.0,N-01,standstill idle warm ECT 81-83,baseline idle characterisation,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,82551.51,22:55:51.51,652.0,78.0,16.5,300,82.0,91.7,0.0,N-01,standstill idle warm ECT 81-83,baseline idle characterisation,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,82561.51,22:56:01.51,651.9,54.0,10.83,333,82.0,101.7,0.0,N-01,standstill idle warm ECT 81-83,baseline idle characterisation,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,82571.51,22:56:11.51,656.2,79.0,17.23,332,82.0,111.7,0.0,N-01,standstill idle warm ECT 81-83,baseline idle characterisation,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,82581.51,22:56:21.51,651.4,72.0,14.43,330,82.0,121.7,,N-01,standstill idle warm ECT 81-83,baseline idle characterisation,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,82591.51,22:56:31.51,652.7,58.0,11.13,322,82.0,131.7,,N-01,standstill idle warm ECT 81-83,baseline idle characterisation,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,82601.51,22:56:41.51,653.6,75.0,15.98,330,82.0,141.7,,N-01,standstill idle warm ECT 81-83,baseline idle characterisation,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,82611.51,22:56:51.51,655.1,69.0,13.92,328,82.0,151.7,,N-01,standstill idle warm ECT 81-83,baseline idle characterisation,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,82621.51,22:57:01.51,650.9,65.0,12.9,332,82.0,161.7,,N-01,standstill idle warm ECT 81-83,baseline idle characterisation,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,82631.51,22:57:11.51,652.3,74.0,13.63,326,82.0,171.7,,N-01,standstill idle warm ECT 81-83,baseline idle characterisation,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,82641.51,22:57:21.51,650.8,59.0,12.17,328,82.0,181.7,,N-01,standstill idle warm ECT 81-83,baseline idle characterisation,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,82651.51,22:57:31.51,655.5,75.0,14.37,330,82.0,191.7,,N-01,standstill idle warm ECT 81-83,baseline idle characterisation,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,82661.51,22:57:41.51,653.8,84.0,16.38,330,82.0,201.7,,N-01,standstill idle warm ECT 81-83,baseline idle characterisation,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,82671.51,22:57:51.51,651.5,60.0,13.3,329,82.0,211.7,,N-01,standstill idle warm ECT 81-83,baseline idle characterisation,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,82681.51,22:58:01.51,653.3,63.0,13.26,332,82.0,221.7,,N-01,standstill idle warm ECT 81-83,baseline idle characterisation,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,82691.51,22:58:11.51,653.0,53.0,12.47,332,82.0,231.7,,N-01,standstill idle warm ECT 81-83,baseline idle characterisation,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,82701.51,22:58:21.51,656.1,74.0,15.5,331,82.0,241.7,,N-01,standstill idle warm ECT 81-83,baseline idle characterisation,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,82711.51,22:58:31.51,650.8,76.0,15.13,333,82.0,251.7,,N-01,standstill idle warm ECT 81-83,baseline idle characterisation,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,82721.51,22:58:41.51,652.9,62.0,11.33,332,82.0,261.7,,N-01,standstill idle warm ECT 81-83,baseline idle characterisation,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,82731.51,22:58:51.51,654.3,80.0,16.96,330,82.0,271.7,,N-01,standstill idle warm ECT 81-83,baseline idle characterisation,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,82741.51,22:59:01.51,653.3,66.0,14.64,330,82.0,281.7,,N-01,standstill idle warm ECT 81-83,baseline idle characterisation,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,82751.51,22:59:11.51,650.5,61.0,13.78,332,82.0,291.7,,N-01,standstill idle warm ECT 81-83,baseline idle characterisation,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,82761.51,22:59:21.51,654.5,69.0,13.46,332,,301.7,,N-01,standstill idle warm ECT 81-83,baseline idle characterisation,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,82771.51,22:59:31.51,652.9,52.0,12.61,333,,311.7,,N-01,standstill idle warm ECT 81-83,baseline idle characterisation,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,82781.51,22:59:41.51,656.0,76.0,17.2,333,,321.7,,N-01,standstill idle warm ECT 81-83,baseline idle characterisation,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,82791.51,22:59:51.51,651.9,80.0,14.38,331,,331.7,,N-01,standstill idle warm ECT 81-83,baseline idle characterisation,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,82801.51,23:00:01.51,652.0,61.0,12.66,311,,341.7,,N-01,standstill idle warm ECT 81-83,baseline idle characterisation,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,82811.51,23:00:11.51,656.2,72.0,16.86,271,,351.7,,N-01,standstill idle warm ECT 81-83,baseline idle characterisation,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,82821.51,23:00:21.51,652.4,59.0,13.54,240,82.0,1.9,,N-01,standstill idle warm ECT 81-83,baseline idle characterisation,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,82831.51,23:00:31.51,653.1,61.0,12.36,257,82.0,11.9,,N-01,standstill idle warm ECT 81-83,baseline idle characterisation,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,82841.51,23:00:41.51,652.7,61.0,13.67,317,82.0,21.9,,N-01,standstill idle warm ECT 81-83,baseline idle characterisation,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,82851.51,23:00:51.51,653.4,57.0,12.37,214,82.0,31.9,,N-01,standstill idle warm ECT 81-83,baseline idle characterisation,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,82861.51,23:01:01.51,657.3,78.0,21.34,134,82.0,41.9,,N-01,standstill idle warm ECT 81-83,baseline idle characterisation,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,82881.51,23:01:21.51,651.2,58.0,12.98,162,81.0,6.5,0.0,N-01,standstill idle warm ECT 81-83,baseline idle characterisation,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,82891.51,23:01:31.51,659.3,80.0,18.35,163,81.0,16.5,0.0,N-01,standstill idle warm ECT 81-83,baseline idle characterisation,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,82901.51,23:01:41.51,657.6,65.0,13.06,164,81.0,26.5,0.0,N-01,standstill idle warm ECT 81-83,baseline idle characterisation,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,82911.51,23:01:51.51,653.8,30.0,7.55,162,81.0,36.5,0.0,N-01,standstill idle warm ECT 81-83,baseline idle characterisation,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,82921.51,23:02:01.51,652.0,42.0,6.37,163,81.0,46.5,0.0,N-01,standstill idle warm ECT 81-83,baseline idle characterisation,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,82931.51,23:02:11.51,651.5,51.0,10.49,163,81.0,56.5,0.0,N-01,standstill idle warm ECT 81-83,baseline idle characterisation,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,82941.51,23:02:21.51,657.0,43.0,9.64,164,81.0,66.5,0.0,N-01,standstill idle warm ECT 81-83,baseline idle characterisation,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,82951.51,23:02:31.51,653.3,35.0,8.58,162,81.0,76.5,0.0,N-01,standstill idle warm ECT 81-83,baseline idle characterisation,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,82961.51,23:02:41.51,646.5,40.0,8.18,163,81.0,86.5,0.0,N-01,standstill idle warm ECT 81-83,baseline idle characterisation,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,82971.51,23:02:51.51,649.9,36.0,7.52,152,81.0,96.5,0.0,N-01,standstill idle warm ECT 81-83,baseline idle characterisation,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,82981.51,23:03:01.51,651.5,41.0,8.45,131,81.0,106.5,0.0,N-01,standstill idle warm ECT 81-83,baseline idle characterisation,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,82991.51,23:03:11.51,653.1,40.0,9.73,159,81.0,116.5,0.0,N-01,standstill idle warm ECT 81-83,baseline idle characterisation,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,83001.51,23:03:21.51,652.3,43.0,9.27,162,81.0,126.5,,N-01,standstill idle warm ECT 81-83,baseline idle characterisation,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,83011.51,23:03:31.51,650.9,49.0,10.28,159,81.0,136.5,,N-01,standstill idle warm ECT 81-83,baseline idle characterisation,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,83021.51,23:03:41.51,651.1,54.0,11.52,162,81.0,146.5,,N-01,standstill idle warm ECT 81-83,baseline idle characterisation,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,83031.51,23:03:51.51,650.4,46.0,11.51,160,81.0,156.5,,N-01,standstill idle warm ECT 81-83,baseline idle characterisation,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,83041.51,23:04:01.51,652.7,41.0,9.77,160,81.0,166.5,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,83051.51,23:04:11.51,652.0,34.0,7.83,160,81.0,176.5,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,83061.51,23:04:21.51,652.3,29.0,6.11,162,81.0,186.5,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,83071.51,23:04:31.51,649.0,35.0,6.98,156,81.0,196.5,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,83081.51,23:04:41.51,652.8,46.0,10.04,158,81.0,206.5,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,83091.51,23:04:51.51,650.2,34.0,7.69,134,81.0,216.5,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,83101.51,23:05:01.51,649.2,23.0,4.9,160,81.0,226.5,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,83111.51,23:05:11.51,651.0,35.0,6.66,162,81.0,236.5,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,83121.51,23:05:21.51,652.2,38.0,9.36,162,81.0,246.5,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,83131.51,23:05:31.51,651.8,39.0,8.55,161,81.0,256.5,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,83141.51,23:05:41.51,652.6,35.0,8.41,166,81.0,266.5,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,83151.51,23:05:51.51,651.6,24.0,5.5,164,81.0,276.5,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,83161.51,23:06:01.51,652.4,43.0,9.67,165,81.0,286.5,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,83171.51,23:06:11.51,651.0,39.0,9.11,165,81.0,296.5,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,83181.51,23:06:21.51,654.5,51.0,12.25,165,,306.5,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,83191.51,23:06:31.51,651.8,38.0,7.77,166,,316.5,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,83201.51,23:06:41.51,651.3,31.0,6.78,165,,326.5,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,83211.51,23:06:51.51,653.4,32.0,5.77,165,,336.5,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,83221.51,23:07:01.51,651.1,33.0,6.58,166,,346.5,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,83231.51,23:07:11.51,653.2,37.0,7.2,165,,356.5,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,83241.51,23:07:21.51,651.6,41.0,9.54,165,,366.5,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,83251.51,23:07:31.51,652.5,55.0,10.97,164,,376.5,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,83261.51,23:07:41.51,650.9,39.0,9.67,165,,386.5,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,83271.51,23:07:51.51,652.0,52.0,12.33,165,,396.5,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,83281.51,23:08:01.51,653.4,51.0,11.32,164,,406.5,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,83291.51,23:08:11.51,653.1,37.0,9.2,164,,416.5,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,83301.51,23:08:21.51,652.3,32.0,7.72,166,,426.5,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,83311.51,23:08:31.51,651.8,23.0,4.99,166,,436.5,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,83321.51,23:08:41.51,651.8,28.0,5.24,165,,446.5,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,83331.51,23:08:51.51,650.4,41.0,7.66,87,,456.5,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,83341.51,23:09:01.51,651.0,23.0,4.57,98,91.0,0.3,0.0,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,83351.51,23:09:11.51,650.7,25.0,4.9,160,91.0,10.3,0.0,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,83361.51,23:09:21.51,654.8,27.0,5.25,160,91.0,20.3,0.0,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,83371.51,23:09:31.51,651.3,30.0,5.95,161,91.0,30.3,0.0,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,83381.51,23:09:41.51,651.8,24.0,5.0,159,91.0,40.3,0.0,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,83391.51,23:09:51.51,652.7,31.0,5.57,160,91.0,50.3,0.0,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,83401.51,23:10:01.51,651.2,25.0,4.96,159,91.0,60.3,0.0,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,83411.51,23:10:11.51,652.1,29.0,5.59,160,91.0,70.3,0.0,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,83421.51,23:10:21.51,653.5,30.0,6.55,159,91.0,80.3,0.0,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,83431.51,23:10:31.51,651.0,24.0,4.82,159,91.0,90.3,0.0,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,83441.51,23:10:41.51,652.2,22.0,4.97,159,91.0,100.3,0.0,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,83451.51,23:10:51.51,651.0,30.0,5.85,162,91.0,110.3,0.0,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,83461.51,23:11:01.51,651.0,24.0,4.74,158,91.0,120.3,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,83471.51,23:11:11.51,651.2,25.0,5.15,160,91.0,130.3,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,83481.51,23:11:21.51,650.4,21.0,4.39,126,91.0,140.3,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,83491.51,23:11:31.51,650.1,33.0,5.68,164,91.0,150.3,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,83501.51,23:11:41.51,651.6,24.0,5.27,154,91.0,160.3,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,83511.51,23:11:51.51,650.8,20.0,4.59,164,91.0,170.3,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,83521.51,23:12:01.51,650.2,24.0,5.09,163,91.0,180.3,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,83531.51,23:12:11.51,650.9,24.0,4.77,166,91.0,190.3,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,83541.51,23:12:21.51,651.8,19.0,4.04,165,91.0,200.3,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,83551.51,23:12:31.51,645.9,66.0,15.82,165,91.0,210.3,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,83561.51,23:12:41.51,649.1,28.0,5.91,166,91.0,220.3,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,83571.51,23:12:51.51,650.2,33.0,5.85,166,91.0,230.3,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,83581.51,23:13:01.51,650.6,24.0,4.84,165,91.0,240.3,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,83591.51,23:13:11.51,650.3,29.0,5.49,164,91.0,250.3,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,83601.51,23:13:21.51,649.7,30.0,6.98,159,91.0,260.3,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,83611.51,23:13:31.51,651.5,32.0,6.41,165,91.0,270.3,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,83621.51,23:13:41.51,652.5,36.0,8.51,165,91.0,280.3,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,83631.51,23:13:51.51,652.0,35.0,8.29,163,91.0,290.3,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,83641.51,23:14:01.51,667.4,85.0,16.75,164,,300.3,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,83651.51,23:14:11.51,654.1,31.0,6.86,161,,310.3,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,83661.51,23:14:21.51,651.0,33.0,6.41,166,,320.3,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,83671.51,23:14:31.51,650.9,31.0,7.71,119,,330.3,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,83681.51,23:14:41.51,646.4,73.0,17.74,159,,340.3,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,83691.51,23:14:51.51,651.7,46.0,10.23,161,,350.3,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,83701.51,23:15:01.51,650.6,30.0,6.24,165,,360.3,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,83711.51,23:15:11.51,651.2,27.0,5.38,165,,370.3,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,83721.51,23:15:21.51,645.4,37.0,8.58,165,,380.3,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,83731.51,23:15:31.51,646.0,33.0,6.61,164,,390.3,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,83741.51,23:15:41.51,649.6,38.0,9.5,165,,400.3,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,83751.51,23:15:51.51,652.4,39.0,10.07,163,,410.3,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,83761.51,23:16:01.51,652.6,42.0,10.51,163,,420.3,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,83771.51,23:16:11.51,652.6,25.0,6.53,137,,430.3,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,83781.51,23:16:21.51,659.2,36.0,9.87,123,,440.3,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,83791.51,23:16:31.51,655.4,29.0,6.81,164,,450.3,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,83801.51,23:16:41.51,652.8,32.0,7.06,143,,460.3,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,83811.51,23:16:51.51,653.2,39.0,9.89,56,,470.3,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,83831.51,23:17:11.51,653.4,41.0,11.09,82,,490.3,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,83841.51,23:17:21.51,652.9,38.0,7.58,130,,500.3,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,83851.51,23:17:31.51,652.7,27.0,6.13,152,,510.3,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,83861.51,23:17:41.51,651.2,33.0,6.89,144,,520.3,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,83871.51,23:17:51.51,651.1,31.0,6.65,147,,530.3,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,83881.51,23:18:01.51,651.3,41.0,8.21,150,,540.3,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,83891.51,23:18:11.51,652.4,35.0,8.72,140,,550.3,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,83901.51,23:18:21.51,652.6,42.0,10.44,148,,560.3,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,83911.51,23:18:31.51,652.0,36.0,6.67,150,,570.3,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,83921.51,23:18:41.51,651.5,23.0,5.02,136,,580.3,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,83931.51,23:18:51.51,657.6,76.0,15.27,154,,590.3,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,83941.51,23:19:01.51,653.8,33.0,7.63,154,,600.3,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,83951.51,23:19:11.51,652.2,34.0,8.15,150,,610.3,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,83961.51,23:19:21.51,651.2,37.0,9.51,152,,620.3,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,83971.51,23:19:31.51,651.6,36.0,8.71,130,,630.3,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,83981.51,23:19:41.51,644.6,44.0,10.06,139,,640.3,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,83991.51,23:19:51.51,650.7,32.0,6.87,151,,650.3,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,84001.51,23:20:01.51,649.0,31.0,6.25,162,,660.3,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,84011.51,23:20:11.51,650.5,38.0,7.31,166,,670.3,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,84021.51,23:20:21.51,651.8,39.0,8.23,165,,680.3,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,84031.51,23:20:31.51,650.2,40.0,10.09,166,,690.3,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,84041.51,23:20:41.51,653.1,44.0,11.27,163,,700.3,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,84051.51,23:20:51.51,651.9,38.0,8.66,165,,710.3,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,84061.51,23:21:01.51,651.8,29.0,6.38,149,,720.3,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,84071.51,23:21:11.51,650.8,26.0,4.47,165,,730.3,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,84081.51,23:21:21.51,650.7,33.0,6.2,153,,740.3,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,84091.51,23:21:31.51,651.2,45.0,8.89,165,,750.3,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,84101.51,23:21:41.51,651.5,48.0,9.3,161,,760.3,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,84111.51,23:21:51.51,652.2,37.0,9.08,89,,770.3,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,84121.51,23:22:01.51,651.7,45.0,10.84,114,,780.3,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,84131.51,23:22:11.51,652.1,46.0,10.43,156,,790.3,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,84141.51,23:22:21.51,651.6,41.0,10.92,154,,800.3,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,84151.51,23:22:31.51,653.2,40.0,9.32,157,,810.3,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,84161.51,23:22:41.51,654.1,47.0,10.94,160,,820.3,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,84171.51,23:22:51.51,652.3,41.0,9.1,155,,830.3,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,84181.51,23:23:01.51,651.7,33.0,8.29,157,,840.3,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,84191.51,23:23:11.51,652.3,39.0,8.39,159,,850.3,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,84201.51,23:23:21.51,658.1,111.0,21.57,153,,860.3,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,84211.51,23:23:31.51,660.0,53.0,11.04,157,,870.3,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,84221.51,23:23:41.51,654.2,44.0,10.67,158,,880.3,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,84231.51,23:23:51.51,649.9,37.0,9.18,113,,890.3,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,84241.51,23:24:01.51,652.4,41.0,8.24,159,,900.3,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,84251.51,23:24:11.51,647.3,63.0,12.56,164,,910.3,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,84261.51,23:24:21.51,647.1,50.0,10.12,165,,920.3,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,84271.51,23:24:31.51,650.0,49.0,11.21,164,,930.3,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,84281.51,23:24:41.51,651.2,45.0,9.93,164,,940.3,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,84291.51,23:24:51.51,652.3,34.0,8.16,166,,950.3,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,84301.51,23:25:01.51,649.6,31.0,5.51,165,,960.3,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,84311.51,23:25:11.51,652.6,31.0,7.46,163,,970.3,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,84321.51,23:25:21.51,650.9,61.0,11.79,166,,980.3,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,84331.51,23:25:31.51,652.6,45.0,10.88,165,,990.3,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,84341.51,23:25:41.51,650.2,39.0,9.06,165,,1000.3,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,84351.51,23:25:51.51,651.2,33.0,5.65,138,,1010.3,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,84771.51,23:32:51.51,650.0,15.0,3.88,51,98.0,0.1,0.0,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,84791.51,23:33:11.51,647.1,32.0,8.2,176,95.0,5.2,0.0,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,84801.51,23:33:21.51,649.8,32.0,7.41,108,93.0,2.1,0.0,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,84851.51,23:34:11.51,651.3,38.0,8.8,158,94.0,6.9,0.0,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,84861.51,23:34:21.51,651.5,34.0,8.98,141,94.0,16.9,0.0,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,84871.51,23:34:31.51,652.5,36.0,7.88,155,94.0,26.9,0.0,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,84881.51,23:34:41.51,650.9,27.0,6.28,143,94.0,36.9,0.0,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,84891.51,23:34:51.51,651.8,27.0,5.28,153,94.0,46.9,0.0,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,84901.51,23:35:01.51,650.6,22.0,4.48,141,94.0,56.9,0.0,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,84911.51,23:35:11.51,649.3,29.0,5.6,145,94.0,66.9,0.0,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,84921.51,23:35:21.51,652.9,26.0,5.99,148,94.0,76.9,0.0,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,84931.51,23:35:31.51,649.5,27.0,5.56,142,94.0,86.9,0.0,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,84941.51,23:35:41.51,652.0,32.0,6.48,94,94.0,96.9,0.0,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,84951.51,23:35:51.51,651.9,30.0,5.98,139,94.0,106.9,0.0,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,84961.51,23:36:01.51,651.8,31.0,7.27,161,94.0,116.9,0.0,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,84971.51,23:36:11.51,650.9,32.0,5.75,165,94.0,126.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,84981.51,23:36:21.51,651.9,34.0,6.55,165,94.0,136.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,84991.51,23:36:31.51,650.6,28.0,4.87,164,94.0,146.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,85001.51,23:36:41.51,658.1,100.0,18.65,165,94.0,156.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,85011.51,23:36:51.51,655.8,38.0,8.44,165,94.0,166.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,85021.51,23:37:01.51,652.4,42.0,9.92,164,94.0,176.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,85031.51,23:37:11.51,649.8,44.0,10.91,164,94.0,186.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,85041.51,23:37:21.51,651.1,43.0,10.27,166,94.0,196.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,85051.51,23:37:31.51,645.3,38.0,9.27,163,94.0,206.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,85061.51,23:37:41.51,651.8,45.0,10.3,153,94.0,216.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,85071.51,23:37:51.51,652.1,38.0,9.63,159,94.0,226.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,85081.51,23:38:01.51,653.3,41.0,8.99,157,94.0,236.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,85091.51,23:38:11.51,651.7,47.0,10.54,155,94.0,246.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,85101.51,23:38:21.51,651.1,36.0,7.9,159,94.0,256.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,85111.51,23:38:31.51,651.7,36.0,6.24,158,94.0,266.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,85121.51,23:38:41.51,652.2,31.0,6.18,161,94.0,276.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,85131.51,23:38:51.51,650.8,33.0,8.07,161,94.0,286.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,85141.51,23:39:01.51,651.2,40.0,8.15,151,94.0,296.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,85151.51,23:39:11.51,650.6,30.0,5.98,149,,306.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,85161.51,23:39:21.51,651.5,35.0,7.76,157,,316.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,85171.51,23:39:31.51,653.9,45.0,11.25,158,,326.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,85181.51,23:39:41.51,651.8,39.0,9.32,158,,336.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,85191.51,23:39:51.51,652.7,41.0,10.91,158,,346.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,85201.51,23:40:01.51,653.2,52.0,10.06,160,,356.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,85211.51,23:40:11.51,652.8,31.0,5.37,158,,366.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,85221.51,23:40:21.51,650.9,28.0,5.2,158,,376.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,85231.51,23:40:31.51,650.7,31.0,5.85,159,,386.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,85241.51,23:40:41.51,651.2,26.0,5.66,158,,396.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,85251.51,23:40:51.51,652.8,34.0,5.81,158,,406.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,85261.51,23:41:01.51,653.1,34.0,7.29,157,,416.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,85271.51,23:41:11.51,659.8,89.0,17.79,152,,426.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,85281.51,23:41:21.51,653.6,29.0,5.79,158,,436.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,85291.51,23:41:31.51,647.6,40.0,9.53,161,,446.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,85301.51,23:41:41.51,647.8,38.0,6.9,157,,456.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,85311.51,23:41:51.51,648.8,25.0,5.44,145,,466.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,85321.51,23:42:01.51,652.1,27.0,5.65,160,,476.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,85331.51,23:42:11.51,650.1,37.0,6.94,111,,486.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,85341.51,23:42:21.51,651.4,25.0,5.59,68,,496.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,85351.51,23:42:31.51,650.5,24.0,4.52,157,,506.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,85361.51,23:42:41.51,650.0,33.0,5.59,135,,516.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,85371.51,23:42:51.51,647.9,32.0,6.73,151,,526.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,85381.51,23:43:01.51,649.3,25.0,5.8,132,,536.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,85391.51,23:43:11.51,651.5,46.0,10.11,130,,546.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,85401.51,23:43:21.51,652.8,44.0,9.59,131,,556.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,85411.51,23:43:31.51,652.6,32.0,7.39,141,,566.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,85421.51,23:43:41.51,651.5,29.0,6.18,134,,576.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,85431.51,23:43:51.51,650.7,33.0,5.97,137,,586.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,85441.51,23:44:01.51,652.8,26.0,5.69,105,,596.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,85451.51,23:44:11.51,651.2,28.0,5.55,131,,606.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,85461.51,23:44:21.51,651.9,28.0,5.99,131,,616.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,85471.51,23:44:31.51,650.4,37.0,7.78,129,,626.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,85481.51,23:44:41.51,651.7,29.0,6.63,147,,636.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,85491.51,23:44:51.51,651.3,33.0,6.96,126,,646.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,85501.51,23:45:01.51,650.8,38.0,7.76,115,,656.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,85511.51,23:45:11.51,655.3,37.0,6.6,126,,666.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,85521.51,23:45:21.51,651.0,37.0,7.15,134,,676.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,85531.51,23:45:31.51,653.2,32.0,6.76,130,,686.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,85541.51,23:45:41.51,651.2,36.0,7.19,133,,696.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,85551.51,23:45:51.51,654.6,85.0,15.71,131,,706.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,85561.51,23:46:01.51,651.6,30.0,5.95,136,,716.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,85571.51,23:46:11.51,645.1,40.0,8.77,127,,726.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,85581.51,23:46:21.51,650.9,40.0,8.95,134,,736.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,85591.51,23:46:31.51,652.8,40.0,9.43,133,,746.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,85601.51,23:46:41.51,654.7,48.0,9.72,150,,756.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,85611.51,23:46:51.51,653.5,39.0,6.74,142,,766.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,85621.51,23:47:01.51,651.4,30.0,5.76,135,,776.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,85631.51,23:47:11.51,648.7,36.0,5.98,138,,786.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,85641.51,23:47:21.51,650.5,27.0,6.03,141,,796.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,85661.51,23:47:41.51,651.2,32.0,6.74,150,,816.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,85671.51,23:47:51.51,652.2,33.0,7.64,157,,826.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,85681.51,23:48:01.51,651.6,45.0,9.55,158,,836.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,85691.51,23:48:11.51,653.6,40.0,10.21,147,,846.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,85701.51,23:48:21.51,651.5,39.0,9.17,155,,856.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,85711.51,23:48:31.51,654.2,45.0,11.52,157,,866.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,85721.51,23:48:41.51,653.7,49.0,9.72,154,,876.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,85731.51,23:48:51.51,653.7,44.0,9.05,156,,886.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,85741.51,23:49:01.51,654.2,50.0,10.15,158,,896.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,85751.51,23:49:11.51,652.6,33.0,8.15,155,,906.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,85761.51,23:49:21.51,651.4,39.0,6.7,153,,916.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,85771.51,23:49:31.51,653.2,49.0,9.25,154,,926.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,85781.51,23:49:41.51,652.5,41.0,9.68,154,,936.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,85791.51,23:49:51.51,652.1,43.0,9.58,158,,946.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,85801.51,23:50:01.51,652.3,44.0,10.87,116,,956.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,85811.51,23:50:11.51,654.5,43.0,9.89,144,,966.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,85821.51,23:50:21.51,650.9,38.0,7.36,159,,976.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,85831.51,23:50:31.51,651.3,48.0,11.32,160,,986.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,85841.51,23:50:41.51,653.3,34.0,6.93,132,,996.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,85851.51,23:50:51.51,654.3,87.0,18.84,72,,1006.9,0.0,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,85861.51,23:51:01.51,655.3,45.0,9.28,160,,1016.9,0.0,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,85871.51,23:51:11.51,652.4,41.0,10.09,150,,1026.9,0.0,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,85881.51,23:51:21.51,653.6,35.0,10.56,155,,1036.9,0.0,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,85891.51,23:51:31.51,652.7,47.0,10.37,157,,1046.9,0.0,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,85901.51,23:51:41.51,649.3,37.0,9.11,144,,1056.9,0.0,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,85911.51,23:51:51.51,647.2,30.0,7.21,120,,1066.9,0.0,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,85921.51,23:52:01.51,648.5,31.0,6.64,86,,1076.9,0.0,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,85931.51,23:52:11.51,650.7,46.0,8.29,135,,1086.9,0.0,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,85941.51,23:52:21.51,649.9,28.0,5.94,145,,1096.9,0.0,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,85951.51,23:52:31.51,652.0,33.0,7.26,148,,1106.9,0.0,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,85961.51,23:52:41.51,652.8,37.0,8.27,148,,1116.9,0.0,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,85971.51,23:52:51.51,651.2,29.0,5.54,147,,1126.9,0.0,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,85981.51,23:53:01.51,650.3,30.0,6.31,159,,1136.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,85991.51,23:53:11.51,652.1,39.0,9.88,160,,1146.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,86001.51,23:53:21.51,652.3,40.0,8.97,161,,1156.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,86011.51,23:53:31.51,652.7,38.0,7.45,162,,1166.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,86021.51,23:53:41.51,650.5,38.0,9.43,133,,1176.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,86031.51,23:53:51.51,653.5,33.0,8.31,68,97.0,0.9,0.0,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,86061.51,23:54:21.51,653.1,33.0,6.87,154,97.0,30.9,0.0,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,86071.51,23:54:31.51,652.6,36.0,6.87,142,97.0,40.9,0.0,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,86081.51,23:54:41.51,650.4,45.0,10.01,150,97.0,50.9,0.0,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,86091.51,23:54:51.51,653.3,58.0,11.43,145,97.0,60.9,0.0,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,86101.51,23:55:01.51,654.4,49.0,9.86,151,97.0,70.9,0.0,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,86111.51,23:55:11.51,652.4,33.0,6.46,152,97.0,80.9,0.0,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,86121.51,23:55:21.51,651.9,35.0,8.25,144,97.0,90.9,0.0,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,86131.51,23:55:31.51,652.0,43.0,9.46,147,97.0,100.9,0.0,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,86141.51,23:55:41.51,652.9,35.0,7.59,124,97.0,110.9,0.0,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,86151.51,23:55:51.51,660.5,100.0,13.09,113,97.0,120.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,86161.51,23:56:01.51,653.2,31.0,5.87,153,97.0,130.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,86171.51,23:56:11.51,641.7,49.0,12.84,147,97.0,140.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,86181.51,23:56:21.51,650.2,44.0,9.68,151,97.0,150.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,86191.51,23:56:31.51,650.1,24.0,4.85,144,97.0,160.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,86201.51,23:56:41.51,656.7,43.0,11.11,149,97.0,170.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,86211.51,23:56:51.51,651.7,38.0,7.81,150,97.0,180.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,86221.51,23:57:01.51,651.0,47.0,9.55,146,97.0,190.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,86231.51,23:57:11.51,650.0,35.0,8.86,111,97.0,200.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,86241.51,23:57:21.51,651.1,53.0,7.46,142,97.0,210.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,86251.51,23:57:31.51,650.6,44.0,11.54,125,97.0,220.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,86261.51,23:57:41.51,654.2,47.0,11.08,154,97.0,230.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,86271.51,23:57:51.51,653.3,41.0,6.93,161,97.0,240.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,86281.51,23:58:01.51,650.4,50.0,7.94,157,97.0,250.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,86291.51,23:58:11.51,651.7,41.0,8.74,155,97.0,260.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,86301.51,23:58:21.51,652.7,24.0,4.69,152,97.0,270.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,86311.51,23:58:31.51,654.1,47.0,10.05,163,97.0,280.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,86321.51,23:58:41.51,656.6,37.0,8.28,161,97.0,290.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,86331.51,23:58:51.51,652.7,35.0,8.51,143,,300.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,86341.51,23:59:01.51,653.8,30.0,5.75,70,,310.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,86351.51,23:59:11.51,650.8,43.0,9.54,155,,320.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,86361.51,23:59:21.51,652.6,55.0,10.66,145,,330.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,86371.51,23:59:31.51,651.8,41.0,8.25,146,,340.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,86381.51,23:59:41.51,651.4,44.0,10.0,148,,350.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,86391.51,23:59:51.51,651.0,28.0,5.57,138,,360.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,86401.51,00:00:01.51,650.0,38.0,8.64,137,,370.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,86411.51,00:00:11.51,651.5,40.0,8.94,151,,380.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,86421.51,00:00:21.51,652.5,41.0,8.93,124,,390.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,86431.51,00:00:31.51,651.7,37.0,8.99,145,,400.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,86441.51,00:00:41.51,652.4,47.0,10.8,158,,410.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,86451.51,00:00:51.51,655.6,79.0,17.05,161,,420.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,86461.51,00:01:01.51,651.4,44.0,8.5,158,,430.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,86471.51,00:01:11.51,650.1,36.0,7.35,164,,440.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,86481.51,00:01:21.51,650.7,49.0,10.47,162,,450.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,86491.51,00:01:31.51,650.6,36.0,7.41,164,,460.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,86501.51,00:01:41.51,648.4,61.0,11.93,163,,470.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,86511.51,00:01:51.51,649.1,38.0,7.77,161,,480.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,86521.51,00:02:01.51,648.9,36.0,8.47,150,,490.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,86531.51,00:02:11.51,651.6,38.0,7.68,162,,500.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,86541.51,00:02:21.51,652.2,41.0,9.05,146,,510.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,86601.51,00:03:21.51,651.9,42.0,8.97,113,,570.9,0.0,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,86611.51,00:03:31.51,651.6,29.0,6.25,158,,580.9,0.0,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,86621.51,00:03:41.51,651.3,59.0,10.65,148,,590.9,0.0,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,86631.51,00:03:51.51,650.5,45.0,8.49,152,,600.9,0.0,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,86641.51,00:04:01.51,651.9,31.0,7.17,148,,610.9,0.0,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,86651.51,00:04:11.51,650.4,47.0,9.2,146,,620.9,0.0,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,86661.51,00:04:21.51,651.4,32.0,5.73,152,,630.9,0.0,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,86671.51,00:04:31.51,652.3,35.0,8.92,152,,640.9,0.0,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,86681.51,00:04:41.51,651.3,31.0,7.23,125,,650.9,0.0,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,86691.51,00:04:51.51,652.8,41.0,7.86,157,,660.9,0.0,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,86701.51,00:05:01.51,651.6,48.0,8.89,163,,670.9,0.0,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,86711.51,00:05:11.51,652.4,34.0,7.58,163,,680.9,0.0,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,86721.51,00:05:21.51,656.4,77.0,17.33,163,,690.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,86731.51,00:05:31.51,654.4,39.0,7.93,159,,700.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,86741.51,00:05:41.51,653.4,48.0,10.92,140,,710.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,86751.51,00:05:51.51,651.9,38.0,7.39,159,,720.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,86761.51,00:06:01.51,650.5,37.0,8.33,159,,730.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,86771.51,00:06:11.51,649.5,44.0,9.26,162,,740.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,86781.51,00:06:21.51,649.4,32.0,6.88,160,,750.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,86791.51,00:06:31.51,650.1,48.0,9.04,161,,760.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,86801.51,00:06:41.51,651.6,42.0,9.17,161,,770.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,86811.51,00:06:51.51,652.2,33.0,6.97,145,,780.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,86821.51,00:07:01.51,651.1,49.0,10.91,147,,790.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,86831.51,00:07:11.51,650.8,30.0,6.5,158,,800.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,86841.51,00:07:21.51,651.6,44.0,9.37,160,,810.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,86851.51,00:07:31.51,653.2,46.0,9.81,161,,820.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,86861.51,00:07:41.51,653.0,37.0,8.56,160,,830.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,86871.51,00:07:51.51,651.6,34.0,7.1,164,,840.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,86881.51,00:08:01.51,649.8,34.0,7.53,160,,850.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,86891.51,00:08:11.51,654.3,36.0,6.99,163,,860.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,86901.51,00:08:21.51,651.3,43.0,8.87,161,,870.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,86911.51,00:08:31.51,652.0,38.0,7.82,164,,880.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,86921.51,00:08:41.51,652.0,47.0,10.15,160,,890.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,86931.51,00:08:51.51,653.7,38.0,8.41,145,,900.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,86941.51,00:09:01.51,651.4,67.0,11.43,163,,910.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,86951.51,00:09:11.51,651.8,33.0,6.8,160,,920.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,86961.51,00:09:21.51,651.0,44.0,10.09,161,,930.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,86971.51,00:09:31.51,651.2,33.0,6.22,161,,940.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,86981.51,00:09:41.51,652.1,37.0,8.82,161,,950.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,86991.51,00:09:51.51,657.0,82.0,17.29,160,,960.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,87001.51,00:10:01.51,656.4,41.0,10.1,150,,970.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,87011.51,00:10:11.51,653.4,41.0,8.68,163,,980.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,87021.51,00:10:21.51,651.4,24.0,5.48,163,,990.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,87031.51,00:10:31.51,651.0,56.0,11.82,162,,1000.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,87041.51,00:10:41.51,649.7,33.0,7.33,161,,1010.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,87051.51,00:10:51.51,647.5,35.0,7.94,164,,1020.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,87061.51,00:11:01.51,650.0,32.0,7.86,89,,1030.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,87081.51,00:11:21.51,651.4,35.0,8.22,74,,1050.9,0.0,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,87091.51,00:11:31.51,652.1,41.0,6.86,158,,1060.9,0.0,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,87101.51,00:11:41.51,649.9,50.0,9.57,154,,1070.9,0.0,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,87111.51,00:11:51.51,645.3,42.0,10.19,155,,1080.9,0.0,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,87121.51,00:12:01.51,650.1,45.0,9.38,149,,1090.9,0.0,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,87131.51,00:12:11.51,651.4,44.0,8.08,157,,1100.9,0.0,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,87141.51,00:12:21.51,651.6,40.0,7.87,155,,1110.9,0.0,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,87151.51,00:12:31.51,652.0,38.0,8.37,159,,1120.9,0.0,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,87161.51,00:12:41.51,651.9,31.0,7.35,151,,1130.9,0.0,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,87171.51,00:12:51.51,653.4,36.0,7.9,157,,1140.9,0.0,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,87181.51,00:13:01.51,651.5,31.0,7.49,154,,1150.9,0.0,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,87191.51,00:13:11.51,652.8,37.0,7.6,153,,1160.9,0.0,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,87201.51,00:13:21.51,651.2,41.0,8.06,133,,1170.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,87211.51,00:13:31.51,653.6,33.0,7.25,157,,1180.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,87221.51,00:13:41.51,654.0,38.0,8.17,159,,1190.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,87231.51,00:13:51.51,651.2,42.0,8.26,154,,1200.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,87241.51,00:14:01.51,654.5,34.0,7.24,103,,1210.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,87251.51,00:14:11.51,652.6,37.0,8.71,156,,1220.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,87261.51,00:14:21.51,663.1,109.0,23.96,152,,1230.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,87271.51,00:14:31.51,660.6,46.0,10.37,155,,1240.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,87281.51,00:14:41.51,653.3,31.0,6.44,158,,1250.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,87291.51,00:14:51.51,651.3,42.0,9.14,153,,1260.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,87301.51,00:15:01.51,652.2,41.0,9.28,154,,1270.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,87311.51,00:15:11.51,642.5,50.0,11.71,138,,1280.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,87321.51,00:15:21.51,642.9,40.0,7.7,161,,1290.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,87331.51,00:15:31.51,647.9,34.0,7.86,160,,1300.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,87341.51,00:15:41.51,651.6,33.0,7.49,159,,1310.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,87351.51,00:15:51.51,650.8,34.0,7.27,161,,1320.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,87361.51,00:16:01.51,652.6,49.0,8.55,162,,1330.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,87371.51,00:16:11.51,653.0,40.0,9.06,138,,1340.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,87391.51,00:16:31.51,653.0,38.0,7.77,115,,1360.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,87401.51,00:16:41.51,652.4,54.0,9.84,158,,1370.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,87411.51,00:16:51.51,652.7,45.0,9.3,133,,1380.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,87421.51,00:17:01.51,648.8,31.0,7.0,108,,1390.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,87431.51,00:17:11.51,653.5,37.0,8.39,147,,1400.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,87441.51,00:17:21.51,650.1,30.0,5.29,141,,1410.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,87451.51,00:17:31.51,652.4,42.0,9.17,146,,1420.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,87461.51,00:17:41.51,652.7,40.0,7.68,153,,1430.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,87471.51,00:17:51.51,652.5,31.0,6.74,120,,1440.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,87481.51,00:18:01.51,652.0,30.0,7.42,157,,1450.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,87491.51,00:18:11.51,652.3,33.0,7.03,164,,1460.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,87501.51,00:18:21.51,652.3,38.0,8.36,163,,1470.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,87511.51,00:18:31.51,652.6,41.0,9.12,163,,1480.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,87521.51,00:18:41.51,660.5,102.0,21.09,165,,1490.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,87531.51,00:18:51.51,655.4,54.0,10.28,163,,1500.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,87541.51,00:19:01.51,651.2,33.0,5.99,165,,1510.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,87551.51,00:19:11.51,650.1,40.0,8.11,164,,1520.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,87561.51,00:19:21.51,650.9,41.0,8.77,164,,1530.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,87571.51,00:19:31.51,656.1,38.0,9.54,163,,1540.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,87581.51,00:19:41.51,652.5,31.0,6.16,165,,1550.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,87591.51,00:19:51.51,651.3,47.0,10.58,164,,1560.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,87601.51,00:20:01.51,651.2,35.0,7.32,164,,1570.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,87611.51,00:20:11.51,651.3,33.0,7.0,163,,1580.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,87621.51,00:20:21.51,652.4,47.0,8.87,165,,1590.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,87631.51,00:20:31.51,646.3,61.0,13.33,155,,1600.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,87641.51,00:20:41.51,647.0,45.0,7.65,155,,1610.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,87651.51,00:20:51.51,649.9,36.0,6.63,165,,1620.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,87661.51,00:21:01.51,653.7,40.0,9.06,164,,1630.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,87671.51,00:21:11.51,651.6,38.0,7.4,160,,1640.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,87681.51,00:21:21.51,651.9,41.0,8.83,164,,1650.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,87691.51,00:21:31.51,652.8,39.0,7.66,165,,1660.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,87701.51,00:21:41.51,650.1,37.0,7.29,162,,1670.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,87711.51,00:21:51.51,652.7,37.0,7.34,165,,1680.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,87721.51,00:22:01.51,652.9,41.0,8.02,165,,1690.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,87731.51,00:22:11.51,654.4,41.0,9.23,163,,1700.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,87741.51,00:22:21.51,654.3,36.0,7.84,164,,1710.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,87751.51,00:22:31.51,652.3,29.0,6.73,161,,1720.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,87761.51,00:22:41.51,653.4,40.0,8.59,158,,1730.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,87771.51,00:22:51.51,650.7,26.0,6.15,119,,1740.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,87791.51,00:23:11.51,653.8,41.0,7.83,150,,1760.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,87801.51,00:23:21.51,658.0,86.0,18.29,156,,1770.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,87811.51,00:23:31.51,658.1,60.0,13.08,157,,1780.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,87821.51,00:23:41.51,653.8,40.0,7.73,153,,1790.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,87831.51,00:23:51.51,652.6,37.0,8.51,156,,1800.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,87841.51,00:24:01.51,650.3,38.0,8.74,152,,1810.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,87851.51,00:24:11.51,650.8,53.0,11.16,157,,1820.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,87861.51,00:24:21.51,649.4,25.0,5.89,157,,1830.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,87871.51,00:24:31.51,650.5,37.0,7.84,155,,1840.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,87881.51,00:24:41.51,646.3,30.0,5.79,157,,1850.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,87891.51,00:24:51.51,649.7,45.0,9.37,156,,1860.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,87901.51,00:25:01.51,651.7,22.0,4.82,158,,1870.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,87911.51,00:25:11.51,653.1,46.0,8.65,153,,1880.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,87921.51,00:25:21.51,651.4,33.0,7.53,156,,1890.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,87931.51,00:25:31.51,650.2,48.0,8.82,154,,1900.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,87941.51,00:25:41.51,644.2,45.0,9.87,155,,1910.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,87951.51,00:25:51.51,650.5,37.0,6.71,158,,1920.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,87961.51,00:26:01.51,651.7,45.0,9.19,154,,1930.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,87971.51,00:26:11.51,659.9,60.0,12.55,150,,1940.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,87981.51,00:26:21.51,655.9,46.0,9.3,155,,1950.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,87991.51,00:26:31.51,653.8,44.0,9.48,158,,1960.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,88001.51,00:26:41.51,658.6,42.0,9.74,154,,1970.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,88011.51,00:26:51.51,652.4,36.0,7.35,147,,1980.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,88021.51,00:27:01.51,652.4,27.0,6.45,155,,1990.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,88031.51,00:27:11.51,651.2,44.0,10.4,146,,2000.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,88041.51,00:27:21.51,646.9,31.0,7.71,144,,2010.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,88051.51,00:27:31.51,648.3,28.0,6.11,155,,2020.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,88061.51,00:27:41.51,653.6,51.0,11.21,155,,2030.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,88071.51,00:27:51.51,654.3,40.0,8.0,157,,2040.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,88081.51,00:28:01.51,656.4,91.0,18.23,159,,2050.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,88091.51,00:28:11.51,648.4,49.0,11.91,147,,2060.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,88101.51,00:28:21.51,651.5,49.0,7.93,154,,2070.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,88111.51,00:28:31.51,644.0,38.0,7.53,147,,2080.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,88121.51,00:28:41.51,651.6,40.0,9.14,147,,2090.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,88131.51,00:28:51.51,655.2,40.0,8.06,151,,2100.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,88141.51,00:29:01.51,654.7,43.0,9.82,108,,2110.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,88151.51,00:29:11.51,652.2,41.0,9.32,154,,2120.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,88161.51,00:29:21.51,650.8,34.0,6.17,160,,2130.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,88171.51,00:29:31.51,652.0,48.0,9.3,161,,2140.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,88181.51,00:29:41.51,650.7,38.0,7.48,159,,2150.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,88191.51,00:29:51.51,652.8,43.0,9.11,160,,2160.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,88201.51,00:30:01.51,644.0,37.0,9.6,156,,2170.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,88211.51,00:30:11.51,648.4,36.0,7.02,158,,2180.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,88221.51,00:30:21.51,651.9,46.0,8.74,161,,2190.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,88231.51,00:30:31.51,652.5,37.0,6.89,161,,2200.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,88241.51,00:30:41.51,651.3,43.0,7.73,161,,2210.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,88251.51,00:30:51.51,651.4,31.0,5.58,162,,2220.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,88261.51,00:31:01.51,651.8,51.0,8.58,160,,2230.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,88271.51,00:31:11.51,652.3,44.0,9.58,158,,2240.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,88281.51,00:31:21.51,650.3,49.0,7.84,160,,2250.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,88291.51,00:31:31.51,652.1,29.0,6.19,162,,2260.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,88301.51,00:31:41.51,652.5,50.0,9.87,162,,2270.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,88311.51,00:31:51.51,651.8,45.0,8.57,162,,2280.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,88321.51,00:32:01.51,651.2,33.0,6.96,160,,2290.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,88331.51,00:32:11.51,649.6,28.0,6.49,161,,2300.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,88341.51,00:32:21.51,652.7,37.0,8.41,162,,2310.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,88351.51,00:32:31.51,651.9,37.0,7.72,162,,2320.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,88361.51,00:32:41.51,650.9,36.0,7.58,160,,2330.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,88371.51,00:32:51.51,664.7,82.0,18.66,160,,2340.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,88381.51,00:33:01.51,661.1,39.0,8.84,161,,2350.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,88391.51,00:33:11.51,652.7,45.0,9.14,160,,2360.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,88401.51,00:33:21.51,651.6,28.0,6.45,159,,2370.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,88411.51,00:33:31.51,650.1,31.0,6.91,160,,2380.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,88421.51,00:33:41.51,649.5,50.0,10.42,162,,2390.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,88431.51,00:33:51.51,649.6,29.0,6.32,161,,2400.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,88441.51,00:34:01.51,649.3,30.0,7.35,162,,2410.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,88451.51,00:34:11.51,654.1,37.0,9.27,162,,2420.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,88461.51,00:34:21.51,651.8,35.0,7.48,163,,2430.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,88471.51,00:34:31.51,651.4,31.0,7.36,164,,2440.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,88481.51,00:34:41.51,650.7,36.0,6.44,163,,2450.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,88491.51,00:34:51.51,651.7,44.0,8.14,163,,2460.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,88501.51,00:35:01.51,650.9,38.0,8.48,164,,2470.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,88511.51,00:35:11.51,650.7,40.0,6.23,163,,2480.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,88521.51,00:35:21.51,652.2,33.0,6.11,164,,2490.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,88531.51,00:35:31.51,649.8,45.0,8.29,155,,2500.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,89091.51,00:44:51.51,652.5,33.0,9.68,96,,3060.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,89101.51,00:45:01.51,653.5,39.0,7.02,89,,3070.9,0.0,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,89111.51,00:45:11.51,651.1,40.0,9.19,135,,3080.9,0.0,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,89121.51,00:45:21.51,651.6,33.0,7.86,117,,3090.9,0.0,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,89131.51,00:45:31.51,652.5,41.0,7.96,150,,3100.9,0.0,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,89141.51,00:45:41.51,653.1,31.0,6.65,151,,3110.9,0.0,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,89151.51,00:45:51.51,649.6,49.0,9.73,148,,3120.9,0.0,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,89161.51,00:46:01.51,652.4,42.0,9.83,146,,3130.9,0.0,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,89171.51,00:46:11.51,652.1,50.0,8.85,158,,3140.9,0.0,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,89181.51,00:46:21.51,650.7,29.0,6.77,155,,3150.9,0.0,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,89191.51,00:46:31.51,653.5,46.0,10.25,156,,3160.9,0.0,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,89201.51,00:46:41.51,651.5,40.0,8.8,155,,3170.9,0.0,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,89211.51,00:46:51.51,651.5,29.0,6.35,156,,3180.9,0.0,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,89221.51,00:47:01.51,651.5,32.0,7.14,153,,3190.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,89231.51,00:47:11.51,651.3,42.0,10.23,153,,3200.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,89241.51,00:47:21.51,651.1,30.0,7.78,158,,3210.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,89251.51,00:47:31.51,648.7,28.0,6.27,120,,3220.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,89261.51,00:47:41.51,651.2,39.0,8.38,156,,3230.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,89271.51,00:47:51.51,652.4,47.0,10.75,145,,3240.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,89281.51,00:48:01.51,653.9,41.0,9.62,164,,3250.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,89291.51,00:48:11.51,652.9,45.0,10.39,162,,3260.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,89301.51,00:48:21.51,659.2,106.0,19.89,162,,3270.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,89311.51,00:48:31.51,655.8,40.0,8.11,99,,3280.9,,N-02,standstill idle warm ECT 91-98,continued idle,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,90321.51,01:05:21.51,651.8,29.0,7.3,54,,515.2,0.0,,,,
+2026-09-04 22-23-38.zip,park_neutral,92021.51,01:33:41.51,651.6,31.0,8.28,80,,2215.2,0.0,N-06,idle then ~2000 rpm then idle,both banks confirmed,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,92031.51,01:33:51.51,651.5,33.0,7.86,50,,2225.2,0.0,N-06,idle then ~2000 rpm then idle,both banks confirmed,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,92041.51,01:34:01.51,652.1,25.0,5.97,115,,2235.2,0.0,N-06,idle then ~2000 rpm then idle,both banks confirmed,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,92051.51,01:34:11.51,650.5,30.0,5.92,162,,2245.2,0.0,N-06,idle then ~2000 rpm then idle,both banks confirmed,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,92061.51,01:34:21.51,651.1,30.0,6.59,161,,2255.2,0.0,N-06,idle then ~2000 rpm then idle,both banks confirmed,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,92071.51,01:34:31.51,651.5,32.0,6.97,162,,2265.2,0.0,N-06,idle then ~2000 rpm then idle,both banks confirmed,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,92081.51,01:34:41.51,652.6,35.0,7.47,160,,2275.2,0.0,N-06,idle then ~2000 rpm then idle,both banks confirmed,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,92091.51,01:34:51.51,650.3,28.0,5.92,160,,2285.2,0.0,N-06,idle then ~2000 rpm then idle,both banks confirmed,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,92101.51,01:35:01.51,650.7,31.0,6.57,164,,2295.2,0.0,N-06,idle then ~2000 rpm then idle,both banks confirmed,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,92111.51,01:35:11.51,652.0,30.0,6.76,154,,2305.2,0.0,N-06,idle then ~2000 rpm then idle,both banks confirmed,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,92121.51,01:35:21.51,651.6,39.0,8.69,161,,2315.2,0.0,N-06,idle then ~2000 rpm then idle,both banks confirmed,pre_purge_valve
+2026-09-04 22-23-38.zip,park_neutral,92131.51,01:35:31.51,651.9,32.0,7.67,160,,2325.2,0.0,N-06,idle then ~2000 rpm then idle,both banks confirmed,pre_purge_valve
+20260905_030915.csv.gz,in_gear,12182.86,03:23:02.86,549.3,18.0,4.96,69,99.0,246.2,0.0,N-09,standstill in gear,Park versus Drive,post_purge_valve
+20260905_030915.csv.gz,in_gear,12192.86,03:23:12.86,551.2,20.0,4.13,144,99.0,256.2,0.0,N-09,standstill in gear,Park versus Drive,post_purge_valve
+20260905_030915.csv.gz,in_gear,12202.86,03:23:22.86,550.3,15.0,3.45,149,99.0,266.2,0.0,N-09,standstill in gear,Park versus Drive,post_purge_valve
+20260905_030915.csv.gz,in_gear,12212.86,03:23:32.86,550.4,12.0,2.51,155,99.0,276.2,0.0,N-09,standstill in gear,Park versus Drive,post_purge_valve
+20260905_030915.csv.gz,in_gear,12222.86,03:23:42.86,549.9,12.0,2.38,155,99.0,286.2,0.0,N-09,standstill in gear,Park versus Drive,post_purge_valve
+20260905_030915.csv.gz,in_gear,12232.86,03:23:52.86,549.7,13.0,2.9,152,99.0,296.2,0.0,N-09,standstill in gear,Park versus Drive,post_purge_valve
+20260905_030915.csv.gz,in_gear,12242.86,03:24:02.86,550.2,16.0,3.8,151,,306.2,0.0,N-09,standstill in gear,Park versus Drive,post_purge_valve
+20260905_030915.csv.gz,in_gear,12252.86,03:24:12.86,551.0,44.0,8.29,154,,316.2,0.0,N-09,standstill in gear,Park versus Drive,post_purge_valve
+20260905_030915.csv.gz,in_gear,12262.86,03:24:22.86,548.9,18.0,3.63,130,,326.2,0.0,N-09,standstill in gear,Park versus Drive,post_purge_valve
+20260905_030915.csv.gz,in_gear,12272.86,03:24:32.86,550.0,15.0,3.08,154,,336.2,0.0,N-09,standstill in gear,Park versus Drive,post_purge_valve
+20260905_030915.csv.gz,in_gear,12282.86,03:24:42.86,595.5,178.0,60.2,152,,346.2,0.0,,,,
+20260905_030915.csv.gz,park_neutral,12292.86,03:24:52.86,647.0,37.0,8.59,142,,356.2,0.0,N-10,standstill in Park,Park versus Drive,post_purge_valve
+20260905_030915.csv.gz,park_neutral,12302.86,03:25:02.86,652.7,31.0,7.56,145,,366.2,0.0,N-10,standstill in Park,Park versus Drive,post_purge_valve
+20260905_030915.csv.gz,park_neutral,12312.86,03:25:12.86,656.9,44.0,9.88,149,,376.2,,N-10,standstill in Park,Park versus Drive,post_purge_valve
+20260905_030915.csv.gz,park_neutral,12322.86,03:25:22.86,653.2,42.0,10.57,152,,386.2,,N-10,standstill in Park,Park versus Drive,post_purge_valve
+20260905_030915.csv.gz,park_neutral,12332.86,03:25:32.86,651.3,53.0,12.41,145,,396.2,,N-10,standstill in Park,Park versus Drive,post_purge_valve
+20260905_030915.csv.gz,park_neutral,12342.86,03:25:42.86,651.8,52.0,11.54,148,,406.2,,N-10,standstill in Park,Park versus Drive,post_purge_valve
+20260905_030915.csv.gz,park_neutral,12352.86,03:25:52.86,651.5,41.0,9.88,148,,416.2,,N-10,standstill in Park,Park versus Drive,post_purge_valve
+20260905_030915.csv.gz,park_neutral,12362.86,03:26:02.86,652.2,34.0,7.38,130,,426.2,,N-10,standstill in Park,Park versus Drive,post_purge_valve
+20260905_030915.csv.gz,park_neutral,12372.86,03:26:12.86,650.8,33.0,7.06,158,,436.2,,N-10,standstill in Park,Park versus Drive,post_purge_valve
+20260905_030915.csv.gz,park_neutral,12382.86,03:26:22.86,648.9,41.0,7.59,163,,446.2,,N-10,standstill in Park,Park versus Drive,post_purge_valve
+20260905_030915.csv.gz,park_neutral,12392.86,03:26:32.86,649.4,31.0,7.24,160,,456.2,,N-10,standstill in Park,Park versus Drive,post_purge_valve
+20260905_030915.csv.gz,park_neutral,12402.86,03:26:42.86,652.6,41.0,9.97,162,,466.2,,N-10,standstill in Park,Park versus Drive,post_purge_valve
+20260905_030915.csv.gz,park_neutral,12412.86,03:26:52.86,654.1,44.0,10.99,161,,476.2,,N-10,standstill in Park,Park versus Drive,post_purge_valve
+20260905_030915.csv.gz,park_neutral,12422.86,03:27:02.86,653.5,43.0,9.96,162,,486.2,,N-10,standstill in Park,Park versus Drive,post_purge_valve
+20260905_030915.csv.gz,park_neutral,12432.86,03:27:12.86,654.6,42.0,9.06,161,,496.2,,N-10,standstill in Park,Park versus Drive,post_purge_valve
+20260905_030915.csv.gz,park_neutral,12442.86,03:27:22.86,651.7,31.0,5.82,162,,506.2,,N-10,standstill in Park,Park versus Drive,post_purge_valve
+20260905_030915.csv.gz,park_neutral,12452.86,03:27:32.86,650.5,27.0,5.36,161,,516.2,,N-10,standstill in Park,Park versus Drive,post_purge_valve
+20260905_030915.csv.gz,park_neutral,12462.86,03:27:42.86,650.3,41.0,8.43,160,,526.2,,N-10,standstill in Park,Park versus Drive,post_purge_valve
+20260905_030915.csv.gz,park_neutral,12472.86,03:27:52.86,654.7,44.0,10.02,161,,536.2,,N-10,standstill in Park,Park versus Drive,post_purge_valve
+20260905_030915.csv.gz,park_neutral,12482.86,03:28:02.86,657.6,86.0,17.04,161,,546.2,,N-10,standstill in Park,Park versus Drive,post_purge_valve
+20260905_030915.csv.gz,park_neutral,12492.86,03:28:12.86,654.1,46.0,11.62,161,,556.2,,N-10,standstill in Park,Park versus Drive,post_purge_valve
+20260905_030915.csv.gz,park_neutral,12502.86,03:28:22.86,652.0,49.0,10.49,160,,566.2,,N-10,standstill in Park,Park versus Drive,post_purge_valve
+20260905_030915.csv.gz,park_neutral,12512.86,03:28:32.86,651.4,26.0,5.99,162,,576.2,,N-10,standstill in Park,Park versus Drive,post_purge_valve
+20260905_030915.csv.gz,park_neutral,12522.86,03:28:42.86,651.2,29.0,4.88,161,,586.2,,N-10,standstill in Park,Park versus Drive,post_purge_valve
+20260905_030915.csv.gz,park_neutral,12532.86,03:28:52.86,647.5,44.0,9.3,162,,596.2,,N-10,standstill in Park,Park versus Drive,post_purge_valve
+20260905_030915.csv.gz,park_neutral,12542.86,03:29:02.86,648.6,40.0,9.47,159,,606.2,,N-10,standstill in Park,Park versus Drive,post_purge_valve
+20260905_030915.csv.gz,park_neutral,12552.86,03:29:12.86,650.8,42.0,10.53,161,,616.2,,N-10,standstill in Park,Park versus Drive,post_purge_valve
+20260905_030915.csv.gz,park_neutral,12562.86,03:29:22.86,653.6,52.0,12.39,160,,626.2,,N-10,standstill in Park,Park versus Drive,post_purge_valve
+20260905_030915.csv.gz,park_neutral,12572.86,03:29:32.86,654.0,38.0,9.95,160,,636.2,,N-10,standstill in Park,Park versus Drive,post_purge_valve
+20260905_030915.csv.gz,park_neutral,12582.86,03:29:42.86,651.8,39.0,8.91,158,,646.2,,N-10,standstill in Park,Park versus Drive,post_purge_valve
+20260905_030915.csv.gz,park_neutral,12592.86,03:29:52.86,651.5,25.0,5.77,162,,656.2,,N-10,standstill in Park,Park versus Drive,post_purge_valve
+20260905_030915.csv.gz,park_neutral,12602.86,03:30:02.86,650.9,28.0,5.65,156,,666.2,,N-10,standstill in Park,Park versus Drive,post_purge_valve
+20260905_034051.csv.gz,park_neutral,13606.64,03:46:46.64,648.7,68.0,13.1,55,,,,N-11,driving,"deceleration fuel cut, then wide open throttle",post_purge_valve
+20260905_034051.csv.gz,in_gear,14506.64,04:01:46.64,587.9,94.0,26.33,83,,,,N-11,driving,"deceleration fuel cut, then wide open throttle",post_purge_valve
+20260905_034051.csv.gz,park_neutral,14516.64,04:01:56.64,668.7,482.0,126.23,132,,,,N-11,driving,"deceleration fuel cut, then wide open throttle",post_purge_valve
+20260905_041723.csv.gz,ambiguous,15507.0,04:18:27.00,611.4,61.0,8.73,59,84.0,11.9,0.0,N-12,driving then returning to standstill,after-drive reads,post_purge_valve
+20260905_041723.csv.gz,ambiguous,15517.0,04:18:37.00,610.6,41.0,7.49,91,84.0,1.4,0.0,N-12,driving then returning to standstill,after-drive reads,post_purge_valve
+20260905_041723.csv.gz,ambiguous,15527.0,04:18:47.00,606.4,53.0,7.29,79,84.0,11.4,0.0,N-12,driving then returning to standstill,after-drive reads,post_purge_valve
+20260905_041723.csv.gz,park_neutral,15877.0,04:24:37.00,641.1,402.0,37.72,159,,309.5,,N-12,driving then returning to standstill,after-drive reads,post_purge_valve
+20260905_041723.csv.gz,park_neutral,15887.0,04:24:47.00,664.8,429.0,81.49,161,,319.5,,N-12,driving then returning to standstill,after-drive reads,post_purge_valve
+20260905_041723.csv.gz,park_neutral,15967.0,04:26:07.00,746.0,439.0,134.69,156,,399.5,,N-12,driving then returning to standstill,after-drive reads,post_purge_valve
+20260905_041723.csv.gz,park_neutral,15977.0,04:26:17.00,651.1,144.0,30.53,158,,409.5,,N-13,standstill idle warm,"long idle - trims, purge, commanded air/fuel",post_purge_valve
+20260905_041723.csv.gz,park_neutral,15987.0,04:26:27.00,669.6,135.0,24.49,158,,419.5,,N-13,standstill idle warm,"long idle - trims, purge, commanded air/fuel",post_purge_valve
+20260905_041723.csv.gz,park_neutral,15997.0,04:26:37.00,657.9,70.0,14.51,153,,429.5,,N-13,standstill idle warm,"long idle - trims, purge, commanded air/fuel",post_purge_valve
+20260905_041723.csv.gz,park_neutral,16007.0,04:26:47.00,660.0,48.0,11.93,155,,439.5,,N-13,standstill idle warm,"long idle - trims, purge, commanded air/fuel",post_purge_valve
+20260905_041723.csv.gz,park_neutral,16017.0,04:26:57.00,656.0,56.0,13.8,156,,449.5,,N-13,standstill idle warm,"long idle - trims, purge, commanded air/fuel",post_purge_valve
+20260905_041723.csv.gz,park_neutral,16027.0,04:27:07.00,652.9,49.0,13.15,159,,459.5,,N-13,standstill idle warm,"long idle - trims, purge, commanded air/fuel",post_purge_valve
+20260905_041723.csv.gz,park_neutral,16037.0,04:27:17.00,657.7,54.0,10.04,159,,469.5,,N-13,standstill idle warm,"long idle - trims, purge, commanded air/fuel",post_purge_valve
+20260905_041723.csv.gz,park_neutral,16047.0,04:27:27.00,651.5,52.0,13.61,156,,479.5,,N-13,standstill idle warm,"long idle - trims, purge, commanded air/fuel",post_purge_valve
+20260905_041723.csv.gz,park_neutral,16057.0,04:27:37.00,654.4,52.0,13.16,158,,489.5,,N-13,standstill idle warm,"long idle - trims, purge, commanded air/fuel",post_purge_valve
+20260905_041723.csv.gz,park_neutral,16067.0,04:27:47.00,656.1,62.0,15.68,71,,499.5,,N-13,standstill idle warm,"long idle - trims, purge, commanded air/fuel",post_purge_valve
+20260905_041723.csv.gz,park_neutral,16187.0,04:29:47.00,650.8,57.0,12.86,87,,619.5,0.0,N-13,standstill idle warm,"long idle - trims, purge, commanded air/fuel",post_purge_valve
+20260905_041723.csv.gz,park_neutral,16197.0,04:29:57.00,653.0,58.0,11.33,152,,629.5,0.0,N-13,standstill idle warm,"long idle - trims, purge, commanded air/fuel",post_purge_valve
+20260905_041723.csv.gz,park_neutral,16207.0,04:30:07.00,652.5,56.0,13.19,156,,639.5,0.0,N-13,standstill idle warm,"long idle - trims, purge, commanded air/fuel",post_purge_valve
+20260905_041723.csv.gz,park_neutral,16217.0,04:30:17.00,655.0,49.0,11.46,141,,649.5,0.0,N-13,standstill idle warm,"long idle - trims, purge, commanded air/fuel",post_purge_valve
+20260905_041723.csv.gz,park_neutral,16227.0,04:30:27.00,648.4,55.0,11.57,145,,659.5,0.0,N-13,standstill idle warm,"long idle - trims, purge, commanded air/fuel",post_purge_valve
+20260905_041723.csv.gz,park_neutral,16237.0,04:30:37.00,653.3,56.0,13.32,154,,669.5,0.0,N-13,standstill idle warm,"long idle - trims, purge, commanded air/fuel",post_purge_valve
+20260905_041723.csv.gz,park_neutral,16247.0,04:30:47.00,654.6,67.0,11.77,157,,679.5,0.0,N-13,standstill idle warm,"long idle - trims, purge, commanded air/fuel",post_purge_valve
+20260905_041723.csv.gz,park_neutral,16257.0,04:30:57.00,652.9,61.0,13.28,152,,689.5,0.0,N-13,standstill idle warm,"long idle - trims, purge, commanded air/fuel",post_purge_valve
+20260905_041723.csv.gz,park_neutral,16267.0,04:31:07.00,657.0,46.0,10.16,125,,699.5,0.0,N-13,standstill idle warm,"long idle - trims, purge, commanded air/fuel",post_purge_valve
+20260905_041723.csv.gz,park_neutral,16277.0,04:31:17.00,650.8,61.0,10.97,157,,709.5,0.0,N-13,standstill idle warm,"long idle - trims, purge, commanded air/fuel",post_purge_valve
+20260905_041723.csv.gz,park_neutral,16287.0,04:31:27.00,651.5,47.0,9.89,147,,719.5,0.0,N-13,standstill idle warm,"long idle - trims, purge, commanded air/fuel",post_purge_valve
+20260905_041723.csv.gz,park_neutral,16297.0,04:31:37.00,655.5,51.0,11.36,155,,729.5,0.0,N-13,standstill idle warm,"long idle - trims, purge, commanded air/fuel",post_purge_valve
+20260905_041723.csv.gz,park_neutral,16307.0,04:31:47.00,657.8,60.0,16.61,161,,739.5,,N-13,standstill idle warm,"long idle - trims, purge, commanded air/fuel",post_purge_valve
+20260905_041723.csv.gz,park_neutral,16317.0,04:31:57.00,657.8,56.0,9.26,129,,749.5,,N-13,standstill idle warm,"long idle - trims, purge, commanded air/fuel",post_purge_valve
+20260905_041723.csv.gz,park_neutral,17097.0,04:44:57.00,657.3,56.0,13.34,63,,760.6,0.0,N-13,standstill idle warm,"long idle - trims, purge, commanded air/fuel",post_purge_valve
+20260905_041723.csv.gz,park_neutral,17107.0,04:45:07.00,651.8,53.0,12.54,156,,770.6,0.0,N-13,standstill idle warm,"long idle - trims, purge, commanded air/fuel",post_purge_valve
+20260905_041723.csv.gz,park_neutral,17117.0,04:45:17.00,653.7,74.0,13.28,152,,780.6,0.0,N-13,standstill idle warm,"long idle - trims, purge, commanded air/fuel",post_purge_valve
+20260905_041723.csv.gz,park_neutral,17127.0,04:45:27.00,653.0,51.0,13.06,152,,790.6,0.0,N-13,standstill idle warm,"long idle - trims, purge, commanded air/fuel",post_purge_valve
+20260905_041723.csv.gz,park_neutral,17137.0,04:45:37.00,654.3,49.0,12.85,153,,800.6,0.0,N-13,standstill idle warm,"long idle - trims, purge, commanded air/fuel",post_purge_valve
+20260905_041723.csv.gz,park_neutral,17147.0,04:45:47.00,653.2,72.0,15.96,156,,810.6,0.0,N-13,standstill idle warm,"long idle - trims, purge, commanded air/fuel",post_purge_valve
+20260905_041723.csv.gz,park_neutral,17157.0,04:45:57.00,652.8,50.0,12.38,152,,820.6,0.0,N-13,standstill idle warm,"long idle - trims, purge, commanded air/fuel",post_purge_valve
+20260905_041723.csv.gz,park_neutral,17167.0,04:46:07.00,654.2,58.0,12.12,152,,830.6,0.0,N-13,standstill idle warm,"long idle - trims, purge, commanded air/fuel",post_purge_valve
+20260905_041723.csv.gz,park_neutral,17177.0,04:46:17.00,652.0,55.0,11.44,120,,840.6,0.0,N-13,standstill idle warm,"long idle - trims, purge, commanded air/fuel",post_purge_valve
+20260905_041723.csv.gz,park_neutral,17187.0,04:46:27.00,655.3,47.0,12.25,131,,850.6,0.0,N-13,standstill idle warm,"long idle - trims, purge, commanded air/fuel",post_purge_valve
+20260905_041723.csv.gz,park_neutral,17317.0,04:48:37.00,659.3,51.0,12.8,59,,980.6,0.0,N-13,standstill idle warm,"long idle - trims, purge, commanded air/fuel",post_purge_valve
+20260905_041723.csv.gz,park_neutral,17327.0,04:48:47.00,663.5,65.0,15.48,113,,990.6,0.0,N-13,standstill idle warm,"long idle - trims, purge, commanded air/fuel",post_purge_valve
+20260905_041723.csv.gz,park_neutral,17337.0,04:48:57.00,652.5,50.0,11.71,154,,1000.6,0.0,N-13,standstill idle warm,"long idle - trims, purge, commanded air/fuel",post_purge_valve
+20260905_041723.csv.gz,park_neutral,17347.0,04:49:07.00,654.5,44.0,10.62,126,,1010.6,0.0,N-13,standstill idle warm,"long idle - trims, purge, commanded air/fuel",post_purge_valve
+20260905_041723.csv.gz,park_neutral,17357.0,04:49:17.00,652.4,38.0,8.18,147,,1020.6,0.0,N-13,standstill idle warm,"long idle - trims, purge, commanded air/fuel",post_purge_valve
+20260905_041723.csv.gz,park_neutral,17367.0,04:49:27.00,652.7,37.0,8.98,148,,1030.6,0.0,N-13,standstill idle warm,"long idle - trims, purge, commanded air/fuel",post_purge_valve
+20260905_041723.csv.gz,park_neutral,17377.0,04:49:37.00,652.0,41.0,10.78,130,,1040.6,0.0,N-13,standstill idle warm,"long idle - trims, purge, commanded air/fuel",post_purge_valve
+20260905_041723.csv.gz,park_neutral,17387.0,04:49:47.00,652.8,49.0,10.43,144,,1050.6,0.0,N-13,standstill idle warm,"long idle - trims, purge, commanded air/fuel",post_purge_valve
+20260905_041723.csv.gz,park_neutral,17397.0,04:49:57.00,652.1,53.0,11.54,150,,1060.6,0.0,N-13,standstill idle warm,"long idle - trims, purge, commanded air/fuel",post_purge_valve
+20260905_041723.csv.gz,park_neutral,17407.0,04:50:07.00,652.6,47.0,10.02,147,,1070.6,0.0,N-13,standstill idle warm,"long idle - trims, purge, commanded air/fuel",post_purge_valve
+20260905_041723.csv.gz,park_neutral,17417.0,04:50:17.00,651.3,34.0,7.33,151,,1080.6,0.0,N-13,standstill idle warm,"long idle - trims, purge, commanded air/fuel",post_purge_valve
+20260905_041723.csv.gz,park_neutral,17427.0,04:50:27.00,652.0,51.0,11.04,146,,1090.6,0.0,N-13,standstill idle warm,"long idle - trims, purge, commanded air/fuel",post_purge_valve
+20260905_041723.csv.gz,park_neutral,17437.0,04:50:37.00,652.3,42.0,9.71,139,,1100.6,,N-13,standstill idle warm,"long idle - trims, purge, commanded air/fuel",post_purge_valve
+20260905_041723.csv.gz,park_neutral,17447.0,04:50:47.00,651.4,38.0,9.7,95,,1110.6,,N-13,standstill idle warm,"long idle - trims, purge, commanded air/fuel",post_purge_valve
+20260905_041723.csv.gz,park_neutral,17457.0,04:50:57.00,654.6,29.0,6.79,50,,1120.6,0.0,N-13,standstill idle warm,"long idle - trims, purge, commanded air/fuel",post_purge_valve
+20260905_041723.csv.gz,park_neutral,17637.0,04:53:57.00,653.5,35.0,8.22,147,,1300.6,,N-13,standstill idle warm,"long idle - trims, purge, commanded air/fuel",post_purge_valve
+20260905_041723.csv.gz,park_neutral,17647.0,04:54:07.00,652.4,28.0,5.36,147,,1310.6,,N-13,standstill idle warm,"long idle - trims, purge, commanded air/fuel",post_purge_valve
+20260905_041723.csv.gz,park_neutral,17657.0,04:54:17.00,655.4,39.0,9.02,153,,1320.6,,N-13,standstill idle warm,"long idle - trims, purge, commanded air/fuel",post_purge_valve
+20260905_041723.csv.gz,park_neutral,17667.0,04:54:27.00,650.7,36.0,8.52,152,,1330.6,,N-13,standstill idle warm,"long idle - trims, purge, commanded air/fuel",post_purge_valve
+20260905_041723.csv.gz,park_neutral,17677.0,04:54:37.00,650.8,39.0,9.32,153,,1340.6,,N-13,standstill idle warm,"long idle - trims, purge, commanded air/fuel",post_purge_valve
+20260905_041723.csv.gz,park_neutral,17687.0,04:54:47.00,652.8,28.0,6.04,152,,1350.6,,N-13,standstill idle warm,"long idle - trims, purge, commanded air/fuel",post_purge_valve
+20260905_041723.csv.gz,park_neutral,17697.0,04:54:57.00,650.9,29.0,6.06,131,,1360.6,,N-13,standstill idle warm,"long idle - trims, purge, commanded air/fuel",post_purge_valve
+20260905_041723.csv.gz,park_neutral,17707.0,04:55:07.00,652.0,32.0,7.51,158,,1370.6,,N-13,standstill idle warm,"long idle - trims, purge, commanded air/fuel",post_purge_valve
+20260905_041723.csv.gz,park_neutral,17717.0,04:55:17.00,650.8,42.0,10.91,143,,1380.6,,N-13,standstill idle warm,"long idle - trims, purge, commanded air/fuel",post_purge_valve
+20260905_041723.csv.gz,park_neutral,17727.0,04:55:27.00,652.5,33.0,6.82,156,,1390.6,,N-13,standstill idle warm,"long idle - trims, purge, commanded air/fuel",post_purge_valve
+20260905_041723.csv.gz,park_neutral,17737.0,04:55:37.00,651.5,26.0,4.74,158,,1400.6,,N-13,standstill idle warm,"long idle - trims, purge, commanded air/fuel",post_purge_valve
+20260905_041723.csv.gz,park_neutral,17747.0,04:55:47.00,651.7,47.0,9.44,159,,1410.6,,N-13,standstill idle warm,"long idle - trims, purge, commanded air/fuel",post_purge_valve
+20260905_041723.csv.gz,park_neutral,17757.0,04:55:57.00,651.8,38.0,10.28,162,,1420.6,,N-13,standstill idle warm,"long idle - trims, purge, commanded air/fuel",post_purge_valve
+20260905_041723.csv.gz,park_neutral,17767.0,04:56:07.00,650.7,36.0,7.26,156,,1430.6,,N-13,standstill idle warm,"long idle - trims, purge, commanded air/fuel",post_purge_valve
+20260905_041723.csv.gz,park_neutral,17777.0,04:56:17.00,651.6,27.0,5.02,162,,1440.6,,N-13,standstill idle warm,"long idle - trims, purge, commanded air/fuel",post_purge_valve
+20260905_041723.csv.gz,park_neutral,17787.0,04:56:27.00,651.2,41.0,9.24,162,,1450.6,,N-13,standstill idle warm,"long idle - trims, purge, commanded air/fuel",post_purge_valve
+20260905_041723.csv.gz,park_neutral,17797.0,04:56:37.00,650.4,40.0,8.99,158,,1460.6,,N-13,standstill idle warm,"long idle - trims, purge, commanded air/fuel",post_purge_valve
+20260905_041723.csv.gz,park_neutral,17807.0,04:56:47.00,652.1,37.0,7.06,159,,1470.6,,N-13,standstill idle warm,"long idle - trims, purge, commanded air/fuel",post_purge_valve
+20260905_041723.csv.gz,park_neutral,17817.0,04:56:57.00,651.6,32.0,6.84,164,,1480.6,,N-13,standstill idle warm,"long idle - trims, purge, commanded air/fuel",post_purge_valve
+20260905_041723.csv.gz,park_neutral,17827.0,04:57:07.00,651.0,39.0,9.94,156,,1490.6,,N-13,standstill idle warm,"long idle - trims, purge, commanded air/fuel",post_purge_valve
+20260905_041723.csv.gz,park_neutral,17837.0,04:57:17.00,651.8,42.0,10.58,161,,1500.6,,N-13,standstill idle warm,"long idle - trims, purge, commanded air/fuel",post_purge_valve
+20260905_041723.csv.gz,park_neutral,17847.0,04:57:27.00,653.1,37.0,7.73,163,,1510.6,,N-13,standstill idle warm,"long idle - trims, purge, commanded air/fuel",post_purge_valve
+20260905_041723.csv.gz,park_neutral,17857.0,04:57:37.00,651.0,30.0,6.13,154,,1520.6,,N-13,standstill idle warm,"long idle - trims, purge, commanded air/fuel",post_purge_valve
+20260905_041723.csv.gz,park_neutral,17867.0,04:57:47.00,651.1,42.0,8.62,157,,1530.6,,N-13,standstill idle warm,"long idle - trims, purge, commanded air/fuel",post_purge_valve
+20260905_041723.csv.gz,park_neutral,17877.0,04:57:57.00,651.7,50.0,12.67,158,,1540.6,,N-13,standstill idle warm,"long idle - trims, purge, commanded air/fuel",post_purge_valve
+20260905_041723.csv.gz,park_neutral,17887.0,04:58:07.00,652.7,33.0,7.61,157,,1550.6,,N-13,standstill idle warm,"long idle - trims, purge, commanded air/fuel",post_purge_valve
+20260905_041723.csv.gz,park_neutral,17897.0,04:58:17.00,650.6,23.0,4.38,159,,1560.6,,N-13,standstill idle warm,"long idle - trims, purge, commanded air/fuel",post_purge_valve
+20260905_041723.csv.gz,park_neutral,17907.0,04:58:27.00,651.1,37.0,8.4,161,,1570.6,,N-13,standstill idle warm,"long idle - trims, purge, commanded air/fuel",post_purge_valve
+20260905_041723.csv.gz,park_neutral,17917.0,04:58:37.00,653.1,38.0,9.29,158,,1580.6,,N-13,standstill idle warm,"long idle - trims, purge, commanded air/fuel",post_purge_valve
+20260905_041723.csv.gz,park_neutral,17927.0,04:58:47.00,652.5,44.0,9.25,156,,1590.6,,N-13,standstill idle warm,"long idle - trims, purge, commanded air/fuel",post_purge_valve
+20260905_041723.csv.gz,park_neutral,17937.0,04:58:57.00,651.1,29.0,5.18,159,,1600.6,,N-13,standstill idle warm,"long idle - trims, purge, commanded air/fuel",post_purge_valve
+20260905_041723.csv.gz,park_neutral,17947.0,04:59:07.00,652.0,28.0,5.58,158,,1610.6,,N-13,standstill idle warm,"long idle - trims, purge, commanded air/fuel",post_purge_valve
+20260905_041723.csv.gz,park_neutral,17957.0,04:59:17.00,656.1,83.0,16.71,158,,1620.6,,N-13,standstill idle warm,"long idle - trims, purge, commanded air/fuel",post_purge_valve
+20260905_041723.csv.gz,park_neutral,17967.0,04:59:27.00,655.1,53.0,11.91,159,,1630.6,,N-13,standstill idle warm,"long idle - trims, purge, commanded air/fuel",post_purge_valve
+20260905_041723.csv.gz,park_neutral,17977.0,04:59:37.00,653.1,38.0,9.68,157,,1640.6,,N-13,standstill idle warm,"long idle - trims, purge, commanded air/fuel",post_purge_valve
+20260905_041723.csv.gz,park_neutral,17987.0,04:59:47.00,643.8,47.0,8.74,159,,1650.6,,N-13,standstill idle warm,"long idle - trims, purge, commanded air/fuel",post_purge_valve
+20260905_041723.csv.gz,park_neutral,17997.0,04:59:57.00,649.1,33.0,6.12,134,,1660.6,,N-13,standstill idle warm,"long idle - trims, purge, commanded air/fuel",post_purge_valve
+20260905_041723.csv.gz,park_neutral,18007.0,05:00:07.00,680.8,48.0,12.45,138,,1670.6,,N-13,standstill idle warm,"long idle - trims, purge, commanded air/fuel",post_purge_valve
+20260905_041723.csv.gz,park_neutral,18017.0,05:00:17.00,660.6,42.0,10.56,95,,1680.6,,N-13,standstill idle warm,"long idle - trims, purge, commanded air/fuel",post_purge_valve
+20260905_041723.csv.gz,park_neutral,18027.0,05:00:27.00,652.2,34.0,7.63,126,,1690.6,,N-13,standstill idle warm,"long idle - trims, purge, commanded air/fuel",post_purge_valve
+20260905_041723.csv.gz,park_neutral,18037.0,05:00:37.00,651.6,29.0,5.71,161,,1700.6,,N-13,standstill idle warm,"long idle - trims, purge, commanded air/fuel",post_purge_valve
+20260905_041723.csv.gz,park_neutral,18047.0,05:00:47.00,650.8,33.0,8.07,119,,1710.6,,N-13,standstill idle warm,"long idle - trims, purge, commanded air/fuel",post_purge_valve
+20260905_041723.csv.gz,park_neutral,18057.0,05:00:57.00,651.6,28.0,7.69,56,,1720.6,,N-13,standstill idle warm,"long idle - trims, purge, commanded air/fuel",post_purge_valve
+20260905_041723.csv.gz,park_neutral,18067.0,05:01:07.00,650.3,23.0,4.78,98,,1730.6,,N-13,standstill idle warm,"long idle - trims, purge, commanded air/fuel",post_purge_valve
+20260905_041723.csv.gz,park_neutral,18077.0,05:01:17.00,650.3,36.0,7.39,155,,1740.6,,N-13,standstill idle warm,"long idle - trims, purge, commanded air/fuel",post_purge_valve
+20260905_041723.csv.gz,park_neutral,18087.0,05:01:27.00,651.8,43.0,9.76,159,,1750.6,,N-13,standstill idle warm,"long idle - trims, purge, commanded air/fuel",post_purge_valve
+20260905_041723.csv.gz,park_neutral,18097.0,05:01:37.00,650.6,33.0,7.62,162,,1760.6,,N-13,standstill idle warm,"long idle - trims, purge, commanded air/fuel",post_purge_valve
+20260905_041723.csv.gz,park_neutral,18107.0,05:01:47.00,650.6,45.0,10.51,159,,1770.6,,N-13,standstill idle warm,"long idle - trims, purge, commanded air/fuel",post_purge_valve
+20260905_041723.csv.gz,park_neutral,18117.0,05:01:57.00,651.9,27.0,6.62,149,,1780.6,,N-13,standstill idle warm,"long idle - trims, purge, commanded air/fuel",post_purge_valve
+20260905_041723.csv.gz,park_neutral,18127.0,05:02:07.00,649.4,29.0,6.06,153,,1790.6,,N-13,standstill idle warm,"long idle - trims, purge, commanded air/fuel",post_purge_valve
+20260905_041723.csv.gz,park_neutral,18137.0,05:02:17.00,642.7,45.0,11.14,139,,1800.6,,N-13,standstill idle warm,"long idle - trims, purge, commanded air/fuel",post_purge_valve
+20260905_041723.csv.gz,park_neutral,18147.0,05:02:27.00,648.0,41.0,8.6,109,,1810.6,,N-13,standstill idle warm,"long idle - trims, purge, commanded air/fuel",post_purge_valve
+20260905_041723.csv.gz,park_neutral,18157.0,05:02:37.00,650.4,34.0,7.59,150,,1820.6,,N-13,standstill idle warm,"long idle - trims, purge, commanded air/fuel",post_purge_valve
+20260905_041723.csv.gz,park_neutral,18167.0,05:02:47.00,649.8,31.0,6.41,150,,1830.6,,N-13,standstill idle warm,"long idle - trims, purge, commanded air/fuel",post_purge_valve
+20260905_041723.csv.gz,park_neutral,18177.0,05:02:57.00,650.2,43.0,9.9,136,,1840.6,,N-13,standstill idle warm,"long idle - trims, purge, commanded air/fuel",post_purge_valve
+20260905_041723.csv.gz,park_neutral,18187.0,05:03:07.00,651.8,45.0,10.59,113,,1850.6,,N-13,standstill idle warm,"long idle - trims, purge, commanded air/fuel",post_purge_valve
+20260905_041723.csv.gz,park_neutral,18197.0,05:03:17.00,651.6,25.0,4.9,155,,1860.6,,N-13,standstill idle warm,"long idle - trims, purge, commanded air/fuel",post_purge_valve
+20260905_041723.csv.gz,park_neutral,18207.0,05:03:27.00,655.3,71.0,15.15,158,,1870.6,,N-13,standstill idle warm,"long idle - trims, purge, commanded air/fuel",post_purge_valve
+20260905_041723.csv.gz,park_neutral,18217.0,05:03:37.00,658.0,52.0,13.88,154,,1880.6,,N-13,standstill idle warm,"long idle - trims, purge, commanded air/fuel",post_purge_valve
+20260905_041723.csv.gz,park_neutral,18227.0,05:03:47.00,654.4,38.0,9.49,144,,1890.6,,N-13,standstill idle warm,"long idle - trims, purge, commanded air/fuel",post_purge_valve
+20260905_041723.csv.gz,park_neutral,18237.0,05:03:57.00,649.5,36.0,8.14,157,,1900.6,,N-13,standstill idle warm,"long idle - trims, purge, commanded air/fuel",post_purge_valve
+20260905_041723.csv.gz,park_neutral,18247.0,05:04:07.00,645.1,32.0,7.25,158,,1910.6,,N-13,standstill idle warm,"long idle - trims, purge, commanded air/fuel",post_purge_valve
+20260905_041723.csv.gz,park_neutral,18257.0,05:04:17.00,651.3,44.0,9.83,156,,1920.6,,N-13,standstill idle warm,"long idle - trims, purge, commanded air/fuel",post_purge_valve
+20260905_041723.csv.gz,park_neutral,18267.0,05:04:27.00,648.9,41.0,11.04,157,,1930.6,,N-13,standstill idle warm,"long idle - trims, purge, commanded air/fuel",post_purge_valve
+20260905_041723.csv.gz,park_neutral,18277.0,05:04:37.00,651.7,32.0,6.66,140,,1940.6,,N-13,standstill idle warm,"long idle - trims, purge, commanded air/fuel",post_purge_valve
+20260905_041723.csv.gz,park_neutral,18287.0,05:04:47.00,653.0,28.0,4.89,158,,1950.6,,N-13,standstill idle warm,"long idle - trims, purge, commanded air/fuel",post_purge_valve
+20260905_041723.csv.gz,park_neutral,18297.0,05:04:57.00,650.8,36.0,6.65,155,,1960.6,,N-13,standstill idle warm,"long idle - trims, purge, commanded air/fuel",post_purge_valve
+20260905_041723.csv.gz,park_neutral,18307.0,05:05:07.00,650.7,44.0,11.85,143,,1970.6,,N-13,standstill idle warm,"long idle - trims, purge, commanded air/fuel",post_purge_valve
+20260905_041723.csv.gz,park_neutral,18317.0,05:05:17.00,653.2,53.0,11.52,152,,1980.6,,N-13,standstill idle warm,"long idle - trims, purge, commanded air/fuel",post_purge_valve
+20260905_041723.csv.gz,park_neutral,18327.0,05:05:27.00,653.1,31.0,6.57,152,,1990.6,,N-13,standstill idle warm,"long idle - trims, purge, commanded air/fuel",post_purge_valve
+20260905_041723.csv.gz,park_neutral,18337.0,05:05:37.00,649.5,42.0,6.38,159,,2000.6,,N-13,standstill idle warm,"long idle - trims, purge, commanded air/fuel",post_purge_valve
+20260905_041723.csv.gz,park_neutral,18347.0,05:05:47.00,652.0,43.0,10.22,155,,2010.6,,N-13,standstill idle warm,"long idle - trims, purge, commanded air/fuel",post_purge_valve
+20260905_041723.csv.gz,park_neutral,18357.0,05:05:57.00,651.8,50.0,11.97,157,,2020.6,,N-13,standstill idle warm,"long idle - trims, purge, commanded air/fuel",post_purge_valve
+20260905_041723.csv.gz,park_neutral,18367.0,05:06:07.00,650.7,47.0,10.69,160,,2030.6,,N-13,standstill idle warm,"long idle - trims, purge, commanded air/fuel",post_purge_valve
+20260905_041723.csv.gz,park_neutral,18377.0,05:06:17.00,652.8,24.0,5.68,155,,2040.6,,N-13,standstill idle warm,"long idle - trims, purge, commanded air/fuel",post_purge_valve
+20260905_041723.csv.gz,park_neutral,18387.0,05:06:27.00,651.3,29.0,5.78,151,,2050.6,,N-13,standstill idle warm,"long idle - trims, purge, commanded air/fuel",post_purge_valve
+20260905_041723.csv.gz,park_neutral,18397.0,05:06:37.00,648.5,47.0,10.73,157,,2060.6,,N-13,standstill idle warm,"long idle - trims, purge, commanded air/fuel",post_purge_valve
+20260905_041723.csv.gz,park_neutral,18407.0,05:06:47.00,650.6,43.0,10.11,152,,2070.6,,N-13,standstill idle warm,"long idle - trims, purge, commanded air/fuel",post_purge_valve
+20260905_041723.csv.gz,park_neutral,18417.0,05:06:57.00,653.7,33.0,8.87,81,,2080.6,,N-13,standstill idle warm,"long idle - trims, purge, commanded air/fuel",post_purge_valve
+20260905_041723.csv.gz,park_neutral,18427.0,05:07:07.00,652.9,27.0,5.98,141,,2090.6,,N-13,standstill idle warm,"long idle - trims, purge, commanded air/fuel",post_purge_valve
+20260905_041723.csv.gz,park_neutral,18437.0,05:07:17.00,652.7,33.0,7.0,125,,2100.6,,N-13,standstill idle warm,"long idle - trims, purge, commanded air/fuel",post_purge_valve
