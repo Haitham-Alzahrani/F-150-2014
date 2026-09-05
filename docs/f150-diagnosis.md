@@ -655,6 +655,80 @@ addresses the actual complaint.
 
 ---
 
+## ADAPTIVES WERE WIPED DURING THE REPAIR — read this before any trim number
+
+The owner disconnected the battery negative terminal and bridged the
+disconnected cable to the positive post to drain residual capacitance. **That is
+a full Keep Alive Memory wipe.** It happened at the same time as the purge valve
+replacement.
+
+### What it invalidates
+
+- **"Long term trim learned to zero" is withdrawn.** Both banks read 0 % at idle
+  after the repair because the memory was *erased*, not because the PCM learned
+  that value. The number carries no information until the truck has been driven.
+- **The load-cell slope is gone.** The table of idle +3.13 / +2.34 %, just above
+  idle +0.78 %, ~2000 rpm 0 % was learned around the **old** valve and has been
+  erased. It must be re-measured from scratch.
+- **The archived DTCs are gone** — U0422 on OBD-II and the PCM, U0140 on the OCS,
+  B11D8(14) on the RCM. So are the monitor results, the freeze frame, and the
+  distance and warm-up counters since codes cleared. Mode 06 is empty again.
+
+### What survives, and it is the part that matters
+
+**Short term trim is a live correction and does not depend on anything learned.**
+With long term sitting at 0, short term *is* the entire correction the engine is
+requesting.
+
+| Warm idle in Park | Long term | Short term | **Live total** |
+|---|---|---|---|
+| Before the valve | +3.13 % | ~0 | **+3.1 %** — adding fuel |
+| After the valve | 0 (wiped) | **−1.5 %** | **−1.5 %** — removing fuel |
+
+**A swing of about 4.6 points, and the wipe does not touch it.** The engine
+genuinely no longer runs lean at idle. The conclusion about the repair stands;
+only the long term numbers supporting it were unusable.
+
+### The confound this creates
+
+The new valve was fitted **and** the adaptives were wiped in the same operation,
+so the improvement in D and R has two candidate causes rather than one.
+
+**Against the reset being responsible:** the owner performed a relearn and drove
+300 km earlier in this investigation with no change to the symptom. A reset
+alone has already been tried and has already failed. That points firmly at the
+valve.
+
+**It is still not a clean experiment.** The way to close it is to let the
+adaptives relearn and see whether D and R stay clean. **If the improvement came
+from the reset, the shake will return in D and R as long term re-learns.**
+
+### The test that settles the fuel side, now that a baseline exists
+
+Drive 30 minutes minimum, mixed, including a sustained 60-80 km/h stretch. That
+relearns long term, runs the catalyst and oxygen sensor monitors, refills Mode
+06, and shows whether D and R stay clean.
+
+Then repeat the 2000 rpm capture — `Long term fuel % trim - Bank 1` paired with
+`Long term fuel % trim - Bank 2`, idle to a held 2000 rpm and back.
+
+| New slope | Verdict |
+|---|---|
+| **Flat** — near 0 at idle and at 2000 | **The leak is gone.** The old +3.13 / +2.34 was the purge valve. |
+| **Still sloped** — positive at idle, 0 at 2000 | Another unmetered-air source remains. PCV and brake booster next. |
+
+**The pre-repair slope is on record**, so this is a genuine before-and-after on
+the same measurement — the cleanest comparison available in this investigation.
+
+### Rule going forward
+
+**Do not wipe Keep Alive Memory before a measurement unless the wipe is itself
+the experiment.** It destroys learned trims, code history, freeze frames and
+monitor results in one action, and it puts a second variable into any repair
+performed at the same time.
+
+---
+
 ## PURGE VALVE REPLACED — the shake is GONE in D and R, still present in P and N
 
 **First change in the symptom in the owner's entire ownership.**

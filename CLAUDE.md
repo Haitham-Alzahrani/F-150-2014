@@ -314,6 +314,40 @@ fan is cycling and loading the engine. Does not touch the trim finding, which
 rests on learned cell values. Worth its own capture: `Engine RPM` +
 `Throttle Position Actually` at a held 2000 rpm.
 
+### ADAPTIVES WERE WIPED WITH THE REPAIR — read before any trim number
+
+The owner disconnected the battery negative and bridged the cable to the
+positive post to drain capacitance — **a full Keep Alive Memory wipe** — at the
+same time as fitting the purge valve.
+
+**Invalidated:** "long term trim learned to zero" (it was *erased*) · the whole
+load-cell slope (idle +3.13/+2.34, just off idle +0.78, 2000 rpm 0) which was
+learned around the OLD valve · the archived DTCs U0422 / U0140 / B11D8 · the
+monitor results, freeze frame and the distance/warm-up counters. Mode 06 is
+empty again.
+
+**Survives, and it is the part that matters: short term trim is live and does
+not depend on learning.** With long term at 0, short term *is* the whole
+correction requested.
+
+| Warm idle in Park | Long term | Short term | **Live total** |
+|---|---|---|---|
+| Before the valve | +3.13 % | ~0 | **+3.1 %** adding fuel |
+| After the valve | 0 (wiped) | **−1.5 %** | **−1.5 %** removing fuel |
+
+**~4.6 points of swing, untouched by the wipe.** The engine genuinely no longer
+runs lean at idle.
+
+**The confound:** new valve AND wiped adaptives in one operation, so the D/R
+improvement has two candidate causes. Against the reset: the owner already did a
+relearn plus 300 km earlier with no change — a reset alone has been tried and
+failed. **Close it by letting the adaptives relearn: if the improvement came
+from the reset, the shake returns in D and R as long term re-learns.**
+
+**Rule: never wipe KAM before a measurement unless the wipe is the experiment.**
+It destroys learned trims, code history, freeze frames and monitors in one
+action, and adds a second variable to any repair done alongside it.
+
 ### PURGE VALVE REPLACED — shake GONE in D and R, still in P and N
 
 **First change in the symptom in the owner's entire ownership.**
