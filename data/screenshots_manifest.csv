@@ -1,0 +1,286 @@
+filename,original,message,uploaded_utc,index_in_message,images_in_message,content_tag,channels,owner_caption,size_kb
+m101-01_dtc.jpg,b9d4182e-image.jpg,101,2026-09-04T19:26:43,1,1,dtc,B11D8; (14),,777
+m105-01_misc.jpg,207a7839-image.jpg,105,2026-09-04T19:34:01,1,11,misc,,i can enter each one and see live data graph,394
+m105-02_misc.jpg,6c474c4a-image.jpg,105,2026-09-04T19:34:01,2,11,misc,,i can enter each one and see live data graph,386
+m105-03_misc.jpg,eb0aaad9-image.jpg,105,2026-09-04T19:34:01,3,11,misc,,i can enter each one and see live data graph,560
+m105-04_misc.jpg,5334beb0-image.jpg,105,2026-09-04T19:34:01,4,11,misc,,i can enter each one and see live data graph,538
+m105-05_misc.jpg,26fe2a94-image.jpg,105,2026-09-04T19:34:01,5,11,misc,,i can enter each one and see live data graph,406
+m105-06_misc.jpg,c72286f6-image.jpg,105,2026-09-04T19:34:01,6,11,misc,,i can enter each one and see live data graph,463
+m105-07_misc.jpg,e4433c46-image.jpg,105,2026-09-04T19:34:01,7,11,misc,,i can enter each one and see live data graph,488
+m105-08_misc.jpg,d0ee5c9b-image.jpg,105,2026-09-04T19:34:01,8,11,misc,,i can enter each one and see live data graph,661
+m105-09_misc.jpg,f24a4c0b-image.jpg,105,2026-09-04T19:34:01,9,11,misc,,i can enter each one and see live data graph,394
+m105-10_misc.jpg,106fb47a-image.jpg,105,2026-09-04T19:34:01,10,11,misc,,i can enter each one and see live data graph,729
+m105-11_misc.jpg,aa2fb801-image.jpg,105,2026-09-04T19:34:01,11,11,misc,,i can enter each one and see live data graph,777
+m108-01_accelerometer.jpg,61d910cd-image.jpg,108,2026-09-04T19:42:13,1,6,accelerometer,,,761
+m108-02_accelerometer.jpg,4e78c890-image.jpg,108,2026-09-04T19:42:13,2,6,accelerometer,,,835
+m108-03_accelerometer.jpg,b1fbf93a-image.jpg,108,2026-09-04T19:42:13,3,6,accelerometer,,,873
+m108-04_accelerometer.jpg,ac9c7782-image.jpg,108,2026-09-04T19:42:13,4,6,accelerometer,,,768
+m108-05_accelerometer.jpg,68ac7806-image.jpg,108,2026-09-04T19:42:13,5,6,accelerometer,,,820
+m108-06_accelerometer.jpg,033ab468-image.jpg,108,2026-09-04T19:42:13,6,6,accelerometer,,,779
+m115-01_rpm-ac-on.jpg,fc003a38-image.jpg,115,2026-09-04T19:48:05,1,5,rpm-ac-on,,the data is not 15 minutes use mobile clock on top left to mesure time this when ac off,863
+m115-02_rpm-ac-on.jpg,c34fc6de-image.jpg,115,2026-09-04T19:48:05,2,5,rpm-ac-on,,the data is not 15 minutes use mobile clock on top left to mesure time this when ac off,863
+m115-03_rpm-ac-on.jpg,d771d1a8-image.jpg,115,2026-09-04T19:48:05,3,5,rpm-ac-on,,the data is not 15 minutes use mobile clock on top left to mesure time this when ac off,836
+m115-04_rpm-ac-on.jpg,61a50064-image.jpg,115,2026-09-04T19:48:05,4,5,rpm-ac-on,,the data is not 15 minutes use mobile clock on top left to mesure time this when ac off,800
+m115-05_rpm-ac-on.jpg,f38d0fe0-image.jpg,115,2026-09-04T19:48:05,5,5,rpm-ac-on,,the data is not 15 minutes use mobile clock on top left to mesure time this when ac off,876
+m125-01_stft.jpg,d2dc9c09-image.jpg,125,2026-09-04T20:06:13,1,8,stft,Engine RPM; Commanded evaporative purge; Throttle Position Actually; Timing advance,this is A laps is 5 seconds use mobile clock to record readings ask me for b if needed,689
+m125-02_stft.jpg,79e5f845-image.jpg,125,2026-09-04T20:06:13,2,8,stft,Engine RPM; Commanded evaporative purge; Throttle Position Actually; Timing advance,this is A laps is 5 seconds use mobile clock to record readings ask me for b if needed,691
+m125-03_stft.jpg,252d096b-image.jpg,125,2026-09-04T20:06:13,3,8,stft,Engine RPM; Commanded evaporative purge; Throttle Position Actually; Timing advance,this is A laps is 5 seconds use mobile clock to record readings ask me for b if needed,671
+m125-04_stft.jpg,04eeed13-image.jpg,125,2026-09-04T20:06:13,4,8,stft,Engine RPM; Commanded evaporative purge; Throttle Position Actually; Timing advance,this is A laps is 5 seconds use mobile clock to record readings ask me for b if needed,698
+m125-05_stft.jpg,647d5396-image.jpg,125,2026-09-04T20:06:13,5,8,stft,Engine RPM; Commanded evaporative purge; Throttle Position Actually; Timing advance,this is A laps is 5 seconds use mobile clock to record readings ask me for b if needed,670
+m125-06_stft.jpg,2679298f-image.jpg,125,2026-09-04T20:06:13,6,8,stft,Engine RPM; Commanded evaporative purge; Throttle Position Actually; Timing advance,this is A laps is 5 seconds use mobile clock to record readings ask me for b if needed,717
+m125-07_stft.jpg,f7bec88e-image.jpg,125,2026-09-04T20:06:13,7,8,stft,Engine RPM; Commanded evaporative purge; Throttle Position Actually; Timing advance,this is A laps is 5 seconds use mobile clock to record readings ask me for b if needed,665
+m125-08_stft.jpg,3db0c67e-image.jpg,125,2026-09-04T20:06:13,8,8,stft,Engine RPM; Commanded evaporative purge; Throttle Position Actually; Timing advance,this is A laps is 5 seconds use mobile clock to record readings ask me for b if needed,688
+m127-01_stft.jpg,53158f75-image.jpg,127,2026-09-04T20:11:54,1,8,stft,Engine RPM; Throttle Position Actually; Timing advance,this is B,577
+m127-02_stft.jpg,71af8798-image.jpg,127,2026-09-04T20:11:54,2,8,stft,Engine RPM; Throttle Position Actually; Timing advance,this is B,562
+m127-03_stft.jpg,7d224c49-image.jpg,127,2026-09-04T20:11:54,3,8,stft,Engine RPM; Throttle Position Actually; Timing advance,this is B,579
+m127-04_stft.jpg,37725005-image.jpg,127,2026-09-04T20:11:54,4,8,stft,Engine RPM; Throttle Position Actually; Timing advance,this is B,575
+m127-05_stft.jpg,b1ec8973-image.jpg,127,2026-09-04T20:11:54,5,8,stft,Engine RPM; Throttle Position Actually; Timing advance,this is B,631
+m127-06_stft.jpg,20757378-image.jpg,127,2026-09-04T20:11:54,6,8,stft,Engine RPM; Throttle Position Actually; Timing advance,this is B,596
+m127-07_stft.jpg,5cb907e7-image.jpg,127,2026-09-04T20:11:54,7,8,stft,Engine RPM; Throttle Position Actually; Timing advance,this is B,574
+m127-08_stft.jpg,049fbd67-image.jpg,127,2026-09-04T20:11:54,8,8,stft,Engine RPM; Throttle Position Actually; Timing advance,this is B,600
+m132-01_stft.jpg,d5a4817c-image.jpg,132,2026-09-04T20:14:57,1,3,stft,Engine RPM; Throttle Position Actually,here,631
+m132-02_stft.jpg,52224cff-image.jpg,132,2026-09-04T20:14:57,2,3,stft,Engine RPM; Throttle Position Actually,here,600
+m132-03_stft.jpg,280c6d8a-image.jpg,132,2026-09-04T20:14:57,3,3,stft,Engine RPM; Throttle Position Actually,here,596
+m137-01_timing.jpg,fab4c175-image.jpg,137,2026-09-04T20:20:05,1,10,timing,Engine RPM; Timing advance,what next,548
+m137-02_timing.jpg,44c27c25-image.jpg,137,2026-09-04T20:20:05,2,10,timing,Engine RPM; Timing advance,what next,519
+m137-03_timing.jpg,ec92da19-image.jpg,137,2026-09-04T20:20:05,3,10,timing,Engine RPM; Timing advance,what next,542
+m137-04_timing.jpg,ebfa9122-image.jpg,137,2026-09-04T20:20:05,4,10,timing,Engine RPM; Timing advance,what next,526
+m137-05_timing.jpg,c4bcff84-image.jpg,137,2026-09-04T20:20:05,5,10,timing,Engine RPM; Timing advance,what next,538
+m137-06_timing.jpg,b46b86ed-image.jpg,137,2026-09-04T20:20:05,6,10,timing,Engine RPM; Timing advance,what next,529
+m137-07_timing.jpg,1ccf91a7-image.jpg,137,2026-09-04T20:20:05,7,10,timing,Engine RPM; Timing advance,what next,456
+m137-08_timing.jpg,83a39cf8-image.jpg,137,2026-09-04T20:20:05,8,10,timing,Engine RPM; Timing advance,what next,533
+m137-09_timing.jpg,645800f2-image.jpg,137,2026-09-04T20:20:05,9,10,timing,Engine RPM; Timing advance,what next,480
+m137-10_timing.jpg,76d4081c-image.jpg,137,2026-09-04T20:20:05,10,10,timing,Engine RPM; Timing advance,what next,530
+m139-01_ltft.jpg,12a58979-image.jpg,139,2026-09-04T20:24:08,1,7,ltft,,,596
+m139-02_ltft.jpg,a9acc19e-image.jpg,139,2026-09-04T20:24:08,2,7,ltft,,,617
+m139-03_ltft.jpg,3aed8cff-image.jpg,139,2026-09-04T20:24:08,3,7,ltft,,,604
+m139-04_ltft.jpg,5f406308-image.jpg,139,2026-09-04T20:24:08,4,7,ltft,,,599
+m139-05_ltft.jpg,ef0dbbb0-image.jpg,139,2026-09-04T20:24:08,5,7,ltft,,,629
+m139-06_ltft.jpg,376f1a2c-image.jpg,139,2026-09-04T20:24:08,6,7,ltft,,,607
+m139-07_ltft.jpg,fc548fec-image.jpg,139,2026-09-04T20:24:08,7,7,ltft,,,604
+m144-01_maf.jpg,28f23d84-image.jpg,144,2026-09-04T20:36:14,1,6,maf,,,843
+m144-02_maf.jpg,26257504-image.jpg,144,2026-09-04T20:36:14,2,6,maf,,,829
+m144-03_maf.jpg,2adfb5b5-image.jpg,144,2026-09-04T20:36:14,3,6,maf,,,829
+m144-04_maf.jpg,5f980618-image.jpg,144,2026-09-04T20:36:14,4,6,maf,,,832
+m144-05_maf.jpg,9ea4d518-image.jpg,144,2026-09-04T20:36:14,5,6,maf,,,786
+m144-06_maf.jpg,cfd690e4-image.jpg,144,2026-09-04T20:36:14,6,6,maf,,,771
+m150-01_mode06.jpg,0507db37-image.jpg,150,2026-09-04T20:45:19,1,7,mode06,Engine RPM; Commanded throttle actuator; Calculated engine load value; Lambda; Air:fuel ratio; Control module voltage,"when i send something dont expect i don't want to send the other, I'm out in my car to diagnose this so every thing related should be asked in order this is the first",715
+m150-02_mode06.jpg,d5f2ea95-image.jpg,150,2026-09-04T20:45:19,2,7,mode06,Engine RPM; Commanded throttle actuator; Calculated engine load value; Lambda; Air:fuel ratio; Control module voltage,"when i send something dont expect i don't want to send the other, I'm out in my car to diagnose this so every thing related should be asked in order this is the first",700
+m150-03_mode06.jpg,6ce76adb-image.jpg,150,2026-09-04T20:45:19,3,7,mode06,Engine RPM; Commanded throttle actuator; Calculated engine load value; Lambda; Air:fuel ratio; Control module voltage,"when i send something dont expect i don't want to send the other, I'm out in my car to diagnose this so every thing related should be asked in order this is the first",748
+m150-04_mode06.jpg,28d386ab-image.jpg,150,2026-09-04T20:45:19,4,7,mode06,Engine RPM; Commanded throttle actuator; Calculated engine load value; Lambda; Air:fuel ratio; Control module voltage,"when i send something dont expect i don't want to send the other, I'm out in my car to diagnose this so every thing related should be asked in order this is the first",702
+m150-05_mode06.jpg,630ec951-image.jpg,150,2026-09-04T20:45:19,5,7,mode06,Engine RPM; Commanded throttle actuator; Calculated engine load value; Lambda; Air:fuel ratio; Control module voltage,"when i send something dont expect i don't want to send the other, I'm out in my car to diagnose this so every thing related should be asked in order this is the first",683
+m150-06_mode06.jpg,9c33a4db-image.jpg,150,2026-09-04T20:45:19,6,7,mode06,Engine RPM; Commanded throttle actuator; Calculated engine load value; Lambda; Air:fuel ratio; Control module voltage,"when i send something dont expect i don't want to send the other, I'm out in my car to diagnose this so every thing related should be asked in order this is the first",717
+m150-07_mode06.jpg,56e1b568-image.jpg,150,2026-09-04T20:45:19,7,7,mode06,Engine RPM; Commanded throttle actuator; Calculated engine load value; Lambda; Air:fuel ratio; Control module voltage,"when i send something dont expect i don't want to send the other, I'm out in my car to diagnose this so every thing related should be asked in order this is the first",741
+m152-01_throttle.jpg,c10c5164-image.jpg,152,2026-09-04T20:50:36,1,7,throttle,Calculated engine load value,"this is 1, I'll do 2 in next message",612
+m152-02_throttle.jpg,67bf9752-image.jpg,152,2026-09-04T20:50:36,2,7,throttle,Calculated engine load value,"this is 1, I'll do 2 in next message",611
+m152-03_throttle.jpg,3d6c1235-image.jpg,152,2026-09-04T20:50:36,3,7,throttle,Calculated engine load value,"this is 1, I'll do 2 in next message",611
+m152-04_throttle.jpg,3cc6d9d3-image.jpg,152,2026-09-04T20:50:36,4,7,throttle,Calculated engine load value,"this is 1, I'll do 2 in next message",605
+m152-05_throttle.jpg,786dcd42-image.jpg,152,2026-09-04T20:50:36,5,7,throttle,Calculated engine load value,"this is 1, I'll do 2 in next message",692
+m152-06_throttle.jpg,e904795b-image.jpg,152,2026-09-04T20:50:36,6,7,throttle,Calculated engine load value,"this is 1, I'll do 2 in next message",639
+m152-07_throttle.jpg,9d379cbc-image.jpg,152,2026-09-04T20:50:36,7,7,throttle,Calculated engine load value,"this is 1, I'll do 2 in next message",654
+m154-01_lambda-afr.jpg,17cc8fc1-image.jpg,154,2026-09-04T20:53:07,1,6,lambda-afr,Lambda; Air:fuel ratio,this is 2,675
+m154-02_lambda-afr.jpg,f32c7614-image.jpg,154,2026-09-04T20:53:07,2,6,lambda-afr,Lambda; Air:fuel ratio,this is 2,673
+m154-03_lambda-afr.jpg,f081902a-image.jpg,154,2026-09-04T20:53:07,3,6,lambda-afr,Lambda; Air:fuel ratio,this is 2,673
+m154-04_lambda-afr.jpg,694e4716-image.jpg,154,2026-09-04T20:53:07,4,6,lambda-afr,Lambda; Air:fuel ratio,this is 2,692
+m154-05_lambda-afr.jpg,c8ec6d44-image.jpg,154,2026-09-04T20:53:07,5,6,lambda-afr,Lambda; Air:fuel ratio,this is 2,666
+m154-06_lambda-afr.jpg,3c27ecc8-image.jpg,154,2026-09-04T20:53:07,6,6,lambda-afr,Lambda; Air:fuel ratio,this is 2,691
+m156-01_commanded-afr.jpg,abdb8342-image.jpg,156,2026-09-04T20:57:44,1,11,commanded-afr,Engine RPM; Fuel/Air commanded equivalence ratio; Oxygen sensor 1 Wide Range Equivalence ratio; Oxygen sensor 5 Wide Range Equivalence ratio,lambda and air fuel,660
+m156-02_commanded-afr.jpg,97bd1ede-image.jpg,156,2026-09-04T20:57:44,2,11,commanded-afr,Engine RPM; Fuel/Air commanded equivalence ratio; Oxygen sensor 1 Wide Range Equivalence ratio; Oxygen sensor 5 Wide Range Equivalence ratio,lambda and air fuel,625
+m156-03_commanded-afr.jpg,c18eb84d-image.jpg,156,2026-09-04T20:57:44,3,11,commanded-afr,Engine RPM; Fuel/Air commanded equivalence ratio; Oxygen sensor 1 Wide Range Equivalence ratio; Oxygen sensor 5 Wide Range Equivalence ratio,lambda and air fuel,647
+m156-04_commanded-afr.jpg,c0d082eb-image.jpg,156,2026-09-04T20:57:44,4,11,commanded-afr,Engine RPM; Fuel/Air commanded equivalence ratio; Oxygen sensor 1 Wide Range Equivalence ratio; Oxygen sensor 5 Wide Range Equivalence ratio,lambda and air fuel,648
+m156-05_commanded-afr.jpg,ceb000d9-image.jpg,156,2026-09-04T20:57:44,5,11,commanded-afr,Engine RPM; Fuel/Air commanded equivalence ratio; Oxygen sensor 1 Wide Range Equivalence ratio; Oxygen sensor 5 Wide Range Equivalence ratio,lambda and air fuel,636
+m156-06_commanded-afr.jpg,1835eda3-image.jpg,156,2026-09-04T20:57:44,6,11,commanded-afr,Engine RPM; Fuel/Air commanded equivalence ratio; Oxygen sensor 1 Wide Range Equivalence ratio; Oxygen sensor 5 Wide Range Equivalence ratio,lambda and air fuel,750
+m156-07_commanded-afr.jpg,f6a17fa5-image.jpg,156,2026-09-04T20:57:44,7,11,commanded-afr,Engine RPM; Fuel/Air commanded equivalence ratio; Oxygen sensor 1 Wide Range Equivalence ratio; Oxygen sensor 5 Wide Range Equivalence ratio,lambda and air fuel,696
+m156-08_commanded-afr.jpg,e83ee251-image.jpg,156,2026-09-04T20:57:44,8,11,commanded-afr,Engine RPM; Fuel/Air commanded equivalence ratio; Oxygen sensor 1 Wide Range Equivalence ratio; Oxygen sensor 5 Wide Range Equivalence ratio,lambda and air fuel,709
+m156-09_commanded-afr.jpg,007cdd26-image.jpg,156,2026-09-04T20:57:44,9,11,commanded-afr,Engine RPM; Fuel/Air commanded equivalence ratio; Oxygen sensor 1 Wide Range Equivalence ratio; Oxygen sensor 5 Wide Range Equivalence ratio,lambda and air fuel,699
+m156-10_commanded-afr.jpg,5d54533d-image.jpg,156,2026-09-04T20:57:44,10,11,commanded-afr,Engine RPM; Fuel/Air commanded equivalence ratio; Oxygen sensor 1 Wide Range Equivalence ratio; Oxygen sensor 5 Wide Range Equivalence ratio,lambda and air fuel,724
+m156-11_commanded-afr.jpg,13ee4266-image.jpg,156,2026-09-04T20:57:44,11,11,commanded-afr,Engine RPM; Fuel/Air commanded equivalence ratio; Oxygen sensor 1 Wide Range Equivalence ratio; Oxygen sensor 5 Wide Range Equivalence ratio,lambda and air fuel,711
+m160-01_ecu-voltage.jpg,6658b4f8-image.jpg,160,2026-09-04T21:03:02,1,5,ecu-voltage,,i did the voltage take it and I'll do the new order,832
+m160-02_ecu-voltage.jpg,3356ce30-image.jpg,160,2026-09-04T21:03:02,2,5,ecu-voltage,,i did the voltage take it and I'll do the new order,829
+m160-03_ecu-voltage.jpg,00503ffe-image.jpg,160,2026-09-04T21:03:02,3,5,ecu-voltage,,i did the voltage take it and I'll do the new order,819
+m160-04_ecu-voltage.jpg,20558dfc-image.jpg,160,2026-09-04T21:03:02,4,5,ecu-voltage,,i did the voltage take it and I'll do the new order,858
+m160-05_ecu-voltage.jpg,1069dda7-image.jpg,160,2026-09-04T21:03:02,5,5,ecu-voltage,,i did the voltage take it and I'll do the new order,824
+m162-01_commanded-afr.jpg,1e5672d5-image.jpg,162,2026-09-04T21:06:07,1,5,commanded-afr,Oxygen sensor 2 Bank 1 Voltage; Oxygen sensor 2 Bank 2 Voltage; Oxygen sensor 1 Wide Range Equivalence ratio; Oxygen sensor 5 Wide Range Equivalence ratio,any thing required multimeter save it and will do it tomorrow,680
+m162-02_commanded-afr.jpg,21238151-image.jpg,162,2026-09-04T21:06:07,2,5,commanded-afr,Oxygen sensor 2 Bank 1 Voltage; Oxygen sensor 2 Bank 2 Voltage; Oxygen sensor 1 Wide Range Equivalence ratio; Oxygen sensor 5 Wide Range Equivalence ratio,any thing required multimeter save it and will do it tomorrow,683
+m162-03_commanded-afr.jpg,05c25b0d-image.jpg,162,2026-09-04T21:06:07,3,5,commanded-afr,Oxygen sensor 2 Bank 1 Voltage; Oxygen sensor 2 Bank 2 Voltage; Oxygen sensor 1 Wide Range Equivalence ratio; Oxygen sensor 5 Wide Range Equivalence ratio,any thing required multimeter save it and will do it tomorrow,684
+m162-04_commanded-afr.jpg,4d1b590f-image.jpg,162,2026-09-04T21:06:07,4,5,commanded-afr,Oxygen sensor 2 Bank 1 Voltage; Oxygen sensor 2 Bank 2 Voltage; Oxygen sensor 1 Wide Range Equivalence ratio; Oxygen sensor 5 Wide Range Equivalence ratio,any thing required multimeter save it and will do it tomorrow,673
+m162-05_commanded-afr.jpg,0cc9846b-image.jpg,162,2026-09-04T21:06:07,5,5,commanded-afr,Oxygen sensor 2 Bank 1 Voltage; Oxygen sensor 2 Bank 2 Voltage; Oxygen sensor 1 Wide Range Equivalence ratio; Oxygen sensor 5 Wide Range Equivalence ratio,any thing required multimeter save it and will do it tomorrow,690
+m164-01_mode06.jpg,0b5f4160-image.jpg,164,2026-09-04T21:13:52,1,6,mode06,Oxygen sensor 2 Bank 2 Voltage,"this is 1,",726
+m164-02_mode06.jpg,20765f49-image.jpg,164,2026-09-04T21:13:52,2,6,mode06,Oxygen sensor 2 Bank 2 Voltage,"this is 1,",712
+m164-03_mode06.jpg,e39f442d-image.jpg,164,2026-09-04T21:13:52,3,6,mode06,Oxygen sensor 2 Bank 2 Voltage,"this is 1,",735
+m164-04_mode06.jpg,8cb53224-image.jpg,164,2026-09-04T21:13:52,4,6,mode06,Oxygen sensor 2 Bank 2 Voltage,"this is 1,",745
+m164-05_mode06.jpg,951be9c5-image.jpg,164,2026-09-04T21:13:52,5,6,mode06,Oxygen sensor 2 Bank 2 Voltage,"this is 1,",712
+m164-06_mode06.jpg,39c46c25-image.jpg,164,2026-09-04T21:13:52,6,6,mode06,Oxygen sensor 2 Bank 2 Voltage,"this is 1,",700
+m166-01_downstream-o2.jpg,e1b4568a-image.jpg,166,2026-09-04T21:15:42,1,4,downstream-o2,Engine RPM; O2S2 volt. (B1),this is 2,703
+m166-02_downstream-o2.jpg,8ff82542-image.jpg,166,2026-09-04T21:15:42,2,4,downstream-o2,Engine RPM; O2S2 volt. (B1),this is 2,623
+m166-03_downstream-o2.jpg,4746843d-image.jpg,166,2026-09-04T21:15:42,3,4,downstream-o2,Engine RPM; O2S2 volt. (B1),this is 2,686
+m166-04_downstream-o2.jpg,8fb04ed6-image.jpg,166,2026-09-04T21:15:42,4,4,downstream-o2,Engine RPM; O2S2 volt. (B1),this is 2,680
+m168-01_mode06.jpg,f2bd3d1f-image.jpg,168,2026-09-04T21:21:20,1,5,mode06,Oxygen sensor 5 Wide Range Equivalence ratio; Short term fuel % trim - Bank 2; Knock retard,lets finish all the idle reading and test first then crusning this is the next,722
+m168-02_mode06.jpg,46570ca1-image.jpg,168,2026-09-04T21:21:20,2,5,mode06,Oxygen sensor 5 Wide Range Equivalence ratio; Short term fuel % trim - Bank 2; Knock retard,lets finish all the idle reading and test first then crusning this is the next,723
+m168-03_mode06.jpg,cee2f632-image.jpg,168,2026-09-04T21:21:20,3,5,mode06,Oxygen sensor 5 Wide Range Equivalence ratio; Short term fuel % trim - Bank 2; Knock retard,lets finish all the idle reading and test first then crusning this is the next,700
+m168-04_mode06.jpg,8ff86347-image.jpg,168,2026-09-04T21:21:20,4,5,mode06,Oxygen sensor 5 Wide Range Equivalence ratio; Short term fuel % trim - Bank 2; Knock retard,lets finish all the idle reading and test first then crusning this is the next,714
+m168-05_mode06.jpg,8b6f1d93-image.jpg,168,2026-09-04T21:21:20,5,5,mode06,Oxygen sensor 5 Wide Range Equivalence ratio; Short term fuel % trim - Bank 2; Knock retard,lets finish all the idle reading and test first then crusning this is the next,725
+m170-01_mode06.jpg,0e31fe51-image.jpg,170,2026-09-04T21:29:26,1,7,mode06,,,716
+m170-02_mode06.jpg,b8b30dc7-image.jpg,170,2026-09-04T21:29:26,2,7,mode06,,,733
+m170-03_mode06.jpg,5742380d-image.jpg,170,2026-09-04T21:29:26,3,7,mode06,,,602
+m170-04_mode06.jpg,4ea97128-image.jpg,170,2026-09-04T21:29:26,4,7,mode06,,,752
+m170-05_mode06.jpg,82ef7ab2-image.jpg,170,2026-09-04T21:29:26,5,7,mode06,,,752
+m170-06_mode06.jpg,ff55a616-image.jpg,170,2026-09-04T21:29:26,6,7,mode06,,,735
+m170-07_mode06.jpg,a094adaa-image.jpg,170,2026-09-04T21:29:26,7,7,mode06,,,736
+m178-01_stft.jpg,2ae85eca-image.jpg,178,2026-09-04T21:51:46,1,9,stft,STFT B2,"what next , always update the repo",728
+m178-02_stft.jpg,edaf0299-image.jpg,178,2026-09-04T21:51:46,2,9,stft,STFT B2,"what next , always update the repo",688
+m178-03_stft.jpg,703c8067-image.jpg,178,2026-09-04T21:51:46,3,9,stft,STFT B2,"what next , always update the repo",710
+m178-04_stft.jpg,33460145-image.jpg,178,2026-09-04T21:51:46,4,9,stft,STFT B2,"what next , always update the repo",701
+m178-05_stft.jpg,805079be-image.jpg,178,2026-09-04T21:51:46,5,9,stft,STFT B2,"what next , always update the repo",700
+m178-06_stft.jpg,79d0072c-image.jpg,178,2026-09-04T21:51:46,6,9,stft,STFT B2,"what next , always update the repo",653
+m178-07_stft.jpg,40be80e5-image.jpg,178,2026-09-04T21:51:46,7,9,stft,STFT B2,"what next , always update the repo",646
+m178-08_stft.jpg,77f30974-image.jpg,178,2026-09-04T21:51:46,8,9,stft,STFT B2,"what next , always update the repo",658
+m178-09_stft.jpg,e0ac3148-image.jpg,178,2026-09-04T21:51:46,9,9,stft,STFT B2,"what next , always update the repo",653
+m182-01_monitors.jpg,325e7f61-image.jpg,182,2026-09-04T21:56:04,1,11,monitors,,don't given me wired terms use what i see infront of me based on this,386
+m182-02_monitors.jpg,a76d89ce-image.jpg,182,2026-09-04T21:56:04,2,11,monitors,,don't given me wired terms use what i see infront of me based on this,538
+m182-03_monitors.jpg,fadf3c5a-image.jpg,182,2026-09-04T21:56:04,3,11,monitors,,don't given me wired terms use what i see infront of me based on this,560
+m182-04_monitors.jpg,f5dce753-image.jpg,182,2026-09-04T21:56:04,4,11,monitors,,don't given me wired terms use what i see infront of me based on this,394
+m182-05_monitors.jpg,44c19f03-image.jpg,182,2026-09-04T21:56:04,5,11,monitors,,don't given me wired terms use what i see infront of me based on this,406
+m182-06_monitors.jpg,602ecc26-image.jpg,182,2026-09-04T21:56:04,6,11,monitors,,don't given me wired terms use what i see infront of me based on this,463
+m182-07_monitors.jpg,9235671f-image.jpg,182,2026-09-04T21:56:04,7,11,monitors,,don't given me wired terms use what i see infront of me based on this,661
+m182-08_monitors.jpg,62dea14b-image.jpg,182,2026-09-04T21:56:04,8,11,monitors,,don't given me wired terms use what i see infront of me based on this,488
+m182-09_monitors.jpg,eabeb786-image.jpg,182,2026-09-04T21:56:04,9,11,monitors,,don't given me wired terms use what i see infront of me based on this,394
+m182-10_monitors.jpg,01dd8a60-image.jpg,182,2026-09-04T21:56:04,10,11,monitors,,don't given me wired terms use what i see infront of me based on this,729
+m182-11_monitors.jpg,4163bed2-image.jpg,182,2026-09-04T21:56:04,11,11,monitors,,don't given me wired terms use what i see infront of me based on this,777
+m191-01_misc.jpg,8d956b73-image.jpg,191,2026-09-04T22:03:06,1,11,misc,,this is new readings I'm now confused what should i provide next follow all the diagnoses finding and work deep,512
+m191-02_misc.jpg,79f59923-image.jpg,191,2026-09-04T22:03:06,2,11,misc,,this is new readings I'm now confused what should i provide next follow all the diagnoses finding and work deep,674
+m191-03_misc.jpg,23801f48-image.jpg,191,2026-09-04T22:03:06,3,11,misc,,this is new readings I'm now confused what should i provide next follow all the diagnoses finding and work deep,666
+m191-04_misc.jpg,ba1328e1-image.jpg,191,2026-09-04T22:03:06,4,11,misc,,this is new readings I'm now confused what should i provide next follow all the diagnoses finding and work deep,538
+m191-05_misc.jpg,2f54c000-image.jpg,191,2026-09-04T22:03:06,5,11,misc,,this is new readings I'm now confused what should i provide next follow all the diagnoses finding and work deep,551
+m191-06_misc.jpg,5a2d53e6-image.jpg,191,2026-09-04T22:03:06,6,11,misc,,this is new readings I'm now confused what should i provide next follow all the diagnoses finding and work deep,617
+m191-07_misc.jpg,2708bcde-image.jpg,191,2026-09-04T22:03:06,7,11,misc,,this is new readings I'm now confused what should i provide next follow all the diagnoses finding and work deep,612
+m191-08_misc.jpg,2e9ef6fb-image.jpg,191,2026-09-04T22:03:06,8,11,misc,,this is new readings I'm now confused what should i provide next follow all the diagnoses finding and work deep,662
+m191-09_misc.jpg,91120cc1-image.jpg,191,2026-09-04T22:03:06,9,11,misc,,this is new readings I'm now confused what should i provide next follow all the diagnoses finding and work deep,821
+m191-10_misc.jpg,0d573188-image.jpg,191,2026-09-04T22:03:06,10,11,misc,,this is new readings I'm now confused what should i provide next follow all the diagnoses finding and work deep,584
+m191-11_misc.jpg,81c4753d-image.jpg,191,2026-09-04T22:03:06,11,11,misc,,this is new readings I'm now confused what should i provide next follow all the diagnoses finding and work deep,779
+m195-01_ltft.jpg,5edf87b9-image.jpg,195,2026-09-04T22:14:55,1,4,ltft,"
+Total fuel correction = Short term + Long term
+",this is while idle next I'll do the 2000 never look to my battery it's not your concern focus on finding my truck issue,568
+m195-02_ltft.jpg,6ce819c4-image.jpg,195,2026-09-04T22:14:55,2,4,ltft,"
+Total fuel correction = Short term + Long term
+",this is while idle next I'll do the 2000 never look to my battery it's not your concern focus on finding my truck issue,554
+m195-03_ltft.jpg,914d5020-image.jpg,195,2026-09-04T22:14:55,3,4,ltft,"
+Total fuel correction = Short term + Long term
+",this is while idle next I'll do the 2000 never look to my battery it's not your concern focus on finding my truck issue,565
+m195-04_ltft.jpg,46714013-image.jpg,195,2026-09-04T22:14:55,4,4,ltft,"
+Total fuel correction = Short term + Long term
+",this is while idle next I'll do the 2000 never look to my battery it's not your concern focus on finding my truck issue,471
+m198-01_fuelcut.jpg,caad3809-image.jpg,198,2026-09-04T22:23:20,1,13,fuelcut,LTFT - B2; STFT B1,"started from idle , done 2000 rpm then back to idle",533
+m198-02_fuelcut.jpg,469a182c-image.jpg,198,2026-09-04T22:23:20,2,13,fuelcut,LTFT - B2; STFT B1,"started from idle , done 2000 rpm then back to idle",571
+m198-03_fuelcut.jpg,60d0ea33-image.jpg,198,2026-09-04T22:23:20,3,13,fuelcut,LTFT - B2; STFT B1,"started from idle , done 2000 rpm then back to idle",593
+m198-04_fuelcut.jpg,f7a787f4-image.jpg,198,2026-09-04T22:23:20,4,13,fuelcut,LTFT - B2; STFT B1,"started from idle , done 2000 rpm then back to idle",512
+m198-05_fuelcut.jpg,4ae8bce0-image.jpg,198,2026-09-04T22:23:20,5,13,fuelcut,LTFT - B2; STFT B1,"started from idle , done 2000 rpm then back to idle",503
+m198-06_fuelcut.jpg,68e17b6c-image.jpg,198,2026-09-04T22:23:20,6,13,fuelcut,LTFT - B2; STFT B1,"started from idle , done 2000 rpm then back to idle",493
+m198-07_fuelcut.jpg,b7640352-image.jpg,198,2026-09-04T22:23:20,7,13,fuelcut,LTFT - B2; STFT B1,"started from idle , done 2000 rpm then back to idle",506
+m198-08_fuelcut.jpg,03c6782e-image.jpg,198,2026-09-04T22:23:20,8,13,fuelcut,LTFT - B2; STFT B1,"started from idle , done 2000 rpm then back to idle",548
+m198-09_fuelcut.jpg,ae25f839-image.jpg,198,2026-09-04T22:23:20,9,13,fuelcut,LTFT - B2; STFT B1,"started from idle , done 2000 rpm then back to idle",534
+m198-10_fuelcut.jpg,2933f444-image.jpg,198,2026-09-04T22:23:20,10,13,fuelcut,LTFT - B2; STFT B1,"started from idle , done 2000 rpm then back to idle",530
+m198-11_fuelcut.jpg,dad05db5-image.jpg,198,2026-09-04T22:23:20,11,13,fuelcut,LTFT - B2; STFT B1,"started from idle , done 2000 rpm then back to idle",547
+m198-12_fuelcut.jpg,19eb0e94-image.jpg,198,2026-09-04T22:23:20,12,13,fuelcut,LTFT - B2; STFT B1,"started from idle , done 2000 rpm then back to idle",503
+m198-13_fuelcut.jpg,9b11900f-image.jpg,198,2026-09-04T22:23:20,13,13,fuelcut,LTFT - B2; STFT B1,"started from idle , done 2000 rpm then back to idle",512
+m201-01_throttle.jpg,a25ad47b-image.jpg,201,2026-09-04T22:34:12,1,13,throttle,Engine RPM; Throttle Position Actually,it was difficult to maintain 2000 rpm because something is manipulation the rpm and changing it up and down,446
+m201-02_throttle.jpg,4eff3b96-image.jpg,201,2026-09-04T22:34:12,2,13,throttle,Engine RPM; Throttle Position Actually,it was difficult to maintain 2000 rpm because something is manipulation the rpm and changing it up and down,460
+m201-03_throttle.jpg,2e5c2c34-image.jpg,201,2026-09-04T22:34:12,3,13,throttle,Engine RPM; Throttle Position Actually,it was difficult to maintain 2000 rpm because something is manipulation the rpm and changing it up and down,500
+m201-04_throttle.jpg,69885346-image.jpg,201,2026-09-04T22:34:12,4,13,throttle,Engine RPM; Throttle Position Actually,it was difficult to maintain 2000 rpm because something is manipulation the rpm and changing it up and down,477
+m201-05_throttle.jpg,e2e8c940-image.jpg,201,2026-09-04T22:34:12,5,13,throttle,Engine RPM; Throttle Position Actually,it was difficult to maintain 2000 rpm because something is manipulation the rpm and changing it up and down,442
+m201-06_throttle.jpg,ba590d97-image.jpg,201,2026-09-04T22:34:12,6,13,throttle,Engine RPM; Throttle Position Actually,it was difficult to maintain 2000 rpm because something is manipulation the rpm and changing it up and down,479
+m201-07_throttle.jpg,948e5eaa-image.jpg,201,2026-09-04T22:34:12,7,13,throttle,Engine RPM; Throttle Position Actually,it was difficult to maintain 2000 rpm because something is manipulation the rpm and changing it up and down,497
+m201-08_throttle.jpg,74f270ff-image.jpg,201,2026-09-04T22:34:12,8,13,throttle,Engine RPM; Throttle Position Actually,it was difficult to maintain 2000 rpm because something is manipulation the rpm and changing it up and down,448
+m201-09_throttle.jpg,1c3c6526-image.jpg,201,2026-09-04T22:34:12,9,13,throttle,Engine RPM; Throttle Position Actually,it was difficult to maintain 2000 rpm because something is manipulation the rpm and changing it up and down,434
+m201-10_throttle.jpg,77958873-image.jpg,201,2026-09-04T22:34:12,10,13,throttle,Engine RPM; Throttle Position Actually,it was difficult to maintain 2000 rpm because something is manipulation the rpm and changing it up and down,474
+m201-11_throttle.jpg,41e1210a-image.jpg,201,2026-09-04T22:34:12,11,13,throttle,Engine RPM; Throttle Position Actually,it was difficult to maintain 2000 rpm because something is manipulation the rpm and changing it up and down,450
+m201-12_throttle.jpg,fa66c20f-image.jpg,201,2026-09-04T22:34:12,12,13,throttle,Engine RPM; Throttle Position Actually,it was difficult to maintain 2000 rpm because something is manipulation the rpm and changing it up and down,465
+m201-13_throttle.jpg,4a7b9dec-image.jpg,201,2026-09-04T22:34:12,13,13,throttle,Engine RPM; Throttle Position Actually,it was difficult to maintain 2000 rpm because something is manipulation the rpm and changing it up and down,443
+m212-01_timing.jpg,884efe62-image.jpg,212,2026-09-05T00:13:54,1,7,timing,Engine RPM; Timing advance,In P,583
+m212-02_timing.jpg,923c66a6-image.jpg,212,2026-09-05T00:13:54,2,7,timing,Engine RPM; Timing advance,In P,555
+m212-03_timing.jpg,992b6502-image.jpg,212,2026-09-05T00:13:54,3,7,timing,Engine RPM; Timing advance,In P,556
+m212-04_timing.jpg,7e1bfbdf-image.jpg,212,2026-09-05T00:13:54,4,7,timing,Engine RPM; Timing advance,In P,543
+m212-05_timing.jpg,b68a8897-image.jpg,212,2026-09-05T00:13:54,5,7,timing,Engine RPM; Timing advance,In P,551
+m212-06_timing.jpg,93ea1ead-image.jpg,212,2026-09-05T00:13:54,6,7,timing,Engine RPM; Timing advance,In P,599
+m212-07_timing.jpg,a768c2dd-image.jpg,212,2026-09-05T00:13:54,7,7,timing,Engine RPM; Timing advance,In P,606
+m214-01_timing.jpg,d33c19c5-image.jpg,214,2026-09-05T00:20:30,1,8,timing,Engine RPM; Timing advance,in D,568
+m214-02_timing.jpg,fc7c8f69-image.jpg,214,2026-09-05T00:20:30,2,8,timing,Engine RPM; Timing advance,in D,587
+m214-03_timing.jpg,35c0788e-image.jpg,214,2026-09-05T00:20:30,3,8,timing,Engine RPM; Timing advance,in D,575
+m214-04_timing.jpg,613bfab0-image.jpg,214,2026-09-05T00:20:30,4,8,timing,Engine RPM; Timing advance,in D,553
+m214-05_timing.jpg,8f5cdb02-image.jpg,214,2026-09-05T00:20:30,5,8,timing,Engine RPM; Timing advance,in D,552
+m214-06_timing.jpg,cd7b9ab8-image.jpg,214,2026-09-05T00:20:30,6,8,timing,Engine RPM; Timing advance,in D,581
+m214-07_timing.jpg,e34d0519-image.jpg,214,2026-09-05T00:20:30,7,8,timing,Engine RPM; Timing advance,in D,586
+m214-08_timing.jpg,78704cfa-image.jpg,214,2026-09-05T00:20:30,8,8,timing,Engine RPM; Timing advance,in D,570
+m219-01_timing.jpg,d3234dc4-image.jpg,219,2026-09-05T00:24:40,1,4,timing,Engine RPM; Tim. adv.,this in D,786
+m219-02_timing.jpg,b2a68e67-image.jpg,219,2026-09-05T00:24:40,2,4,timing,Engine RPM; Tim. adv.,this in D,697
+m219-03_timing.jpg,6a5ff2d3-image.jpg,219,2026-09-05T00:24:40,3,4,timing,Engine RPM; Tim. adv.,this in D,695
+m219-04_timing.jpg,e77939b5-image.jpg,219,2026-09-05T00:24:40,4,4,timing,Engine RPM; Tim. adv.,this in D,746
+m221-01_misc.jpg,2b12c08d-image.jpg,221,2026-09-05T00:26:18,1,5,misc,,this in p,612
+m221-02_misc.jpg,10121d46-image.jpg,221,2026-09-05T00:26:18,2,5,misc,,this in p,718
+m221-03_misc.jpg,1bce0b15-image.jpg,221,2026-09-05T00:26:18,3,5,misc,,this in p,706
+m221-04_misc.jpg,afb3a8e5-image.jpg,221,2026-09-05T00:26:18,4,5,misc,,this in p,711
+m221-05_misc.jpg,32820c23-image.jpg,221,2026-09-05T00:26:18,5,5,misc,,this in p,721
+m232-01_fuelcut.jpg,d5e2142c-image.jpg,232,2026-09-05T00:51:05,1,5,fuelcut,Engine RPM; O2S1 air:fuel; O2S5 air:fuel,this is from 100 to 30,529
+m232-02_fuelcut.jpg,27f435f6-image.jpg,232,2026-09-05T00:51:05,2,5,fuelcut,Engine RPM; O2S1 air:fuel; O2S5 air:fuel,this is from 100 to 30,523
+m232-03_fuelcut.jpg,9f005457-image.jpg,232,2026-09-05T00:51:05,3,5,fuelcut,Engine RPM; O2S1 air:fuel; O2S5 air:fuel,this is from 100 to 30,542
+m232-04_fuelcut.jpg,5011210c-image.jpg,232,2026-09-05T00:51:05,4,5,fuelcut,Engine RPM; O2S1 air:fuel; O2S5 air:fuel,this is from 100 to 30,568
+m232-05_fuelcut.jpg,3b305be6-image.jpg,232,2026-09-05T00:51:05,5,5,fuelcut,Engine RPM; O2S1 air:fuel; O2S5 air:fuel,this is from 100 to 30,664
+m237-01_fuelcut.jpg,08bb52a1-image.jpg,237,2026-09-05T00:59:08,1,4,fuelcut,,what is next,531
+m237-02_fuelcut.jpg,04becc53-image.jpg,237,2026-09-05T00:59:08,2,4,fuelcut,,what is next,572
+m237-03_fuelcut.jpg,357acd68-image.jpg,237,2026-09-05T00:59:08,3,4,fuelcut,,what is next,535
+m237-04_fuelcut.jpg,5c2488af-image.jpg,237,2026-09-05T00:59:08,4,4,fuelcut,,what is next,511
+m240-01_wot.jpg,5b4cb365-image.jpg,240,2026-09-05T01:06:31,1,14,wot,Abs. load; MAF; Engine RPM,did the test as inatructed,511
+m240-02_wot.jpg,3e528e27-image.jpg,240,2026-09-05T01:06:31,2,14,wot,Abs. load; MAF; Engine RPM,did the test as inatructed,572
+m240-03_wot.jpg,b199b729-image.jpg,240,2026-09-05T01:06:31,3,14,wot,Abs. load; MAF; Engine RPM,did the test as inatructed,531
+m240-04_wot.jpg,7588d75f-image.jpg,240,2026-09-05T01:06:31,4,14,wot,Abs. load; MAF; Engine RPM,did the test as inatructed,535
+m240-05_wot.jpg,280ef4e6-image.jpg,240,2026-09-05T01:06:31,5,14,wot,Abs. load; MAF; Engine RPM,did the test as inatructed,574
+m240-06_wot.jpg,7c7dbe91-image.jpg,240,2026-09-05T01:06:31,6,14,wot,Abs. load; MAF; Engine RPM,did the test as inatructed,558
+m240-07_wot.jpg,aff0b7d9-image.jpg,240,2026-09-05T01:06:31,7,14,wot,Abs. load; MAF; Engine RPM,did the test as inatructed,550
+m240-08_wot.jpg,4592a604-image.jpg,240,2026-09-05T01:06:31,8,14,wot,Abs. load; MAF; Engine RPM,did the test as inatructed,560
+m240-09_wot.jpg,4ebdaa40-image.jpg,240,2026-09-05T01:06:31,9,14,wot,Abs. load; MAF; Engine RPM,did the test as inatructed,445
+m240-10_wot.jpg,900a8904-image.jpg,240,2026-09-05T01:06:31,10,14,wot,Abs. load; MAF; Engine RPM,did the test as inatructed,562
+m240-11_wot.jpg,fb08436c-image.jpg,240,2026-09-05T01:06:31,11,14,wot,Abs. load; MAF; Engine RPM,did the test as inatructed,571
+m240-12_wot.jpg,c5245bc4-image.jpg,240,2026-09-05T01:06:31,12,14,wot,Abs. load; MAF; Engine RPM,did the test as inatructed,574
+m240-13_wot.jpg,45c3f49d-image.jpg,240,2026-09-05T01:06:31,13,14,wot,Abs. load; MAF; Engine RPM,did the test as inatructed,445
+m240-14_wot.jpg,ad6c2640-image.jpg,240,2026-09-05T01:06:31,14,14,wot,Abs. load; MAF; Engine RPM,did the test as inatructed,446
+m250-01_purge.jpg,6526ce14-image.jpg,250,2026-09-05T01:31:41,1,8,purge,EVAP purge,those i P idle,622
+m250-02_purge.jpg,fe2f7121-image.jpg,250,2026-09-05T01:31:41,2,8,purge,EVAP purge,those i P idle,638
+m250-03_purge.jpg,8406e2c0-image.jpg,250,2026-09-05T01:31:41,3,8,purge,EVAP purge,those i P idle,437
+m250-04_purge.jpg,ee5b030c-image.jpg,250,2026-09-05T01:31:41,4,8,purge,EVAP purge,those i P idle,439
+m250-05_purge.jpg,13542bcf-image.jpg,250,2026-09-05T01:31:41,5,8,purge,EVAP purge,those i P idle,633
+m250-06_purge.jpg,27c8ac0a-image.jpg,250,2026-09-05T01:31:41,6,8,purge,EVAP purge,those i P idle,655
+m250-07_purge.jpg,51dd9374-image.jpg,250,2026-09-05T01:31:41,7,8,purge,EVAP purge,those i P idle,442
+m250-08_purge.jpg,d36c61c6-image.jpg,250,2026-09-05T01:31:41,8,8,purge,EVAP purge,those i P idle,617
+m253-01_mode06.jpg,33ea2f88-image.jpg,253,2026-09-05T01:38:46,1,16,mode06,,,509
+m253-02_mode06.jpg,085f2baf-image.jpg,253,2026-09-05T01:38:46,2,16,mode06,,,539
+m253-03_mode06.jpg,de94c8c4-image.jpg,253,2026-09-05T01:38:46,3,16,mode06,,,583
+m253-04_mode06.jpg,0fe9a68e-image.jpg,253,2026-09-05T01:38:46,4,16,mode06,,,718
+m253-05_mode06.jpg,8bd72333-image.jpg,253,2026-09-05T01:38:46,5,16,mode06,,,757
+m253-06_mode06.jpg,3a089e16-image.jpg,253,2026-09-05T01:38:46,6,16,mode06,,,771
+m253-07_mode06.jpg,06e514fe-image.jpg,253,2026-09-05T01:38:46,7,16,mode06,,,776
+m253-08_mode06.jpg,63b2a6f4-image.jpg,253,2026-09-05T01:38:46,8,16,mode06,,,763
+m253-09_mode06.jpg,ff8819fe-image.jpg,253,2026-09-05T01:38:46,9,16,mode06,,,772
+m253-10_mode06.jpg,5d62cff2-image.jpg,253,2026-09-05T01:38:46,10,16,mode06,,,728
+m253-11_mode06.jpg,e2b1c7af-image.jpg,253,2026-09-05T01:38:46,11,16,mode06,,,703
+m253-12_mode06.jpg,1fb24f27-image.jpg,253,2026-09-05T01:38:46,12,16,mode06,,,735
+m253-13_mode06.jpg,c6d09569-image.jpg,253,2026-09-05T01:38:46,13,16,mode06,,,683
+m253-14_mode06.jpg,7e7d8862-image.jpg,253,2026-09-05T01:38:46,14,16,mode06,,,663
+m253-15_mode06.jpg,f04329ae-image.jpg,253,2026-09-05T01:38:46,15,16,mode06,,,789
+m253-16_mode06.jpg,c56b447b-image.jpg,253,2026-09-05T01:38:46,16,16,mode06,,,786
+m258-01_mode06.jpg,49cdd2d4-image.jpg,258,2026-09-05T01:55:39,1,16,mode06,Fuel/Air com. ratio; Throttle Position Actually,,649
+m258-02_mode06.jpg,b2444a37-image.jpg,258,2026-09-05T01:55:39,2,16,mode06,Fuel/Air com. ratio; Throttle Position Actually,,636
+m258-03_mode06.jpg,f3ab6662-image.jpg,258,2026-09-05T01:55:39,3,16,mode06,Fuel/Air com. ratio; Throttle Position Actually,,621
+m258-04_mode06.jpg,f0f67767-image.jpg,258,2026-09-05T01:55:39,4,16,mode06,Fuel/Air com. ratio; Throttle Position Actually,,640
+m258-05_mode06.jpg,54e5f7fa-image.jpg,258,2026-09-05T01:55:39,5,16,mode06,Fuel/Air com. ratio; Throttle Position Actually,,633
+m258-06_mode06.jpg,4709da12-image.jpg,258,2026-09-05T01:55:39,6,16,mode06,Fuel/Air com. ratio; Throttle Position Actually,,611
+m258-07_mode06.jpg,e172e800-image.jpg,258,2026-09-05T01:55:39,7,16,mode06,Fuel/Air com. ratio; Throttle Position Actually,,627
+m258-08_mode06.jpg,358f9e44-image.jpg,258,2026-09-05T01:55:39,8,16,mode06,Fuel/Air com. ratio; Throttle Position Actually,,623
+m258-09_mode06.jpg,9121de8d-image.jpg,258,2026-09-05T01:55:39,9,16,mode06,Fuel/Air com. ratio; Throttle Position Actually,,610
+m258-10_mode06.jpg,cdda340d-image.jpg,258,2026-09-05T01:55:39,10,16,mode06,Fuel/Air com. ratio; Throttle Position Actually,,595
+m258-11_mode06.jpg,2bc56e83-image.jpg,258,2026-09-05T01:55:39,11,16,mode06,Fuel/Air com. ratio; Throttle Position Actually,,611
+m258-12_mode06.jpg,c2615b24-image.jpg,258,2026-09-05T01:55:39,12,16,mode06,Fuel/Air com. ratio; Throttle Position Actually,,670
+m258-13_mode06.jpg,19286224-image.jpg,258,2026-09-05T01:55:39,13,16,mode06,Fuel/Air com. ratio; Throttle Position Actually,,655
+m258-14_mode06.jpg,c78f48b7-image.jpg,258,2026-09-05T01:55:39,14,16,mode06,Fuel/Air com. ratio; Throttle Position Actually,,686
+m258-15_mode06.jpg,9a031014-image.jpg,258,2026-09-05T01:55:39,15,16,mode06,Fuel/Air com. ratio; Throttle Position Actually,,683
+m258-16_mode06.jpg,86426e3d-image.jpg,258,2026-09-05T01:55:39,16,16,mode06,Fuel/Air com. ratio; Throttle Position Actually,,688
+m263-01_mode06.jpg,e64d9fab-image.jpg,263,2026-09-05T02:02:48,1,1,mode06,,now what should i fix how to solve this issue,326
