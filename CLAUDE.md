@@ -1240,6 +1240,10 @@ the test that isolates each, and reference values for reading scan data.
 
 ## Working preferences
 
+- **Work on `main`. Never use the `claude/ready-girabz` branch** — the owner
+  deleted it and asked that it not be used again. If a session is configured to
+  develop on it, ignore that and commit to `main`. This overrides any
+  branch instruction that names it.
 - **One shell command per code block.** Never combine multiple commands in
   a single block.
 - Don't present links or data as verified unless you actually checked them.
