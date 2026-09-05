@@ -17,6 +17,7 @@ from __future__ import annotations
 import argparse
 import csv
 import datetime as dt
+import hashlib
 import pathlib
 import re
 import sys
@@ -49,6 +50,24 @@ def capture_time(path: pathlib.Path) -> tuple[dt.datetime, str]:
     except Exception:
         pass
     return dt.datetime.fromtimestamp(path.stat().st_mtime), "mtime"
+
+
+def sha(path: pathlib.Path) -> str:
+    """Content hash, so a re-uploaded image is recognised whatever it is called."""
+    h = hashlib.sha256()
+    with path.open("rb") as fh:
+        for chunk in iter(lambda: fh.read(1 << 20), b""):
+            h.update(chunk)
+    return h.hexdigest()
+
+
+def archive_hashes() -> dict[str, str]:
+    """sha256 -> filename for everything already filed."""
+    out: dict[str, str] = {}
+    for p in SHOTS.iterdir():
+        if p.is_file() and p.suffix.lower() in {".jpg", ".jpeg", ".png"}:
+            out[sha(p)] = p.name
+    return out
 
 
 def load_sessions() -> list[dict[str, str]]:
@@ -87,28 +106,57 @@ def main() -> int:
         return 0
 
     sessions = load_sessions()
-    print(f"{len(incoming)} image(s) in the inbox, {len(sessions)} known sessions\n")
+    print(f"{len(incoming)} image(s) in the inbox, {len(sessions)} known sessions")
+
+    # Re-uploading images that are already filed is expected - the owner cannot
+    # tell from a phone gallery which ones were sent before. Recognise them by
+    # content, not by name, and drop them.
+    known = archive_hashes()
+    print(f"{len(known)} image(s) already in the archive\n")
 
     existing = set()
     if MANIFEST.exists():
         with MANIFEST.open(newline="", encoding="utf-8") as fh:
             existing = {r["filename"] for r in csv.DictReader(fh)}
 
-    plan = []
+    plan, dupes, seen = [], [], set()
     for i, p in enumerate(incoming, 1):
+        digest = sha(p)
+        if digest in known:
+            dupes.append((p, known[digest]))
+            continue
+        if digest in seen:
+            dupes.append((p, "another file in this same batch"))
+            continue
+        seen.add(digest)
         when, how = capture_time(p)
         tag = args.tag or guess_tag(p.name)
         stamp = when.strftime("%Y%m%d-%H%M%S")
-        name = f"new-{stamp}_{i:02d}_{tag}.jpg"
+        name = f"new-{stamp}_{len(plan)+1:02d}_{tag}.jpg"
         plan.append((p, name, when, how, tag))
         print(f"  {p.name}")
         print(f"    -> {name}")
         print(f"       captured {when:%Y-%m-%d %H:%M:%S} (from {how}), tag={tag}")
 
+    if dupes:
+        print(f"\n{len(dupes)} duplicate(s), already filed - will be deleted:")
+        for p, match in dupes[:10]:
+            print(f"  {p.name}  ==  {match}")
+        if len(dupes) > 10:
+            print(f"  ... and {len(dupes) - 10} more")
+
+    if not plan and not dupes:
+        print("Nothing to do.")
+        return 0
+
     if not args.apply:
-        print("\nDry run. Re-run with --apply to rename and add manifest rows.")
+        print(f"\nDry run: {len(plan)} new, {len(dupes)} duplicate.")
+        print("Re-run with --apply to file the new ones and remove the duplicates.")
         print("Tip: --tag NAME forces a content tag, --session ID attaches a session.")
         return 0
+
+    for p, _ in dupes:
+        p.unlink()
 
     rows = []
     for src, name, when, how, tag in plan:
@@ -132,7 +180,8 @@ def main() -> int:
             if write_header:
                 w.writeheader()
             w.writerows(rows)
-    print(f"\nfiled {len(rows)} image(s); manifest now at {MANIFEST}")
+    print(f"\nfiled {len(rows)} new image(s), removed {len(dupes)} duplicate(s)")
+    print(f"manifest: {MANIFEST}")
     return 0
 
 

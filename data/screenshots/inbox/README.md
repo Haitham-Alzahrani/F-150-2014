@@ -7,8 +7,16 @@ Upload straight into this folder from the browser:
 On a phone, switch Chrome to **Desktop site** first — the upload control does not
 render in mobile view.
 
-- Up to **100 files per commit**, 25 MB each. Screenshots here run ~630 KB.
-- Drag the files in, or tap **choose your files**, then **Commit changes**.
+- **Upload about 90 at a time.** GitHub refuses more than 100 per commit
+  ("Yowza, that's a lot of files") — 90 keeps you clear of it.
+- 25 MB per file. Screenshots here run ~630 KB, so a full batch is fine.
+- Tap **choose your files**, select a batch, then **Commit changes**. Repeat.
+
+**Do not worry about sending the same image twice.** 277 screenshots are already
+filed, and you cannot tell which from a phone gallery. The ingest tool compares
+by content hash, not filename — anything already held is recognised and removed,
+whatever it has been renamed to along the way. Upload everything and let the tool
+sort it out.
 
 ## Then say what condition they were taken under
 
