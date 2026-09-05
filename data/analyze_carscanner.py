@@ -73,8 +73,8 @@ def report(data, chan, a, b, label):
 
 
 def main() -> None:
-    d1 = load(LOGS / "20260905_030915.csv")
-    d3 = load(LOGS / "20260905_041723.csv")
+    d1 = load(LOGS / "20260905_030915.csv.gz")
+    d3 = load(LOGS / "20260905_041723.csv.gz")
 
     print("=" * 72)
     print("SPARK vs ENGINE SPEED   (log 20260905_030915, 17 Hz both channels)")

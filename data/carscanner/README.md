@@ -23,6 +23,25 @@ the analysis depends on.
 
 `Record location data` makes no difference either way.
 
+## Big files — compress before uploading
+
+GitHub's web uploader refuses anything over **25 MB**, and a long session runs
+well past that. **Compress the file on the phone first.** These logs are highly
+repetitive text and shrink about **15:1** — the 6.3 MB log in this folder is
+355 KB gzipped, so a 35 MB export lands near 2 MB and clears every limit with
+room to spare.
+
+On Android: long-press the file in any file manager (Files by Google, MiXplorer,
+ZArchiver, Solid Explorer) and choose **Compress** or **Zip**. Upload the
+resulting `.zip` exactly as you would the CSV.
+
+Logs are **stored compressed here** and read that way. `carscanner_lib.read_text`
+accepts `.csv`, `.csv.gz` and `.zip` (one CSV inside) and hands back the same
+text, so nothing downstream knows or cares which form arrived. The analysis was
+rerun against the compressed copies and reproduces byte-identical output.
+
+To gzip one here instead: `gzip -9 <file>.csv`.
+
 ## VIN
 
 This truck is `1FTMF1EM1EFC80632`. The app's session list has held recordings

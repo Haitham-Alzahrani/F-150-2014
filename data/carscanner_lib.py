@@ -7,6 +7,8 @@ channel on its own true sample times and never forward-fills.
 from __future__ import annotations
 
 import csv
+import gzip
+import zipfile
 from pathlib import Path
 
 import numpy as np
@@ -17,10 +19,38 @@ def parse_clock(raw: str) -> float:
     return int(h) * 3600 + int(m) * 60 + float(s)
 
 
+def read_text(path: Path) -> str:
+    """Read a log whether it is stored plain, gzipped, or inside a zip.
+
+    These exports are 35 MB and larger as plain CSV and compress roughly 15:1,
+    which is the difference between a file that can be moved around and one that
+    cannot. Storing them compressed is the default; nothing downstream needs to
+    know which form it got.
+    """
+    path = Path(path)
+    if path.suffix == ".gz":
+        raw = gzip.decompress(path.read_bytes())
+    elif path.suffix == ".zip":
+        with zipfile.ZipFile(path) as z:
+            names = [n for n in z.namelist() if n.lower().endswith(".csv")]
+            if len(names) != 1:
+                raise ValueError(f"{path.name}: expected one CSV inside, found {names}")
+            raw = z.read(names[0])
+    else:
+        raw = path.read_bytes()
+    return raw.decode("utf-8-sig", errors="replace")
+
+
+def logs(directory: Path) -> list[Path]:
+    """Every log in a directory, in filename order, whatever its container."""
+    out = [p for p in Path(directory).iterdir()
+           if p.suffix in (".csv", ".gz", ".zip") and not p.name.startswith(".")]
+    return sorted(out)
+
+
 def load(path: Path) -> dict[str, tuple[np.ndarray, np.ndarray]]:
     """Return {channel: (t_seconds, values)} using each channel's own samples."""
-    text = Path(path).read_text(encoding="utf-8-sig", errors="replace")
-    rows = list(csv.DictReader(text.splitlines()))
+    rows = list(csv.DictReader(read_text(Path(path)).splitlines()))
     headers = [h for h in rows[0].keys() if h and h != "time"]
     times = np.array([parse_clock(r["time"]) for r in rows])
 
