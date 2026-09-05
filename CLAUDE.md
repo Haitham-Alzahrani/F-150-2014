@@ -9,6 +9,75 @@ not "see a mechanic."
 **2014 Ford F-150 XL Regular Cab · 3.7L V6 Ti-VCT · 6R80 auto · 4x2**
 VIN `1FTMF1EM1EFC80632` · 131,000 km (Aug 2026) · Jeddah
 
+## SPARK FOLLOWS RPM — measured, not inferred (2026-09-05, from logged data)
+
+**Three Car Scanner CSV logs, ~17 Hz per channel on true timestamps, 135,000
+rows.** Screenshots could give amplitude but never phase. These can, and they
+answer the question this investigation has turned on since night one.
+
+| Signal | vs engine speed | Correlation |
+|---|---|---|
+| **Timing advance** | **LAGS by 0.10 s** | **r = −0.84, −0.91, −0.76** (three windows) |
+| **Commanded air/fuel** | **LEADS by 0.00–0.20 s** | r = −0.38 to −0.50 |
+| Throttle | own rhythm, 18.7 s | r = +0.20, unrelated |
+| Purge | own rhythm, 16.8 s | r = −0.24, unrelated |
+
+**THE PCM IS NOT DRIVING THE RPM WITH SPARK.** Spark moves *after* engine speed,
+by 100 ms, anti-correlated at **r = −0.91** — rpm rises, spark is pulled back a
+tenth of a second later. That is a governor reacting to a disturbance it did not
+create. **"Something is adjusting the rpm on my behalf" is answered: yes, and it
+is correcting, not causing.** Every reading of the screenshots that had spark
+driving the oscillation is withdrawn.
+
+**The commanded air/fuel dither leads engine speed, with the physically correct
+sign** — a leaner command precedes a dip in rpm. Order of events, measured:
+
+```
+commanded AFR dither  →  rpm responds ~0.1 s later  →  spark corrects ~0.1 s after that
+```
+
+**But it is not the whole disturbance.** |r| ≈ 0.45 accounts for roughly a fifth
+of the variance in engine speed. Something else supplies the rest, and these logs
+do not name it.
+
+### The period is 3.1 s, not 3.4–3.5 s
+
+**0.32 Hz, in every window, in Park and in Drive, in both rpm and spark.** The
+old figure came from counting cycles by eye on a 15 s screen. Use **3.1 s / 0.32
+Hz** from here on.
+
+### Park vs Drive, quantified properly
+
+| | Mean | SD | 10 s spans, median | Period |
+|---|---|---|---|---|
+| **Drive** at standstill | 550.3 | **4.37** | **14.8** (11–44) | 3.03 s |
+| **Park** | 652.1 | **9.56** | **40.2** (24–85) | 3.13 s |
+
+**Same oscillation, same frequency, 2.7× the amplitude in Park.** In gear it is
+damped, not absent — consistent with converter loading, and it means D and R were
+never "clean", only below the threshold of feeling.
+
+### What this does to the crank-signal hypothesis
+
+**Weakened, not eliminated.** The rpm swing is phase-locked to a commanded fuel
+change with the right sign and the right delay, which is what a *real* torque
+disturbance looks like. A lying crank sensor would not produce that relationship.
+It remains the only hypothesis that explains reset-helps-then-returns, so it
+stays open — but it no longer has the field to itself.
+
+### The sample rate was wrong in this file
+
+**Car Scanner samples each channel at ~17 Hz (60 ms), not 56–117 ms.** Nyquist is
+**8.3 Hz**. Firing (32.5 Hz) and first order (10.8 Hz) are still invisible, so the
+felt shake is still out of reach — but 8.3 Hz reaches the **bottom edge of the
+8–15 Hz engine-rock band**, which this file previously said was unreachable.
+
+**Logs live in `data/carscanner/`. The analysis is
+[`data/analyze_carscanner.py`](data/analyze_carscanner.py), output in
+[`docs/carscanner-timing-analysis.txt`](docs/carscanner-timing-analysis.txt).**
+Export as **CSV #2 (Horizontal)** — never #3, which forward-fills invented
+samples and would have destroyed every lag above.
+
 ## THE D/R FIX RELAPSED — the reset helped, not the valve (2026-09-05)
 
 | | P / N | D / R |

@@ -1,0 +1,53 @@
+========================================================================
+SPARK vs ENGINE SPEED   (log 20260905_030915, 17 Hz both channels)
+========================================================================
+  Park idle 03:24:52-03:27:12        n= 2800
+      channel  p2p    6.000   dominant 0.321 Hz = 3.11 s
+      rpm      p2p     55.5   dominant 0.321 Hz = 3.11 s
+      r = -0.835 at -0.10 s  ->  channel lags engine speed
+  Park idle 03:27:12-03:30:15        n= 3645
+      channel  p2p    7.500   dominant 0.324 Hz = 3.09 s
+      rpm      p2p     84.7   dominant 0.324 Hz = 3.09 s
+      r = -0.910 at -0.10 s  ->  channel lags engine speed
+  Drive idle 03:23:03-03:24:43       n= 1829
+      channel  p2p    6.500   dominant 0.328 Hz = 3.05 s
+      rpm      p2p     44.5   dominant 0.328 Hz = 3.05 s
+      r = -0.764 at -0.10 s  ->  channel lags engine speed
+
+========================================================================
+COMMANDED AIR/FUEL vs ENGINE SPEED   (log 20260905_041723)
+========================================================================
+  Park idle window 2180-2400s        n= 4383
+      channel  p2p    0.454   dominant 0.301 Hz = 3.32 s
+      rpm      p2p     51.8   dominant 0.329 Hz = 3.04 s
+      r = -0.495 at +0.05 s  ->  channel leads engine speed
+  Park idle window 2400-2600s        n= 3977
+      channel  p2p    0.480   dominant 0.312 Hz = 3.21 s
+      rpm      p2p     87.3   dominant 0.332 Hz = 3.01 s
+      r = -0.384 at +0.20 s  ->  channel leads engine speed
+  Park idle window 2600-2800s        n= 3905
+      channel  p2p    0.459   dominant 0.302 Hz = 3.31 s
+      rpm      p2p     85.8   dominant 0.302 Hz = 3.31 s
+      r = -0.407 at +0.00 s  ->  channel in phase with engine speed
+  Park idle window 2800-2980s        n= 3551
+      channel  p2p    0.464   dominant 0.310 Hz = 3.23 s
+      rpm      p2p     61.8   dominant 0.332 Hz = 3.01 s
+      r = +0.502 at -1.55 s  ->  channel lags engine speed
+
+========================================================================
+EVERYTHING ELSE THE PCM DRIVES
+========================================================================
+  Throttle, Park idle                n= 2621
+      channel  p2p   18.530   dominant 0.053 Hz = 18.72 s
+      rpm      p2p     74.3   dominant 0.298 Hz = 3.36 s
+      r = +0.198 at +0.25 s  ->  channel leads engine speed
+  Purge, Park idle                   n= 2688
+      channel  p2p    3.922   dominant 0.060 Hz = 16.80 s
+      rpm      p2p     74.5   dominant 0.372 Hz = 2.69 s
+      r = -0.240 at -1.45 s  ->  channel lags engine speed
+
+========================================================================
+PARK vs DRIVE, same session, minutes apart
+========================================================================
+  Drive  mean  550.3 rpm   sd  4.37   10 s spans median 14.8 (min 11, max 44)   0.330 Hz = 3.03 s
+  Park   mean  652.1 rpm   sd  9.56   10 s spans median 40.2 (min 24, max 85)   0.320 Hz = 3.13 s
