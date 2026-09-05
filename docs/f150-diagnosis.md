@@ -655,6 +655,68 @@ addresses the actual complaint.
 
 ---
 
+## PURGE VALVE REPLACED — the shake is GONE in D and R, still present in P and N
+
+**First change in the symptom in the owner's entire ownership.**
+
+| Condition | Before | After the new purge valve |
+|---|---|---|
+| P / N at standstill | **Worst** | **Still present** |
+| D / R at standstill | Less | **Gone** |
+| Driving under load | Absent | Absent |
+
+### What this establishes
+
+**The purge valve was a real contributor.** Six previous repairs aimed at six
+different systems changed nothing measurable. This one moved the symptom
+boundary. The EVAP purge circuit is confirmed as a genuine source of unmetered
+air on this vehicle, exactly as the trim slope predicted.
+
+**And it is not the whole story.** The remaining shake sits in the single
+condition with the *highest* manifold vacuum. The symptom still tracks vacuum
+inversely — the same curve as before, with the threshold moved. **At least one
+more vacuum-dependent source remains.**
+
+### The truck is now its own control
+
+Previously every condition was somewhere on a continuum. Now there is a sharp
+boundary at a standstill:
+
+- **P / N — shakes.** Highest vacuum.
+- **D / R — clean.** Slightly lower vacuum, converter load, different idle
+  target and a different learned trim cell.
+
+**Two conditions, minutes apart, same engine, same temperature, one shakes and
+one does not.** That is a far better comparison than anything available before,
+and it costs nothing. Every remaining question should be asked as "how does P
+differ from D at a standstill".
+
+### Caveats to hold
+
+- **The adaptives have not relearned.** Long term trim still holds the values it
+  learned around the *old* valve: +3.13 % bank 1, +2.34 % bank 2 at idle. Until
+  the truck has been driven, those numbers describe hardware that is no longer
+  fitted. **Short term trim is the honest reading right now** — if the leak is
+  smaller, the engine needs less fuel than long term is still adding, so short
+  term should sit **negative** at idle until long term catches up.
+- **Confirm the improvement survives a heat cycle.** "Less" becoming "gone" is a
+  change in degree reported by feel. It should be re-checked cold and after a
+  full warm-up before it is treated as permanent.
+
+### What remains on the list
+
+Same family, same method — engine off, disconnect, plug, restart, read both
+banks' short term trim at warm idle:
+
+1. **PCV valve, hose, grommet and elbow** — never inspected, twelve years of
+   Jeddah heat, hard plastic that cracks
+2. **Brake booster line and check valve** — never tested
+3. **Intake manifold gasket, throttle body gasket, injector O-rings** — cannot
+   be isolated by unplugging anything, which is where **a smoke test** earns its
+   place
+
+---
+
 ## CONFIRMED ON BOTH BANKS — and the correction is a SLOPE, not a step (2026-09, 01:30-01:32)
 
 Thirteen consecutive ~15 s windows pairing `LTFT - B1` with `LTFT - B2`, graph

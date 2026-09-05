@@ -314,7 +314,40 @@ fan is cycling and loading the engine. Does not touch the trim finding, which
 rests on learned cell values. Worth its own capture: `Engine RPM` +
 `Throttle Position Actually` at a held 2000 rpm.
 
-### PRIME SUSPECT: EVAP purge flowing unmetered air at idle
+### PURGE VALVE REPLACED — shake GONE in D and R, still in P and N
+
+**First change in the symptom in the owner's entire ownership.**
+
+| Condition | Before | After the new purge valve |
+|---|---|---|
+| P / N standstill | **Worst** | **Still present** |
+| D / R standstill | Less | **Gone** |
+| Driving | Absent | Absent |
+
+**The purge valve was a real contributor** — six earlier repairs changed
+nothing; this one moved the symptom boundary, exactly as the trim slope
+predicted. **And it is not the whole story:** the remaining shake sits in the
+condition with the *highest* manifold vacuum, so the symptom still tracks vacuum
+inversely and **at least one more unmetered-air source remains.**
+
+**The truck is now its own control.** P/N shakes, D/R is clean, minutes apart,
+same engine, same temperature. Ask every remaining question as *"how does P
+differ from D at a standstill"* — it is the best comparison this investigation
+has ever had, and it is free.
+
+**Caveats:** the adaptives have NOT relearned — long term trim still holds
++3.13 / +2.34 %, learned around hardware no longer fitted. **Short term trim is
+the honest reading now**, and it should sit *negative* at idle until long term
+catches up. Also confirm the improvement survives a heat cycle before treating
+it as permanent.
+
+**Still on the list, same method (engine off → disconnect → plug manifold port →
+restart → read both banks' short term trim):** PCV valve/hose/grommet/elbow,
+then brake booster line and check valve. Then a smoke test for the joints that
+cannot be isolated by unplugging — manifold gasket, throttle body gasket,
+injector O-rings.
+
+### Superseded suspect: EVAP purge flowing unmetered air at idle
 
 `Commanded evaporative purge` runs at **~40 % at warm idle**, flat, on a truck
 that had been idling for over three hours — long past when a canister should
