@@ -58,12 +58,47 @@ those captions are the only record of the condition each capture was taken under
 
 ## Adding more
 
-1. Drop images into [`inbox/`](inbox/).
-2. `python3 data/ingest_screenshots.py` — dry run, shows the plan.
-3. `python3 data/ingest_screenshots.py --apply` to file them.
+### The easy route: send them in chat
+
+The chat attachment button is a file browser — select as many as you like. That
+is how all 277 of these arrived. They get named, indexed and pushed from there.
+
+**It is also the only route where the caption travels with the images**, and the
+caption is what records the condition. Prefer it.
+
+### Bulk upload without chat: GitHub web
+
+On a phone, open the repository in Chrome, switch on **Desktop site** (the upload
+button does not exist in mobile view), navigate to `data/screenshots/inbox`, then
+**Add file → Upload files**. 100 files per commit, 25 MB per file.
+
+From a computer, clone the repo and copy the folder in directly — no limits.
+
+### Filing what lands in the inbox
+
+1. `python3 data/ingest_screenshots.py` — dry run, shows the plan.
+2. `python3 data/ingest_screenshots.py --apply` to file them.
 
 Optional: `--tag mode06` to force a content tag, `--session P3S-004` to attach a
 session id.
+
+### From Termux, in one command
+
+[`../phone-upload.sh`](../phone-upload.sh) copies the phone's screenshots from a
+given date into the inbox, commits and pushes:
+
+```
+bash data/phone-upload.sh 2026-09-05 idle
+```
+
+Needs `termux-setup-storage` once, and the repo cloned to `~/F-150-2014`.
+
+### There is no upload webpage
+
+A published page cannot store files on this account — the capabilities available
+here cover shared data, republishing, downloads, connectors, presence and asking
+Claude, but not file storage. A page that accepted images would have nowhere to
+put them, so none was built.
 
 **It reads EXIF capture time, falling back to file time.** It cannot read the
 phone clock burned into the image, which is this project's authoritative
