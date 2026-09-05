@@ -547,15 +547,23 @@ Warning:
 
 Practical Calibration Heuristics — Not Factory Specifications
 
+This card compresses the six bands of the classification table in section 2A into
+three columns. Its boundaries are the same boundaries; where a reading falls near
+one, read section 2A rather than this card.
+
+· Excellent = the Perfect / Exceptional and Excellent bands of section 2A
+· Good = the Good / Healthy and Acceptable bands
+· Investigate = the Marginal and Poor / Severe Oscillation bands
+
 Parameter Excellent Good Investigate Evidence Level
-P/N RPM P-P ≤10 RPM ≤30 RPM 40 RPM Level 3
-Drive RPM P-P ≤15 RPM ≤40 RPM 50 RPM Level 3
-Spark P-P ≤3° ≤6° 8–10° rhythmic Level 3
-Idle Recovery Time <1 sec <2 sec 3 sec Level 3
-RPM Error ±0–5 RPM ±10–20 RPM ±20 RPM persistent Level 3
+P/N RPM P-P <15 RPM ≥15–<40 RPM ≥40 RPM Level 3
+Drive RPM P-P <20 RPM ≥20–<50 RPM ≥50 RPM Level 3
+Spark P-P ≤4° >4–<8° ≥8°, or any amplitude that is rhythmic Level 3
+Idle Recovery Time <1 sec <2 sec ≥2 sec Level 3
+RPM Error ±0–5 RPM >±5–±20 RPM >±20 RPM persistent Level 3
 STFT Near 0% Moderate correction Persistent >±10% Level 3
 LTFT Near 0% Moderate correction Persistent >±10% Level 3
-Bank Trim Difference <3% 3–5% 5% persistent Level 3
+Bank Trim Difference <3% 3–<5% ≥5% persistent Level 3
 MAF (P/N) — 2011–2014 only ~0.49 lb/min (rule of thumb) — Varies with OSID Level 3
 MAF (Drive) — 2011–2014 only ~0.52–0.60 lb/min — Varies with load Level 3
 
