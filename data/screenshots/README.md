@@ -31,10 +31,37 @@ Images uploaded after the fact are named `new-<date>-<time>_NN_<tag>.jpg`.
 | `content_tag` | what the screen shows |
 | `channels` | the exact scan-app channel names |
 | `owner_caption` | **what the owner said when he sent it** — the condition |
+| `reply_message` | the analysis message — readings cite this, not the image message |
+| `extracted_rows` | **the reading and observation ids taken from this image** |
+| `n_extracted_rows` | how many |
+| `width` `height` | 1220 x 2712 on every image |
+| `has_exif` | yes on all 277 |
+| `sha256` | content hash — how re-uploads are recognised |
+
+**Every one of the 277 images links to the rows extracted from it.** Going the
+other way, a reading's `source` cites the analysis message, so
+`reply_message` is the column that joins them — not `message`. That off-by-one
+was found and fixed by checking rather than assuming: the first attempt linked
+only 190 of 277.
 
 `owner_caption` is the important column. It is where "this while AC on", "this
 is A laps is 5 seconds", "those i P idle" and "this is from 100 to 30" live, and
 those captions are the only record of the condition each capture was taken under.
+
+## 18 images were sent twice
+
+258 of the 277 files are unique; **18 groups covering 37 files are byte-identical
+duplicates.** The owner re-sent them, which is entirely reasonable — a phone
+gallery gives no way to tell what has already been sent.
+
+The largest group matters for reading the record: **the whole 10:26-10:33 value
+list was sent twice**, once at message 105 and again at message 182. It was
+analysed both times. The second time the owner said *"this is old screenshot
+always read phone clock"* — and he was right; the assistant had begun treating a
+re-sent session as new data.
+
+They are kept, not deduplicated. Both arrivals are part of the record and each
+carries its own caption.
 
 ## Content
 
