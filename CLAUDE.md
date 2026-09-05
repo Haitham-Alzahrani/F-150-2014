@@ -747,6 +747,14 @@ identification, engine, transmission, capacities, fluids, OBD-II buses,
 intervals, part numbers. Figures are marked [VIN] / [SPEC] / [VERIFY];
 never act on a [VERIFY] torque or capacity without checking the manual.
 
+**Field sheet — the full capture protocol at the truck:
+[`docs/FIELD-SHEET.md`](docs/FIELD-SHEET.md)** — every capture worth taking after
+the purge valve replacement, in the order to take them, with the exact app label
+for each channel and what each one answers. Sessions A–I cover standstill before
+driving, Park versus Drive, 2000 rpm, the drive itself, standstill after, cold
+start, the engine-off physical tests, measuring the vibration, and the control
+sample.
+
 **Data still wanted: [`docs/DATA-REQUESTS.md`](docs/DATA-REQUESTS.md)** — every
 scan capture taken and still outstanding, what each one answers, and the
 physical tests that now outrank further scanning.
