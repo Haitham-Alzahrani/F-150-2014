@@ -1,0 +1,15 @@
+### status bar
+stc ksa 4:03 @ -::
+
+### page
+Engine RPM 1795 rpm SO?
+
+1800 7:45 22:50 22:55
+Min: 1786.00 Avg: 3513.32 Max: 6402.00
+MAF 6.29 g/sec <O2
+
+22:49 22:90 22:99
+Min: 5.89 Avg: 84.14 Max: 215.27
+As: A
+
+< ‘O) Oo

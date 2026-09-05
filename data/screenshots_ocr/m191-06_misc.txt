@@ -1,0 +1,63 @@
+### status bar
+stc 1:00 © -::
+
+### page
+Control module voltage 838ms
+
+12.7 V
+
+Absolute load value 840ms
+
+14.12 %
+
+Fuel/Air commanded equivalence ratio 843ms
+14.41
+
+Relative throttle position 840ms
+
+0.78 %
+
+Ambient air temperature 314
+
+2
+Absolute throttle position B 628m
+
+14.12 %
+
+Absolute pedal position D 629ms
+
+14.9 %
+
+Absolute pedal position E 659ms
+
+7.45 %
+
+Commanded throttle actuator 660ms
+
+1.57 %
+
+Ethanol fuel percent 661ms
+
+16.08 %
+
+Average fuel consumption 841ms
+
+co L/100km
+
+Average fuel consumption (Today) 841ms
+
+co L/100km
+
+Average fuel consumption (total) 841ms
+
+co L/100km
+
+Ads:
+
+a
+Cara
+
+== OBD2 Car Scanner ELM327 Torque
+GD GD INSTALL
+
+< © O

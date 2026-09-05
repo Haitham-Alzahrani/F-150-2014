@@ -1,0 +1,45 @@
+### status bar
+stc ksa 4:36 @ -::
+
+### page
+Fuel System Monitor Bank 1 - MID$81
+Manufacturer defined - Test ID (TID) $80
+
+Value Minimum Maximum Result
+0 0 0.796865369 PASSED
+6498055
+
+Fuel System Monitor Bank 2 - MID$82
+Manufacturer defined - Test ID (TID) $80
+
+Value Minimum Maximum Result
+0 0 0.796865369 PASSED
+6498055
+
+Misfire Monitor General Data - MIDSA1
+Manufacturer defined - Test ID (TID) $80
+
+Value Minimum Maximum Result
+0 0 30.976274 PASSED
+% % %
+
+Misfire Monitor General Data - MIDSA1
+Manufacturer defined - Test ID (TID) $81
+
+Value Minimum Maximum Result
+0 0 0.949172 PASSED
+% % %
+
+Misfire Monitor General Data - MIDSA1
+Manufacturer defined - Test ID (TID) $84
+
+Value Minimum Maximum Result
+527.1982909 0 918.8744258 PASSED
+895476 on 793012
+- Ads: -
+
+go tl fool ualall Jom dolys ydlu we
+
+Dsgoudl Loyal dood! bobs] 7“
+
+@

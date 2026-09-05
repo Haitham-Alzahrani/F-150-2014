@@ -1,0 +1,45 @@
+### status bar
+stc 10:31
+
+### page
+Oxygen sensor 1 Wide Range Equivalence ratio
+
+14.92
+Oxygen sensor 5 Wide Range Current (mA)
+OmA
+Oxygen sensor 5 Wide Range Equivalence ratio
+14.8
+Catalyst temperature Bank 1 Sensor 1
+458.9 ° ,
+Catalyst temperature Bank 2 Sensor 1
+458.9 °C
+Monitor status this drive cycle
+MIL:OFF
+DTC count:0
+
+Misfire: Available/Completed
+
+Fuel System: Available/Not completed
+Components: Available/Not completed
+
+Catalyst: Available/Not completed
+
+Heated Catalyst: Not available/Completed
+Evaporative System: Not available/Not completed
+Secondary Air System: Not available/Completed
+A/C refrigerant: Not available/Completed
+Oxygen Sensor: Available/Not completed
+Oxygen Sensor Heater: Available/Not completed
+EGR system: Available/Completed
+
+Control module voltage
+13.76 V
+
+Absolute load value
+14.12 %
+
+| ial /Niw nammanaAad rr rill minlAnan KAtin
+
+Ads:
+
+< © ©

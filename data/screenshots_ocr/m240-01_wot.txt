@@ -1,0 +1,9 @@
+### status bar
+stc ksa 3:58 @ ---
+
+### page
+Engine RPM 1705 rpm SO?
+
+17:25 173
+Min: 1705.00 Avg: 1865.48 Max: 2213.00
+02S5 air:fuel 29.38 ¢O>

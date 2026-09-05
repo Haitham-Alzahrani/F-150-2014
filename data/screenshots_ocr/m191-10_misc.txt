@@ -1,0 +1,49 @@
+### status bar
+stc 1:00 © -::
+
+### page
+Short term fuel % trim - Bank 1 477ms
+
+0%
+
+Long term fuel % trim - Bank 1 508ms$
+3.13 %
+
+Short term fuel % trim - Bank 2 509ms
+4.69 %
+
+Long term fuel % trim - Bank 2 510ms
+2.34 %
+
+Engine RPM 479ms
+640 rpm
+
+Vehicle speed 479ms
+0 km/h
+
+Timing advance 479ms
+13 °
+
+Intake air temperature 479ms
+37°C
+
+MAF air flow rate 480ms
+2.97 g/sec
+
+Throttle position 480ms
+12.55 %
+
+Oxygen sensor 2 Bank 1 Voltage 445ms
+0.79 V
+
+Oxygen sensor 2 Bank 1 Short term fuel trim 445ms
+n/a %
+
+Oxygen sensor 2 Bank 2 Voltage 451ms
+0.67 V
+
+Ads:
+
+| : OBD2 — ELM327 Torque INSTALL
+
+© O

@@ -1,0 +1,16 @@
+### status bar
+stc 3:49 @-::
+
+### page
+Engine RPM 1547 rpm SO?
+
+8:90 8:99 9:00
+Min: 1547.00 Avg: 1756.84 Max: 1859.00
+
+02$1 air:fuel 29.38 ¢O>
+
+8:90 8:99 9:00
+Min: 13.07 Avg: 21.17 Max: 29.38
+As: A
+
+< © Oo

@@ -1,0 +1,19 @@
+### status bar
+stc 3:49 @-::
+
+### page
+Engine RPM 1837 rpm SO?
+
+1859
+1856
+
+8:40 8:49 8:90
+
+Min: 1783.00 Avg: 1815.01 Max: 1859.00
+02S1 air:fuel 14.39 gO?
+
+8:40 8:49 8:90
+Min: 13.49 Avg: 14.62 Max: 15.84
+As: A
+
+< © Oo

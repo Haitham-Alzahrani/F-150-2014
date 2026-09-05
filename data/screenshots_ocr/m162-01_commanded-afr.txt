@@ -1,0 +1,19 @@
+### status bar
+stc 12:04 ® -::
+
+### page
+Engine RPM 643 rpm SO?
+668
+
+=
+00
+Fe ar ee |
+
+Min: 627.00 Avg: 650.17 Max: 668.00
+Fuel/Air com. ratio 14.86 SO?
+
+40:20 40:25 40:30
+Min: 14.41 Avg: 14.59 Max: 14.86
+As: A
+
+< © Oo

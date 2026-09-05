@@ -1,0 +1,30 @@
+### status bar
+ste ksa 4:37 @ -::
+
+### page
+Oxygen Sensor Completed
+Available
+
+Oxygen Sensor Heater Completed
+Available
+
+EGR system Completed
+Available
+
+CURRENT DRIVE CYCLE
+STATUS:
+
+Misfire Completed
+A\, vit WWIe
+
+Fuel System Completed
+A\ it Wie
+
+Components Not completed
+Available
+
+Catalyst Completed
+Not available
+
+Heated Catalyst Completed
+Not availabl

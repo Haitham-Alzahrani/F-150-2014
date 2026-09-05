@@ -1,0 +1,9 @@
+### status bar
+ste 3:50 @ ---
+
+### page
+Engine RPM 993 rpm SO?
+
+; 9:39 9:40
+Min: 843.00 Avg: 1052.94 Max: 1203.00
+02S1 air:fuel 29.38 ¢O>

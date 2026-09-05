@@ -1,0 +1,49 @@
+### status bar
+stc ksa 4:36 @ -::
+
+### page
+VVT Monitor Bank 2 - MIDS$36
+Manufacturer defined - Test ID (TID) $83
+Value Minimum Maximum Result
+
+0 0 26.45 PASSED
+
+° ° fe)
+
+VVT Monitor Bank 2 - MID$36
+Manufacturer defined - Test ID (TID) $84
+
+Value Minimum Maximum Result
+0 0 22.36000000 PASSED
+6 : 0000003
+
+°
+
+VVT Monitor Bank 2 - MIDS36
+Manufacturer defined - Test ID (TID) $85
+Value Minimum Maximum Result
+
+0.05 0 20 PASSED
+
+° fe) °
+
+EVAP Monitor (0.090“) - MID$3A
+Manufacturer defined - Test ID (TID) $80
+
+Value Minimum Maximum Result
+0 0 0 PASSED
+Pa Pa Pa
+
+EVAP Monitor (0.090“) - MID$3A
+Manufacturer defined - Test ID (TID) $81
+
+Value Minimum Maximum Result
+0 0 0 PASSED
+Pa Pa Pa
+-Ads:-
+
+20 ‘yd! jam! allel Jom dolys ydlu wy
+
+Lsgoud! Lsyall Ugo! bobs]
+
+@

@@ -1,0 +1,40 @@
+### status bar
+stc 1:01 © -:-
+
+### page
+[BCM] Left Front Tire Pressure 291ms
+
+237.53 kPa
+
+[BCM] Right Front Tire Pressure 289ms
+211.68 kPa
+
+[BCM] Right Rear Outer Tire Pressure 302ms
+247.88 kPa
+
+[BCM] Left Rear Outer Tire Pressure 342ms
+247.88 kPa
+
+[BCM] Right Rear Inner Tire Pressure 340ms
+0 kPa
+
+[BCM] Left Rear Inner Tire Pressure 361ms
+0 kPa
+
+[BCM] Battery State Detection Status Oms
+[BCM] Battery SoC too low for start/stop Oms
+[BCM] Battery Capacity too low for start/stop Oms
+[BCM] Battery Current too high for start/stop Oms
+
+[BCM] Battery Voltage too low for cold cranking ms
+capability ;
+
+[BCM] Battery Voltage too low for Start/Stop Oms
+
+[BCM] Battery Refresh Cycle in progress for Start/Stop
+
+‘Ads:
+
+: 583381 S9> ygew yl} 3900 cpaeiuss Lise adlbs |
+
+@

@@ -1,0 +1,49 @@
+### status bar
+stc 1:01 © -:-
+
+### page
+A/C pressure 719ms
+
+0 kPa
+
+Lambda 719ms
+0.99
+
+Air:fuel ratio 719ms
+14.55
+
+Oil Life % Oms
+%
+
+(ABS) Front left wheel speed Oms
+km/h
+
+(ABS) Front right wheel speed Oms
+km/h
+
+(ABS) Rear left wheel speed Oms
+km/h
+
+(ABS) Rear right wheel speed Oms
+km/h
+
+Fan speed desired Oms
+%
+
+Engine fuel rate Om$
+L/h
+
+Engine oil pressure raw ong
+kPa
+
+[BCM] Battery SoC 690ms
+90 %
+
+[BCM] Vehicle Battery SoC 690ms
+90A
+
+‘Ads:
+
+: 583381 S9> ygew yl} 3900 cpaeiuss Lise adlbs |
+
+@

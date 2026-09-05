@@ -1,0 +1,55 @@
+### status bar
+stc 1:00 © -::
+
+### page
+Oxygen sensor 1 Wide Range Equivalence ratio 26/ms
+14.87
+
+Oxygen sensor 5 Wide Range Current (mA) 300ms
+-0.09 mA
+
+Oxygen sensor 5 Wide Range Equivalence ratio 300ms
+14.54
+
+Catalyst temperature Bank 1 Sensor 1 300m$
+459.9 °C
+
+Catalyst temperature Bank 2 Sensor 1 301ms
+459.9 °C
+
+Monitor status this drive cycle 300ms
+
+MIL:OFF
+
+DTC count:0
+
+Misfire: Available/Completed
+
+Fuel System: Available/Not completed
+Components: Available/Not completed
+
+Catalyst: Available/Not completed
+
+Heated Catalyst: Not available/Completed
+Evaporative System: Not available/Not completed
+Secondary Air System: Not available/Completed
+A/C refrigerant: Not available/Completed
+Oxygen Sensor: Available/Not completed
+Oxygen Sensor Heater: Available/Not completed
+EGR system: Available/Completed
+
+Control module voltage 271ms
+
+12.75 V
+
+Absolute load value 268ms
+
+14.12 %
+
+Ciianl/ Air ARRRAmaAn AnRA AnuiininlAanan ratin 272ms
+Ads:
+
+OBD2 Car Scanner ELM327 Torque
+ees
+
+< © O

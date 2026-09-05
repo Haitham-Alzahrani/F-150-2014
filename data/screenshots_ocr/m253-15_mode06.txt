@@ -1,0 +1,44 @@
+### status bar
+stc ksa 4:36 @ -::
+
+### page
+Oxygen Sensor Monitor Bank 2 — Sensor 1 - MID$05 |
+Manufacturer defined - Test ID (TID) $88
+Value Minimum Maximum Result
+0.008 0 0.4 PASSED
+SeC. Sec. SeC.
+
+Oxygen Sensor Monitor Bank 2 — Sensor 2 - MIDS06
+Manufacturer defined - Test ID (TID) $85
+
+Value Minimum Maximum Result
+-3788 -30000 0 PASSED
+mvV/sec. mvV/sec. mvV/sec.
+
+Oxygen Sensor Monitor Bank 2 — Sensor 2 - MIDS06
+Manufacturer defined - Test ID (TID) $86
+
+Value Minimum Maximum Result
+0.856 0 10 PASSED
+SeC. SeC. SeC.
+
+Catalyst Monitor Bank 1 - MID$21
+Manufacturer defined - Test ID (TID) $81
+
+Value Minimum Maximum Result
+0.371089265 0 0.835927397 PASSED
+27809566 5738155
+
+Catalyst Monitor Bank 2 - MID$22
+Manufacturer defined - Test ID (TID) $81
+
+Value Minimum Maximum Result
+0.363276859 0 0.835927397 PASSED
+69329365 5738155
+- Ads:
+
+20 ‘yd! jam! allel Jom dolys ydlu wy
+
+Asgo2ul dsyoll drgotl bokst] “a
+
+@

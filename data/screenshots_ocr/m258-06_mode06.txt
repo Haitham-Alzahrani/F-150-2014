@@ -1,0 +1,28 @@
+### status bar
+stc ksa 4:50 @ -::
+
+### page
+Engine RPM 659 rpm SO?
+677
+674
+
+670
+666 |]
+662 Hy}
+
+604
+690
+646
+642
+638
+634
+
+32:45 32:90 32:99
+Min: 626.00 Avg: 654.07 Max: 677.00
+
+Throttle Position Actually 9.44 ° SO?
+
+32:49 32:50 32:59
+Min: 9.44 Avg: 9.44 Max: 9.44
+
+< © Oo

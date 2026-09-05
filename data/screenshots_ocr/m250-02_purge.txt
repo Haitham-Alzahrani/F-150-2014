@@ -1,0 +1,17 @@
+### status bar
+stc ksa 4:30 @ -::
+
+### page
+Engine RPM 632 rpm SO?
+685
+
+12:40 12:49 12:90
+Min: 629.00 Avg: 652.21 Max: 685.00
+
+EVAP purge 49.02 % SO?
+
+12:40 12:45 12:50
+Min: 47.06 Avg: 47.87 Max: 49.80
+©
+
+< © Oo

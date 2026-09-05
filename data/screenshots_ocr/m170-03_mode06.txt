@@ -1,0 +1,9 @@
+### status bar
+ste 12:28 © -::
+
+### page
+Engine RPM 655 rpm SO?
+
+4:20 4:25 4:30
+Min: 616.00 Avg: 652.83 Max: 715.00
+02S5 air:fuel 14.87 60?

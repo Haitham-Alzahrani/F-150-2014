@@ -1,0 +1,48 @@
+### status bar
+stc 1:01 © -:-
+
+### page
+[BCM] Battery Refresh Cycle in progress for Start/Stop
+
+[BCM] Battery Temperature Too Low for auto stop 9s
+
+[BCM] Battery Voltage Too Low for auto restart Oms
+
+[BCM] Normalized cumulative discharge from battépys
+with engine on [Cn]
+
+10.6
+
+[BCM] Normalized cumulative discharge from battépys
+with engine off [Cn]
+
+2.9
+
+[BCM] Normalized cumulative charge when ignitiot#78's
+on [Cn]
+
+121.6
+
+[BCM] Vehicle Battery Voltage 401ms
+12.8 V
+
+[BCM] Vehicle Battery B Voltage Oms
+V
+
+[BCM] Vehicle Battery Current 419ms
+OA
+
+[BCM] Vehicle Battery B Current Oms
+A
+
+[BCM] Battery Current: Predicted Oms
+A
+
+[BCM] Battery Quinscent Current: low range Oms
+mA
+
+‘Ads:
+
+: 583381 S9> ygew yl} 3900 cpaeiuss Lise adlbs |
+
+@

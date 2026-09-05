@@ -1,0 +1,45 @@
+### status bar
+stc 10:26
+
+### page
+OBD-II Ui]
+
+U0422(00) Archive (inactive)
+
+Invalid data received - body control module
+Status: Confirmed, Test failed since last DTC clear
+Click to search for description on the Internet...
+
+Engine control unit Ul]
+
+U0422(00) Archive (inactive)
+
+Invalid data received - body control module
+Status: Confirmed, Test failed since last DTC clear
+Click to search for description on the Internet...
+
+ocs Ui]
+
+U0140(00) Archive (inactive)
+
+Data bus, body control module (BCM) - no
+communication
+
+Status: Confirmed
+
+Click to search for description on the Internet...
+
+RCM Hl
+
+B11D8(14) Archive (inactive)
+RESTRAINTS EVENT NOTIFICATION
+Status: Confirmed
+
+Click to search for description on the Internet...
+
+Ads:
+
+wae OBD2 Car Scanner ELM327 Torque
+gS an a chicklet
+
+< © w

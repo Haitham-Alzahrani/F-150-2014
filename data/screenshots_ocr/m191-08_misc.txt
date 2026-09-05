@@ -1,0 +1,41 @@
+### status bar
+stc 1:00 © -::
+
+### page
+Oxygen sensor 2 Bank 2 Voltage 452ms
+
+0.79 V
+
+Oxygen sensor 2 Bank 2 Short term fuel trim 452ms
+n/a %
+
+OBD standards this vehicle conforms to 478m$
+
+OBD as defined by the EPA
+
+Auxillary Input Status 480ms
+Power take off: not active
+Run time since engine start 478ms
+0.03:06:10
+Distance traveled with MIL on 480ms
+0 km
+Commanded evaporative purge 480ms
+40.39 %
+Fuel level input (%) 480ms
+49.8 %
+# warm-ups since codes cleared 480ms
+3
+Distance traveled since codes cleared 478ms
+101 km
+Evap. system vapor pressure 447ms
+-412.5 Pa
+Barometric pressure 453ms
+97 kPa
+Oxygen sensor 1 Wide Range Current (mA) 450ms
+-0.07 mA
+
+Ads: -
+
+; OBD2 Car Scanner ELM327 Torque INSTALL
+
+< © O

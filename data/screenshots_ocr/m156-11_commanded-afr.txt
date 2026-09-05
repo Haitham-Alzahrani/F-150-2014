@@ -1,0 +1,15 @@
+### status bar
+Sstc 11:54 © -::
+
+### page
+Engine RPM 648 rpm SO?
+
+30:45 30:50 30:55
+Min: 630.00 Avg: 653.28 Max: 669.00
+Air:fuel ratio 14.44 SO?
+
+30:49 30:50 30:59
+Min: 14.39 Avg: 14.61 Max: 14.97
+As: A
+
+< © O

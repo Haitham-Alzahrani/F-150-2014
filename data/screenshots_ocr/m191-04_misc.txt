@@ -1,0 +1,45 @@
+### status bar
+stc 1:01 © -:-
+
+### page
+ATF temperature var.3 749ms
+
+76.69 °C
+
+PCM Odometer 748ms
+131313 km
+
+Throttle Position Desired 751ms
+8.28 °
+
+Throttle Position Actually 748ms
+7.85 °
+
+Learned octane 756ms
+-0.6
+
+Knock retard 744ms
+@} °
+
+Variable camshaft actual advance #1 749ms
+-0.06 °
+
+Gear (AT) 720ms
+1
+
+Manifold absolute pressure (high resolution) Oms
+kPa
+
+DPF average distance between regen Oms
+km
+
+DPF failed regens Oms
+DPF failed regens (average) Ooms
+Vane position sensor 718ms
+OV
+
+‘Ads:
+
+: 583381 S9> ygew yl} 3900 cpaeiuss Lise adlbs |
+
+@

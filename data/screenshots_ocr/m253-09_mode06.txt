@@ -1,0 +1,50 @@
+### status bar
+stc ksa 4:36 @ -::
+
+### page
+Misfire Cylinder 3 Data - MIDSA4
+
+EWMA (Exponential Weighted Moving Average) misfire
+counts for last ten (10) driving cycles - Test ID (TID)
+SOB
+
+Value Minimum Maximum Result
+
+0 0 65535 PASSED
+
+Misfire Cylinder 3 Data - MIDSA4
+
+Misfire counts for last / current driving
+cycles(calculated, rounded to an integer value) - Test ID
+
+(TID) SOC
+Value Minimum Maximum Result
+0 0 65535 PASSED
+
+Misfire Cylinder 3 Data - MIDSA4
+Manufacturer defined - Test ID (TID) $80
+
+Value Minimum Maximum Result
+0 0 30.976274 PASSED
+% % %
+
+Misfire Cylinder 3 Data - MIDSA4
+Manufacturer defined - Test ID (TID) $81
+
+Value Minimum Maximum Result
+0 0 0.949172 PASSED
+% % %
+
+Misfire Cylinder 4 Data - MIDSA5
+EWMA (Exponential Weighted Moving Average) misfire
+
+counts for last ten (10) driving cycles - Test ID (TID)
+
+SOB
+- Ads: -
+
+20 oil hol allsil So> d>lys ydlus AS
+
+ysgol dsyoll digodl bokst] 4
+
+@

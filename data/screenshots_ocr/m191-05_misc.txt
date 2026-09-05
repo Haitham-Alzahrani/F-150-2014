@@ -1,0 +1,42 @@
+### status bar
+stc 1:01 © -:-
+
+### page
+Fuel economizer (based on fuel system status an@°4ms
+throttle position)
+
+1
+
+Fuel level input (V) 541ms
+| 24.9L
+Fuel used 510ms
+| 0.28L
+Fuel used (Today) 510ms
+| 0.14L
+Fuel used (total) 510ms
+0.14L
+
+Fuel used (Week) 510ms
+0.14L
+
+Fuel used price 510ms
+| 0.28$
+Fuel used price (Today) 510m$
+0.14$
+
+Fuel used price (total) 510ms
+| 0.14$
+Fuel used price (Week) 510ms
+| 0.14$
+Instant engine power (based on fuel consumption5!9ms
+| 3.92 hp
+Power from MAF 510ms
+| 3.53 hp
+Vehicle acceleration 599ms
+Oa
+
+‘Ads:
+
+: 85! Voie yous yl} 3900 ¢yducus Ys Lie asl; |
+
+@

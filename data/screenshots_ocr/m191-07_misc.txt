@@ -1,0 +1,55 @@
+### status bar
+stc 1:01 © -:-
+
+### page
+Average fuel consumption (Week) 970ms
+
+co L/100km
+
+Average fuel consumption 10 sec 570ms
+co L/100km
+
+Average speed 570ms
+0 km/h
+
+Calculated boost 572ms
+0.26 bar
+
+Calculated instant fuel consumption 570ms
+co L/100km
+
+Calculated instant fuel rate 570ms
+0.97 L/h
+
+Distance to empty 570ms
+n/a km
+
+Distance travelled 570ms
+0 km
+
+Distance travelled (Today) 570ms
+0 km
+
+Distance travelled (total) 570ms
+Okm
+
+Distance travelled (Week) 570ms
+0 km
+
+Engine RPM x1000 573ms
+0.6 rpm
+
+Free space in fuel tank 599ms
+25.1L
+
+Ciital AannAnamionr (AnNanA An Fiial aviatam atatiia anAI7Ms
+
+Ads:
+
+—
+ee:
+
+—— OBD2 Car Scanner ELM327 Torque
+a INSTALL J NSTALL
+
+< © O

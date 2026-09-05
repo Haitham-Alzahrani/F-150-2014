@@ -1,0 +1,44 @@
+### status bar
+stc ksa 4:36 @ -::
+
+### page
+EVAP Monitor (0.090“) - MID$3A
+Manufacturer defined - Test ID (TID) $82
+Value Minimum Maximum Result
+0 0 0 PASSED
+Pa Pa Pa
+
+EVAP Monitor (0.040”) - MID$3B
+Manufacturer defined - Test ID (TID) $80
+
+Value Minimum Maximum Result
+0 0 0 PASSED
+Pa Pa Pa
+
+Purge Flow Monitor - MIDS3D
+Manufacturer defined - Test ID (TID) $80
+
+Value Minimum Maximum Result
+0 0 0 PASSED
+Pa/sec. Pa/sec. Pa/sec.
+
+Purge Flow Monitor - MIDS3D
+Manufacturer defined - Test ID (TID) $81
+
+Value Minimum Maximum Result
+0 0 0 PASSED
+Pa Pa Pa
+
+Purge Flow Monitor - MIDS3D
+Manufacturer defined - Test ID (TID) $82
+
+Value Minimum Maximum Result
+0 0 0 PASSED
+Pa Pa Pa
+
+Oxygen Sensor Heater Monitor Bank 1 — Sensor 1 -
+- Ads: :
+
+Lsgoud! Lsyall Ugo! bobs]
+
+@

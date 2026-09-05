@@ -1,0 +1,11 @@
+### status bar
+ste 1:13 © -:
+
+### page
+STFT B1 “1.56 % G0?
+
+Min: -2.34 Avg: -1.28 Max: 0.00
+LTFT - B2 2.34 % 09
+
+46:00 46:09 46:10
+Min: 2.34 Avg: 2.34 Max: 2.34

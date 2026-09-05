@@ -1,0 +1,12 @@
+### status bar
+stc 11:49 © -::
+
+### page
+Engine RPM 665 rpm SO?
+
+no
+
+Min: 631.00 Avg: 652.29 Max: 674.00
+Throttle actuator 1.18 % SO?
+
+Min: 1.18 Avg: 1.18 Max: 1.57

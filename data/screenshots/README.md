@@ -48,6 +48,40 @@ only 190 of 277.
 is A laps is 5 seconds", "those i P idle" and "this is from 100 to 30" live, and
 those captions are the only record of the condition each capture was taken under.
 
+## Every image is machine-readable
+
+`python3 data/ocr_screenshots.py` OCRs each screenshot into
+[`../screenshots_ocr/`](../screenshots_ocr/) and pulls fields into the manifest.
+
+**The phone clock is no longer trapped in the pixels.** It reads on **276 of 277**
+images, and it agrees with the file's EXIF capture time on **275 of those 276**.
+The single exception is a one-minute OCR slip, not a conflict.
+
+**The EXIF is the better timestamp.** Phone clock `10:26` against EXIF
+`2026:09:04 22:26:11` — the same moment, but to the second, and with the AM/PM
+ambiguity settled that the on-screen clock could never resolve.
+
+Preprocessing note, because it was not obvious: the app draws values in red,
+green and yellow on near-black, and **red is almost invisible under a luminance
+grayscale** — a first attempt silently lost every "Completed" in the monitor
+screens. Taking the brightest of the three channels per pixel keeps all colours.
+
+## The sessions rebuild themselves from the timestamps
+
+[`../sessions_from_exif.csv`](../sessions_from_exif.csv) — **23 capture sessions**
+across **6 h 36 m**, from 22:26 on 4 September to 05:02 on the 5th, clustered on a
+four-minute idle gap. Each row carries its start, end, duration, image count,
+message range and content.
+
+**The largest gap is 1 h 38 m, between 01:32:39 and 03:11:06.** That is the purge
+valve replacement and the memory wipe — **visible in the file timestamps without
+anyone having written it down.** The epoch boundary that the whole before-and-
+after comparison rests on is now independently confirmed by the files themselves:
+189 images before the repair, the rest after.
+
+Three other gaps mark real events: 23 min after 03:25 (the relearning drive
+starting), 23 min after 04:05 (returning from it), 20 min after 00:28.
+
 ## 18 images were sent twice
 
 258 of the 277 files are unique; **18 groups covering 37 files are byte-identical

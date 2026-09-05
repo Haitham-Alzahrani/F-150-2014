@@ -1,0 +1,47 @@
+### status bar
+stc ksa 4:36 @ -::
+
+### page
+Oxygen Sensor Heater Monitor Bank 1 — Sensor 1 -
+MID$41
+
+Manufacturer defined - Test ID (TID) $81
+
+Value Minimum Maximum Result
+2550 1120 3800 PASSED
+mA mA mA
+
+Oxygen Sensor Heater Monitor Bank 1 — Sensor 2 -
+MID$42
+
+Manufacturer defined - Test ID (TID) $81
+
+Value Minimum Maximum Result
+637 220 3000 PASSED
+mA mA mA
+
+Oxygen Sensor Heater Monitor Bank 2 — Sensor 1 -
+MID$45
+
+Manufacturer defined - Test ID (TID) $81
+
+Value Minimum Maximum Result
+2455 1120 3800 PASSED
+mA mA mA
+
+Oxygen Sensor Heater Monitor Bank 2 — Sensor 2 -
+MID$46
+
+Manufacturer defined - Test ID (TID) $81
+
+Value Minimum Maximum Result
+652 220 3000 PASSED
+mA mA mA
+
+Fuel System Monitor Bank 1 - MID$81
+Manufacturer defined - Test ID (TID) $80
+Value Minimum Maximum Result
+
+- Ads:
+
+@
