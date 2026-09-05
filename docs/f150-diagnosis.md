@@ -700,15 +700,41 @@ because the mixture never leaves a narrow band there.
 Worth having, since the O2 sensors on this truck were "cleaned" by an unknown
 method and have been carried as an open item throughout.
 
-### Outstanding: the same test on bank 2
+### Bank 2 — same result. THE FUEL SYSTEM IS ELIMINATED (2026-09, 03:58)
 
-Repeat the identical coast capturing `Oxygen sensor 5 Wide Range Equivalence
-ratio` (`O2S5 air:fuel` on the graph screen).
+`Engine RPM` + `O2S5 air:fuel`, same coast.
 
-| Bank 2 result | Meaning |
-|---|---|
-| **Pegs at 29.38 and holds flat** | Both banks sealed. Injectors and fuel delivery fully eliminated. |
-| **Fails to peg, or drifts back** | **Fuel is entering bank 2 during cut — a leaking injector on that side.** That would run one cylinder rich at idle, produce an uneven power stroke, set no code, and match the symptom being chased. |
+| Graph clock | `Engine RPM` | `O2S5 air:fuel` |
+|---|---|---|
+| 17:12-17:22 | 1664 → 2255, accelerating | dips to **12.33** — power enrichment |
+| 17:22-17:33 | 2213 → 1800 | oscillating 14.5-15.5, closed loop |
+| **17:34** | throttle closed | **steps vertically to 29.38** |
+| 17:33-17:48 | 1772 → 1500 | **29.38 flat**, min = avg = max |
+| 17:43-17:58 | 1569 → 1381 | **29.38 flat**, min = avg = max |
+
+**Identical to bank 1.** Bank 2's sensor demonstrated an even wider sweep —
+**12.33 to 29.38** — in both directions, fast.
+
+| | Bank 1 | Bank 2 |
+|---|---|---|
+| Injectors seal on fuel cut | **Yes**, pegged flat | **Yes**, pegged flat |
+| Upstream sensor range shown | 13.49 → 29.38 | **12.33 → 29.38** |
+| Sensor response | fast, both directions | fast, both directions |
+
+**What is now closed:**
+
+- **Leaking injectors, both banks — ELIMINATED.** Measured on the engine, in
+  place, under real manifold vacuum.
+- **Both upstream oxygen sensors — CONFIRMED HEALTHY.** Full range, fast, both
+  directions. This closes the "cleaned by an unknown method" concern that has
+  been carried as an open item since the beginning of this project.
+- **Fuel delivery under load — PROVEN.** The PCM commanded roughly 12.3:1 at
+  wide throttle and the system delivered it, which exercises the pump, the
+  regulator and the injectors at high demand.
+
+Combined with trims now sitting near zero at idle after the purge valve
+replacement, **there is nothing left to find in fuelling.** The fuel system is
+eliminated as a cause of the remaining vibration.
 
 ---
 

@@ -339,11 +339,16 @@ dead flat for a minute.
   **Bank 1 upstream sensor: healthy, full range, fast.** Closes an item carried
   open since the sensors were "cleaned" by an unknown method.
 
-**Outstanding: the same coast capturing `O2S5 air:fuel` (upstream bank 2).**
-Pegs flat = both banks sealed, fuel delivery fully eliminated. Fails to peg =
-**fuel entering bank 2 during cut, a leaking injector on that side** — which
-would run one cylinder rich at idle, give an uneven power stroke, set no code,
-and match the symptom exactly.
+**Bank 2 did exactly the same** (03:58): `O2S5 air:fuel` pegged 29.38 flat,
+min = avg = max, two windows, 1772 → 1381 rpm. It also swept **12.33 → 29.38** —
+wider than bank 1, fast in both directions.
+
+**THE FUEL SYSTEM IS ELIMINATED.** Leaking injectors both banks — out. Both
+upstream O2 sensors — confirmed healthy across full range, closing the "cleaned
+by unknown method" item carried since day one. Fuel delivery under load —
+proven, 12.3:1 commanded and delivered at wide throttle, exercising pump,
+regulator and injectors. With trims near zero at idle after the new purge valve,
+**there is nothing left to find in fuelling.**
 
 ### THE SHAKE IS STRONG — mechanical side REOPENED (2026-09)
 
