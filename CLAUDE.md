@@ -1199,6 +1199,15 @@ the barometric 97 kPa reading and the evap −412.5 Pa reading both came from
 channels this file once said never to request again** — and which are the app's
 own arithmetic rather than readings from the truck.
 
+**Calibration and tuning reference for this engine family:
+[`docs/ford-3.7-cyclone-6r80-guide.md`](docs/ford-3.7-cyclone-6r80-guide.md)** —
+Ford 3.7 Cyclone and 6R80, covering 2011–2014 Mustang and F-150. It carries a
+four-level evidence system separating Ford-verified specifications from
+technical references, observed calibration heuristics and OSID-specific values
+that must be read from the vehicle. **Its idle-stability classification table is
+the nearest thing this project has to a control sample**, though the values are
+observed heuristics rather than Ford acceptance criteria and it says so.
+
 **Specs and technical data: [`docs/f150-specs.md`](docs/f150-specs.md)** —
 identification, engine, transmission, capacities, fluids, OBD-II buses,
 intervals, part numbers. Figures are marked [VIN] / [SPEC] / [VERIFY];
