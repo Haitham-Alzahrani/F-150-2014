@@ -70,7 +70,20 @@ check the millisecond figure, and check twice.
 | `Fuel level input (V)` | 26.47 L |
 | `Free space in fuel tank` | 23.53 L |
 
-**On the graph screen** `Short term fuel % trim - Bank 2` is headed **`STFT B2`**.
+**Graph-screen headers that differ from the list label:**
+
+| Graph header | List label |
+|---|---|
+| `STFT B2` | `Short term fuel % trim - Bank 2` |
+| `LTFT - B1` / `LTFT - B2` | `Long term fuel % trim - Bank 1` / `- Bank 2` |
+| **`Fuel/Air com. ratio`** | `Fuel/Air commanded equivalence ratio` |
+| `Tim. adv.` | `Timing advance` |
+| `O2S1 air:fuel` | `Oxygen sensor 1 Wide Range Equivalence ratio` |
+| `O2S5 air:fuel` | `Oxygen sensor 5 Wide Range Equivalence ratio` |
+| `EVAP purge` | `Commanded evaporative purge` |
+| `Abs. load` | `Absolute load value` |
+| `MAF` | `MAF air flow rate` |
+| `ECU voltage` | `Control module voltage` |
 
 ## Oxygen sensors
 

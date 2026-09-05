@@ -655,6 +655,109 @@ addresses the actual complaint.
 
 ---
 
+## RE-TEST OF THE PCM-DRIVES-THE-RPM THEORY (2026-09, 04:49-04:54)
+
+The theory was first measured on night one, **before** the purge valve was
+replaced and before the adaptives were wiped and relearned. Everything
+downstream of it had been re-measured since; the head of the chain had not.
+This is the re-test.
+
+### The commanded square wave is IDENTICAL
+
+Graph header **`Fuel/Air com. ratio`** (list label
+`Fuel/Air commanded equivalence ratio`).
+
+| | First night | **After the repair** |
+|---|---|---|
+| Levels | 14.41 ↔ 14.86 | **14.42 ↔ 14.86** |
+| Amplitude | ±1.5 % | **±1.5 %** |
+| Period | ~3.4 s | **~3.5 s** |
+
+**Unchanged.** New purge valve, wiped and relearned adaptives, trims at −0.78 %
+on both banks — and the command is exactly what it was.
+
+### The SHAPE is the important new observation
+
+The trace is a **perfect two-level square wave with vertical edges.** It sits at
+14.86, drops to 14.42, returns. Nothing in between, no rounding, no overshoot.
+The dwell is asymmetric — roughly 2.5 s lean, 1 s rich.
+
+**A control loop that is *hunting* produces a rounded, continuous waveform.**
+This is the PCM toggling between two fixed setpoints. **It is a deliberate,
+programmed function, not a loop that has lost control** — which is what
+fore/aft catalyst control looks like.
+
+### RPM follows the command, with the right lag
+
+`Fuel/Air com. ratio` paired with `Engine RPM`, cleanest window 37:00-37:15:
+
+| Command goes rich (14.42) at | RPM peaks at |
+|---|---|
+| 37:01.5 | **~37:03** |
+| 37:05 | **~37:06.5** |
+| 37:08.5 | **~37:10** |
+
+**RPM peaks roughly 1-1.5 s after each rich command.** Richer mixture produces
+more torque, and the delay is what combustion plus flywheel inertia gives at
+idle. **Command leads, rpm follows** — the direction the theory predicts.
+
+**Honest limit:** not every window reads that cleanly (one contains a large
+excursion to 676 rpm that does not fit the pattern), and reading phase by eye
+in a closed loop remains suggestive rather than conclusive. This is the best
+evidence obtained so far and it points the right way.
+
+### The throttle is still completely static
+
+`Throttle Position Actually` reads **min = avg = max** — one flat line — while
+rpm swings 39-56 rpm across eight windows. Over tens of seconds it steps between
+9.44, 9.55, 9.88 and 10.33 °, which is drift, not oscillation.
+
+**Confirmed: the PCM never moves the throttle at idle on this engine. It holds
+idle with spark alone.** `Tim. adv.` runs 10.0-14.0 ° with visible structure at
+the same ~3.5 s period.
+
+### RPM spans this session
+
+630-679, 633-672, 631-672, 624-680, 624-680, 626-677, 624-670, 627-675 —
+**39 to 56 rpm peak to peak**, consistent with every previous measurement.
+
+### THE READING THIS FORCES: it all looks NORMAL
+
+Every element of the oscillation is consistent with a healthy system:
+
+- **Both upstream O2 sensors respond in 0.014 s** against a 0.4 s limit (Mode
+  06). Not lazy — the loop is not slow because a sensor is failing.
+- **Both catalysts sit at 44 % of their limit** (Mode 06). Good oxygen storage.
+- **Good storage makes the fore/aft loop SLOW.** A ~3.5 s period is what healthy
+  converters produce; a degraded one would make the loop run *faster*.
+- **±1.5 % commanded AFR is within what many Ford PCMs run.**
+
+**So the answer to "is the ECU manipulating the rpm?" is yes — deliberately, by
+design, and every measurable property of how it does so looks normal.**
+
+Nothing here is evidence of a fault. It is evidence that the PCM's catalyst
+control produces a small, regular torque ripple, and that an unloaded engine at
+650 rpm in Park shows it as ±25 rpm.
+
+### What still settles it
+
+1. **The cold start.** The dither is a closed-loop function and does not run at
+   all in open loop. Capture `Engine RPM` + `Fuel/Air com. ratio` from the first
+   crank. **RPM steady while the command is flat, then hunting once the square
+   wave begins, is causation proven.** Hunting from cold, before any dither, and
+   the theory is wrong.
+2. **A control sample** on another 3.7 — whether ±1.5 % and ±25 rpm are ordinary
+   for this engine.
+
+### And it still does not explain the felt shake
+
+A ±25 rpm cycling at 3.5 s moves a needle. It does not move a person in a seat.
+That separation was established earlier and stands. The shake is worst at idle
+and fades with rpm, which points at first-order excitation of the engine's
+rocking mode on its mounts — mechanical, and invisible to this tool.
+
+---
+
 ## MODE 06 — the ECU is exhausted, and everything PASSED (2026-09, 04:36-04:37)
 
 On-board monitoring test results, read after a full drive that completed the
