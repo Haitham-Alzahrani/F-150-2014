@@ -58,7 +58,8 @@ VOCAB: dict[tuple[str, str], set[str]] = {
         "pre_purge_valve", "post_purge_valve_pre_drive", "post_drive", "unknown",
     },
     ("readings.csv", "reading_method"): {
-        "curve_read", "app_minmaxavg", "instantaneous", "menu", "unknown",
+        "curve_read", "app_minmaxavg", "instantaneous", "menu", "owner_report",
+        "unknown",
     },
     ("subjective.csv", "category"): {
         "symptom", "symptom_change", "method_correction", "vehicle_fact",
@@ -172,6 +173,8 @@ def main() -> int:
         ("0.371", "the bank 1 catalyst monitor value"),
         ("6832", "the peak rpm reached"),
         ("u0422", "the archived BCM communication code"),
+        ("650", "the reported idle speed"),
+        ("since i got it", "the owner's statement that it was never smooth"),
     ]:
         if probe not in blob:
             problems.append(f"COVERAGE: {label} ({probe!r}) not found anywhere")

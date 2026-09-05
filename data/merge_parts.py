@@ -18,10 +18,19 @@ PARTS = DATA / "parts"
 
 #: target file -> the shard filenames that feed it, in order
 SOURCES: dict[str, list[str]] = {
-    "readings.csv": ["part1_readings.csv", "part2_readings.csv", "part3_readings.csv"],
+    "readings.csv": [
+        "part0_readings.csv", "part1_readings.csv", "part2_readings.csv",
+        "part3_readings.csv",
+    ],
     "sessions.csv": ["part1_sessions.csv", "part2_sessions.csv", "part3_sessions.csv"],
-    "subjective.csv": ["part1_subjective.csv", "part2_subjective.csv", "part3_subjective.csv"],
-    "timeline.csv": ["part1_timeline.csv", "part2_timeline.csv", "part3_timeline.csv"],
+    "subjective.csv": [
+        "part0_subjective.csv", "part1_subjective.csv", "part2_subjective.csv",
+        "part3_subjective.csv",
+    ],
+    "timeline.csv": [
+        "part0_timeline.csv", "part1_timeline.csv", "part2_timeline.csv",
+        "part3_timeline.csv",
+    ],
     "findings.csv": ["part4_findings.csv"],
     "eliminations.csv": ["part4_eliminations.csv"],
 }
