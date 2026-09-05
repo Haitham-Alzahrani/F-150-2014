@@ -91,6 +91,102 @@ is unknown — relevant to cam phaser condition, which depends on oil history.
 
 ---
 
+## THE PROBLEM WAS MIS-SCOPED — it is NOT an idle fault (2026-09-05, owner clarification)
+
+**The owner's full description, given in his own words after the dataset was
+built. It reframes the entire investigation.**
+
+> "When I switch on the car and look at it in the idle position, the RPM needle
+> is shaking, and you observe the RPM going up and down. And in that moment I
+> feel something shaking... it's not the kind of shake that will make it stall.
+> It is just like irregularity in the RPM itself. When I accelerate and I bring
+> it to 1000, 1500, the body shake disappears, **but the RPM needle is still
+> jumping and bouncing.** And it is hard for me to adjust the RPM at 1000
+> because **something is working on behalf of me of adjusting the RPM** — it's
+> going up and down... **the problem exists in a wide range of RPM and not only
+> limited to one RPM.** When the engine gets more fuel, more RPM, the shake I
+> cannot feel in the car body — it's only happening in front of me, in the
+> needle."
+
+### There are TWO symptoms, and they have different scopes
+
+| Symptom | Where it occurs |
+|---|---|
+| **RPM instability — the needle jumping** | **The whole rpm range.** 650, 1000, 1500, 2000. It never stops. |
+| **Body shake — felt through the seat and body** | **Idle only.** Gone by 1000-1500. |
+
+### This resolves the apparent conflict in the owner's answers
+
+The extraction audit flagged a conflict between an early answer of *"present
+everywhere, roughly equal"* to a question about sweeping the rpm in Park, and a
+late answer of *"worst at idle 650"* to the held-and-rated sweep.
+
+**There was never a conflict.** The early answer describes the **rpm
+instability**, which is present at every engine speed. The late answer describes
+**what he feels**, which is idle-only. Both are correct and they describe
+different phenomena. The assistant asked him to reconcile two answers that were
+never in tension.
+
+### What this invalidates about the investigation's scope
+
+**The whole investigation has been conducted as though this were an idle fault.**
+Every elimination rests on data captured at idle, or on two short holds at
+2000 rpm. That scope was wrong, and it was wrong from the first night.
+
+**The owner reported the wider scope twice and it was filed as a side note both
+times** — "it was difficult to maintain 2000 rpm because something is
+manipulating the rpm", and again here. On the first occasion the assistant
+explained it away as drive-by-wire throttle plus cooling-fan cycling, and moved
+on. That explanation was never tested.
+
+### Why it weakens the leading explanation
+
+The measured chain — a commanded ±1.5 % AFR square wave at ~3.5 s driving a
+±25 rpm oscillation — is **fore/aft catalyst control, a closed-loop fuelling
+function**. It was characterised entirely at idle.
+
+**Above idle the idle governor releases.** With the driver holding the pedal, the
+PCM should follow the pedal. If engine speed still wanders at a held 1000-1500
+rpm, idle speed control cannot be the explanation, and a catalyst-dither
+mechanism characterised at idle is not obviously the explanation either.
+
+### What it strengthens — a hypothesis raised on night one and NEVER TESTED
+
+**Is the rpm signal itself true?** If the crankshaft position signal is noisy —
+marginal sensor, damaged connector, reluctor defect, twelve years of heat — the
+PCM would *believe* engine speed is wandering, modulate spark and fuel to correct
+a phantom, and **that modulation would make the engine genuinely oscillate.**
+
+One fault. Every rpm. No code. It fits "present in a wide range of rpm" far
+better than an idle-specific closed-loop function does.
+
+**It has never been tested.** The test is an engine speed measurement independent
+of the PCM: a timing light with a tach function, or the phone accelerometer
+(firing frequency = rpm/60 x 3).
+
+### The tests that split it — at a HELD 1500 rpm, not at idle
+
+1. **`Engine RPM` + `Throttle Position Actually`.**
+   Throttle flat while rpm wanders → torque is varying, or the rpm reading is
+   lying. Throttle moving while the pedal is still → **the PCM is moving the
+   plate deliberately**, which is a different fault.
+2. **`Engine RPM` + `Fuel/Air com. ratio`.**
+   Square wave still present and rpm following → the same mechanism operates
+   across the range. **No square wave but rpm still wandering → the dither is not
+   the cause**, and every conclusion drawn from it at idle must be re-read.
+3. **`Engine RPM` + `Tim. adv.`** at the same hold, for the spark response.
+4. **Independent rpm** — timing light tach against the app, at idle and at 1500.
+
+### Standing lesson, reinforced for the third time
+
+**The owner's description of the symptom outranks the assistant's scoping of it.**
+Three conclusions in this file have now been withdrawn because a measured
+correlation, or an assumed scope, was allowed to override what the vehicle
+actually does. This one is the largest: it was not a wrong answer, it was the
+wrong question.
+
+---
+
 ## Symptom — as actually characterised
 
 A **small** vibration felt in the cab, with visible movement on the

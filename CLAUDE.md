@@ -9,6 +9,54 @@ not "see a mechanic."
 **2014 Ford F-150 XL Regular Cab · 3.7L V6 Ti-VCT · 6R80 auto · 4x2**
 VIN `1FTMF1EM1EFC80632` · 131,000 km (Aug 2026) · Jeddah
 
+## THE PROBLEM IS NOT AN IDLE FAULT — read this first (2026-09-05)
+
+**The owner's own description, which re-scopes everything below it.** There are
+**two** symptoms and they have different ranges:
+
+| Symptom | Where |
+|---|---|
+| **RPM instability — the needle visibly jumping** | **The WHOLE rpm range.** 650, 1000, 1500, 2000. It never stops. |
+| **Body shake — felt through the seat** | **Idle only.** Gone by 1000–1500. |
+
+> "When I bring it to 1000, 1500, the body shake disappears, **but the RPM needle
+> is still jumping and bouncing.** And it is hard for me to adjust the RPM at 1000
+> because **something is working on behalf of me of adjusting the RPM**… **the
+> problem exists in a wide range of RPM and not only limited to one RPM.**"
+
+**This resolves the apparent conflict** between his early "present everywhere,
+roughly equal" and his late "worst at idle 650": the first describes the *rpm
+instability*, the second describes *what he feels*. Both correct, different
+phenomena, never in tension.
+
+**Consequence: the entire investigation was scoped as an idle fault and that was
+wrong.** Every elimination below rests on idle data or two short 2000 rpm holds.
+**The owner reported the wider scope twice and it was filed as a side note both
+times** — once explained away as drive-by-wire throttle plus fan cycling, never
+tested.
+
+**It weakens the leading explanation.** The measured ±1.5 % AFR square wave at
+3.5 s is fore/aft catalyst control — a closed-loop fuelling function
+characterised entirely at idle. Above idle the idle governor releases and the PCM
+should follow the pedal; if rpm still wanders at a held 1500, idle speed control
+is not the explanation.
+
+**It strengthens a night-one hypothesis that was never tested: is the rpm signal
+itself true?** A noisy crank signal would make the PCM *believe* rpm is
+wandering, modulate spark and fuel for a phantom, and that modulation would make
+the engine genuinely oscillate — one fault, every rpm, no code.
+
+**THE TESTS, AT A HELD 1500 rpm — not at idle:**
+
+1. `Engine RPM` + `Throttle Position Actually` — flat throttle with wandering rpm
+   means torque is varying or the rpm reading is lying; a moving plate under a
+   still pedal means **the PCM is doing it deliberately**.
+2. `Engine RPM` + `Fuel/Air com. ratio` — **no square wave but rpm still
+   wandering kills the dither explanation** and forces a re-read of everything
+   concluded from it at idle.
+3. `Engine RPM` + `Tim. adv.` at the same hold.
+4. **Independent rpm** — timing-light tach against the app, at idle and at 1500.
+
 ## The open problem
 
 A **small** vibration felt in the cab at idle and light load, with visible
