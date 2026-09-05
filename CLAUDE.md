@@ -877,6 +877,15 @@ driving, Park versus Drive, 2000 rpm, the drive itself, standstill after, cold
 start, the engine-off physical tests, measuring the vibration, and the control
 sample.
 
+**Driving tests — everything only obtainable while moving:
+[`docs/DRIVING-TESTS.md`](docs/DRIVING-TESTS.md)** — cruise trims and the
+catalyst at the only load where it can be judged, deceleration fuel cut as a
+leaking-injector test, **the neutral coast** (engine at idle, truck moving —
+isolates the vibration *path* from the engine itself), engine-speed versus
+road-speed separation, converter lockup, wide-open-throttle breathing, knock
+under load, electrical load, and the after-drive reads including **Mode 06
+per-cylinder misfire counts**.
+
 **Data still wanted: [`docs/DATA-REQUESTS.md`](docs/DATA-REQUESTS.md)** — every
 scan capture taken and still outstanding, what each one answers, and the
 physical tests that now outrank further scanning.
