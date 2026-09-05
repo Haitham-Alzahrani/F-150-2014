@@ -314,6 +314,44 @@ fan is cycling and loading the engine. Does not touch the trim finding, which
 rests on learned cell values. Worth its own capture: `Engine RPM` +
 `Throttle Position Actually` at a held 2000 rpm.
 
+### THE LEAK IS CLOSED — idle trim −0.78 % BOTH banks (2026-09, 04:28–04:31)
+
+`LTFT - B1` + `LTFT - B2`, warm idle in Park, three windows, adaptives fully
+relearned after a proper drive.
+
+| | Before the valve | **After, relearned** |
+|---|---|---|
+| `Long term fuel % trim - Bank 1` | **+3.13 %** | **−0.78 %** |
+| `Long term fuel % trim - Bank 2` | **+2.34 %** | **−0.78 %** |
+
+Both banks min = avg = max = −0.78 %, flat across all three windows, and
+**identical to each other** — the same value, not merely within one step.
+
+**This is the idle cell, at the operating point where the symptom lives, with
+relearned adaptives.** It is the measurement the whole vacuum-leak investigation
+was built to obtain. **The engine no longer runs lean at idle by any amount. The
+purge valve was the leak.**
+
+**The unmetered-air line is FINISHED.** PCV, brake booster, manifold gasket,
+throttle body gasket, injector O-rings and the smoke test are all withdrawn —
+there is no lean bias left for them to explain.
+
+**The new valve behaves differently:** `EVAP purge` now runs **47.06–49.80 %,
+actively stepping** in 0.39 % increments over tens of seconds, where the old one
+sat flat at 40–41 %. The PCM is genuinely controlling purge now. It does *not*
+drive the hunt — purge moves over 10–30 s, the hunt runs at 3–4 s.
+
+**THE HUNT IS UNCHANGED:** 56, 51, 57, **67**, 61 rpm spans, same ~3.4 s rhythm,
+if anything wider than the 44–55 measured at 03:23. **Clean separation — the leak
+is gone and the hunt did not change. The leak was never causing the hunt.**
+
+**Remaining, and only these:** ① **Mode 06 per-cylinder misfire counts**, the one
+ECU item never read · ② the hunt itself, needing a control sample to judge · ③
+the felt shake, which is **invisible to this tool by physics**: the app's
+response time is 56–117 ms, resolving 4–8 Hz at best, while first order at
+650 rpm is 10.8 Hz and firing is 32.5 Hz. **No tool sampling through the OBD port
+can see the frequencies that shake a cab.**
+
 ### WIDE OPEN THROTTLE — the engine breathes PERFECTLY (2026-09, 04:02–04:03)
 
 | Channel | Peak | Healthy target |

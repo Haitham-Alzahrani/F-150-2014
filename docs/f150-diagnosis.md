@@ -655,6 +655,92 @@ addresses the actual complaint.
 
 ---
 
+## THE LEAK IS CLOSED — idle trim −0.78 % on both banks (2026-09, 04:28-04:31)
+
+`LTFT - B1` paired with `LTFT - B2`, warm idle in Park, three consecutive
+windows, after a full drive with relearned adaptives.
+
+| | Before the purge valve | **After, relearned** |
+|---|---|---|
+| `Long term fuel % trim - Bank 1` | **+3.13 %** | **−0.78 %** |
+| `Long term fuel % trim - Bank 2` | **+2.34 %** | **−0.78 %** |
+
+Both banks read **min = avg = max = −0.78 %**, dead flat across all three
+windows, and **identical to each other** — not merely within one quantisation
+step, but the same value.
+
+**This is the idle cell, measured at the exact operating point where the symptom
+lives, with the adaptives fully relearned after a proper drive.** It is the
+measurement the whole vacuum-leak investigation was built to obtain.
+
+**The engine no longer runs lean at idle by any amount. The purge valve was the
+leak, and replacing it closed it completely.** Bank 1 moved 3.9 points, bank 2
+moved 3.1 points, both to slightly negative.
+
+**The unmetered-air line of inquiry is finished.** PCV, brake booster, manifold
+gasket, throttle body gasket, injector O-rings and the smoke test are all
+withdrawn as suspects — there is no lean bias left for them to explain.
+
+### The new purge valve behaves differently from the old one
+
+| | Old valve | New valve |
+|---|---|---|
+| `EVAP purge` at warm idle | flat **40-41 %**, drifting one LSB at a time | **47.06-49.80 %, actively stepping up and down** |
+
+The old valve's command sat still. The new one is modulated in single 0.39 %
+steps across a 2.7-point range over tens of seconds. **The PCM is genuinely
+controlling purge now**, which is what a working system looks like and is further
+evidence the old valve was not responding to command.
+
+**It is not driving the rpm hunt.** Purge modulates over 10-30 s; the hunt runs
+at 3-4 s. The two traces show no correlation across five paired windows.
+
+### The rpm hunt is UNCHANGED
+
+| Window (graph clock) | `Engine RPM` span |
+|---|---|
+| 12:37-12:52 | 56 rpm |
+| 12:52-13:07 | 51 rpm |
+| 13:03-13:18 | 57 rpm |
+| 13:18-13:33 | **67 rpm** |
+| 13:32-13:47 | 61 rpm |
+
+Same ~3.4 s rhythm, same repeating shape, amplitude if anything slightly wider
+than the 44-55 rpm measured at 03:23 earlier the same night.
+
+**This is a clean separation.** The lean condition is gone; the hunt did not
+change. **The leak was never causing the hunt.** They were independent
+phenomena, and the fuel one has been closed.
+
+### What this leaves
+
+Every fuel and air measurement now reads clean:
+
+| System | Verdict |
+|---|---|
+| Idle fuel trim | **−0.78 % both banks, identical** — perfect |
+| Cruise fuel trim | −1.56 / −0.78 % — perfect |
+| Unmetered air | **Eliminated** — no lean bias anywhere |
+| Injectors | **Eliminated** — both banks seal on fuel cut |
+| Upstream O2 sensors | **Eliminated** — full range, fast, both banks |
+| Engine breathing | **Excellent** — 96.47 % load, 215 g/s |
+| Catalytic converters | **Eliminated** — no restriction |
+| Purge system | **Repaired and working** |
+
+**Remaining, and only these:**
+
+1. **Mode 06 per-cylinder misfire counts** — the one ECU item never read.
+2. **The rpm hunt** — ~55 rpm at 3.4 s, driven by the PCM's own commanded AFR
+   dither. Whether that amplitude is abnormal for a 3.7 is unresolved and needs
+   a control sample.
+3. **The felt shake** — worst at idle, fading with rpm, gone in gear. Mechanical.
+   **Invisible to this tool by physics**, not by oversight: the app's response
+   time is 56-117 ms, so it resolves at best 4-8 Hz, while first order at 650 rpm
+   is 10.8 Hz and the firing pulse is 32.5 Hz. **No OBD tool sampling through the
+   diagnostic port can see the frequencies that shake a cab.**
+
+---
+
 ## WIDE OPEN THROTTLE — the engine breathes perfectly (2026-09, 04:02-04:03)
 
 Full-throttle pulls captured as `Abs. load` + `Engine RPM`, then `MAF` +
