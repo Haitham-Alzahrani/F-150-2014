@@ -79,8 +79,23 @@ removed, cleaned and flow-tested** · O2 sensors "cleaned", method unknown.
 Also established: factory airbox and duct (no oiled filter) · always 95
 octane from the same station · no aftermarket tune, no evidence of prior
 engine work · thermostat reaches and holds temperature · coolant level
-steady · currently 5W-30 (spec is 5W-20 — correct at next change, but it is
-not the cause) · battery disconnected once, relearn done plus 300 km.
+steady · battery disconnected once, relearn done plus 300 km.
+
+**Weaker than this file previously claimed — the owner's actual answers were
+hedged, and the hedges were dropped:**
+
+| Claimed here | What the owner actually said |
+|---|---|
+| "currently 5W-30" | **"5W-30 or similar"** — the viscosity in the sump is not established |
+| Spark plugs replaced | **The brand, part number and gap were never stated.** "Replacing spark plugs never changed the shake" answers a different question |
+| An idle relearn followed the throttle body clean | **"I don't know — they said drive it 250 km and it will relearn."** This file once called that "a legitimate drive-cycle relearn" and concluded the adaptives were mature. That is stronger than the answer supports. |
+| Serpentine belt, tensioner, idler | **"Don't know"** — eliminated by reasoning, never inspected |
+| Battery age | **"Don't know"** — the whole charging analysis sits on top of this gap |
+| Rear diff lubricant | **"Changed at some point"** — no date, no distance |
+| What was done to the O2 sensors | **"Don't know what they did"** — the method remains unknown |
+
+None of these change the diagnosis. They are recorded because a hedge silently
+promoted to a fact is how this investigation went wrong more than once.
 
 ### Do these first — ten minutes, engine off, no scan tool
 
@@ -891,6 +906,14 @@ real time**, so the axis is MM:SS, gridlines are 5 s, and the screen is ~15 s
 wide. An HH:MM reading would need 2 h 35 m to elapse in 3 minutes. The question
 is retired.
 
+**Why this matters more than it looks.** *Every* period, cycle count and
+frequency in this investigation is derived from that screen width — the 3.4 s
+oscillation, the 0.28 Hz, the whole order analysis. It originated as the owner's
+approximate by-eye estimate ("about 15 seconds"), and an earlier revision of this
+file assumed 15 *minutes* and was wrong by a factor of sixty. **The two-clock
+check is what makes it safe to build on**, because it confirms the axis
+independently of the estimate. Do not weaken it back to an estimate.
+
 ### Amplitude — do not overstate it
 
 Paired captures show a **24–34 rpm** band, tighter than the earlier 30–53.
@@ -1023,8 +1046,10 @@ on the seat, warm idle. At ~660 rpm:
    everything else.
 2. **Permanent codes (Mode 0A)** — the only code history a clear cannot destroy.
 3. LTFT after several hundred km, since the current 0 % is probably un-relearned.
-4. Whether the A/C was running during the live-data scan. If it was, those
-   trims were measured under load, which makes them stronger evidence.
+4. ~~Whether the A/C was running during the live-data scan.~~ **ASKED AND
+   UNRECOVERABLE.** The owner's answer was **"not sure"**. The A/C state during
+   that scan cannot now be established, so every reading from it must carry
+   `ac=unknown` and none of it may be treated as measured-under-load.
 5. VCT commanded vs actual, via the FORScan handoff, if anything still points there.
 
 Two numbers collapse most of the diagnosis — fuel trims say whether it's a

@@ -63,8 +63,9 @@ VOCAB: dict[tuple[str, str], set[str]] = {
         # value_read   - a numeric list screen, neither a curve nor a cumulative field
         # menu         - Mode 06 / monitor / DTC menus
         # owner_report - the owner's own answer, a distinct grade of evidence
+        # inferred     - derived by the assistant, not read from the vehicle
         "curve_read", "app_minmaxavg", "value_read", "instantaneous", "menu",
-        "owner_report", "unknown",
+        "owner_report", "inferred", "unknown",
     },
     ("subjective.csv", "category"): {
         "symptom", "symptom_change", "method_correction", "vehicle_fact",
