@@ -432,8 +432,31 @@ plugs/injectors/throttle body/fluids.
 **No scan data could ever see either.** Consistent with three nights of OBD work
 finding a real but small fuel fault and nothing that explains a strong vibration.
 
-**The tests, all free:** ① hand on engine → frame rail beside the mount → cab
-floor; frame nearly as bad as engine means the mount is passing it through ·
+**RPM SWEEP IN PARK — the best free test now available.** Hold 650, 800, 900,
+1000, 1200, 1500, 1800 rpm for 20–30 s each and rate the shake. The engine rocks
+on its mounts at **8–15 Hz**, and each order sweeps through that band at a
+different rpm: half order is 5.4 Hz at idle, first order **10.8 Hz at idle**,
+firing 32.5 Hz.
+
+| Behaviour as rpm rises | Interpretation |
+|---|---|
+| Worst at idle, fading by 900–1000 | First order driving the mount rock mode — **mount or rotational imbalance** |
+| Worsens around 1000–1800 then fades | **Half order — one cylinder differing**, sweeping into resonance |
+| Steadily reduces, no peak | Normal; idle is the roughest point any engine runs at |
+| Grows continuously with rpm | Rotational imbalance driven directly |
+
+**ELECTRICAL LOAD AT IDLE IN PARK.** All loads on — alternator drag is a mild
+version of what the converter does in D. Shake reduces → load damping is the
+mechanism, fitting the D/R story. No change → load is not the mechanism and the
+D/R difference comes from engine position or a contact that breaks in gear.
+
+**The neutral coast is WITHDRAWN — it does not work.** The owner found two
+faults with it and both are correct: shifting to N above a road-speed threshold
+makes the PCM raise idle, so the engine is not in the same state at all; and
+road and tyre vibration at 60 km/h swamps a small idle shake.
+
+**The other tests, all free:** ① hand on engine → frame rail beside the mount →
+cab floor; frame nearly as bad as engine means the mount is passing it through ·
 ② helper watches the engine rock through P→D→R→P · ③ hand along exhaust, A/C,
 power steering, cooler lines, looms, heat shields for one spot buzzing harder
 than its neighbours, then push/pull it while someone reports the seat · ④ pry bar

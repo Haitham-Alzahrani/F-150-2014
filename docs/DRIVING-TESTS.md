@@ -115,7 +115,67 @@ overrun, which is normal and simply marks the event.
 
 ---
 
-## TEST 3 — Neutral coast ⭐ the one that separates engine from vehicle
+## TEST 3 — Neutral coast — WITHDRAWN, IT DOES NOT WORK
+
+**The owner attempted this and reported two problems that invalidate it. Both
+are correct.**
+
+1. **Idle speed is not the same.** Shifting to Neutral above a road-speed
+   threshold makes the PCM raise idle well above its stationary value. The whole
+   premise of the test was that the engine would be in the *identical* state as
+   at a standstill in Park. It is not.
+2. **Road and tyre vibration swamps the measurement.** At 60 km/h the cab is
+   already full of vibration from the road surface. A small idle shake cannot be
+   judged against that background.
+
+**Replaced by the rpm sweep in Park** (see below), plus the electrical load test
+and the mount touch test in [`FIELD-SHEET.md`](FIELD-SHEET.md) Session G. The
+original description is kept below only as a record of the reasoning.
+
+### TEST 3B — THE RPM SWEEP IN PARK, the replacement ⭐
+
+Warm, stationary, in Park. Hold each of these steady for 20-30 seconds and rate
+the strength of the shake felt in the seat:
+
+**650 (idle) → 800 → 900 → 1000 → 1200 → 1500 → 1800**
+
+**Why it discriminates.** The engine produces vibration at several orders
+simultaneously, and each scales with rpm at a different rate:
+
+| Order | At 650 rpm | At 1200 rpm |
+|---|---|---|
+| Half order — one cylinder differing | 5.4 Hz | 10 Hz |
+| First order — rotational imbalance | **10.8 Hz** | 20 Hz |
+| Firing pulse, 3rd order | 32.5 Hz | 60 Hz |
+
+**The engine rocking on its mounts resonates at roughly 8-15 Hz.** Which order is
+exciting that resonance therefore depends entirely on engine speed, and sweeping
+the rpm sweeps each order through the resonance band in turn.
+
+| Behaviour as rpm rises | Interpretation |
+|---|---|
+| **Worst at idle, clearly fading by 900-1000** | First order driving the mount rock mode — **a mount, or rotational imbalance** (damper, pulley, flexplate) |
+| **Worsens around 1000-1800, then fades** | **Half order** — one cylinder contributing differently, sweeping into the resonance |
+| **Steadily reduces, no peak** | Normal. Idle is the roughest point any engine runs at. |
+| **Grows continuously with rpm** | Rotational imbalance driven directly rather than through a resonance |
+
+Free, stationary, no instruments, and the four behaviours are distinguishable by
+feel.
+
+### TEST 3C — Electrical load at idle in Park
+
+Headlights, blower on maximum, rear demister, every load available, at warm idle
+in Park. The alternator then puts real drag on the engine — a mild version of
+what the converter does in Drive.
+
+| Result | Interpretation |
+|---|---|
+| **Shake reduces** | Load damping is the mechanism, which fits the D/R observation and points at ordinary torque ripple rather than a broken component |
+| **No change** | Load is not the mechanism, and the D/R difference comes from somewhere else — engine position on the mounts, or a contact point that breaks when the engine rotates |
+
+### The original test, for the record
+
+
 
 **At about 60 km/h on a clear straight road, shift into Neutral and coast.**
 The engine drops to idle, unloaded, exactly as it is in Park — but the truck is
