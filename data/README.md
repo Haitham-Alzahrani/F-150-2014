@@ -1,11 +1,44 @@
-# Structured dataset — extraction in progress
+# Structured dataset
 
 Machine-readable extraction of every reading taken during the idle-vibration
 investigation, so the data can be sorted, filtered and correlated instead of
 re-read out of prose.
 
-**Status: extraction running.** The CSVs are not present yet. This directory
-currently holds the schema and the tooling.
+**829 rows across six tables. `python3 data/validate.py` passes.**
+
+| Table | Rows |
+|---|---|
+| `readings.csv` | 324 |
+| `findings.csv` | 163 |
+| `subjective.csv` | 139 |
+| `eliminations.csv` | 102 |
+| `timeline.csv` | 64 |
+| `sessions.csv` | 37 |
+
+## What the extraction found in the documents
+
+The audit corrected the source documents as well as building the dataset:
+
+- **15 rounds of the owner's direct answers had never been extracted at all** —
+  they lived in interactive-tool results, not in message text. They contain
+  "same cold and hot", "never, not once", "silent — just felt, not heard", and
+  "like this since I got it".
+- **Several hedges had been promoted to facts** in `CLAUDE.md` — the oil
+  viscosity, the idle relearn after the throttle body clean, the belt inspection,
+  the battery age. All now recorded as the hedges they were.
+- **81 rows carried an inferred A/C state.** A/C-off was *requested* in the
+  instructions and recorded as though measured. Downgraded to `unknown` — this
+  is the assumption that already failed once, when the owner corrected an
+  analysis with "this while AC on".
+- **`docs/DATA-REQUESTS.md` was stale**, still asserting three conclusions that
+  had been withdrawn. Struck through in place with a header warning.
+- **Four contradictions inside `CLAUDE.md`** where a later section reversed an
+  earlier one without the earlier one being marked. All four now cross-reference.
+- **An early answer conflicts with a late one.** Asked early how the shake
+  behaves through an rpm sweep in Park, the answer was *"present everywhere,
+  roughly equal"*. The held-and-rated sweep at the end gave *"worst at idle
+  650"*. Flagged in `PART0-0002`, `PART0-0018`, `P0O-0004`, `P0O-0007` rather
+  than averaged away.
 
 ## Why this exists
 

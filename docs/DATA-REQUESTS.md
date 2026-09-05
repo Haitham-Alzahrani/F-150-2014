@@ -24,9 +24,9 @@ open idle-oscillation investigation on VIN `1FTMF1EM1EFC80632`.
 
 | Pair | Result |
 |---|---|
-| RPM + `Short term fuel % trim - Bank 1` | Trim within ±1.56 %, quantised in 0.78 % steps. **Fuel control eliminated** |
-| RPM + `Commanded evaporative purge` | Flat ~40 %, drifting one LSB at a time. **Purge eliminated** |
-| RPM + `Throttle Position Actually` | Static; min = max on wide-axis windows. **Air path eliminated** |
+| RPM + `Short term fuel % trim - Bank 1` | Trim within ±1.56 %, quantised in 0.78 % steps. ~~**Fuel control eliminated**~~ **WITHDRAWN** — short-term trim is the correction applied *around* the commanded ratio, not the mixture. The dither lives in the command, so flat trim was never evidence of flat mixture. |
+| RPM + `Commanded evaporative purge` | Flat ~40 %, drifting one LSB at a time. **Purge eliminated as the driver of the 3.4 s oscillation** — but the valve was later found leaking unmetered air and its replacement removed the shake in D and R. |
+| RPM + `Throttle Position Actually` | Static; min = max on wide-axis windows. ~~**Air path eliminated**~~ **OVERSTATED** — it shows only that the PCM does not govern idle with the throttle. It says nothing about air entering elsewhere, and a purge leak was subsequently found. |
 | RPM + `Timing advance` | **Swinging 10-13.5°** in rhythm. The governor's only active lever |
 | RPM + `Variable camshaft actual advance #1` | 0.00 to −0.06°, two adjacent steps. **VCT eliminated** |
 | RPM alone, A/C on vs off | A/C on 64-81 rpm span, off 30-53. Compressor is not the cause |

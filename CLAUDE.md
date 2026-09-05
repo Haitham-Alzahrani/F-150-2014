@@ -64,10 +64,14 @@ smoother in gear at a standstill, so the observation was never evidence of
 a fault; and the truck being flawless under load rules out the whole
 worsens-under-load family the old reasoning pointed at.
 
+**MOUNTS ARE NO LONGER RULED OUT BY THIS TEST — see *THE SHAKE IS STRONG* below.**
+The D-vs-R argument excludes a *torque-reaction* fault but is blind to a mount
+that has lost its damping, which is not direction-dependent.
+
 **D and R feel the same as each other.** Engine torque reacts in opposite
 directions in D and R, so a collapsed mount or a torque-reaction contact
 would differ between them. This is a better mount test than the old D-vs-N
-one, and it keeps **mounts, flexplate and driveline ruled out** — as does
+one, and it keeps **flexplate and driveline ruled out** — as does
 the symptom reproducing at a standstill in Park.
 
 ### Already done — none of it changed the shake
@@ -462,7 +466,8 @@ symptom that only appears at idle.
 
 **And the shake in P and N is still there.** The scan tool has been exhausted
 honestly, and what it establishes is that **the engine is sound.** What remains
-is either per-cylinder contribution (**Mode 06 — the one ECU item never read**)
+is either per-cylinder contribution (**Mode 06 — read at 04:36, after this
+section was written; see *MODE 06* above, where it passed on all six cylinders**)
 or mechanical isolation and contact, which produce no ECU signature at all.
 
 ### FUEL CUT TEST — bank 1 injectors SEALED (2026-09, 03:49–03:50)
@@ -1081,7 +1086,10 @@ reading, use the exact label from that file.** Not an abbreviation, not the
 engineering term, not the SAE PID name. He navigates a list on a phone; a name
 that does not match the list wastes his time at the truck. The file also records
 which channels return blank on this vehicle (barometric pressure, high-res MAP,
-evap vapor pressure) so they are never requested again, and which are the app's
+evap vapor pressure) — **but note that all three of those later returned real
+values at 01:00, so treat that list as "blank in one session", not "unsupported";
+the barometric 97 kPa reading and the evap −412.5 Pa reading both came from
+channels this file once said never to request again** — and which are the app's
 own arithmetic rather than readings from the truck.
 
 **Specs and technical data: [`docs/f150-specs.md`](docs/f150-specs.md)** —
