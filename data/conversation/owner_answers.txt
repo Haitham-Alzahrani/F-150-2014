@@ -1,0 +1,61 @@
+
+===== OWNER ANSWER ROUND 1 — near transcript message [2] =====
+Your questions have been answered: "What are you ready to do on the truck?"="Something else". You can now continue with these answers in mind.
+
+===== OWNER ANSWER ROUND 2 — near transcript message [7] =====
+Your questions have been answered: "When is the shake worst, relative to engine temperature?"="Same cold and hot", "Has the check engine light ever come on since this started?"="Never, not once", "The unstable 1,000–2,000 rpm — can you reproduce it standing still?"="Yes, in Park standing still", "What does turning the A/C on do to the shake at idle?"="No change at all". You can now continue with these answers in mind.
+
+===== OWNER ANSWER ROUND 3 — near transcript message [8] =====
+Your questions have been answered: "Holding steady throttle in Park at ~1,500 rpm, does the tachometer needle actually move?"="Needle visibly wanders", "How does the shake behave as you sweep the rpm up in Park?"="Present everywhere, roughly equal", "Is there any noise with the shake, or is it silent vibration?"="Silent — just felt, not heard", "What is the actual idle rpm in Park, warm, A/C off?"="Normal, around 650–750". You can now continue with these answers in mind.
+
+===== OWNER ANSWER ROUND 4 — near transcript message [9] =====
+The user answered: "Has the truck ever run smoothly since you owned it, or has it always been like this?"="Like this since I got it", "Under load on the road, does it pull normally?"="Pulls great with no vibration at all", "What spark plugs went in, and were they gapped?"="Replacing spark plugs never changed the chake behavior", "What do you actually have on hand to test with?"="Currently the car in the workshop and they have all tools". Read the answers carefully — they may request clarification, changes, or that you not proceed — and follow what they actually say.
+
+===== OWNER ANSWER ROUND 5 — near transcript message [12] =====
+The user answered: "What does "different pattern" actually mean — how does the D/R shake feel compared to the N/P one?"="Let's keep this open we are not sure", "Are D and R different from each other, or only different from N/P?"="D and R feel the same", "In D or R at a standstill, does the tachometer needle move?"="Needle wanders in gear too", "How solid is your brother's observation?"="He felt it once or twice". Read the answers carefully — they may request clarification, changes, or that you not proceed — and follow what they actually say.
+
+===== OWNER ANSWER ROUND 6 — near transcript message [17] =====
+Your questions have been answered: "Has the EGR valve ever been cleaned, replaced, or even removed for a look?"="Never touched", "Has the PCV valve, its hose and the elbow ever been replaced or inspected?"="Never inspected", "Has the intake manifold ever been off the engine — by you or anyone before you?"="Yes, during the injector clean", "Is the air intake factory, or has someone fitted an aftermarket one?"="Factory airbox and duct". You can now continue with these answers in mind.
+
+===== OWNER ANSWER ROUND 7 — near transcript message [18] =====
+The user answered: "Did the shake change in any way after the injector clean — when the manifold was off?"="Exactly the same as before", "Has the battery been disconnected or replaced — and was an idle relearn done afterward?"="Disconnect and drove about 300km and relearn done", "What fuel goes in it, and from where?"="Always 95, same station", "Any sign of previous engine work, or an aftermarket tuner ever plugged into it?"="No evidence of either". Read the answers carefully — they may request clarification, changes, or that you not proceed — and follow what they actually say.
+
+===== OWNER ANSWER ROUND 8 — near transcript message [22] =====
+The user answered: "Brake fluid — ever changed or moisture-tested?"="Don't ask any questions not related to issue or diagnoses", "Rear differential lubricant — ever changed?"="Changed at some point", "Serpentine belt, tensioner and idler pulleys — replaced or inspected?"="Don't know", "The battery — how old is it?"="Don't know". Read the answers carefully — they may request clarification, changes, or that you not proceed — and follow what they actually say.
+
+===== OWNER ANSWER ROUND 9 — near transcript message [23] =====
+Your questions have been answered: "Does the temperature gauge come up to normal and stay there?"="Comes up normally, stays there", "What oil viscosity is in it now?"="5W-30 or similar", "Does it use or lose coolant?"="Level stays steady". You can now continue with these answers in mind.
+
+===== OWNER ANSWER ROUND 10 — near transcript message [26] =====
+Your questions have been answered: "The throttle body — confirm it has genuinely never been cleaned or replaced?"="Cleaned at some point", "The EVAP purge valve and canister — ever inspected, tested or replaced?"="Never touched", "How was the injector clean actually performed?"="Removed, cleaned and flow-tested", "What was actually done to the O2 sensors when they were "cleaned"?"="Don't know what they did". You can now continue with these answers in mind.
+
+===== OWNER ANSWER ROUND 11 — near transcript message [27] =====
+The user answered: "How was the throttle body cleaned?"="Removed from the manifold, cleaned by hand", "Did the shake change at all after the throttle body was cleaned?"="No change whatsoever", "Was an idle relearn run after that cleaning?"="I don't know they said drive it 250km and it will relearn". Read the answers carefully — they may request clarification, changes, or that you not proceed — and follow what they actually say.
+
+===== OWNER ANSWER ROUND 12 — near transcript message [102] =====
+Your questions have been answered: "Is the airbag / restraint warning light on in the cluster?"="No light, cluster normal", "Was that the complete code list, or is there more above or below?"="That is everything". You can now continue with these answers in mind.
+
+===== OWNER ANSWER ROUND 13 — near transcript message [112] =====
+Your questions have been answered: "Was the A/C also on during the earlier "All sensors" scan — the one showing 661 rpm and the fuel trims?"="Not sure", "Does the A/C actually blow cold?"="Yes, cools properly", "Can you record two short traces back to back for comparison?"="Yes, I can do that". You can now continue with these answers in mind.
+
+===== OWNER ANSWER ROUND 14 — near transcript message [116] =====
+Your questions have been answered: "How long does the trace take to travel the full width of the graph, timed against your phone clock?"="About 15 seconds", "When you watch the live tachometer needle in the cab, what does it actually do?"="Visibly breathes up and down". You can now continue with these answers in mind.
+
+===== OWNER ANSWER ROUND 15 — near transcript message [278] =====
+block types: {'thinking': 205, 'tool_use': 341, 'tool_result': 340, 'text': 210, 'image': 277}
+tools: {'Bash': 283, 'AskUserQuestion': 15, 'ToolSearch': 2, 'WebSearch': 29, 'WebFetch': 8, 'Agent': 4}
+
+--- USE ---
+{"questions": [{"question": "What are you ready to do on the truck?", "header": "Next step", "multiSelect": false, "options": [{"label": "Pull scan data", "description": "Adapter and phone/laptop in hand, ready to log fuel trims, misfire counters, EGR position and codes. I'll give you the exact capture sequence and how to get the data back to me."}, {"label": "Clean the throttle body", "description": "Ready to do the hands-on job. I'll give you the procedure for the 3.7L Ti-VCT plus the mandatory 6R80/PCM idle relearn afterward."}, {"label": "Set up the logger", "description": "You want the ve
+
+--- RESULT ---
+"Your questions have been answered: "What are you ready to do on the truck?"="Something else". You can now continue with these answers in mind."
+
+--- RESULT ---
+"Your questions have been answered: "When is the shake worst, relative to engine temperature?"="Same cold and hot", "Has the check engine light ever come on since this started?"="Never, not once", "The unstable 1,000–2,000 rpm — can you reproduce it standing still?"="Yes, in Park standing still", "What does turning the A/C on do to the shake at idle?"="No change at all". 
+
+--- RESULT ---
+"Your questions have been answered: "Holding steady throttle in Park at ~1,500 rpm, does the tachometer needle actually move?"="Needle visibly wanders", "How does the shake behave as you sweep the rpm up in Park?"="Present everywhere, roughly equal", "Is there any noise with the shake, or is it silent vibration?"="Silent — just felt, not heard", "What is the actual idle rpm in Pa
+
+--- RESULT ---
+"The user answered: "Has the truck ever run smoothly since you owned it, or has it always been like this?"="Like this since I got it", "Under load on the road, does it pull normally?"="Pulls great with no vibration at all", "What spark plugs went in, and were they gapped?"="Replacing spark plugs never changed the chake behavior", "What do you actually have on hand to test with?"="Cu
