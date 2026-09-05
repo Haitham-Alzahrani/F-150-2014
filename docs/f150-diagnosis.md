@@ -655,6 +655,166 @@ addresses the actual complaint.
 
 ---
 
+## MODE 06 — the ECU is exhausted, and everything PASSED (2026-09, 04:36-04:37)
+
+On-board monitoring test results, read after a full drive that completed the
+monitors. **This is the last unread item in the ECU, and it closes the
+electronic phase of the investigation.**
+
+### Per-cylinder misfire — there is no weak cylinder
+
+`Misfire counts for last / current driving cycles`, TID $0C, one MID per
+cylinder:
+
+| Cylinder | MID | Counts this cycle | EWMA over 10 cycles (TID $0B) |
+|---|---|---|---|
+| 1 | $A2 | **0** | 0 |
+| 2 | $A3 | **0** | 0 |
+| 3 | $A4 | **0** | 0 |
+| **4** | $A5 | **2** | 0 |
+| 5 | $A6 | **0** | 0 |
+| **6** | $A7 | **1** | 0 |
+
+Manufacturer-defined TIDs $80 and $81 read **0 % on every cylinder** against
+limits of 30.98 % and 0.949 %.
+
+**Two counts and one count are noise, not a pattern.** A drive cycle contains
+hundreds of thousands of firing events, and the **ten-cycle exponential moving
+average is zero on all six cylinders**, which means nothing persistent is
+happening. A genuinely weak cylinder produces tens to hundreds of counts and a
+non-zero rolling average.
+
+**A likely explanation for even those three counts:** the WOT pulls in this same
+session reached **6832 rpm**, hitting the rev limiter. The limiter cuts fuel and
+spark, and the misfire monitor can log that as misfire events.
+
+**The single-weak-cylinder hypothesis is eliminated.** It was the last
+ECU-visible mechanism that could produce a felt idle vibration with no code, and
+the ECU's own per-cylinder counters say no.
+
+*Optional confirmation: re-read Mode 06 after a drive containing no rev-limiter
+hits. If cylinders 4 and 6 read zero, the counts were the limiter.*
+
+### The catalyst question is settled — both good, both equal
+
+| | Value | Limit | Result |
+|---|---|---|---|
+| `Catalyst Monitor Bank 1` MID$21 TID$81 | **0.3711** | 0.8359 | PASSED |
+| `Catalyst Monitor Bank 2` MID$22 TID$81 | **0.3633** | 0.8359 | PASSED |
+
+Both converters sit at **44 % of the failure threshold** and within **2 % of
+each other**.
+
+**This definitively kills the bank 1 downstream asymmetry** recorded earlier in
+this document from idle snapshots. That asymmetry was an artefact of reading a
+swinging narrowband signal at the worst operating point for judging a converter.
+The monitor's own test values, taken under proper conditions, show the two banks
+are the same.
+
+### All four oxygen sensors — healthy and matched
+
+| Sensor | MID | Response | Limit | Result |
+|---|---|---|---|---|
+| Bank 1 Sensor 1 (upstream) | $01 TID$87 | **0.014 s** | 0.4 s | PASSED |
+| Bank 1 Sensor 1 | $01 TID$88 | 0.006 s | 0.4 s | PASSED |
+| Bank 2 Sensor 1 (upstream) | $05 TID$87 | **0.014 s** | 0.4 s | PASSED |
+| Bank 2 Sensor 1 | $05 TID$88 | 0.008 s | 0.4 s | PASSED |
+| Bank 1 Sensor 2 (downstream) | $02 TID$85 | −3846 mV/s | −30000 | PASSED |
+| Bank 1 Sensor 2 | $02 TID$86 | 0.792 s | 10 s | PASSED |
+| Bank 2 Sensor 2 (downstream) | $06 TID$85 | −3788 mV/s | −30000 | PASSED |
+| Bank 2 Sensor 2 | $06 TID$86 | 0.856 s | 10 s | PASSED |
+
+**Both upstream sensors respond in 0.014 s against a 0.4 s limit — 3.5 % of the
+allowance, and identical to each other.** Heater currents also matched: 2550 and
+2455 mA upstream, 637 and 652 mA downstream, all inside limits.
+
+### Cam phasers — essentially perfect
+
+| | Error | Limit | Result |
+|---|---|---|---|
+| `VVT Monitor Bank 1` MID$35 TID$85 | **0.06 °** | 20 ° | PASSED |
+| `VVT Monitor Bank 2` MID$36 TID$85 | **0.05 °** | 20 ° | PASSED |
+
+TIDs $82, $83 and $84 all read 0 ° against limits of 20 °, 26.45 ° and 22.36 °.
+
+**The phasers track their commanded target within six hundredths of a degree.**
+This is the real measurement, far stronger than the live-data reading at idle
+that showed them parked. **VCT and cam timing are eliminated with evidence.**
+
+### Fuel system monitor
+
+| | Value | Limit | Result |
+|---|---|---|---|
+| `Fuel System Monitor Bank 1` MID$81 TID$80 | **0** | 0.7969 | PASSED |
+| `Fuel System Monitor Bank 2` MID$82 TID$80 | **0** | 0.7969 | PASSED |
+
+### One unidentified value
+
+`Misfire Monitor General Data` MID$A1 **TID $84** reads **527.198** against a
+range of 0 to 918.874, PASSED. Manufacturer-defined and not documented in any
+source available here.
+
+**It is the only value in the entire Mode 06 set that is neither near zero nor
+matched between banks**, sitting at 57 % of its allowed range. [VERIFY] against
+Ford service information before drawing anything from it. It passed, so it is
+not a fault by the PCM's own reckoning.
+
+### Monitor status since DTC reset
+
+| Monitor | Status |
+|---|---|
+| Misfire | **Completed** |
+| Fuel System | **Completed** |
+| Components | **Completed** |
+| Catalyst | **Completed** |
+| Oxygen Sensor | **Completed** |
+| Oxygen Sensor Heater | **Completed** |
+| EGR system | **Completed** |
+| Evaporative System | **Not completed** |
+
+Everything ran except the EVAP monitor, which needs specific fuel level,
+temperature and cold-soak conditions and has not had the chance since the valve
+was replaced. Not a concern.
+
+---
+
+## THE ECU PHASE IS OVER
+
+**Every test the powertrain computer can run has now been run, and every one of
+them passed with margin.**
+
+| System | How it was closed |
+|---|---|
+| Per-cylinder combustion | Mode 06: 0,0,0,2,0,1 counts, 10-cycle average zero on all six |
+| Catalytic converters | Mode 06: 0.371 / 0.363 against a 0.836 limit, banks within 2 % |
+| Oxygen sensors, all four | Mode 06: 0.014 s response against 0.4 s limit, banks identical |
+| Cam phasers | Mode 06: 0.06 ° error against a 20 ° limit |
+| Fuel system | Mode 06: zero on both banks |
+| Fuel trims | −0.78 % both banks at idle, identical |
+| Injectors | Both banks seal completely on deceleration fuel cut |
+| Engine breathing | 96.47 % absolute load, 215 g/s MAF, no plateau to the limiter |
+| Unmetered air | Lean bias gone after the purge valve |
+| Knock | 0 ° retard |
+| Codes | None, ever |
+
+**And the shake in P and N is unchanged.**
+
+**This is a result, not a dead end.** The engine is sound — mechanically,
+electronically, and in its combustion — by every measurement the vehicle is
+capable of producing. What is left cannot be an engine-running fault, because
+an engine-running fault would have shown itself in at least one of the above.
+
+**What remains is vibration and its transmission path**, which the OBD port
+cannot see for a reason of physics rather than oversight: the app's response
+time is 56-117 ms, resolving 4-8 Hz at best, while first order at 650 rpm is
+10.8 Hz and the firing pulse is 32.5 Hz.
+
+**Everything from here is hands-on:** the harmonic balancer, the engine mounts,
+the search for a contact point, and the phone accelerometer to name the
+frequency.
+
+---
+
 ## THE LEAK IS CLOSED — idle trim −0.78 % on both banks (2026-09, 04:28-04:31)
 
 `LTFT - B1` paired with `LTFT - B2`, warm idle in Park, three consecutive

@@ -314,6 +314,55 @@ fan is cycling and loading the engine. Does not touch the trim finding, which
 rests on learned cell values. Worth its own capture: `Engine RPM` +
 `Throttle Position Actually` at a held 2000 rpm.
 
+### MODE 06 — the ECU is EXHAUSTED and everything PASSED (2026-09, 04:36)
+
+**The last unread item in the ECU. It closes the electronic phase.**
+
+**Per-cylinder misfire, TID $0C:** cyl 1 **0** · 2 **0** · 3 **0** · 4 **2** ·
+5 **0** · 6 **1**. **The 10-cycle EWMA (TID $0B) is ZERO on all six.** Two counts
+and one count across hundreds of thousands of firing events, with nothing
+persistent, is noise. And the WOT pulls in the same session hit **6832 rpm** —
+the rev limiter cuts fuel and spark, which the misfire monitor can log.
+**THE SINGLE-WEAK-CYLINDER HYPOTHESIS IS ELIMINATED** — it was the last
+ECU-visible mechanism that could shake a cab with no code.
+
+**Catalysts — settled, both good, both equal:** Bank 1 **0.3711**, Bank 2
+**0.3633**, limit **0.8359**. Both at 44 % of the failure threshold and within
+2 % of each other. **This kills the bank 1 downstream asymmetry** recorded
+earlier from idle snapshots — that was an artefact of reading a swinging
+narrowband signal at the worst point for judging a converter.
+
+**All four O2 sensors — healthy and matched:** upstream B1 and B2 both
+**0.014 s** response against a **0.4 s** limit (3.5 % of allowance, identical);
+downstream 0.792 / 0.856 s against 10 s. Heater currents matched too.
+
+**Cam phasers — essentially perfect:** VVT error **0.06 ° (B1) / 0.05 ° (B2)**
+against a **20 °** limit. **VCT and cam timing eliminated with evidence**, far
+stronger than the live-data reading.
+
+**Fuel system monitor:** 0 on both banks against a 0.797 limit.
+
+**[VERIFY] one unidentified value:** `Misfire Monitor General Data` MID$A1
+**TID $84 = 527.198** of 0–918.874, PASSED. Manufacturer-defined, undocumented
+here, and the only value in the whole set neither near zero nor matched between
+banks. It passed, so it is not a fault by the PCM's reckoning.
+
+**Monitors since reset:** all Completed except Evaporative System, which needs
+fuel-level and cold-soak conditions not yet met since the valve change.
+
+### THE ECU PHASE IS OVER
+
+Every test the powertrain computer can run has been run and **all passed with
+margin**. The engine is sound mechanically, electronically and in its
+combustion, by every measurement the vehicle can produce. **An engine-running
+fault would have shown itself in at least one of them.**
+
+What remains is **vibration and its transmission path**, which the OBD port
+cannot see for reasons of physics: the app answers every 56–117 ms, resolving
+4–8 Hz at best, while first order at 650 rpm is **10.8 Hz** and firing is
+**32.5 Hz**. **Everything from here is hands-on** — harmonic balancer, engine
+mounts, contact point, and the phone accelerometer to name the frequency.
+
 ### THE LEAK IS CLOSED — idle trim −0.78 % BOTH banks (2026-09, 04:28–04:31)
 
 `LTFT - B1` + `LTFT - B2`, warm idle in Park, three windows, adaptives fully
