@@ -1,4 +1,50 @@
 ========================================================================
+BEFORE THE PURGE VALVE   (2026-09-04 22:24 - 09-05 01:35, Park idle, A/C off)
+========================================================================
+  spark                              n= 4765
+      channel  p2p   10.000   dominant 0.323 Hz = 3.09 s
+      rpm      p2p    116.1   dominant 0.323 Hz = 3.09 s
+      r = -0.885 at -0.10 s  ->  channel lags engine speed
+  commanded air/fuel                 n= 9568
+      channel  p2p    0.455   dominant 0.255 Hz = 3.92 s
+      rpm      p2p    102.9   dominant 0.255 Hz = 3.92 s
+      r = -0.418 at +0.15 s  ->  channel leads engine speed
+  short term trim B1                 n= 9438
+      channel  p2p    9.375   dominant 0.309 Hz = 3.23 s
+      rpm      p2p     80.8   dominant 0.309 Hz = 3.23 s
+      r = -0.302 at -0.65 s  ->  channel lags engine speed
+  throttle                           n= 5785
+      channel  p2p   14.636   dominant 0.052 Hz = 19.28 s
+      rpm      p2p     82.3   dominant 0.328 Hz = 3.04 s
+      r = +0.184 at +0.65 s  ->  channel leads engine speed
+  cam phaser                         n= 9824
+      channel  p2p    0.062   dominant 1.242 Hz = 0.81 s
+      rpm      p2p    102.5   dominant 0.320 Hz = 3.13 s
+      r = +0.053 at -0.05 s  ->  channel lags engine speed
+  purge                              n= 9506
+      channel  p2p    3.529   dominant 0.059 Hz = 16.98 s
+      rpm      p2p    123.9   dominant 0.320 Hz = 3.13 s
+      r = +0.115 at -0.30 s  ->  channel lags engine speed
+
+========================================================================
+HUNT AMPLITUDE vs COOLANT TEMPERATURE, same session
+========================================================================
+  clock      median span   p90    windows   ECT
+  22:39:37     70.0    80.0      26     83
+  22:44:01     68.0    82.6      40     82
+  22:54:01     61.0    78.5      56     82
+  23:04:01     31.0    43.6      59     91
+  23:14:01     38.0    47.3      58       -
+  23:24:01     39.0    56.6      15     94
+  23:34:08     34.0    45.0      58     94
+  23:44:01     38.0    48.0      58     97
+  23:54:01     41.0    54.8      52       -
+  0:04:01.     38.0    48.3      58       -
+  0:14:01.     40.0    54.0      57       -
+  0:24:01.     40.0    50.2      59       -
+  0:44:45.     38.0    48.4      24     97
+
+========================================================================
 SPARK vs ENGINE SPEED   (log 20260905_030915, 17 Hz both channels)
 ========================================================================
   Park idle 03:24:52-03:27:12        n= 2800

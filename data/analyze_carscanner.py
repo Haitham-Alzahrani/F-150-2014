@@ -72,9 +72,68 @@ def report(data, chan, a, b, label):
     print(f"      r = {c:+.3f} at {lag:+.2f} s  ->  channel {lead} engine speed")
 
 
+def clock(data, s: str) -> float:
+    """A wall-clock string to this log's own time base, midnight-aware."""
+    t0 = data["Engine RPM (rpm)"][0][0]
+    h, m, sec = s.split(":")
+    v = int(h) * 3600 + int(m) * 60 + float(sec)
+    return v + 86400 if v < t0 - 43200 else v
+
+
+def report_at(data, chan, a, b, label):
+    """Same as report(), but the window is given as wall-clock times."""
+    t0 = data["Engine RPM (rpm)"][0][0]
+    report(data, chan, clock(data, a) - t0, clock(data, b) - t0, label)
+
+
+def amplitude_vs_temperature(data) -> None:
+    """Ten-second peak-to-peak spans against coolant temperature."""
+    tr, vr = data["Engine RPM (rpm)"]
+    te, ve = data.get("Engine coolant temperature (℃)", (np.array([]), np.array([])))
+    print("  clock      median span   p90    windows   ECT")
+    for q in range(int((tr[-1] - tr[0]) // 600) + 1):
+        lo, hi = tr[0] + q * 600, tr[0] + (q + 1) * 600
+        m = (tr >= lo) & (tr < hi)
+        if m.sum() < 2000:
+            continue
+        t, v = tr[m], vr[m]
+        spans = [v[(t >= s) & (t < s + 10)].max() - v[(t >= s) & (t < s + 10)].min()
+                 for s in np.arange(t[0], t[-1] - 10, 10)
+                 if ((t >= s) & (t < s + 10)).sum() > 50]
+        if not spans:
+            continue
+        e = ve[(te >= lo) & (te < hi)] if len(te) else np.array([])
+        stamp = str(__import__("datetime").timedelta(seconds=float(t[0]))).split(", ")[-1][:8]
+        print(f"  {stamp}   {np.median(spans):6.1f}   {np.percentile(spans, 90):5.1f}"
+              f"   {len(spans):5d}     {e.mean():.0f}" if len(e) else
+              f"  {stamp}   {np.median(spans):6.1f}   {np.percentile(spans, 90):5.1f}"
+              f"   {len(spans):5d}       -")
+
+
 def main() -> None:
+    d0 = load(LOGS / "2026-09-04 22-23-38.zip")
     d1 = load(LOGS / "20260905_030915.csv.gz")
     d3 = load(LOGS / "20260905_041723.csv.gz")
+
+    print("=" * 72)
+    print("BEFORE THE PURGE VALVE   (2026-09-04 22:24 - 09-05 01:35, Park idle, A/C off)")
+    print("=" * 72)
+    report_at(d0, "Timing advance (°)", "23:22:02", "23:26:04", "spark")
+    report_at(d0, "Fuel/Air commanded equivalence ratio ()", "00:02:34", "00:11:26",
+              "commanded air/fuel")
+    report_at(d0, "Short term fuel % trim - Bank 1 (%)", "23:01:06", "23:09:06",
+              "short term trim B1")
+    report_at(d0, "Throttle Position Actually (°)", "23:17:02", "23:22:03", "throttle")
+    report_at(d0, "Variable camshaft actual advance #1 (°)", "23:33:59", "23:42:28",
+              "cam phaser")
+    report_at(d0, "Commanded evaporative purge (%)", "23:09:06", "23:17:13", "purge")
+
+    print()
+    print("=" * 72)
+    print("HUNT AMPLITUDE vs COOLANT TEMPERATURE, same session")
+    print("=" * 72)
+    amplitude_vs_temperature(d0)
+    print()
 
     print("=" * 72)
     print("SPARK vs ENGINE SPEED   (log 20260905_030915, 17 Hz both channels)")

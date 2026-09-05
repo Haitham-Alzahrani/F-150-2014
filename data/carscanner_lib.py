@@ -48,11 +48,24 @@ def logs(directory: Path) -> list[Path]:
     return sorted(out)
 
 
+def unwrap_midnight(t: np.ndarray) -> np.ndarray:
+    """Make a seconds-of-day clock monotonic across midnight.
+
+    Car Scanner stamps rows with wall-clock time only, no date. A session that
+    starts at 22:24 and ends at 01:35 therefore appears to run backwards, which
+    would turn every interval, rate and lag in the analysis into nonsense. Rows
+    are written in order, so any step backwards is a day boundary.
+    """
+    if len(t) < 2:
+        return t
+    return t + 86400.0 * np.concatenate(([0], np.cumsum(np.diff(t) < -43200)))
+
+
 def load(path: Path) -> dict[str, tuple[np.ndarray, np.ndarray]]:
     """Return {channel: (t_seconds, values)} using each channel's own samples."""
     rows = list(csv.DictReader(read_text(Path(path)).splitlines()))
     headers = [h for h in rows[0].keys() if h and h != "time"]
-    times = np.array([parse_clock(r["time"]) for r in rows])
+    times = unwrap_midnight(np.array([parse_clock(r["time"]) for r in rows]))
 
     out: dict[str, tuple[np.ndarray, np.ndarray]] = {}
     for h in headers:

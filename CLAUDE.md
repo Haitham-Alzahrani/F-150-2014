@@ -9,6 +9,62 @@ not "see a mechanic."
 **2014 Ford F-150 XL Regular Cab · 3.7L V6 Ti-VCT · 6R80 auto · 4x2**
 VIN `1FTMF1EM1EFC80632` · 131,000 km (Aug 2026) · Jeddah
 
+## THE PRE-REPAIR SESSION REPLICATES IT EXACTLY (2026-09-05, 3.2 h log)
+
+**A fourth log: 2026-09-04 22:24 → 09-05 01:35, 35 MB, 115,257 rpm samples, Park
+idle throughout, A/C off (`A/C pressure` reads 0 all session).** This is the
+**old purge valve**, hours before the repair — so it tests whether anything found
+after the repair was created by it.
+
+| Signal | vs engine speed | Pre-repair | Post-repair |
+|---|---|---|---|
+| Timing advance | **LAGS 0.10 s** | **r = −0.885** | r = −0.84 / −0.91 / −0.76 |
+| Commanded air/fuel | **LEADS 0.15 s** | **r = −0.418** | r = −0.38 to −0.50 |
+| Short term trim B1 | **LAGS 0.65 s** | r = −0.302 | — |
+| Throttle | own 19.3 s rhythm | r = +0.18 | 18.7 s, r = +0.20 |
+| Purge | own 17.0 s rhythm | r = +0.12 | 16.8 s, r = −0.24 |
+| Cam phaser | **nothing at all** | **p2p 0.062°, r = +0.05** | — |
+
+**Identical, to the hundredth, across a repair that changed the fuel system.**
+The control structure is not something the purge valve created or fixed.
+
+**The full chain now has all four links timed:**
+
+```
+commanded AFR  +0.15 s  →  RPM  0  →  spark  −0.10 s  →  short term trim  −0.65 s
+```
+
+Short term trim arriving **last** is exactly right — it is the O2 loop reacting
+to a mixture change that already happened. It is not driving anything.
+
+**CAM PHASERS ELIMINATED AT IDLE, properly this time.** 9,824 paired samples
+against rpm: total movement **0.062°**, one quantisation step, correlation
+**+0.05**. The earlier elimination rested on a screenshot of a parked needle.
+
+### THE HUNT IS TEMPERATURE DEPENDENT — new, and nobody looked
+
+Ten-second spans through one continuous 3.2-hour idle, engine never switched off:
+
+| Clock | Median span | ECT |
+|---|---|---|
+| 22:39–23:04 | **70, 68, 61 rpm** | **82–83 °C** |
+| 23:04–00:45 | **31, 38, 39, 34, 38, 41, 38, 40, 40, 38** | **91–97 °C** |
+
+**The amplitude halves as coolant goes 82 → 91 °C, and then holds flat for a
+hundred minutes.** Same session, same engine, A/C off, nothing touched.
+
+**This is the first variable found that changes the hunt.** Six repairs, a KAM
+wipe and a purge valve did not. Coolant temperature does, and 82 °C is not cold —
+it is a warm engine that has not fully soaked.
+
+It also answers a question this file has carried as unmeasured: *is the needle
+breathing worse cold?* **Yes — and "cold" here means only 10 °C below soaked.**
+
+**What it points at:** anything the PCM schedules on ECT — idle target, spark
+schedule, the closed-loop entry point — or a physical clearance that closes up as
+the block reaches temperature. **Do not read it as a thermostat fault**; the
+engine reaches and holds 94–97 °C, which this file already established.
+
 ## SPARK FOLLOWS RPM — measured, not inferred (2026-09-05, from logged data)
 
 **Three Car Scanner CSV logs, ~17 Hz per channel on true timestamps, 135,000
