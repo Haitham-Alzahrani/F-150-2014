@@ -1,0 +1,57 @@
+monitor,mid,tid,description,value,limit_min,limit_max,result,source
+Catalyst Monitor Bank 1,MID$21,TID$81,Manufacturer defined,0.371089265,0,0.835927397,PASSED,OCR of m253-15_mode06.jpg; reading PART3-0130
+Catalyst Monitor Bank 2,MID$22,TID$81,Manufacturer defined,0.363276859,0,0.835927397,PASSED,OCR of m253-15_mode06.jpg; reading PART3-0131
+EVAP Monitor (0.040”),MID$3B,TID$80,Manufacturer defined,0,0,0,PASSED,OCR of m253-11_mode06.jpg
+EVAP Monitor (0.090“),MID$3A,TID$80,Manufacturer defined,0,0,0,PASSED,OCR of m253-13_mode06.jpg
+EVAP Monitor (0.090“),MID$3A,TID$81,Manufacturer defined,0,0,0,PASSED,OCR of m253-13_mode06.jpg
+EVAP Monitor (0.090“),MID$3A,TID$82,Manufacturer defined,0,0,0,PASSED,OCR of m253-11_mode06.jpg
+Fuel System Monitor Bank 1,MID$81,TID$80,Manufacturer defined,0,0,0.796865369,PASSED,OCR of m253-12_mode06.jpg; reading PART3-0140
+Fuel System Monitor Bank 2,MID$82,TID$80,Manufacturer defined,0,0,0.796865369,PASSED,OCR of m253-12_mode06.jpg; reading PART3-0141
+Misfire Cylinder 1 Data,MID$A2,TID$0B,,0,0,65535,PASSED,docs/f150-diagnosis.md; reading PART3-0124
+Misfire Cylinder 1 Data,MID$A2,TID$0C,,0,0,65535,PASSED,docs/f150-diagnosis.md; reading PART3-0118
+Misfire Cylinder 1 Data,MID$A2,TID$80,Manufacturer defined,0,0,30.976274,PASSED,OCR of m253-06_mode06.jpg
+Misfire Cylinder 1 Data,MID$A2,TID$81,Manufacturer defined,0,0,0.949172,PASSED,OCR of m253-06_mode06.jpg
+Misfire Cylinder 2 Data,MID$A3,TID$0B,,0,0,65535,PASSED,docs/f150-diagnosis.md; reading PART3-0125
+Misfire Cylinder 2 Data,MID$A3,TID$0C,,0,0,65535,PASSED,docs/f150-diagnosis.md; reading PART3-0119
+Misfire Cylinder 2 Data,MID$A3,TID$80,Manufacturer defined,0,0,30.976274,PASSED,OCR of m253-08_mode06.jpg
+Misfire Cylinder 2 Data,MID$A3,TID$81,Manufacturer defined,0,0,0.949172,PASSED,OCR of m253-08_mode06.jpg
+Misfire Cylinder 3 Data,MID$A4,TID$0B,,0,0,65535,PASSED,docs/f150-diagnosis.md; reading PART3-0126
+Misfire Cylinder 3 Data,MID$A4,TID$0C,,0,0,65535,PASSED,docs/f150-diagnosis.md; reading PART3-0120
+Misfire Cylinder 3 Data,MID$A4,TID$80,Manufacturer defined,0,0,30.976274,PASSED,OCR of m253-09_mode06.jpg
+Misfire Cylinder 3 Data,MID$A4,TID$81,Manufacturer defined,0,0,0.949172,PASSED,OCR of m253-09_mode06.jpg
+Misfire Cylinder 4 Data,MID$A5,TID$0B,,0,0,65535,PASSED,docs/f150-diagnosis.md; reading PART3-0127
+Misfire Cylinder 4 Data,MID$A5,TID$0C,,2,0,65535,PASSED,docs/f150-diagnosis.md; reading PART3-0121
+Misfire Cylinder 4 Data,MID$A5,TID$80,Manufacturer defined,0,0,30.976274,PASSED,OCR of m253-07_mode06.jpg
+Misfire Cylinder 4 Data,MID$A5,TID$81,Manufacturer defined,0,0,0.949172,PASSED,OCR of m253-07_mode06.jpg
+Misfire Cylinder 5 Data,MID$A6,TID$0B,,0,0,65535,PASSED,docs/f150-diagnosis.md; reading PART3-0128
+Misfire Cylinder 5 Data,MID$A6,TID$0C,,0,0,65535,PASSED,docs/f150-diagnosis.md; reading PART3-0122
+Misfire Cylinder 5 Data,MID$A6,TID$80,Manufacturer defined,0,0,30.976274,PASSED,OCR of m253-05_mode06.jpg
+Misfire Cylinder 5 Data,MID$A6,TID$81,Manufacturer defined,0,0,0.949172,PASSED,OCR of m253-05_mode06.jpg
+Misfire Cylinder 6 Data,MID$A7,TID$0B,,0,0,65535,PASSED,docs/f150-diagnosis.md; reading PART3-0129
+Misfire Cylinder 6 Data,MID$A7,TID$0C,,1,0,65535,PASSED,docs/f150-diagnosis.md; reading PART3-0123
+Misfire Cylinder 6 Data,MID$A7,TID$80,Manufacturer defined,0,0,30.976274,PASSED,OCR of m253-04_mode06.jpg
+Misfire Cylinder 6 Data,MID$A7,TID$81,Manufacturer defined,0,0,0.949172,PASSED,OCR of m253-04_mode06.jpg
+Misfire Monitor General Data,MID$A1,TID$80,Manufacturer defined,0,0,30.976274,PASSED,OCR of m253-12_mode06.jpg
+Misfire Monitor General Data,MID$A1,TID$81,Manufacturer defined,0,0,0.949172,PASSED,OCR of m253-12_mode06.jpg
+Misfire Monitor General Data,MID$A1,TID$84,Manufacturer defined,527.1982909,0,918.8744258,PASSED,OCR of m253-12_mode06.jpg; reading PART3-D005
+Oxygen Sensor Heater Monitor Bank 1 - Sensor 1,MID$41,TID$81,Manufacturer defined,2550,1120,3800,PASSED,OCR of m253-10_mode06.jpg; reading PART3-0136
+Oxygen Sensor Heater Monitor Bank 1 - Sensor 2,MID$42,TID$81,Manufacturer defined,637,220,3000,PASSED,OCR of m253-10_mode06.jpg; reading PART3-D001
+Oxygen Sensor Heater Monitor Bank 2 - Sensor 1,MID$45,TID$81,Manufacturer defined,2455,1120,3800,PASSED,OCR of m253-10_mode06.jpg; reading PART3-0137
+Oxygen Sensor Heater Monitor Bank 2 - Sensor 2,MID$46,TID$81,Manufacturer defined,652,220,3000,PASSED,OCR of m253-10_mode06.jpg; reading PART3-D002
+Oxygen Sensor Monitor Bank 1 - Sensor 1,MID$01,TID$87,,0.014,0,0.4,PASSED,docs/f150-diagnosis.md; reading PART3-0132
+Oxygen Sensor Monitor Bank 1 - Sensor 1,MID$01,TID$88,Manufacturer defined,0.005999999,0,0.4,PASSED,OCR of m253-16_mode06.jpg
+Oxygen Sensor Monitor Bank 1 - Sensor 2,MID$02,TID$85,Manufacturer defined,-3846,-30000,0,PASSED,OCR of m253-16_mode06.jpg; reading PART3-D003
+Oxygen Sensor Monitor Bank 1 - Sensor 2,MID$02,TID$86,,0.792,0,10,PASSED,docs/f150-diagnosis.md; reading PART3-0134
+Oxygen Sensor Monitor Bank 2 - Sensor 1,MID$05,TID$87,,0.014,0,0.4,PASSED,docs/f150-diagnosis.md; reading PART3-0133
+Oxygen Sensor Monitor Bank 2 - Sensor 2,MID$06,TID$85,Manufacturer defined,-3788,-30000,0,PASSED,OCR of m253-15_mode06.jpg; reading PART3-D004
+Oxygen Sensor Monitor Bank 2 - Sensor 2,MID$06,TID$86,Manufacturer defined,0.856,0,10,PASSED,OCR of m253-15_mode06.jpg; reading PART3-0135
+Purge Flow Monitor,MID$3D,TID$80,Manufacturer defined,0,0,0,PASSED,OCR of m253-11_mode06.jpg
+Purge Flow Monitor,MID$3D,TID$81,Manufacturer defined,0,0,0,PASSED,OCR of m253-11_mode06.jpg
+Purge Flow Monitor,MID$3D,TID$82,Manufacturer defined,0,0,0,PASSED,OCR of m253-11_mode06.jpg
+VVT Monitor Bank 1,MID$35,TID$82,Manufacturer defined,0,0,20,PASSED,OCR of m253-14_mode06.jpg
+VVT Monitor Bank 1,MID$35,TID$83,Manufacturer defined,0,0,26.45,PASSED,OCR of m253-14_mode06.jpg
+VVT Monitor Bank 1,MID$35,TID$84,Manufacturer defined,0,0,22.36000000,PASSED,OCR of m253-14_mode06.jpg
+VVT Monitor Bank 1,MID$35,TID$85,Manufacturer defined,0.060000000,0,20,PASSED,OCR of m253-14_mode06.jpg; reading PART3-0138
+VVT Monitor Bank 2,MID$36,TID$82,Manufacturer defined,0,0,20,PASSED,OCR of m253-14_mode06.jpg
+VVT Monitor Bank 2,MID$36,TID$84,Manufacturer defined,0,0,22.36000000,PASSED,OCR of m253-13_mode06.jpg
+VVT Monitor Bank 2,MID$36,TID$85,Manufacturer defined,0.05,0,20,PASSED,OCR of m253-13_mode06.jpg; reading PART3-0139

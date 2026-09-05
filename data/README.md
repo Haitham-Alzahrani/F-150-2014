@@ -14,6 +14,35 @@ re-read out of prose.
 | `eliminations.csv` | 102 |
 | `timeline.csv` | 64 |
 | `sessions.csv` | 37 |
+| `mode06.csv` | 56 |
+| `sessions_from_exif.csv` | 23 |
+| `screenshots_manifest.csv` | 277 |
+
+## Everything is text, and the pictures are the proof
+
+| | |
+|---|---|
+| `screenshots/` | **277 images**, the raw evidence |
+| `screenshots_ocr/` | **277 text files** — every screen OCR'd in full |
+| `conversation/transcript.txt` | **269 messages** — the source of every extracted row |
+| `conversation/owner_answers.txt` | **15 rounds** of the owner's direct answers |
+| `mode06.csv` | **56 Mode 06 tests** with limits and results |
+| `sessions_from_exif.csv` | **23 capture sessions** rebuilt from image timestamps |
+
+Every row cites the message it came from; every message is in the transcript;
+every image links to the rows taken from it and to its own OCR text. **The chain
+runs both ways and nothing in it is out of reach.**
+
+### The OCR found readings the extraction had missed
+
+Mode 06 is the case in point. The conversation quoted 29 test results in prose;
+the screens actually hold **41**, and merging both sources gives **56 distinct
+tests** with their limits. The twelve the prose never mentioned were each
+cylinder's two manufacturer-defined entries, the EVAP and purge-flow monitors,
+and three of the four VVT test IDs per bank. **All 56 read PASSED.**
+
+That is the argument for keeping the images and OCRing them rather than trusting
+the write-up: **the write-up is a selection, and the screen is the record.**
 
 ## What the extraction found in the documents
 
