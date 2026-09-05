@@ -314,6 +314,37 @@ fan is cycling and loading the engine. Does not touch the trim finding, which
 rests on learned cell values. Worth its own capture: `Engine RPM` +
 `Throttle Position Actually` at a held 2000 rpm.
 
+### FUEL CUT TEST — bank 1 injectors SEALED (2026-09, 03:49–03:50)
+
+Coasting in gear from ~100 km/h to 30 with the throttle shut, `Engine RPM` +
+`O2S1 air:fuel`.
+
+| Graph clock | RPM | `O2S1 air:fuel` |
+|---|---|---|
+| 8:36–8:54 | 1783 → 1859, on throttle | oscillating 13.49–15.84 |
+| **8:55** | throttle closed | **steps vertically to 29.38** |
+| 8:58–9:41 | 1631 → 843 | **29.38 flat**, min = avg = max, three windows |
+
+29.38 is the top of the PID's range. Fuel cut held from ~1850 rpm to ~850 rpm.
+(The dips and spikes in rpm during the coast are downshifts. Normal.)
+
+**Nothing is putting fuel into bank 1 during overrun.** Injectors commanded off,
+only air through the cylinders — any seepage would stop it pegging. It pegged
+dead flat for a minute.
+
+- **Leaking injector, bank 1 — ELIMINATED**, on the engine and under real
+  manifold vacuum, not just on a flow bench.
+- **Best O2 sensor test in this investigation.** 13.49 → 29.38 in a fraction of a
+  second, held flat, repeated. A lazy or contaminated sensor cannot do that.
+  **Bank 1 upstream sensor: healthy, full range, fast.** Closes an item carried
+  open since the sensors were "cleaned" by an unknown method.
+
+**Outstanding: the same coast capturing `O2S5 air:fuel` (upstream bank 2).**
+Pegs flat = both banks sealed, fuel delivery fully eliminated. Fails to peg =
+**fuel entering bank 2 during cut, a leaking injector on that side** — which
+would run one cylinder rich at idle, give an uneven power stroke, set no code,
+and match the symptom exactly.
+
 ### THE SHAKE IS STRONG — mechanical side REOPENED (2026-09)
 
 **Owner: the shake moves him in the seat.** Not subtle, not needle-only.

@@ -655,6 +655,63 @@ addresses the actual complaint.
 
 ---
 
+## DECELERATION FUEL CUT — bank 1 injectors are sealed (2026-09, 03:49-03:50)
+
+`Engine RPM` paired with `O2S1 air:fuel` (upstream bank 1), coasting in gear from
+about 100 km/h down to 30 with the throttle fully closed.
+
+| Graph clock | `Engine RPM` | `O2S1 air:fuel` |
+|---|---|---|
+| 8:36-8:54 | 1783 → 1859, on throttle | oscillating **13.49-15.84**, avg 14.62 |
+| **8:55** | throttle closed | **steps vertically to 29.38** |
+| 8:58-9:13 | 1631 → 1238 | **29.38 flat**, min = avg = max |
+| 9:15-9:31 | 1190 → 1053 | **29.38 flat** |
+| 9:25-9:41 | 1203 → 843 | **29.38 flat** |
+
+29.38 is the top of the PID's range. Fuel cut engaged the instant the throttle
+closed and **stayed engaged from ~1850 rpm down to ~850 rpm** across three
+consecutive windows.
+
+The dips and spikes in the rpm trace during the coast (941 → 1254, 843 → 1148)
+are the transmission downshifting — rpm falls as a gear releases and jumps as the
+lower gear engages. Normal.
+
+### What this eliminates
+
+**Nothing is putting fuel into bank 1 during overrun.** With the injectors
+commanded fully off, only air passes through the cylinders. Any seepage would
+put fuel in that air and the reading could not peg. It pegged, dead flat, for a
+full minute.
+
+- **Leaking injector, bank 1 — ELIMINATED.** The injectors were flow-tested on a
+  bench during earlier work; this confirms them in place, on the engine, under
+  real manifold vacuum.
+- **Fuel arriving from any other source during overrun — eliminated.** Purge is
+  normally commanded shut during fuel cut, and nothing shows here regardless.
+
+### It is also the best oxygen sensor test in this investigation
+
+The bank 1 upstream sensor moved from **13.49 to 29.38 in a fraction of a
+second**, held it perfectly flat for a minute, and repeated it. **A lazy or
+contaminated sensor cannot do that.** Idle data could never demonstrate it,
+because the mixture never leaves a narrow band there.
+
+**Bank 1 upstream sensor: confirmed healthy across its full range, and fast.**
+Worth having, since the O2 sensors on this truck were "cleaned" by an unknown
+method and have been carried as an open item throughout.
+
+### Outstanding: the same test on bank 2
+
+Repeat the identical coast capturing `Oxygen sensor 5 Wide Range Equivalence
+ratio` (`O2S5 air:fuel` on the graph screen).
+
+| Bank 2 result | Meaning |
+|---|---|
+| **Pegs at 29.38 and holds flat** | Both banks sealed. Injectors and fuel delivery fully eliminated. |
+| **Fails to peg, or drifts back** | **Fuel is entering bank 2 during cut — a leaking injector on that side.** That would run one cylinder rich at idle, produce an uneven power stroke, set no code, and match the symptom being chased. |
+
+---
+
 ## CORRECTION — the shake is STRONG, and that reopens the mechanical side
 
 **Owner's report, unambiguous: the shake moves him in the seat.** Not a subtlety,
