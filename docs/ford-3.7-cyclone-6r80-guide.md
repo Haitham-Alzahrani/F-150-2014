@@ -107,12 +107,12 @@ Fluid Specifications (Level 1):
 Parameter Specification Evidence Level
 Fluid Type Motorcraft MERCON LV / WSS-M2C938-A Level 1 — Ford Owner's Manuals
 6R80 Dry-Fill Capacity (Current Ford Documentation) Approximately 12.12 qt (11.47 L) Level 1 — Current Ford 6R80 Documentation
-6R80 Dry-Fill Capacity (2011–2013 F-150 3.7L) 12.1 qt (11.7 L) Level 1 — 2011–2013 F-150 Owner's Manuals
+6R80 Dry-Fill Capacity (2011–2013 F-150 3.7L) See the note below — the two published figures do not agree Level 1 / disputed — 2011–2013 F-150 Owner's Manuals
 
 Important Notes on Capacity:
 
 · Current Ford 6R80 documentation specifies 12.12 qt (11.47 L) approximate dry-fill capacity.
-· Historical 2011–2013 F-150 owner's manuals list 12.1 qt (11.7 L) for the 3.7L application.
+· The historical 2011–2013 F-150 figure is recorded inconsistently. This guide previously gave it as "12.1 qt (11.7 L)", but those are not the same quantity: 12.1 US qt is 11.45 L, and 11.7 L is 12.36 US qt. One of the two numbers is wrong and it cannot be determined from here which. Secondary sources give 12.10 qt (11.45 L). Read the figure from the vehicle's own owner's manual before filling; do not use either number from this guide.
 · Because Ford documentation differs by publication/year, verify the vehicle-specific service information for the exact configuration.
 · Pan/filter service refill quantity varies with service procedure and cooling system configuration. Always set final fluid level using the Ford transmission-level checking procedure (vehicle level, engine running, fluid at operating temperature).
 
@@ -143,6 +143,8 @@ Ti-VCT Control Capability (Level 2 — Technical Reference):
 Parameter Control Capability Evidence Level
 Intake Cam Up to 60 degrees Level 2 — Ford 3.7L Technical Description
 Exhaust Cam Up to 50 degrees Level 2 — Ford 3.7L Technical Description
+
+[DISPUTED — see the validation record] Ford's own 2011 Mustang Ti-VCT material describes advance/retard authority of as much as 50 degrees, and does not state a 60-degree intake figure. The 60-degree intake value could not be corroborated. Treat both numbers as unconfirmed and read actual commanded cam position from the vehicle.
 
 Note: These values represent the system's stated control capability. Actual commanded cam positions are calibration/OSID-dependent (Level 4) and vary by operating condition, load, RPM, and OSID. Maximum commanded cam-angle values must be taken from the specific OSID.
 
@@ -257,7 +259,7 @@ Important Notes:
 
 · These ranges assume a warmed, mechanically healthy engine at approximately normal atmospheric conditions with stable accessory load. They are not acceptance limits.
 · MAF period is especially sensitive to sensor electronics, transfer function, and sampling implementation. Values are highly sensor/OSID dependent.
-· Warning: 2015–2017 3.7L Mustang is Speed Density (no MAF sensor). These values apply only to 2011–2014 MAF-based applications.
+· These values apply to 2011–2014 MAF-based applications. This guide elsewhere states that the 2015–2017 3.7L Mustang is speed density with no MAF sensor; that claim is contradicted by available evidence — see section 7 and the validation record.
 
 MAF Tuning Method:
 
@@ -532,7 +534,7 @@ Note: "Copperhead" is an informal PCM strategy family designation. The actual PC
 
 7. 2015+ Speed Density Note (Level 2)
 
-2015–2017 North American 3.7L Mustang: Available service/aftermarket documentation identifies the 2015–2017 3.7L Mustang as a MAP-based speed-density strategy without a conventional MAF transfer function.
+[CONTRADICTED — see the validation record] 2015–2017 North American 3.7L Mustang: this guide states that the 2015–2017 3.7L Mustang is a MAP-based speed-density strategy without a conventional MAF transfer function. Parts catalogues list mass air flow sensors as fitting the 2015–2017 Mustang with the 3.7L V6, and general 3.7L V6 Mustang service material describes a MAF sensor on the intake tube. The claim is therefore unsupported and probably wrong. Do not act on it: confirm from the vehicle's own OSID and from whether the intake tube carries a MAF sensor.
 
 HP Tuners Path (Level 4 — if exposed): Engine → Airflow → Speed Density → VE Coefficients
 
@@ -662,3 +664,70 @@ HP Tuners Path (Level 4): Engine → Fuel → Transient → Liquid Fuel Puddle
 ---
 
 End of Complete Reference Guide
+---
+
+10. Validation Record (2026-09-05)
+
+What this record is, and what it is not
+
+Every claim below was checked by web search. **No primary source was opened.**
+The container running the check could reach a search index but could not fetch
+any page — Ford owner-manual content, workshop references, parts catalogues and
+forum threads were all blocked at the network layer. So each line records what
+search summaries said, not what a document says. Under this project's own
+standard that is *corroboration*, not verification: nothing here may be promoted
+to Level 1 on the strength of this record.
+
+Read the Status column as follows:
+
+· Corroborated — independent search results agree with the guide. Still not
+  Ford-verified from a document.
+· Uncorroborated — search did not find the claim either way. Not evidence
+  against it.
+· Disputed — a source gives a different value.
+· Contradicted — the weight of available evidence goes against the claim.
+· Internally inconsistent — the guide's own two figures cannot both be true;
+  no source needed to establish this.
+
+Claim Guide value Status Note
+Firing order 1-4-2-5-3-6 Corroborated Multiple independent sources.
+Cylinder numbering 1-2-3 passenger (Bank 1), 4-5-6 driver Corroborated Matches the guide's Level 2 caveat.
+Mustang 3.7 rating 305 hp @ 6500 / 280 lb-ft @ 4250 Corroborated Widely published.
+F-150 3.7 rating 302 hp @ 6500 / 278 lb-ft @ 4000 Corroborated Widely published.
+6R80 gear ratios 4.17 / 2.34 / 1.52 / 1.14 / 0.87 / 0.69 Corroborated Third gear reads 1.52, not 1.57. The guide's warning about 1.57 stands.
+6R80 fluid type MERCON LV Corroborated —
+6R80 dry fill (current) 12.12 qt (11.47 L) Corroborated Arithmetic is self-consistent.
+6R80 dry fill (2011–2013) 12.1 qt (11.7 L) Internally inconsistent 12.1 US qt = 11.45 L; 11.7 L = 12.36 US qt. Corrected in section 1D to record the discrepancy rather than a value.
+Torque converter stall 2300–2580 RPM Corroborated A search summary attributes this to the Ford 2012–2013 service manual; the manual itself was not reachable.
+Coil-on-plug bolt torque 53 lb-in (6 Nm) Corroborated Exact match to an independent 3.7L figure.
+Spark plug torque 11 lb-ft (15 Nm) Disputed An independent 3.7L source gives 14 Nm / 124 lb-in, which is 10.3 lb-ft. About 1 Nm apart. Use the service manual figure, not this one.
+Spark plug SP-520 / CYFS-12F-5 SP-520 for 3.7L Corroborated Parts listings show SP-520 / CYFS-12F-5 fitting Mustang and Transit 3.7L. The 2014 F-150 3.7L application specifically was not confirmed.
+Spark plug gap 0.049–0.053 in Uncorroborated No source found stating the gap for the 2014 F-150 3.7L. The guide's own instruction to read the underhood emissions label is the reliable path.
+Ti-VCT authority Intake 60°, exhaust 50° Disputed Ford's 2011 Mustang Ti-VCT material describes as much as 50 degrees and states no 60-degree intake figure. Flagged in section 1E.
+2015–2017 Mustang 3.7 Speed density, no MAF Contradicted Parts catalogues list MAF sensors fitting the 2015–2017 Mustang 3.7L V6, and 3.7L V6 service material describes a MAF sensor on the intake tube. Flagged in sections 2D and 7.
+
+Not checkable by search, and deliberately not checked
+
+Everything in section 2 and most of sections 3–8 is Level 3 or Level 4 by the
+guide's own classification: observed calibration ranges and OSID-dependent
+navigation. There is no published authority to check them against — that is what
+makes them Level 3. In particular the idle-stability classification table, the
+RPM-error bands, the MAF observed ranges, the idle spark ranges, the DFCO
+values, the WOT lambda and spark observations, the friction-torque range and the
+speed-limiter figures are all unverifiable in principle from outside a vehicle.
+They are working heuristics and the guide says so. Do not read their absence
+from this record as either support or doubt.
+
+The 1 g/s per litre idle airflow rule of thumb is likewise a heuristic, not a
+specification, and the guide already labels it as one.
+
+What would actually verify this document
+
+Opening the sources. Specifically: the 2014 F-150 owner's manual capacities and
+specifications section (plug part number, gap, transmission fluid capacity), the
+2011–2013 F-150 owner's manual for the disputed capacity, the Ford workshop
+manual section for spark plug and coil torque, the 2011 Mustang workshop manual
+for gear ratios, and the Ford Ti-VCT technical description for cam authority. A
+2014 F-150 technical specifications PDF and Ford's own owner-manual content
+service both appeared in search results and are the natural starting points when
+a network path to them exists.
