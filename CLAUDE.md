@@ -314,7 +314,53 @@ fan is cycling and loading the engine. Does not touch the trim finding, which
 rests on learned cell values. Worth its own capture: `Engine RPM` +
 `Throttle Position Actually` at a held 2000 rpm.
 
-### PARK vs DRIVE, same session — the hunt and the shake are ONE thing (2026-09, 03:23–03:25)
+### THE SHAKE IS STRONG — mechanical side REOPENED (2026-09)
+
+**Owner: the shake moves him in the seat.** Not subtle, not needle-only.
+
+**"The hunt and the shake are one phenomenon" is WITHDRAWN.** A ±25 rpm swing at
+3.4 s is a 4 % cycling of engine speed — it moves a needle, it does not shake a
+person. The inference was weak anyway: **the converter damps everything** in
+gear, so "both vanish in D" never distinguished them.
+
+**MOUNTS ARE NOT ELIMINATED.** This file ruled them out because D and R feel the
+same — sound for *torque-reaction* faults (a collapsed mount would load
+differently in D than R), but **blind to a mount that has lost its damping**,
+which is not direction-dependent.
+
+- The engine rocks on its mounts at **8–15 Hz** at idle — felt through a seat,
+  not heard.
+- **Fluid-filled mounts exist to damp exactly that mode.** One that loses its
+  fluid stops damping it.
+- **In gear, converter drag preloads the engine against the mounts**, shifting it
+  millimetres and changing the rocking mode.
+
+[VERIFY] whether the 2014 F-150 3.7 uses hydraulic engine mounts.
+
+**Second candidate, raised far too late: CONTACT.** Something resting against the
+frame or cab — exhaust pipe, A/C line, power steering line, cooler line, wiring
+loom, heat shield. **Shifting into gear rotates the engine slightly and a part
+that merely touches at rest breaks contact.** Gives: strong in P, gone in D, felt
+not heard, invisible to every sensor, present since purchase, unaffected by
+plugs/injectors/throttle body/fluids.
+
+**No scan data could ever see either.** Consistent with three nights of OBD work
+finding a real but small fuel fault and nothing that explains a strong vibration.
+
+**The tests, all free:** ① hand on engine → frame rail beside the mount → cab
+floor; frame nearly as bad as engine means the mount is passing it through ·
+② helper watches the engine rock through P→D→R→P · ③ hand along exhaust, A/C,
+power steering, cooler lines, looms, heat shields for one spot buzzing harder
+than its neighbours, then push/pull it while someone reports the seat · ④ pry bar
+gently unloading each mount in turn while idling · ⑤ accelerometer to name the
+family (**~10 Hz = engine rock on mounts** · 11 Hz = rotational imbalance ·
+5.5 Hz = one weak cylinder · 33 Hz = firing pulse, so an isolation problem).
+
+**Standing lesson: the owner's description of the symptom outranks an inference
+drawn from graphs.** Two conclusions here have now been withdrawn because a
+measured correlation was allowed to override what the vehicle actually does.
+
+### PARK vs DRIVE, same session — the rpm hunt, measured (2026-09, 03:23–03:25)
 
 `Engine RPM` + `Tim. adv.`, warm, standstill, minutes apart on the same engine.
 **The first clean within-vehicle comparison in this investigation.**

@@ -655,6 +655,96 @@ addresses the actual complaint.
 
 ---
 
+## CORRECTION — the shake is STRONG, and that reopens the mechanical side
+
+**Owner's report, unambiguous: the shake moves him in the seat.** Not a subtlety,
+not something only visible on a needle.
+
+### What that invalidates
+
+**"The hunt and the shake are one phenomenon" is withdrawn.** A ±25 rpm
+oscillation at 3.4 s is a 4 % cycling of engine speed. It moves a tachometer
+needle. **It does not shake a person through a seat base.** The magnitudes do not
+match, and the owner is the instrument that matters here.
+
+**The inference behind it was weak anyway.** The argument was that hunt and shake
+must be the same because both vanish in Drive. But **the torque converter damps
+everything** once it is loaded — the slow speed oscillation and the per-firing
+vibration alike. "Both disappear in D" therefore cannot distinguish between them.
+It was never good evidence.
+
+### This un-eliminates the mounts
+
+This file records mounts as ruled out because **D and R feel the same as each
+other**. That argument is sound for what it covers: engine torque reacts in
+opposite directions in D and R, so a *collapsed* mount, or a torque-reaction
+contact, would differ between them.
+
+**It says nothing about a mount that has lost its damping.** That failure is not
+direction-dependent, so the D-versus-R test is blind to it.
+
+And the pattern fits:
+
+- At idle the engine rocks on its mounts at its own natural frequency, typically
+  **8-15 Hz** — squarely in the band felt through a seat rather than heard.
+- **Fluid-filled mounts exist to damp exactly that mode.** One that has lost its
+  fluid stops damping it, and the cab receives the rocking.
+- **In gear, converter drag preloads the engine against the mounts**, shifting it
+  a few millimetres and changing the rocking mode entirely.
+
+Worst in P/N, absent in D/R, felt not heard, no codes, unaffected by six repairs
+to fuel and ignition. [VERIFY] whether the 2014 F-150 3.7 uses hydraulic
+(fluid-filled) engine mounts — not confirmed against the service manual.
+
+### Second candidate, which should have been raised much earlier: contact
+
+**Something resting against the frame or cab.** Exhaust downpipe or mid-pipe, an
+A/C line, a power steering line, a transmission cooler line, a wiring loom, a
+heat shield.
+
+**Shifting into gear rotates the engine slightly on its mounts, and a part that
+merely touches at rest can break contact.** That yields: strong in P, gone in D,
+felt not heard, invisible to every sensor on the vehicle, present since purchase,
+and entirely unaffected by plugs, injectors, throttle body, coolant and fluid
+changes.
+
+**No scan data could ever have seen either of these**, which is consistent with
+three nights of OBD work finding a real but small fuel fault and nothing that
+explains a strong vibration.
+
+### The tests, all free, all hands-on
+
+1. **Touch test across the mount.** Idling in Park. Hand on the engine, then on
+   the frame rail beside the mount, then on the cab floor. A large drop across
+   the mount means it is isolating; **frame nearly as bad as engine means it is
+   passing vibration straight through.**
+2. **Watch the engine rock.** A helper watches from the front through
+   P → D → R → P. A good set of mounts gives a small damped settle; a dead or
+   loose one gives a large lurch and a wobble.
+3. **Hunt for contact.** Idling in Park, hand along everything passing near the
+   frame or cab. **Feel for one spot buzzing much harder than its neighbours.**
+   Then push or pull the suspect part while someone in the cab reports whether
+   the seat changes.
+4. **Pry bar, gently, while idling.** Take a little weight off each mount in
+   turn. A change in the shake when one mount is unloaded names that mount.
+5. **Accelerometer — now naming a family rather than confirming a story:**
+
+| Frequency | Meaning |
+|---|---|
+| **~10 Hz** | **Engine rocking on its mounts** — mount damping |
+| ~11 Hz | Rotational imbalance — damper, pulley, flexplate |
+| ~5.5 Hz | One cylinder differing from the other five |
+| ~33 Hz | Firing pulse — then the problem is isolation, not the engine |
+
+### Standing lesson
+
+**The owner's description of the symptom outranks an inference drawn from
+graphs.** Two conclusions in this file have now had to be withdrawn because a
+measured correlation was allowed to override what the vehicle actually does —
+the converter-damping argument early on, and the one-phenomenon argument here.
+
+---
+
 ## PARK vs DRIVE, SAME SESSION — the hunt and the shake are ONE phenomenon (2026-09, 03:23-03:25)
 
 `Engine RPM` paired with `Tim. adv.`, warm, standstill, four windows in Drive
