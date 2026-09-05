@@ -314,6 +314,48 @@ fan is cycling and loading the engine. Does not touch the trim finding, which
 rests on learned cell values. Worth its own capture: `Engine RPM` +
 `Throttle Position Actually` at a held 2000 rpm.
 
+### PARK vs DRIVE, same session — the hunt and the shake are ONE thing (2026-09, 03:23–03:25)
+
+`Engine RPM` + `Tim. adv.`, warm, standstill, minutes apart on the same engine.
+**The first clean within-vehicle comparison in this investigation.**
+
+| | **Park** — shakes | **Drive** — clean |
+|---|---|---|
+| Idle speed | ~650 rpm | ~550 rpm (Ford commands lower in gear) |
+| RPM span | **44, 55, 53, 50 rpm** | **15, 13, 18 rpm** |
+| Shape | **clean, regular, repeating** | unstructured, no rhythm |
+| Period | **~3.4–3.5 s**, 4 cycles/screen | none |
+| `Tim. adv.` | 11.5–16° (**≈4.5°**) | 12–14° (**≈2°**) |
+
+**The hunt and the felt shake appear together in Park and vanish together in
+Drive.** Earlier revisions argued they were separate phenomena — a 0.28 Hz
+breathing and a 33 Hz vibration. **That separation is withdrawn.** A ±25 rpm
+swing every 3.4 s is a 4 % cycling of engine speed: exactly a visibly breathing
+needle, and exactly what is felt in a bare cab as rhythmic unevenness without
+ever loping or sounding wrong. **There is one thing to explain, not two.**
+
+**But the P/D difference is also what every healthy automatic does.** In gear the
+converter loads and damps the engine, so the same torque disturbance moves the
+speed far less, and a loop that limit-cycles unloaded can be stable loaded. The
+coherent picture, every element measured:
+
+```
+PCM commands ±1.5 % AFR dither at ~3.4 s  (catalyst control)
+→ cylinder torque ripples at that period
+→ PARK  unloaded, low inertia   → ±25 rpm, FELT
+→ DRIVE converter-loaded, damped → ±8 rpm, not felt
+```
+
+The purge leak added to the disturbance; removing it dropped D/R below
+perception, Park is still above it.
+
+**Whether ±25 rpm in Park is abnormal for a 3.7 is still unknown — no other one
+has ever been measured. That control sample is now the deciding test.**
+
+**Consequence for the accelerometer test:** look for a **~0.28 Hz amplitude
+modulation** of the firing pulse — vibration strength rising and falling every
+~3.4 s — not only for fixed frequencies. In Park and in Drive.
+
 ### ADAPTIVES WERE WIPED WITH THE REPAIR — read before any trim number
 
 The owner disconnected the battery negative and bridged the cable to the

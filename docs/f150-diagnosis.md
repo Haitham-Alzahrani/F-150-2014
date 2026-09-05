@@ -655,6 +655,87 @@ addresses the actual complaint.
 
 ---
 
+## PARK vs DRIVE, SAME SESSION — the hunt and the shake are ONE phenomenon (2026-09, 03:23-03:25)
+
+`Engine RPM` paired with `Tim. adv.`, warm, standstill, four windows in Drive
+with the foot on the brake and five in Park, minutes apart on the same engine at
+the same temperature. **The first clean within-vehicle comparison in this
+investigation.**
+
+| | **Park** — shakes | **Drive** — clean |
+|---|---|---|
+| Idle speed | **~650 rpm** | ~550 rpm |
+| RPM span per window | **44, 55, 53, 50 rpm** | **15, 13, 18 rpm** |
+| Shape | **clean, regular, repeating humps** | unstructured, no rhythm |
+| Period | **~3.4-3.5 s**, 4 cycles per 15 s screen | none discernible |
+| `Tim. adv.` range | 11.5-16 ° (**≈4.5 °**) | 12-14 ° (**≈2 °**) |
+
+Peaks in the 16:03 window fall at roughly 16:07.5, 16:11, 16:14.5 and 16:18 —
+four evenly spaced humps, ~3.4 s apart. **That is the same period measured on
+the first night, unchanged.**
+
+Idle target differs by design: Ford commands roughly 100 rpm lower in gear.
+
+### What this settles: there is ONE thing to explain, not two
+
+**The hunt and the felt shake appear together in Park and vanish together in
+Drive.**
+
+Earlier revisions of this file argued they were probably separate phenomena — a
+slow breathing visible to the scan tool at ~0.28 Hz, and a fast vibration at the
+~33 Hz firing frequency that no OBD log could resolve. **That separation is now
+unlikely and is withdrawn as the working assumption.**
+
+A ±25 rpm swing repeating every 3.4 s is a 4 % cycling of engine speed. That is
+precisely what a visibly breathing tachometer needle is, and precisely what would
+be felt in a bare regular cab as a rhythmic unevenness — while never loping,
+stumbling, or sounding wrong from under the hood, which is exactly how the owner
+has described it from the start.
+
+**Not proof of causation** — the two co-occur across one condition boundary — but
+the alternative (two independent phenomena that happen to switch on and off
+together across that boundary) is much less likely.
+
+### What this does NOT settle
+
+**The Park-versus-Drive difference is also exactly what a healthy automatic
+does.** In gear the torque converter loads the engine; a loaded engine is far
+better damped, so the same torque disturbance produces much less speed
+variation, and a control loop that limit-cycles unloaded can be stable under
+load. This file has recorded that principle before and it applies here.
+
+So the coherent picture, with every element measured:
+
+```
+PCM commands a ±1.5 % AFR dither at ~3.4 s   (measured, catalyst control)
+        ↓
+cylinder torque ripples at that period
+        ↓
+PARK   — unloaded, low inertia   → ±25 rpm, felt
+DRIVE  — converter-loaded, damped → ±8 rpm, not felt
+```
+
+The purge leak was adding to the disturbance. Removing it dropped D and R below
+the threshold of perception; Park is still above it.
+
+**Whether ±25 rpm at idle in Park is abnormal for this engine remains genuinely
+unknown, because no other 3.7 has ever been measured.** That is now the single
+most valuable outstanding test, and it costs nothing.
+
+### Consequences for the remaining work
+
+- **The accelerometer test changes meaning.** It should now look for a **~0.28 Hz
+  amplitude modulation** of the firing pulse — a slow rise and fall in vibration
+  strength every ~3.4 s — as well as the fixed frequencies. Capture it in Park
+  and in Drive and compare.
+- **The control sample is the deciding test.** `Engine RPM` + `Tim. adv.` at warm
+  idle in Park on another 2011-2014 3.7. Two minutes.
+- **Cylinder balance still matters.** An uneven cylinder would make the engine
+  more sensitive to any torque disturbance, which would amplify a normal dither
+  into a felt one.
+
+---
+
 ## ADAPTIVES WERE WIPED DURING THE REPAIR — read this before any trim number
 
 The owner disconnected the battery negative terminal and bridged the
