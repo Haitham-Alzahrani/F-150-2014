@@ -164,12 +164,18 @@ These are calibration heuristics and observed ranges, not factory specifications
 Practical Idle Stability Classification — Diagnostic Heuristic
 
 Classification P/N RPM P-P Drive RPM P-P Spark P-P Recovery Time Interpretation
-Perfect / Exceptional ≤10 RPM ≤15 RPM 1°–3° Immediate Rare; near-perfect airflow/torque model. No action needed.
-Excellent >10–<15 RPM >15–<20 RPM 2°–4° <1 sec Very stable. No action needed.
-Good / Healthy ≥15–<30 RPM ≥20–<40 RPM 3°–6° <1–2 sec Typical healthy operation.
-Acceptable ≥30–<40 RPM ≥40–<50 RPM 5°–8° <2 sec OK if recovery is consistent. If not, investigate.
-Marginal ≥40–≤50 RPM ≥50–≤60 RPM 8°–10° 2–3 sec Investigate vacuum leak, throttle sludge, or idle airflow.
-Poor / Severe Oscillation >50 RPM >60 RPM 10°+ rhythmic >3 sec Investigate before tuning.
+Perfect / Exceptional ≤10 RPM ≤15 RPM ≤3° Immediate Rare; near-perfect airflow/torque model. No action needed.
+Excellent >10–<15 RPM >15–<20 RPM >3–≤4° <1 sec Very stable. No action needed.
+Good / Healthy ≥15–<30 RPM ≥20–<40 RPM >4–≤6° <1–2 sec Typical healthy operation.
+Acceptable ≥30–<40 RPM ≥40–<50 RPM >6–≤8° <2 sec OK if recovery is consistent. If not, investigate.
+Marginal ≥40–≤50 RPM ≥50–≤60 RPM >8–≤10° 2–3 sec Investigate vacuum leak, throttle sludge, or idle airflow.
+Poor / Severe Oscillation >50 RPM >60 RPM >10°, or any amplitude that is rhythmic >3 sec Investigate before tuning.
+
+Boundary convention: the RPM columns are read as stated. The Spark P-P column
+uses lower-open, upper-closed intervals — a band excludes its lower bound and
+includes its upper one — so every value falls in exactly one row with no gap
+between rows. The Poor row's spark entry is an amplitude threshold or any
+amplitude that is rhythmic, because a rhythmic swing is a finding at any size.
 
 Important Distinction: Excursion vs. Oscillation
 
@@ -560,7 +566,7 @@ one, read section 2A rather than this card.
 Parameter Excellent Good Investigate Evidence Level
 P/N RPM P-P <15 RPM ≥15–<40 RPM ≥40 RPM Level 3
 Drive RPM P-P <20 RPM ≥20–<50 RPM ≥50 RPM Level 3
-Spark P-P ≤4° >4–<8° ≥8°, or any amplitude that is rhythmic Level 3
+Spark P-P ≤4° >4–≤8° >8°, or any amplitude that is rhythmic Level 3
 Idle Recovery Time <1 sec <2 sec ≥2 sec Level 3
 RPM Error ±0–5 RPM >±5–±20 RPM >±20 RPM persistent Level 3
 STFT Near 0% Moderate correction Persistent >±10% Level 3
