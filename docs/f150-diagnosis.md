@@ -91,6 +91,125 @@ is unknown — relevant to cam phaser condition, which depends on oil history.
 
 ---
 
+## THE D/R IMPROVEMENT RELAPSED AFTER ~100 km (2026-09-05, owner report)
+
+> "When I replaced it I noticed that the shake is gone in D and R but still in P
+> and N. **And after driving about 100 km it returned in D and R.**"
+
+| | P / N | D / R |
+|---|---|---|
+| Before the purge valve | shakes | less |
+| After the valve **and the KAM wipe** | shakes | **clean** |
+| After ~100 km of driving | shakes | **shakes again** |
+
+### The confound was called in advance, and it has resolved against the valve
+
+This file recorded, at the time of the repair:
+
+> "The confound: new valve AND wiped adaptives in one operation, so the D/R
+> improvement has two candidate causes. **Close it by letting the adaptives
+> relearn: if the improvement came from the reset, the shake returns in D and R
+> as long term re-learns.**"
+
+**It returned. The improvement came from the adaptive reset, not from the purge
+valve.**
+
+### What this settles about the purge valve
+
+**The valve was a real fault and it is genuinely fixed** — long term trim at warm
+idle in Park moved from **+3.13 / +2.34 %** to **−0.78 / −0.78 %** and stayed
+there through a full relearn. The load-cell slope that proved a fixed-size
+unmetered-air opening is gone.
+
+**And it was not the cause of the symptom.** The symptom is back where it started.
+
+So: a real fault was found, proven, and repaired, and it turned out not to be the
+one being chased. That is a clean result rather than a failure — it removes a
+genuine defect and it removes a candidate. **The purge valve joins the other six
+repairs that changed nothing.**
+
+### THE NEW CLASS OF EVIDENCE: reset helps, relearning brings it back
+
+**Wiping the PCM's learned memory temporarily improves the symptom. It returns as
+the memory relearns.**
+
+This has now happened **twice**:
+
+1. The owner's earlier relearn plus 300 km — reported as "didn't solve it", which
+   is consistent with temporary improvement followed by return.
+2. This repair — D/R clean immediately after the wipe, shaking again after
+   ~100 km.
+
+**No purely mechanical fault behaves this way.** A mount that has lost its
+damping, a delaminated harmonic balancer, an exhaust touching the body — none of
+them care what is stored in the PCM's memory. **Whatever is wrong involves
+something the PCM learns.**
+
+This is the first evidence in the entire investigation that discriminates between
+a mechanical cause and a control-system cause, and it points at the control
+system.
+
+### The hypothesis it supports — raised on night one, never tested
+
+**Is the rpm signal itself true?**
+
+Ford PCMs learn a **crankshaft position variation correction** — a stored profile
+of the small spacing errors in the reluctor wheel's teeth, so the misfire monitor
+can distinguish a genuine misfire from a machining tolerance. **A KAM wipe clears
+it and it is relearned over subsequent driving.** [VERIFY against Ford service
+information — the existence and exact behaviour of this table were not confirmed
+from a source during this investigation.]
+
+If the crank signal or the reluctor has a defect, the PCM would *believe* engine
+speed is wandering, modulate spark and fuel to correct a phantom, and **that
+modulation would make the engine genuinely oscillate.**
+
+| Observation | Fits the crank-signal hypothesis? |
+|---|---|
+| Needle jumping at **every** rpm, not only idle | **Yes** — a crank signal error is rpm-independent |
+| No codes, ever | **Yes** — a learned correction, not a fault threshold |
+| **Better after a reset, returns after ~100 km** | **Yes** — the table is cleared, then relearned |
+| Untouched by six fuel and ignition repairs | **Yes** — nothing replaced is in that path |
+| Present since purchase | **Yes** |
+| "Something is working on behalf of me of adjusting the RPM" | **Yes** — the PCM correcting a phantom it believes is real |
+| Body shake idle-only while the needle jumps everywhere | **Yes** — the ripple is constant; only at idle is the engine unloaded enough for it to reach the cab |
+
+**It is the only hypothesis on the table that accounts for the reset-and-return
+pattern.** Everything mechanical fails that test outright.
+
+### How to test it — none of this has been done
+
+1. **Independent rpm measurement.** A timing light with a tach function, or the
+   phone accelerometer (firing frequency = rpm/60 × 3), read against the app's
+   number at idle and at a held 1500 rpm. **If the truck's own reading is
+   jumpier than the crankshaft actually is, the signal is lying.** This is the
+   decisive test and it needs no special tooling.
+2. **Crankshaft position variation relearn.** FORScan and Ford IDS can perform
+   and read the status of this procedure. Whether it has ever been run on this
+   truck is unknown. [VERIFY whether FORScan exposes it for this PCM.]
+3. **Inspect the crank sensor and its harness** — connector condition, pin
+   tension, routing, chafe, and heat damage after twelve years in Jeddah.
+   Wiggle-test the connector while watching the rpm graph.
+4. **Re-measure D and R now that the symptom has returned.** `Engine RPM` +
+   `Tim. adv.` in Drive gave **13-18 rpm span** when D/R was clean. **If the
+   span has grown, the disturbance grew. If it is still 13-18 rpm while the
+   shake is felt, the transmission path changed instead.** That is a sharp,
+   falsifiable prediction and the data to compare against is already recorded.
+
+### The measurement gap this exposes
+
+**The commanded AFR dither was never measured in the window when D/R was clean.**
+It was characterised before the repair and again after the drive, but not during
+the days between the wipe and the relearn — exactly the interval when the symptom
+was different. If the dither had been absent then and present after, it would
+implicate the dither directly.
+
+**Standing rule to add: when a repair or a reset changes the symptom, re-measure
+the full channel set immediately, while the vehicle is in the changed state.**
+That window is short and it does not come back.
+
+---
+
 ## THE PROBLEM WAS MIS-SCOPED — it is NOT an idle fault (2026-09-05, owner clarification)
 
 **The owner's full description, given in his own words after the dataset was

@@ -9,6 +9,65 @@ not "see a mechanic."
 **2014 Ford F-150 XL Regular Cab · 3.7L V6 Ti-VCT · 6R80 auto · 4x2**
 VIN `1FTMF1EM1EFC80632` · 131,000 km (Aug 2026) · Jeddah
 
+## THE D/R FIX RELAPSED — the reset helped, not the valve (2026-09-05)
+
+| | P / N | D / R |
+|---|---|---|
+| Before the purge valve | shakes | less |
+| After the valve **+ KAM wipe** | shakes | **clean** |
+| **After ~100 km** | shakes | **shakes again** |
+
+**The confound was called in advance and has resolved against the valve.** This
+file said: *"if the improvement came from the reset, the shake returns in D and R
+as long term re-learns."* It returned.
+
+**The valve was still a real fault, genuinely fixed** — idle long term trim went
+**+3.13 / +2.34 % → −0.78 / −0.78 %** and held through a full relearn; the
+load-cell slope is gone. **But it was not the cause of the symptom.** It joins the
+other six repairs that changed nothing.
+
+### THE NEW EVIDENCE: reset helps, relearning brings it back
+
+**Wiping the PCM's learned memory temporarily improves the symptom; it returns as
+the memory relearns.** Twice now — the owner's earlier relearn plus 300 km, and
+this repair.
+
+**No purely mechanical fault behaves this way.** A dead mount, a delaminated
+damper, an exhaust touching the body — none care what is in the PCM's memory.
+**Whatever is wrong involves something the PCM learns.** This is the first
+evidence that discriminates mechanical from control-system, and it points at the
+control system.
+
+### It supports the night-one hypothesis that was never tested
+
+**Is the rpm signal itself true?** Ford PCMs learn a **crankshaft position
+variation correction** — a profile of reluctor tooth spacing errors, cleared by a
+KAM wipe and relearned over subsequent driving. [VERIFY against Ford service
+information.] A defective crank signal or reluctor would make the PCM *believe*
+rpm is wandering, modulate spark and fuel for a phantom, and **that modulation
+would make the engine genuinely oscillate.**
+
+It accounts for: needle jumping at **every** rpm · no codes ever · **better after
+a reset, back after ~100 km** · untouched by six fuel/ignition repairs · present
+since purchase · "something is adjusting the rpm on my behalf" · the ripple being
+constant while only idle is unloaded enough to let it reach the cab.
+
+**It is the only hypothesis that accounts for reset-and-return.** Every
+mechanical candidate fails that test outright.
+
+**TESTS, none done:** ① **independent rpm** — timing-light tach vs the app at idle
+and at 1500; if the truck's reading is jumpier than the crank actually is, the
+signal is lying · ② crankshaft position variation relearn status via FORScan/IDS ·
+③ inspect and wiggle-test the crank sensor connector and harness · ④ **re-measure
+Drive now the symptom is back** — `Engine RPM` + `Tim. adv.` gave **13–18 rpm**
+when D/R was clean; a bigger span means the disturbance grew, the same span with
+a felt shake means the path changed.
+
+**Measurement gap this exposed:** the commanded AFR dither was never captured
+during the window when D/R was clean. **Rule: when a repair or reset changes the
+symptom, re-measure the full channel set immediately — that window is short and
+does not come back.**
+
 ## THE PROBLEM IS NOT AN IDLE FAULT — read this first (2026-09-05)
 
 **The owner's own description, which re-scopes everything below it.** There are
