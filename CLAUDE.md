@@ -28,6 +28,75 @@ An electric fan loads the engine only through the alternator, which is a far
 smaller and differently-shaped load than a mechanical fan clutch. Any reasoning
 that treated a fan clutch as a direct crankshaft load is withdrawn.
 
+## THE CAUSE OF THE IDLE OSCILLATION — FOUND (2026-09-06)
+
+**The PCM's own fore/aft catalyst-control dither drives about three quarters of
+the idle rpm oscillation.** Every earlier statement in this file that the dither
+"accounts for about a fifth" is **withdrawn — it used the wrong metric.**
+
+The r = −0.41 broadband correlation is diluted by everything the two signals do
+at frequencies where they are genuinely unrelated. The question "what causes the
+*rhythm*" has to be asked **at the rhythm's frequency**. Magnitude-squared
+coherence at 0.30 Hz, Welch method, 30–40 s segments:
+
+| Window | Condition | Seconds | Segments | **Coherence @ 0.30 Hz** | Significance threshold | Gain, rpm per AFR unit |
+|---|---|---|---|---|---|---|
+| log 3, 2180–2500 s | Park, post-repair | 232 | 14 | **0.749** | 0.206 | 25.0 |
+| log 3, 2500–2800 s | Park, post-repair | 162 | 9 | **0.721** | 0.312 | 25.1 |
+| log 3, 2800–2980 s | Park, post-repair | 140 | 8 | **0.766** | 0.348 | 28.9 |
+| log 0, 5880–6150 s | Park, **pre-repair** | 104 | 5 | **0.791** | 0.527 | 29.8 |
+| log 0, 6150–6420 s | Park, **pre-repair** | 214 | 13 | **0.701** | 0.221 | 24.4 |
+
+**Coherence away from the rhythm (0.6–2 Hz) is 0.085–0.091 — nothing.** The
+relationship exists only at the oscillation frequency, which is exactly what a
+driver looks like and exactly what a coincidence does not.
+
+**For comparison, spark advance has coherence 0.998 with rpm** at the same
+frequency — and 0.68 everywhere else. Spark tracks rpm at all frequencies. It is
+a pure follower, as established.
+
+### What this means
+
+```
+PCM commands ±0.23 AFR (±1.5 %) at 0.30 Hz     — fore/aft catalyst control, NORMAL
+  × engine responds at 24–30 rpm per AFR unit  — lightly damped Park idle
+  = ±6–7 rpm at the fundamental, ~75 % of the rhythm
+  + harmonics, the A/C compressor when running, and noise = the 38 rpm span
+```
+
+**The rpm oscillation is the engine faithfully following a normal control
+function.** The dither amplitude (±1.5 %) is textbook Ford. The period (3.3 s) is
+set by the catalysts' oxygen storage, which Mode 06 puts at 44 % of limit on both
+banks. The engine's response gain is a property of the idle calibration — how
+much damping the governor applies at 0.3 Hz — and this governor uses ±0.9° of a
+47° spark authority, which is a low-gain choice.
+
+**No part is broken. This is calibration behaviour.** Whether the dither amplitude
+or the response gain are *typical for this engine* still cannot be judged without
+another 3.7 — but nothing about it is a fault by any measurement available.
+
+### What would change it
+
+* **A Ford calibration update**, if one exists for this PCM. That is the only
+  legitimate lever on dither amplitude and governor gain. `f150diag survey` prints
+  the calibration IDs; a dealer can say whether a later one was released.
+* **Nothing mechanical.** Replacing sensors, injectors, or converters would not
+  touch it — every one of those measures healthy, and the driving signal is a
+  command the PCM generates on purpose.
+
+### One thing still worth capturing
+
+`Fuel/Air com. ratio` and `O2S2 volt. (B1)` on the same graph for three minutes.
+Only 26–40 simultaneous samples of the downstream sensor and the fuel command
+exist in all four logs. If the downstream sensor leads the command, the fore/aft
+loop is confirmed closed and its behaviour can be judged directly.
+
+### And the felt shake is still a separate problem
+
+None of this touches it. The oscillation is 0.30 Hz; what shakes a seat is
+10–33 Hz; the port cannot see it. **The accelerometer recording is still the only
+test aimed at the symptom the owner actually complained of.**
+
 ## THE CYCLE, TRACED — 926 cycles ensemble-averaged (2026-09-06)
 
 **[`data/trace_rpm_cycle.py`](data/trace_rpm_cycle.py), output in
