@@ -1,4 +1,4 @@
-# Full vehicle assessment — 2014 F-150 XL 3.7 Ti-VCT / 6R80 / 4x2
+# Full vehicle assessment — 2014 F-150 XL 3.7 Ti-VCT / 6R80 / 4x4
 
 **2026-09-06. Five parallel domain analyses of 135,000+ logged samples across four
 Car Scanner sessions (2026-09-04 22:24 → 09-05 05:07), plus the 277-screenshot
@@ -8,6 +8,13 @@ record and the Mode 06 on-board test results.** Component reports:
 [mechanical and breathing](analysis/03-mechanical-and-breathing.md) ·
 [transmission and electrical](analysis/04-transmission-and-electrical.md) ·
 [history and records](analysis/05-history-and-oncoming-tests.md)
+
+**Corrected 2026-09-06 by the owner, who has the truck in front of him:** the
+vehicle is **4x4**, not 4x2 — the VIN pattern decodes as 4x2 and that conflict is
+unresolved, so confirm against the vehicle before ordering any driveline part.
+The cooling **fans are electric**, not a belt-driven clutch fan. And the **air
+conditioning was ON** during part of the long idle session. Sections 3.3 and 8
+are rewritten accordingly.
 
 **Terminology used throughout.** This engine is a V6 — two rows of three
 cylinders. Each row is a *bank*, with its own exhaust manifold, its own catalytic
@@ -79,7 +86,42 @@ and matching the door-code reading. 3.55 would require a 27.4 inch tyre, which
 this truck does not have. Nothing to repair — but any future gearing, speedometer
 or shift-point calculation built on 3.55 would be wrong.
 
-### 3.3 The two loads that cycle — IDENTIFY, do not replace anything yet.
+### 3.3 The cycling load — IDENTIFIED, nothing to do. [RESOLVED 2026-09-06]
+
+Between minute 15 and 40 of the long idle session a clutch cycled on a **15.78
+second period**: calculated load stepping **28.6 % ↔ 36.8 %**, airflow **3.43 →
+5.08 g/s**, fuel rate **+34 %**. At minute 37–38 it stopped and the engine-speed
+oscillation halved at the same moment.
+
+**It was the air-conditioning compressor.** The owner confirms the A/C was on for
+part of that session, and with electric cooling fans the compressor is the only
+clutch that loads the crankshaft directly. The load statistics settle it:
+
+| Minutes | rpm sd | Median 10 s span | **Calculated load sd** |
+|---|---|---|---|
+| **15–38, compressor cycling** | **13.94** | **69.0 rpm** | **4.252 %** |
+| 40–70 | 8.97 | **35.0** | **0.317 %** |
+| 70–131 | 9.27 | 38.0 | 0.373 % |
+
+**Engine load stops varying by a factor of thirteen at the same minute the
+oscillation halves.** No further test is needed and no part is implicated — a
+compressor cycling at idle disturbs any engine.
+
+**Consequence for the whole project: every amplitude figure must state whether
+the compressor was running.** Without that, the same truck reads as two different
+trucks. It also restores the original screenshot finding — A/C off 30–53 rpm, A/C
+on 64–81 — which a later analysis had wrongly doubted. The logs give 35–38
+against 69. **The screenshots were right.**
+
+### 3.3b Two dead channels — never request them again
+
+`A/C pressure` reads exactly **0.000 in every sample of every log**, including
+while driving. `Gear (AT)` reads a constant **1.000 in all 45 samples**. Neither
+channel answers on this truck. **Every past conclusion that rested on "A/C
+pressure reads 0, therefore the A/C was off" is withdrawn** — that is what sent
+this investigation looking for a coolant-temperature effect that was never there.
+
+### 3.3c What 4x4 adds — superseded heading kept for reference
 
 Between minute 15 and minute 40 of the long idle session, **a clutch was cycling
 on a 15.78 second period**: calculated load stepping **28.6 % ↔ 36.8 %**, airflow
@@ -91,23 +133,12 @@ Three independent analyses found this event and agree on its timing. **The
 alternator is eliminated** — charging did not stop until minute 46–52.9, which is
 8 to 15 minutes *after* the step, so it cannot be the cause.
 
-**What that clutch was cannot be determined from the data**, because the `A/C
-pressure` channel on this truck is dead — it reads exactly 0.000 in every sample
-of every log, including while driving. Every past statement in this project that
-"A/C was confirmed off" rested on that dead channel and is withdrawn.
-
-**The candidates are the air-conditioning compressor clutch and the cooling fan
-clutch.** Both are engine loads and both cycle. **Do not replace either.**
-Identify which one, by ear, during one cold idle:
-
-1. Cold start, bonnet open, Park, A/C switched fully OFF at the dash.
-2. Idle 25 minutes. Every time the engine note changes, look and listen at
-   the compressor pulley and at the fan.
-3. Write down which one engages, and the time.
-
-A compressor that cycles with the A/C switched off is a fault worth chasing. A
-fan that cycles is normal. **That distinction decides whether there is anything
-to fix here at all.**
+The truck is **4x4**, which adds a transfer case, a front driveshaft, a front
+differential and front CV axles that a 4x2 does not have. **None of them turn at
+a standstill in Park**, so none can explain the Park idle shake. But the transfer
+case is bolted to the transmission and adds mass and mounting to the powertrain
+assembly, so **transfer-case mounting joins the list for the mount and
+contact-point checks** — on a 4x2 it would not exist at all.
 
 ---
 
@@ -341,7 +372,7 @@ spending it for nothing.
 | # | Action | Cost | What it settles |
 |---|---|---|---|
 | 1 | **Inflate the right front tyre** to 241 kPa | 5 min | A real, unrelated defect |
-| 2 | **Cold idle, bonnet open, A/C off, 25 min. Identify which clutch cycles** | 25 min | Whether the load that halves the oscillation is the A/C compressor (a fault) or the fan (normal) |
+| 2 | ~~Identify which clutch cycles~~ **DONE — it was the A/C compressor** | — | Resolved 2026-09-06. No action, no part |
 | 3 | **Log `Engine RPM` + `Tim. adv.` + `Knock retard` + `O2S1 air:fuel` on a drive with hard pulls** | 10 min | Knock under load, spark under load, WOT mixture, octane relearn — the biggest hole in the dataset |
 | 4 | **Read permanent codes (Mode $0A)** | 5 min | The only code history the battery disconnect could not erase — it lives in non-volatile memory for exactly that reason |
 | 5 | **Accelerometer on the seat, Park then Drive** | 15 min | The only test aimed at the vibration actually complained of |
