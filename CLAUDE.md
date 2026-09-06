@@ -6,8 +6,27 @@ not "see a mechanic."
 
 ## The truck
 
-**2014 Ford F-150 XL Regular Cab · 3.7L V6 Ti-VCT · 6R80 auto · 4x2**
+**2014 Ford F-150 XL Regular Cab · 3.7L V6 Ti-VCT · 6R80 auto · 4x4**
 VIN `1FTMF1EM1EFC80632` · 131,000 km (Aug 2026) · Jeddah
+
+**DRIVE TYPE — 4x4, owner-confirmed 2026-09-06.** Earlier revisions of this file
+said 4x2 on a VIN decode and used that to dismiss the history report. **The owner
+has the truck in front of him and says it is 4x4; that outranks a decode.** The
+conflict is unresolved and matters for parts: `1FTMF1E` decodes as Regular Cab
+4x2 in the position-4 series codes, where 4x4 Regular Cab is normally `1FTNF1E`.
+Confirm before ordering any driveline part by checking for a transfer case, a
+front driveshaft and a 4x4 selector.
+
+**It also puts driveline parts back on the table that a 4x2 does not have** —
+transfer case, front driveshaft, front differential, front CV axles. None of them
+turn at a standstill in Park, so they cannot explain the Park idle shake, but the
+transfer case is bolted to the transmission and adds mass and mounting to the
+powertrain assembly.
+
+**COOLING FANS ARE ELECTRIC, not a belt-driven clutch fan** (owner, 2026-09-06).
+An electric fan loads the engine only through the alternator, which is a far
+smaller and differently-shaped load than a mechanical fan clutch. Any reasoning
+that treated a fan clutch as a direct crankshaft load is withdrawn.
 
 ## THE CYCLE, TRACED — 926 cycles ensemble-averaged (2026-09-06)
 
@@ -106,7 +125,42 @@ to a mixture change that already happened. It is not driving anything.
 against rpm: total movement **0.062°**, one quantisation step, correlation
 **+0.05**. The earlier elimination rested on a screenshot of a parked needle.
 
-### THE AMPLITUDE HALVED ONCE, EARLY IN THE NIGHT — cause not established
+### THE A/C COMPRESSOR DOUBLES THE IDLE OSCILLATION — SETTLED (2026-09-06)
+
+**The owner confirms the air conditioning was ON during part of the long
+session.** With electric cooling fans, the only clutch that can cycle as a direct
+crankshaft load is the A/C compressor. Both remaining candidates collapse to one,
+and the data matches it exactly.
+
+| Minutes into the session | rpm sd | Median 10 s span | **Calculated load sd** |
+|---|---|---|---|
+| **15–38, A/C cycling** | **13.94** | **69.0 rpm** | **4.252 %** |
+| 40–70, after | 8.97 | 35.0 rpm | **0.317 %** |
+| 70–131, after | 9.27 | 38.0 rpm | 0.373 % |
+
+**Engine load stops varying by a factor of thirteen at minute 37–38, and the
+engine-speed oscillation halves at the same moment.** The compressor was cycling
+on a **15.78 s period**, stepping load 28.6 ↔ 36.8 %, airflow 3.43 → 5.08 g/s and
+fuel rate **+34 %**.
+
+**This restores the original screenshot finding, which a later analysis had
+wrongly called into question.** The screenshots recorded A/C OFF at 30–53 rpm and
+A/C ON at 64–81 rpm. The logs give 35–38 against 69. **The screenshot record was
+right and the doubt was wrong.**
+
+**`A/C pressure` is a DEAD CHANNEL on this truck** — exactly 0.000 in every
+sample of every log, including while driving. Every statement in this file that
+"A/C was off, confirmed by A/C pressure reading 0" is withdrawn: that channel
+never answers. `Gear (AT)` is dead the same way, constant 1.000 in all 45
+samples. **Do not request either again, and do not treat their values as data.**
+
+**Is doubling the amplitude with A/C on a fault?** No — a compressor cycling on
+and off at idle disturbs any engine, and this one recovers to a stable idle
+between cycles. It is recorded because it explains a change this project spent
+considerable effort calling unexplained, and because **it means every amplitude
+figure in this file must state whether the compressor was running.**
+
+### THE AMPLITUDE HALVED ONCE, EARLY IN THE NIGHT — superseded, see above
 
 **835 ten-second idle windows across all four logs, in
 [`data/analysis/idle_windows.csv`](data/analysis/idle_windows.csv).** Restricted
