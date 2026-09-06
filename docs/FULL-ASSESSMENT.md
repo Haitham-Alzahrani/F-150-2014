@@ -380,3 +380,66 @@ spending it for nothing.
 | 7 | **Request `Manifold absolute pressure` (the plain PID, not high-resolution)** | — | Would allow a real idle volumetric-efficiency calculation |
 
 Items 1 to 4 are the ones worth doing first. **None of them costs a part.**
+
+---
+
+## 12. WHY DOES THE PCM ADJUST THE FUEL? — the loop, and which sensor drives it
+
+### The fuel command has two layers
+
+**Layer 1, the fast loop, driven by the two UPSTREAM sensors.** It holds the
+mixture at lambda 1 and corrects within a second or so. On this truck those
+sensors respond in **0.014 s against a 0.4 s limit** (Mode 06) and the two banks
+agree to **0.007 AFR** on 6,695 paired samples. This layer is not the source of a
+three-second rhythm — it is far too fast.
+
+**Layer 2, the slow loop, driven by the two DOWNSTREAM sensors.** Ford calls this
+fore/aft, or rear oxygen trim. Its job is to bias the target slightly rich or
+lean so the catalytic converter's oxygen store stays about half full. **Its
+period is set by how long the converter takes to fill and empty, which is
+seconds.** That is where a 3-second rhythm comes from, and it is the layer this
+truck's 0.304 Hz command almost certainly belongs to.
+
+### The measurement that would prove it was never taken
+
+Cross-correlating the commanded air/fuel against every channel that overlaps it:
+
+| Channel | Result |
+|---|---|
+| Upstream air/fuel, Bank 1 (passenger) | **follows** the command by 0.70 s, r = +0.588 |
+| Engine speed | **follows** the command by 0.15 s, r = −0.41 |
+| **Downstream O2, either bank** | **only 26–40 simultaneous samples — not analysable** |
+| Engine coolant temperature | **zero simultaneous samples** |
+
+The 0.70 s delay on the upstream sensor is exactly right — command, injection,
+combustion, exhaust travel, sensor response. **Nothing in the data leads the fuel
+command**, which is consistent with a scheduled dither rather than a reaction —
+but **the one sensor that drives that loop was never sampled alongside it.**
+
+**The capture that closes this: `Fuel/Air com. ratio` together with
+`O2S2 volt. (B1)` on the same graph, three minutes at warm idle in Park.** If the
+downstream sensor leads the fuel command, the fore/aft loop is confirmed as the
+source and its behaviour can be judged. If it does not, the dither is an
+open-loop schedule and no sensor is responsible.
+
+### Sensors that could make this loop misbehave, ranked
+
+| Rank | Sensor | Why it could do this | What the data already says |
+|---|---|---|---|
+| **1** | **Downstream oxygen sensor, either bank** | It is the sensor that drives the slow loop. Lazy, biased or contaminated, the PCM responds late, overshoots, and the loop hunts | Switching response **0.792 / 0.856 s against a 10 s limit** — excellent. But the downstream **slope** test is the tightest approach in the whole Mode 06 set at **12.6–12.8 % from the zero end**, and heater current sits at about **3× its lower limit**. Not failing, but the least comfortable numbers on the truck |
+| **2** | **Engine coolant temperature sensor** | Fuelling and idle target are both scheduled on it. A noisy or drifting signal modulates fuel directly | **Never co-sampled with the fuel command — zero simultaneous samples.** Completely untested against this |
+| **3** | The catalytic converter itself (not a sensor) | The loop's period is set by its oxygen storage. A degraded converter makes the loop run faster | Both at **44 % of the failure limit**, within 2.1 % of each other |
+| **4** | Upstream wideband sensors | Drive the fast loop; a lazy one makes it oscillate | **0.014 s against a 0.4 s limit.** Effectively eliminated |
+| **5** | Mass airflow sensor | A wandering airflow signal would move the fuel command | **r = +0.106 against engine speed** on 13,349 samples. Eliminated |
+| **6** | Fuel rail pressure sensor / regulator | Pressure swing changes delivered fuel | **This PID never returned on this truck.** Unmeasured, but secondary — the command itself is swinging, not just the delivery |
+
+### The honest limit
+
+**The dither is normal in kind.** ±1.5 % commanded air/fuel on a seconds timescale
+is what fore/aft catalyst control looks like on a healthy Ford. Whether its
+amplitude and period are normal **for this engine** cannot be judged without
+another 3.7 to compare against.
+
+**And even a perfect fuel command would not remove the oscillation.** The command
+accounts for r = −0.41, which is **17 % of the variance in engine speed**. Fixing
+the fuel loop entirely would leave four fifths of the movement untouched.
