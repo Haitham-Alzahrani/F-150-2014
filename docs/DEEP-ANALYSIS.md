@@ -52,8 +52,15 @@ add torque instantly by advancing. Sitting near the bottom of the range leaves
 less reserve in the advance direction and more in retard, which is exactly the
 asymmetry a governor would show if it were working harder than it should.
 
-**Why it may be nothing.** The 16–22° figure is a Level 3 observed range that web
-search could not corroborate for the 3.7 at all. A different calibration, a
+**Why it may be nothing — and this got weaker on 2026-09-06.** The 16–22° figure
+is a Level 3 observed range in the guide, and web search does not support it for
+F-150 applications. Forum sources describing F-150 spark advance at idle put it
+at roughly **13–16°**, and a 3.5 EcoBoost F-150 at **3–15°**. Both brackets
+contain or nearly contain this truck's 12.0°. **The deviation may be against a
+wrong reference rather than a wrong engine.** Those are unverified forum
+snippets about unspecified engines, so they do not close the item — but they move
+it down the list, and the control sample now matters more for settling this than
+for anything else. A different calibration, a
 different idle target, or a different measurement convention would move it.
 
 **It is not the learned octane.** Octane adjust moved from −0.600 to +0.081
