@@ -128,8 +128,9 @@ that is a substantive result rather than a failure:
   a specification.
 - The nearest community figure found is **13–17° BTDC at 650 rpm in Park**
   ([ford-trucks.com timing advance thread](https://www.ford-trucks.com/forums/1450485-timing-advance-numbers.html),
-  surfaced via search; **community figure, not Ford**). This truck's 11.9–12.5°
-  sits about **1–2 degrees below the bottom of that band.**
+  surfaced via search; **community figure, not Ford**). This truck's per-window
+  means of 11.89 – 12.46° sit **0.5 to 1.1 degrees below the bottom of that
+  band** — one to two quantisation steps of the PID.
 - Other Ford owners report *lower* idle spark still — 5–6° on some scan-tool
   readouts — but those threads are confounded by tools that report "spark
   advance" and "ignition timing" as two different numbers, so they are not
@@ -147,8 +148,8 @@ vehicle it describes cannot be used to condemn an absolute value.
 **Verdict: 12.0° at warm Park idle on this engine is NORMAL and the 16–22°
 expectation should be deleted from the project's working assumptions.** The
 reasons are (a) there is no Ford specification to be below, (b) the community
-figure is 13–17° and being 1–2° under it is inside the spread of how different
-tools and different idle speeds report, (c) the spark *behaviour* — swing,
+figure is 13–17° and being about one degree under it is inside the spread of how
+different tools, calibrations and idle speeds report, (c) the spark *behaviour* — swing,
 gain, phase, authority — is textbook in every respect measured below, and
 (d) **the engine shows zero knock retard and a learned-octane value that says
 the PCM thinks the fuel is good, which is the opposite of what an engine forced
@@ -429,16 +430,19 @@ synthetic sinusoid:
 
 | Window | segments | mean rpm | predicted rpm/120 | peak found at | peak/floor | amplitude |
 |---|---|---|---|---|---|---|
-| pre-repair Park idle, 82265–84364 s | **122 × 30 s** | 652.1 | **5.434 Hz** | **5.433 Hz** | 4.28× | 0.25 rpm |
-| post-repair Park idle, 03:24:52–03:30:15 | 38 × 30 s | 652.0 | 5.433 Hz | **5.433 Hz** | 3.57× | 0.267 rpm |
-| **Drive idle, 03:23:10–03:24:43** | 8 × 30 s | **550.4** | **4.586 Hz** | **4.600 Hz** | 6.63× | 0.280 rpm |
+| pre-repair Park idle, 22:51:05–23:26:04 | **122 × 30 s**, n = 30,848 | 652.1 | **5.434 Hz** | **5.433 Hz** | 4.28× | 0.300 rpm |
+| post-repair Park idle, 03:24:52–03:30:15 | 38 × 30 s, n = 5,230 | 652.0 | 5.433 Hz | **5.433 Hz** | 3.57× | 0.267 rpm |
+| **Drive idle, 03:23:10–03:24:43** | 8 × 30 s, n = 1,446 | **550.4** | **4.586 Hz** | **4.600 Hz** | 6.63× | 0.280 rpm |
 
 **The peak moves with engine speed.** In Park it is at 5.433 Hz and there is
 nothing at 4.6 Hz. Minutes later in Drive at 550 rpm it is at 4.600 Hz and there
 is nothing at 5.433 Hz (0.64× floor). **A fixed artefact of the app, the sample
-rate or the filter cannot do that.** Across fourteen idle windows the peak lands
-between 5.425 and 5.450 Hz against predictions of 5.422–5.446 Hz — inside one
-FFT bin every time.
+rate or the filter cannot do that.** Across thirteen separate warm Park-idle
+windows the peak lands between **5.425 and 5.450 Hz** against predictions of
+**5.422 – 5.446 Hz** in twelve of them — inside one FFT bin. The thirteenth
+(00:11:09–00:16:22) put its maximum at 4.867 Hz instead, and it is also the
+window with the weakest peak in the set (2.49× floor) — the line was buried
+there, not moved.
 
 **Amplitude: 0.14 to 0.32 rpm zero-to-peak**, against a hunt fundamental of
 7.2–12.8 rpm in the same windows. **The half-order component is 2–3 % of the
@@ -473,12 +477,13 @@ them.**
    line at exactly rpm/120 with no imbalance at all.
 
 **One test in the data leans against reading 2.** A staircase artefact scales
-with the rate of change of the underlying signal. Between the Drive window and
-the Park window minutes later, **the hunt amplitude fell 59 % (11.78 → 4.79 rpm)
-while the half-order amplitude did not move (0.267 → 0.280 rpm).** Across all
-fourteen windows the correlation between half-order amplitude and hunt amplitude
-is only **r = +0.44, n = 14** — not significant. A staircase artefact should
-track the disturbance tightly. It does not.
+with the rate of change of the underlying signal. Between the Drive window
+(03:23:10) and the Park window two minutes later (03:24:52), **the hunt amplitude
+rose by a factor of 2.5 — 4.79 to 11.78 rpm — while the half-order amplitude did
+not move at all: 0.280 to 0.267 rpm.** Across fourteen Park-idle windows the
+correlation between half-order amplitude and hunt amplitude is only **r = +0.44,
+n = 14**, which is not significant. A staircase artefact should track the
+disturbance tightly. It does not.
 
 **Verdict: UNCERTAIN. The signal is real and it is at exactly half engine order;
 its cause is not established.** It is far too small to be what shakes the cab —
@@ -511,7 +516,8 @@ idle timing** — an over-estimated ethanol fraction would give *more* advance, 
 less.
 
 **It is, however, the single mechanism in this domain that could bite at wide
-open throttle in 45 °C ambient, and wide open throttle is exactly where no
+open throttle — 33 °C ambient with 47 °C intake air on those pulls — and wide
+open throttle is exactly where no
 ignition data exists.** It is also the most plausible reason the post-wipe OAR
 stepped positive after two full-throttle pulls. Marked **speculation, testable.**
 
@@ -544,7 +550,7 @@ Nothing in this domain rises to "replace". Ranked by what the evidence supports.
 | 4 | **Inferred ethanol percent (16 → 19 % on E0 fuel)** | **TEST, then decide** | Confirmed only if #2 shows knock retard at WOT. A FORScan flex-fuel-inference reset would be the intervention, not a part | Real anomaly, plausible spark mechanism at high load, **cannot explain the idle symptom** and goes the wrong direction for low idle timing. |
 | 5 | **Half-order torque imbalance** | **TEST — the injector-kill balance test** | Unplug one injector at a time at warm idle, note each rpm drop. Six numbers; an unequal drop names the cylinder. Also settles §3.9 reading 1 vs 2 | 0.14–0.32 rpm is far too small to shake a cab, and Mode 06 says nothing is missing fire. Worth doing only because the test is free and the frequency is exactly right. |
 | 6 | **Knock sensors and wiring** | **LEAVE ALONE — do not inspect on this evidence** | Would only become relevant if #2 showed knock and the PCM did *not* retard | A failed knock sensor sets P0325/P0330 and, on Ford, pushes learned octane toward +1. This truck has no code and learned −0.60. Actively contraindicated. |
-| 7 | **Spark plugs (brand, part number, gap never recorded)** | **INSPECT only if opportunity arises** | Confirm Motorcraft SP-534 / equivalent and gap against `docs/f150-specs.md` before trusting the "already done" entry | CLAUDE.md flags that the brand, part number and gap were never stated. A wrong plug or gap is an ignition-domain unknown — but it cannot be causing what is measured here, since combustion is measurably clean. Record-keeping, not a lead. |
+| 7 | **Spark plugs (brand, part number, gap never recorded)** | **INSPECT only if opportunity arises** | Ask the owner for the brand, part number and gap. `docs/f150-specs.md` lists Motorcraft SP-534 (CYFS-12Y-2), gap ~1.25–1.35 mm — **both marked [VERIFY] there, so check the manual before treating either as the spec** | CLAUDE.md flags that the brand, part number and gap were never stated. A wrong plug or gap is an ignition-domain unknown — but it cannot be causing what is measured here, since combustion is measurably clean. Record-keeping, not a lead. |
 
 ---
 
@@ -577,7 +583,7 @@ engine, on the same 95 octane. Export **CSV #2 (Horizontal)**, rounding off.
 | At wide open throttle | Reading |
 |---|---|
 | Knock retard stays 0 and spark climbs smoothly with rpm | **The ignition domain closes completely.** Items 2, 4 and 6 above all die at once. |
-| Knock retard goes non-zero by a degree or two on the first pull and settles | Normal adaptation, especially at 45 °C ambient. Watch learned octane. |
+| Knock retard goes non-zero by a degree or two on the first pull and settles | Normal adaptation, especially at 33 °C ambient with 47 °C intake air. Watch learned octane. |
 | Knock retard several degrees and sustained, and/or spark visibly pulled back | Real knock. Then the inferred ethanol content (§3.10) becomes the leading suspect and a flex-fuel inference reset is the cheap intervention — **but note this still would not explain a shake at idle.** |
 
 ### Other items this dataset cannot answer

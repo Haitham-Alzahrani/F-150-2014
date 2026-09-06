@@ -27,7 +27,7 @@ right front tyre is 12 % under-inflated.
 | Gear ratio, 4th | N/V **31.538** / **31.445** (n_speed 59 / 11) | 1.14, predicts 30.968 → **+1.84 / +1.54 %** | **NORMAL** |
 | Gear ratio steps, 3rd–6th | 0.754, 0.758, 0.763, 0.763, 0.790, 0.796 | 0.750 / 0.763 / 0.793 | **NORMAL** |
 | Gear ratio step, 2nd→3rd | **0.675, 0.676** (two WOT shifts) | 0.650 | **NORMAL** (converter slip inflates it) |
-| **Axle ratio** | **3.73 derived** (k = 27.165, C = 2.288 m) | door code `26` = 3.73 open | **NORMAL — specs file says 3.55 and is wrong** |
+| **Axle ratio** | **3.729 derived** (k = 27.165, C = 2.288 m) | door code `26` reads 3.73 in axle-code charts [unconfirmed, pages blocked] | **NORMAL — `f150-specs.md` says "likely 3.55" and is wrong** |
 | Torque converter slip, 6th @ 87 km/h | **reference, taken as 0 %** | locked | **NORMAL** |
 | Torque converter slip, 5th @ 61 km/h | **+0.93 %** | 6R80 runs controlled slip 2nd–6th | **NORMAL** |
 | Torque converter slip, 4th @ 32–52 km/h | **+1.5 to +1.8 %** | as above | **NORMAL** |
@@ -118,19 +118,21 @@ where `C` is loaded rolling circumference:
 | Assumed C | Source of C | Implied axle ratio |
 |---|---|---|
 | **2.288 m** | 703 rev/mile, a normal loaded value for a 30.1 in tyre | **3.729** |
-| 2.346 m | 686 rev/mile, Michelin's published figure for LTX 255/65R17 | 3.824 |
-| 2.402 m | 670 rev/mile, theoretical free diameter | 3.915 |
+| 2.346 m | 686 rev/mile, quoted for Michelin LTX A/S 255/65R17 [search summary, page not opened] | 3.824 |
+| 2.402 m | 670 rev/mile, theoretical free diameter [tiresize.com, via search summary] | 3.915 |
 
 3.73 is a factory F-150 ratio; 3.82 and 3.92 are not. Going the other way, a
 3.55 axle would need `C = 2.192 m` — a 27.4 in tyre, four inches smaller than
 anything that fits this truck.
 
 **`docs/f150-specs.md` records axle code `26` and guesses "likely 3.55
-[VERIFY]". Two independent Ford axle-code references give code 26 = 3.73
-conventional (open), and the logged data derives 3.73 to within 0.03. Correct
-the specs file to 3.73.** [The code-26 tables are community/parts-catalogue
-compilations, not a Ford document — but they agree with the measurement, which
-is the stronger evidence.]
+[VERIFY]". The logged data derives 3.729.** Web search returns several
+axle-code charts reading code 26 as 3.73 conventional (open) — **but every one
+of those pages was blocked by this container's egress proxy, so I have the
+search engine's summary of them and not the pages themselves. Treat the code-26
+reading as unconfirmed; the measurement is what carries the claim.** The two
+agree, which is why the specs file should be corrected to **3.73** with the
+axle tag still worth reading to close it properly.
 
 The 2.5 % gap between the derived 2.288 m and Michelin's published 2.346 m is
 inside what tread wear alone explains: 131,000 km of wear removes roughly 8 mm
@@ -478,3 +480,40 @@ came out where they should be.
    and always will.
 4. **`docs/scanner-pids.md` — flag `Gear (AT)` as a Car Scanner calculation that
    reads a constant, and `ATF temperature var.3` as unverified.**
+
+---
+
+## 6. Sources used for the reference values
+
+Everything in the "measured" columns comes from the logs in
+`data/carscanner/`. The reference values used to judge them came from:
+
+- [`docs/ford-3.7-cyclone-6r80-guide.md`](../ford-3.7-cyclone-6r80-guide.md) —
+  6R80 gear ratios 4.17 / 2.34 / 1.52 / 1.14 / 0.87 / 0.69 (Level 1, Ford
+  service reference), MERCON LV, stall 2300–2580 rpm, §4C.1 adaptive shift
+  behaviour.
+- [`docs/f150-specs.md`](../f150-specs.md) — tyre size P255/65R17, cold pressure
+  241 kPa, axle code `26`.
+- [255/65R17 tyre size data](https://tiresize.com/tiresizes/255-65R17.htm) and
+  [Michelin LTX A/S 255/65R17](https://tiresize.com/tires/Michelin/LTX-AS-255-65R17.htm)
+  — revolutions per mile. **Community/retail data, and I read the search
+  engine's summary rather than the pages themselves.**
+- [Ford axle code charts](https://gmundcars.com/ford-axle-code-chart/) and
+  [engineneeds.com](https://engineneeds.com/rear-end-ford-axle-code-chart/) —
+  code 26 = 3.73 open. **Both pages were blocked by this container's egress
+  proxy; only the search summary was available. Unconfirmed.**
+- [Gears Magazine, "Lock Up Madness! GM and Ford Torque Converter Clutch
+  Control"](https://gearsmagazine.com/magazine/lock-up-madness-gm-and-ford-torque-converter-clutch-control/)
+  and [usshift.com 6R80 control notes](https://www.usshift.com/6r80.shtml) —
+  6R80 applies the TCC in 2nd through 6th with a commanded slip band rather than
+  hard lockup. **Trade and vendor sources, not Ford. Level 3 by this project's
+  own evidence scale.**
+- [6R80 transmission temperature discussion, f150forum](https://www.f150forum.com/f82/6r80-transmission-temperature-530633/)
+  and [Mustang6G thermal bypass valve thread](https://www.mustang6g.com/forums/threads/6r80-transmission-temperatures-thermal-bypass-valve.181627/)
+  — normal running band ~85–102 °C, and 91–102 °C at idle in Park for the fluid
+  level check. **Community figures. Confirm against the Ford workshop manual
+  before using them as a pass/fail.**
+- [2014 F-150 cooling fan parts listing](https://ford.oempartsonline.com/v-2014-ford-f-150--xl--3-7l-v6-cng/cooling-system--cooling-fan)
+  — the 3.7 appears to use a fan blade and motor assembly rather than a
+  belt-driven clutch fan. **[VERIFY] — inferred from a parts catalogue listing
+  summary, not from a Ford document.**
