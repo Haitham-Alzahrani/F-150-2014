@@ -1,0 +1,55 @@
+============================================================================================================
+EVERY CHANNEL vs ENGINE SPEED AT IDLE — sorted by strength of relationship
+============================================================================================================
+channel                                      log                           n       r   lag s       p2p  @0.30Hz  verdict
+Timing advance (°)                           2026-09-04 22-23-38.zi    15695  -0.837   -0.10    13.333    49.3%  follows rpm by 0.10s
+Timing advance (°)                           20260905_030915.csv.gz     6507  -0.629   -0.10    10.500    64.2%  follows rpm by 0.10s
+Oxygen sensor 5 Wide Range Current (mA) (mA  2026-09-04 22-23-38.zi    15493  -0.535   -0.60     0.375    69.8%  follows rpm by 0.60s
+Oxygen sensor 5 Wide Range Equivalence rati  2026-09-04 22-23-38.zi    15493  -0.529   -0.65     1.067    69.9%  follows rpm by 0.65s
+Oxygen sensor 1 Wide Range Current (mA) (mA  2026-09-04 22-23-38.zi     8484  -0.479   -0.60     0.285    42.5%  follows rpm by 0.60s
+Oxygen sensor 1 Wide Range Equivalence rati  2026-09-04 22-23-38.zi     8484  -0.477   -0.65     0.817    42.6%  follows rpm by 0.65s
+Air:fuel ratio ()                            2026-09-04 22-23-38.zi     5837  -0.443   -0.75     0.844    65.2%  follows rpm by 0.75s
+Lambda ()                                    2026-09-04 22-23-38.zi     5837  -0.443   -0.75     0.058    65.2%  follows rpm by 0.75s
+Throttle position (%)                        20260905_041723.csv.gz      436  -0.436   -0.15     2.625     1.4%  follows rpm by 0.15s
+Fuel/Air commanded equivalence ratio ()      2026-09-04 22-23-38.zi     9737  -0.416   +0.15     0.455    11.2%  LEADS rpm by 0.15s
+Fuel/Air commanded equivalence ratio ()      20260905_041723.csv.gz    17954  -0.408   +0.15     0.490    79.2%  LEADS rpm by 0.15s
+Oxygen sensor 2 Bank 2 Voltage (V)           2026-09-04 22-23-38.zi     3739  -0.369   +0.00     0.715    61.3%  simultaneous
+Oxygen sensor 2 Bank 1 Voltage (V)           2026-09-04 22-23-38.zi    10819  -0.361   +0.00     0.786    53.2%  simultaneous
+Short term fuel % trim - Bank 1 (%)          2026-09-04 22-23-38.zi    20693  -0.255   -0.65    10.896    32.8%  follows rpm by 0.65s
+Commanded throttle actuator (%)              2026-09-04 22-23-38.zi     4004  -0.214   +0.00     1.153    50.0%  simultaneous
+Short term fuel % trim - Bank 2 (%)          2026-09-04 22-23-38.zi    16538  -0.177   -0.60    12.063    19.8%  follows rpm by 0.60s
+
+============================================================================================================
+NO RELATIONSHIP — measured and excluded (|r| < 0.15)
+============================================================================================================
+  Calculated engine load value (%)                 2026-09-04 22-23-38.zi   n= 14928  r=+0.136
+  Commanded evaporative purge (%)                  20260905_041723.csv.gz   n=  2813  r=-0.139
+  Commanded evaporative purge (%)                  2026-09-04 22-23-38.zi   n=  9559  r=+0.118
+  Control module voltage (V)                       2026-09-04 22-23-38.zi   n=  4235  r=-0.047
+  Intake air temperature (℃)                       2026-09-04 22-23-38.zi   n= 11172  r=+0.054
+  Long term fuel % trim - Bank 1 (%)               2026-09-04 22-23-38.zi   n= 11298  r=-0.068
+  Long term fuel % trim - Bank 2 (%)               2026-09-04 22-23-38.zi   n= 11408  r=-0.070
+  MAF air flow rate (g/sec)                        2026-09-04 22-23-38.zi   n= 13349  r=+0.106
+  OBD Module Voltage (V)                           2026-09-04 22-23-38.zi   n= 13605  r=+0.049
+  Throttle Position Actually (°)                   20260905_041723.csv.gz   n=  5257  r=-0.126
+  Throttle Position Actually (°)                   2026-09-04 22-23-38.zi   n=  7980  r=+0.058
+  Throttle position (%)                            2026-09-04 22-23-38.zi   n=  7403  r=+0.084
+  Variable camshaft actual advance #1 (°)          2026-09-04 22-23-38.zi   n=  9968  r=+0.050
+
+============================================================================================================
+THE CHAIN, ordered by when each thing moves
+============================================================================================================
+   +0.15s  BEFORE  r=-0.416  Fuel/Air commanded equivalence ratio ()        (2026-09-04 22-23-38.zi)
+   +0.15s  BEFORE  r=-0.408  Fuel/Air commanded equivalence ratio ()        (20260905_041723.csv.gz)
+   +0.00s  WITH    r=-0.369  Oxygen sensor 2 Bank 2 Voltage (V)             (2026-09-04 22-23-38.zi)
+   +0.00s  WITH    r=-0.361  Oxygen sensor 2 Bank 1 Voltage (V)             (2026-09-04 22-23-38.zi)
+   -0.10s  AFTER   r=-0.837  Timing advance (°)                             (2026-09-04 22-23-38.zi)
+   -0.10s  AFTER   r=-0.629  Timing advance (°)                             (20260905_030915.csv.gz)
+   -0.15s  AFTER   r=-0.436  Throttle position (%)                          (20260905_041723.csv.gz)
+   -0.60s  AFTER   r=-0.535  Oxygen sensor 5 Wide Range Current (mA) (mA)   (2026-09-04 22-23-38.zi)
+   -0.60s  AFTER   r=-0.479  Oxygen sensor 1 Wide Range Current (mA) (mA)   (2026-09-04 22-23-38.zi)
+   -0.65s  AFTER   r=-0.529  Oxygen sensor 5 Wide Range Equivalence ratio   (2026-09-04 22-23-38.zi)
+   -0.65s  AFTER   r=-0.477  Oxygen sensor 1 Wide Range Equivalence ratio   (2026-09-04 22-23-38.zi)
+   -0.65s  AFTER   r=-0.255  Short term fuel % trim - Bank 1 (%)            (2026-09-04 22-23-38.zi)
+   -0.75s  AFTER   r=-0.443  Air:fuel ratio ()                              (2026-09-04 22-23-38.zi)
+   -0.75s  AFTER   r=-0.443  Lambda ()                                      (2026-09-04 22-23-38.zi)
