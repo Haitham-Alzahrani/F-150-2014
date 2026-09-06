@@ -9,6 +9,71 @@ not "see a mechanic."
 **2014 Ford F-150 XL Regular Cab · 3.7L V6 Ti-VCT · 6R80 auto · 4x2**
 VIN `1FTMF1EM1EFC80632` · 131,000 km (Aug 2026) · Jeddah
 
+## THE CYCLE, TRACED — 926 cycles ensemble-averaged (2026-09-06)
+
+**[`data/trace_rpm_cycle.py`](data/trace_rpm_cycle.py), output in
+[`docs/rpm-cycle-trace.txt`](docs/rpm-cycle-trace.txt).** Individual cycles are
+noisy; stretching each to a common phase axis and averaging 926 of them recovers
+the shape that repeats. **Whatever survives 926 cycles is real** — the averaged
+shape carries a standard error of ±0.25 rpm.
+
+| | Measured |
+|---|---|
+| Period | **2.993 s mean, 3.000 median, sd 0.564 — 19 % jitter** |
+| Fundamental | **0.304 Hz** |
+| 2nd harmonic | 5.5 % of fundamental power |
+| 3rd harmonic | 1.2 % |
+| **Anything above 1 Hz** | **under 1 %. 4–8 Hz is 0.09 %** |
+| Averaged amplitude | 18–21 rpm |
+
+**The wave is close to a sine, and it is asymmetric.** It rises through **43 %**
+of the cycle and falls through 57 %. Steepest rise **+29.3 rpm/s**, steepest fall
+**−17.0 rpm/s** — **the rise is 1.7× steeper than the fall.**
+
+### What happens inside one cycle
+
+| Phase | Event |
+|---|---|
+| 0.00 | rpm crosses its mean going up, **rising fastest** |
+| 0.25 | **rpm peak** |
+| 0.28 | commanded air/fuel at its **richest** |
+| 0.31 | spark at its **most retarded** |
+| 0.58 | rpm falling fastest |
+| 0.75–0.79 | **rpm trough** |
+| 0.81 | spark at its **most advanced**, air/fuel at its **leanest** |
+| 0.96 | rpm rising fastest again |
+
+**Spark is fully advanced exactly at the rpm trough and fully retarded exactly at
+the peak.** That is a governor doing precisely what a governor should. It is not
+the cause; it is the correction, and it is *in the right place in the cycle*.
+
+**But its authority is tiny: 1.75° peak-to-peak, ±0.9° about the mean.** It
+opposes the swing and does not cancel it.
+
+**The rich command sits on the rpm peak and the lean command on the trough**,
+amplitude 0.296 AFR units, leading rpm slightly. Rich → more torque → rpm up.
+The physics runs the right way.
+
+### What the trace rules out
+
+**No fast content.** Between 4 and 8 Hz the spectrum holds **0.09 %** of the
+fundamental's power. Within the bandwidth this tool can see, engine speed is
+smooth — there is no per-event roughness, no stumble, nothing intermittent.
+(Firing at 32.5 Hz is still above Nyquist and still invisible.)
+
+**19 % period jitter is not a mechanical resonance.** A rotating or structural
+resonance holds its frequency far tighter than that. This is a driven or
+limit-cycling loop with a variable delay.
+
+### Where it leaves the case
+
+The trace is consistent with **the catalyst dither driving a torque swing that
+the spark governor opposes with too little authority to cancel** — dither leads,
+rpm follows, spark corrects a tenth of a second later at ±0.9°. It does not prove
+that, because the dither only accounts for about a fifth of the variance, and the
+asymmetric rise says the torque excursion is briefer and larger than a pure sine
+would give.
+
 ## THE PRE-REPAIR SESSION REPLICATES IT EXACTLY (2026-09-05, 3.2 h log)
 
 **A fourth log: 2026-09-04 22:24 → 09-05 01:35, 35 MB, 115,257 rpm samples, Park

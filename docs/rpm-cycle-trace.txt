@@ -1,0 +1,33 @@
+HOT PARK IDLE, 62 minutes, pre-repair — 923 cycles
+  period  mean 2.994 s  median 3.000  sd 0.565 (19 % jitter)
+  averaged cycle: peak at phase 0.22, trough at 0.81, amplitude 18.0 rpm, SEM +/-0.20
+  steepest rise +29.0 rpm/s, steepest fall -16.8 rpm/s -> the rise is 1.7x steeper
+  fraction of the cycle spent rising: 0.42
+
+  phase   rpm deviation
+   0.00   -0.57  |                     *
+   0.06   +3.50  |                               *
+   0.11   +6.99  |                                       *
+   0.17   +8.37  |                                           *
+   0.22   +8.87  |                                            *
+   0.28   +8.37  |                                           *
+   0.33   +7.13  |                                        *
+   0.39   +5.38  |                                   *
+   0.44   +3.24  |                              *
+   0.50   +0.94  |                         *
+   0.56   -1.56  |                   *
+   0.61   -4.17  |            *
+   0.67   -6.43  |       *
+   0.72   -8.22  |  *
+   0.78   -9.09  |*
+   0.83   -8.76  | *
+   0.89   -7.93  |   *
+   0.94   -4.96  |          *
+
+SPARK against the same cycle — 93 cycles
+  rpm    amplitude 20.73   peak at phase 0.25, trough at 0.75
+  signal amplitude 1.748   peak at phase 0.81, trough at 0.31
+
+COMMANDED AIR/FUEL against the same cycle — 220 cycles
+  rpm    amplitude 18.94   peak at phase 0.28, trough at 0.75
+  signal amplitude 0.296   peak at phase 0.81, trough at 0.28
