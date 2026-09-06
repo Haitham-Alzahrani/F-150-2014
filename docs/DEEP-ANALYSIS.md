@@ -100,6 +100,46 @@ it to explain.
 
 ---
 
+## The 2023 F-150 5.0 — what its one log could and could not settle
+
+A 72-second log from the owner's other truck, VIN `1FTFW1E50PKE57201`, taken
+2026-09-01 01:02. **It cannot serve as an idle control: the engine was never
+running.** Engine speed reads 0 across all 47 samples, calculated load 0 %,
+timing advance −2° (its parked default), manifold pressure equal to ambient.
+Coolant at 88 °C and intake air at 67–68 °C say it was a hot soak shortly after
+shutdown, key on, engine off. Every channel in the file is a single constant
+value.
+
+Two things in it are still worth having.
+
+**It nearly closes the barometric question.** With the engine off, manifold
+absolute pressure *is* atmospheric pressure, and the 2023 reads **99 kPa** in the
+same city. The 2014 reports barometric **97 kPa**. So the gap is about **2 kPa
+against another Ford's sensor**, not 4 kPa against a sea-level textbook value —
+and 2 kPa is inside ordinary sensor tolerance. Different days and different
+sensors, so this is supporting evidence rather than proof, but it points the same
+way as the reasoning that already downgraded this item.
+
+**It puts the trim numbers in perspective.** The 2023 carries learned long term
+trims of **−2.34 % on both banks**. The 2014, post-repair, reads **−0.78 % on
+both banks** — closer to zero than the two-year-old truck. Whatever else is wrong
+here, the fuelling is not it.
+
+**It also names a PID worth retrying on the 2014.** The 2023 returns `Intake
+manifold absolute pressure`, which Car Scanner has never returned on the 2014. If
+it can be made to answer, manifold pressure at idle would allow a real
+volumetric-efficiency calculation and would settle whether the 3.004 g/s MAF
+reading is genuinely low or simply what this engine breathes at 652 rpm.
+
+**What is still needed from that truck:** three minutes of `Engine RPM` and
+`Timing advance` at warm idle in Park with the **engine running**, A/C off, at a
+standstill. That single capture answers two questions this investigation has
+carried open since the first night — whether a healthy engine shows a clean
+line-spectrum oscillation at idle, and what idle spark advance a Ford truck
+actually runs.
+
+---
+
 ## What is causing the oscillation
 
 **Measured, not inferred:**
