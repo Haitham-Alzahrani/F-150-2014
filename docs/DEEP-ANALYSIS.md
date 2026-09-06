@@ -107,6 +107,69 @@ it to explain.
 
 ---
 
+## Engine health, read on its own terms (2026-09-06)
+
+Set the complaint aside and ask only: does anything about this engine measure
+wrong? Everything below is paired in one time window on the same log, at Park
+idle unless stated.
+
+### The banks are matched. This is now settled properly.
+
+The project has carried "capture short term trim bank 1 and bank 2 in one window"
+as an open item since the first night. Done, on **7,287 paired samples**:
+
+| | Short term | Long term | **Total correction** |
+|---|---|---|---|
+| Bank 1 | +0.424 % | +3.054 % | **+3.48 %** |
+| Bank 2 | +1.790 % | +2.291 % | **+4.08 %** |
+
+**0.6 % apart — less than one quantisation step.** Upstream air/fuel matches too:
+14.660 against 14.671, a difference of 0.012. **Fuelling is symmetric. The bank
+asymmetry question is closed.**
+
+### The one thing that does not match: what comes out of the converters
+
+Same mixture in, different signal out, same window:
+
+| | Upstream swing (sd) | Downstream swing (sd) | Downstream range |
+|---|---|---|---|
+| Bank 1 | 0.175 AFR | **0.216 V** | 0.085 – 0.875 V |
+| Bank 2 | 0.186 AFR | **0.114 V** | 0.115 – 0.830 V |
+
+**Bank 1's post-catalyst sensor swings nearly twice as far as bank 2's**, on
+3,620 and 2,396 samples, with identical mixture arriving at both. A converter's
+job is to buffer that swing with its oxygen storage. Bank 1's buffers less.
+
+**Do not condemn it.** The PCM's own catalyst monitor, run under its proper
+conditions rather than at idle, scored **bank 1 at 0.3711 and bank 2 at 0.3633
+against a 0.8359 limit** — both at 44 % of the failure threshold and within 2 %
+of each other. Idle is the worst operating point at which to judge a converter:
+lowest flow, lowest temperature. **Real asymmetry, not a fault by the test that
+is designed to find one.** Recheck it at 60–80 km/h cruise, where the monitor
+runs.
+
+### Everything else measures healthy
+
+Knock retard **0.000° on every sample ever logged**. Cam phaser parked, 0.062°
+total. Lambda 0.998. Timing advance ranges **−7° to +40°** under load, so the
+PCM has and uses full spark authority — the 12° at idle is not a stuck value.
+Absolute load 96.47 % and 215 g/s at wide open throttle, with no plateau. Both
+banks' injectors seal on overrun.
+
+### Minor observations, recorded rather than pursued
+
+* **Catalyst temperature is modelled, not measured.** Both banks read identical
+  to three decimal places, which no pair of real sensors would do. Peaks at
+  853 °C during hard driving. Treat it as the PCM's estimate.
+* **The wideband "current (mA)" channels read zero almost everywhere.** That is
+  expected — pump current is near zero at stoichiometric — not a dead sensor.
+* **One 1.5-second dropout**: bank 2's upstream air/fuel read exactly 0.000 for
+  26 consecutive samples at 04:01:49, during deceleration. A single occurrence in
+  5,684 samples, and Mode 06 timed that sensor at 0.014 s against a 0.4 s limit.
+  Almost certainly a data artefact. Worth a second look if it ever repeats.
+
+---
+
 ## The 2023 F-150 5.0 — what its one log could and could not settle
 
 A 72-second log from the owner's other truck, VIN `1FTFW1E50PKE57201`, taken
