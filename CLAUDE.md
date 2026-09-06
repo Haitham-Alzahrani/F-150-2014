@@ -28,6 +28,65 @@ An electric fan loads the engine only through the alternator, which is a far
 smaller and differently-shaped load than a mechanical fan clutch. Any reasoning
 that treated a fan clutch as a direct crankshaft load is withdrawn.
 
+## THE CONTROL SAMPLE ARRIVED — and the idle IS abnormal (2026-09-06)
+
+**The owner's 2023 F-150 5.0, 20 minutes of continuous stationary idle at
+600 rpm, 6,449 samples, same app, same adapter, same city, same evening.**
+Logs in `data/control-2023/`. This is the measurement this project has wanted
+since night one, and it changes the verdict.
+
+### Amplitude — the 2014 swings twice as far
+
+| | 2023 F-150 5.0 | **2014 F-150 3.7** | Ratio |
+|---|---|---|---|
+| Idle speed | 599.3 rpm | 651.8 | — |
+| Standard deviation | **5.64 rpm** | **9.36** | **1.66×** |
+| As a percentage of idle | **0.94 %** | **1.44 %** | 1.53× |
+| **Median 10 s peak-to-peak** | **20.0 rpm** | **38.0** | **1.90×** |
+| p10 – p90 | 17 – 25 | 28 – 52 | — |
+| Windows measured | 91 | 707 | — |
+
+**Identical method, identical window length, both stationary, both warm, A/C
+compressor not cycling in either.** The 2014 moves **1.9× as much**.
+
+### Rhythm — BOTH have one. The "random wander is normal" claim is WITHDRAWN.
+
+An earlier revision of this file argued that a healthy engine wanders randomly
+and a locked rhythm is itself the abnormality. **That is wrong.** The 2023 has a
+dominant peak too, at **0.167 Hz (6.0 s)** — a different rate, but a rhythm.
+
+**What differs is how sharply the oscillation is locked on:**
+
+| | 2023 5.0 | 2014 3.7, 62 min | 2014 3.7, post-repair |
+|---|---|---|---|
+| Dominant frequency | 0.167 Hz (6.0 s) | 0.317 Hz (3.16 s) | 0.333 Hz (3.00 s) |
+| **Peak ÷ median power** | **30×** | **144×** | **353×** |
+| **Power within ±15 % of the peak** | **19.3 %** | **37.4 %** | **62.8 %** |
+| Slow-band rms | 0.235 | 0.554 | 0.569 |
+
+**The 2023's oscillation is broad and shallow. The 2014's is a spike.** Up to
+**63 % of all its slow-band energy sits in one narrow line**, against 19 % on the
+healthy truck, and the peak stands **12× further above the noise floor**.
+
+### What this means
+
+**The 2014's idle is genuinely outside what a healthy Ford of the same family
+does — by amplitude and by how tightly the energy is concentrated.** Both trucks
+run the same fore/aft catalyst control; the 2023 responds to it with a soft,
+spread-out wander and the 2014 responds with a sharp resonance at twice the rate
+and twice the size.
+
+**This does NOT identify a broken part**, and every part on the 2014 still
+measures healthy. It says the *idle control response* is different, which points
+at the calibration, at the engine's damping at 0.3 Hz, or at a load the 2023 does
+not have.
+
+**Caveats, stated plainly:** different engine (5.0 V8 vs 3.7 V6), different model
+year, different transmission, nine years newer. A V8 idles more smoothly than a
+V6 by construction. **This is one control sample, not a population** — but it is
+the only one this project has ever had, and it points the opposite way to the
+previous "your idle is normal" conclusion.
+
 ## THE CAUSE OF THE IDLE OSCILLATION — FOUND (2026-09-06)
 
 **The PCM's own fore/aft catalyst-control dither drives about three quarters of
