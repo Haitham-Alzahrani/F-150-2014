@@ -443,3 +443,87 @@ another 3.7 to compare against.
 **And even a perfect fuel command would not remove the oscillation.** The command
 accounts for r = −0.41, which is **17 % of the variance in engine speed**. Fixing
 the fuel loop entirely would leave four fifths of the movement untouched.
+
+
+---
+
+## 13. THE TWO TRUCKS, TICK FOR TICK — why the 2014 bounces (2026-09-06)
+
+Both idles measured with the identical method: stationary, warm, A/C compressor
+not cycling, same app, same adapter, same city, same evening.
+
+### The averaged cycle, drawn on one scale
+
+```
+ phase   2023 5.0   2014 3.7
+  0.00     -0.02      -0.61   |                  Xo                    |
+  0.11     +2.33      +6.67   |                        o         X     |
+  0.22     +1.70      +8.51   |                       o              X |
+  0.33     +1.08      +6.84   |                      o           X     |
+  0.44     +0.47      +3.05   |                    o     X             |
+  0.56     -0.27      -1.42   |                X  o                    |
+  0.67     -0.56      -6.12   |      X           o                     |
+  0.78     -1.32      -8.66   |X               o                       |
+  0.89     -2.63      -7.63   |   X          o                         |
+                               o = 2023 5.0     X = 2014 3.7
+```
+
+**Same shape. Same period. Three times the size.**
+
+| | 2023 F-150 5.0 | **2014 F-150 3.7** |
+|---|---|---|
+| Cycles averaged | 192 | 1,043 |
+| Mean period | 2.898 s | **2.872 s** |
+| Period jitter | 44 % | **32 %** |
+| **Averaged amplitude** | **5.24 rpm** | **17.32 rpm — 3.3×** |
+| Steepest rise / fall | +17.7 / −7.8 | **+29.2 / −16.9 rpm/s** |
+| **Torque swing driving it** | **±0.254 N·m** | **±0.383 N·m — only 1.5×** |
+
+### The mechanism: the disturbance is similar, the DAMPING is not
+
+**The torque disturbance differs by 1.5×. The speed swing differs by 3.3×.**
+The extra factor is not coming from a bigger push — it is coming from the engine
+absorbing that push less well.
+
+| | 2023 5.0 | **2014 3.7** |
+|---|---|---|
+| Resonant peak | 0.167 Hz | **0.317 Hz** |
+| Half-power width | 0.050 Hz | 0.050 Hz |
+| **Q factor** | **3.3** | **6.3 — twice as sharp** |
+
+**Q is the direct measure of damping.** A Q of 3.3 is a soft, well-damped system:
+a disturbance dies out quickly. A Q of 6.3 is a system that rings.
+
+**The 2014's idle control is half as damped at its own resonant frequency as the
+2023's.** That single number explains the whole difference: same class of
+disturbance, half the damping, three times the swing.
+
+### Why the shape is asymmetric on both, and worse on the 2014
+
+Both trucks rise faster than they fall — the 2023 by 2.28×, the 2014 by 1.73×.
+That is the governor adding torque quickly at the trough and then letting the
+speed decay. **Both are doing the same thing. The 2014 simply overshoots
+further** and takes 42 % of the cycle to rise against the 2023's 25 %.
+
+### What this rules in and out
+
+**It is not a bigger disturbance.** The torque swing is within 1.5× of the
+control truck, and the sources of that disturbance — the fore/aft catalyst dither
+and, when running, the A/C compressor — are the same on both.
+
+**It is not a broken part.** No part measured on the 2014 is outside its limits,
+and a component fault would not produce a clean, stable, low-damping resonance
+holding for hours.
+
+**It is the idle governor's response.** The 2014's governor applies **1.75°
+peak-to-peak of a 47° spark authority**. It has the range to damp this and does
+not use it. That is a calibration choice — proportional gain, or the derivative
+term that provides damping specifically — and it is exactly what a Q of 6.3
+against 3.3 looks like from the outside.
+
+**Honest caveats.** A 5.0 V8 has roughly 40 % more rotating inertia and one and a
+third times as many firing events per revolution, both of which smooth an idle
+independently of any calibration. Nine model years separate the two PCM
+strategies. **One control sample is not a population.** The 3.3× amplitude
+difference is measured beyond doubt; attributing all of it to governor damping is
+the best available reading, not proof.
