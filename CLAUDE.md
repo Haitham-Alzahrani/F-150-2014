@@ -41,11 +41,16 @@ project was opened to solve.
   fault. That test is valid only for a *torque-reaction* failure. A mount that
   has **lost its damping without collapsing** is not direction-dependent, and
   that is what these had done, after twelve Jeddah summers.
-* **[CORRECTED 2026-09-06] The owner reports these are RUBBER mounts, not
-  hydraulic.** An earlier line here called them hydraulic, carried over from a
-  general F-150 article without checking this engine. The owner has the parts in
-  his hands. **Whether the FACTORY part for the 3.7 was hydraulic or rubber is
-  still not established** and it matters — see the new-symptom section below.
+* **[SETTLED 2026-09-06] These are SOLID RUBBER mounts. The old ones had no
+  fluid.** Owner inspected the removed parts. Two earlier claims are withdrawn:
+  that they were hydraulic (carried over from a general F-150 article without
+  checking this engine), and that a solid-rubber replacement for a fluid-filled
+  original explained the new symptom. **Neither applies. Like for like.**
+* **The failure mode was rubber ageing, not fluid loss.** Twelve Jeddah summers
+  of heat and ozone harden bonded rubber. **Hardened rubber transmits vibration
+  instead of absorbing it** — the damping in a rubber mount is the rubber's own
+  internal hysteresis, and that is what heat destroys. It also explains why the
+  symptom was present from purchase and never changed with any engine repair.
 * **Every scan-tool finding stands and none of it mattered to the symptom.**
   The engine measured healthy on 135,000 samples because the engine *was*
   healthy. The vibration was normal engine motion reaching the cab through
@@ -67,15 +72,16 @@ points — mild, felt in the cabin, as if the engine is knocked and pushes back.
 Not yet diagnosed. Recorded here so it is not lost. The three readings that fit,
 in order:
 
-0. **A SOLID RUBBER MOUNT FITTED WHERE FORD USED A FLUID-FILLED ONE.** This is
-   now the leading candidate and it is a documented outcome, not a theory.
-   Multiple sources describe aftermarket F-150 mounts using solid rubber in place
-   of the factory hydraulic design, and report the result as **"a rougher idle
-   than you had with the old, failed mount"** and **"intense cabin vibrations"**.
-   A fluid-filled mount absorbs a torque impulse; solid rubber transmits it
-   almost undiminished, then springs back — **which is precisely "it gets shocked
-   and fights back."** Whether this applies depends on what Ford fitted
-   originally, which is not yet established for the 3.7.
+0. **THE TRADE-OFF THAT COMES WITH SOFT MOUNTS — leading explanation.** The old
+   mounts were hard. A hard mount **holds the engine still and passes vibration
+   through**: continuous buzz, little movement. A new compliant mount does the
+   opposite — it **blocks the buzz but lets the engine actually move.** So a
+   torque step that the old hard mounts held against now displaces the engine,
+   and the mount's spring returns it. **"It gets shocked and fights back" is a
+   soft mount doing its job.** The obvious trigger is the A/C compressor clutch
+   on its measured 15.78 s cycle, which steps engine load 28.6 to 36.8 % and fuel
+   rate by 34 %. That step was always there; the old mounts simply would not let
+   the engine move in response to it.
 1. **Normal settling of new mounts.** A fresh mount is far stiffer than a dead
    one and transmits events the old ones absorbed by being limp. Mount bolts also
    relax after the first heat cycles. **Re-torque everything after a few hundred
@@ -85,7 +91,17 @@ in order:
    cycle, or a gear engagement — excites the 8–15 Hz engine-rock mode as a brief
    decaying ring. "Shocked and fights back" is a precise description of that.
    **This is the mounts working, not failing.**
-3. **Driveline angle changed.** The transmission mount sets the driveline angle,
+3. **Something is now being struck.** The engine can move further than it could
+   on hardened mounts. **A clearance that was adequate for twelve years may not
+   be any more** — a pipe, a line, a loom, a bracket, or a heat shield. This
+   project already carried contact points as a candidate for the original
+   symptom; the new mounts make it more likely, not less. If the sensation is a
+   genuine *impact* rather than a smooth lurch, check this first.
+4. **Loose or under-torqued mount bolts**, which would give exactly an impact
+   feel and can damage the mount.
+5. **Wrong durometer or wrong part.** An aftermarket mount softer than Ford's
+   allows excessive travel.
+6. **Driveline angle changed.** The transmission mount sets the driveline angle,
    and this truck is **4x4** — a transfer case and a front driveshaft the earlier
    revisions of this file did not know existed. A mount of different height, or
    one not seated square, shifts those angles.
