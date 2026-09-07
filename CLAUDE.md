@@ -28,6 +28,59 @@ An electric fan loads the engine only through the alternator, which is a far
 smaller and differently-shaped load than a mechanical fan clutch. Any reasoning
 that treated a fan clutch as a direct crankshaft load is withdrawn.
 
+## SOLVED — THE ENGINE AND TRANSMISSION MOUNTS WERE THE CAUSE (2026-09-06)
+
+**The owner replaced all engine mounts and the transmission mount. The seat shake
+is gone.** Owner's direct report, same day. That closes the complaint this
+project was opened to solve.
+
+**What it confirms, and what it corrects:**
+
+* The mounts were the right answer, and they were **ruled out twice** in this
+  file on a bad argument — that D and R feel the same, so no mount could be at
+  fault. That test is valid only for a *torque-reaction* failure. A hydraulic
+  mount that has **lost its fluid stops damping without collapsing**, which is
+  not direction-dependent, and that is what these had done. Twelve Jeddah
+  summers, and the 2012–2017 F-150 hydraulic mount is a documented leaker.
+* **Every scan-tool finding stands and none of it mattered to the symptom.**
+  The engine measured healthy on 135,000 samples because the engine *was*
+  healthy. The vibration was normal engine motion reaching the cab through
+  mounts that had stopped isolating it.
+* **The 0.30 Hz idle oscillation is a separate matter and is untouched by this.**
+  It is a control-loop property, it is 30× too slow to be felt, and the control
+  sample shows it is real. It stays open on its own merits.
+
+**Standing lesson, and it is the third time this file has had to record one:**
+the D-versus-R argument eliminated the correct answer for weeks. **An elimination
+is only as good as the failure mode it tests.** Write down which failure mode a
+test rules out, not just which part.
+
+## NEW SYMPTOM AFTER THE REPAIR — "shocked, then fights back"
+
+**Owner, same day: the seat shake is gone, but there are now occasional shock
+points — mild, felt in the cabin, as if the engine is knocked and pushes back.**
+
+Not yet diagnosed. Recorded here so it is not lost. The three readings that fit,
+in order:
+
+1. **Normal settling of new mounts.** A fresh hydraulic mount is far stiffer than
+   a dead one and transmits events the old mounts absorbed by being limp. Mount
+   bolts also relax after the first heat cycles. **Re-torque everything after a
+   few hundred kilometres before treating this as a fault.**
+2. **The engine ringing its own mounts.** With mounts that now have a real spring
+   rate, any torque *step* — the A/C compressor clutch engaging on its 15.78 s
+   cycle, or a gear engagement — excites the 8–15 Hz engine-rock mode as a brief
+   decaying ring. "Shocked and fights back" is a precise description of that.
+   **This is the mounts working, not failing.**
+3. **Driveline angle changed.** The transmission mount sets the driveline angle,
+   and this truck is **4x4** — a transfer case and a front driveshaft the earlier
+   revisions of this file did not know existed. A mount of different height, or
+   one not seated square, shifts those angles.
+
+**What separates them: when it happens.** Only at idle in gear points at the
+compressor or engine rock; only while driving points at driveline angle; random
+and fading over days points at settling.
+
 ## THE CONTROL SAMPLE ARRIVED — and the idle IS abnormal (2026-09-06)
 
 **The owner's 2023 F-150 5.0, 20 minutes of continuous stationary idle at
