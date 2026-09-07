@@ -38,10 +38,14 @@ project was opened to solve.
 
 * The mounts were the right answer, and they were **ruled out twice** in this
   file on a bad argument — that D and R feel the same, so no mount could be at
-  fault. That test is valid only for a *torque-reaction* failure. A hydraulic
-  mount that has **lost its fluid stops damping without collapsing**, which is
-  not direction-dependent, and that is what these had done. Twelve Jeddah
-  summers, and the 2012–2017 F-150 hydraulic mount is a documented leaker.
+  fault. That test is valid only for a *torque-reaction* failure. A mount that
+  has **lost its damping without collapsing** is not direction-dependent, and
+  that is what these had done, after twelve Jeddah summers.
+* **[CORRECTED 2026-09-06] The owner reports these are RUBBER mounts, not
+  hydraulic.** An earlier line here called them hydraulic, carried over from a
+  general F-150 article without checking this engine. The owner has the parts in
+  his hands. **Whether the FACTORY part for the 3.7 was hydraulic or rubber is
+  still not established** and it matters — see the new-symptom section below.
 * **Every scan-tool finding stands and none of it mattered to the symptom.**
   The engine measured healthy on 135,000 samples because the engine *was*
   healthy. The vibration was normal engine motion reaching the cab through
@@ -63,10 +67,19 @@ points — mild, felt in the cabin, as if the engine is knocked and pushes back.
 Not yet diagnosed. Recorded here so it is not lost. The three readings that fit,
 in order:
 
-1. **Normal settling of new mounts.** A fresh hydraulic mount is far stiffer than
-   a dead one and transmits events the old mounts absorbed by being limp. Mount
-   bolts also relax after the first heat cycles. **Re-torque everything after a
-   few hundred kilometres before treating this as a fault.**
+0. **A SOLID RUBBER MOUNT FITTED WHERE FORD USED A FLUID-FILLED ONE.** This is
+   now the leading candidate and it is a documented outcome, not a theory.
+   Multiple sources describe aftermarket F-150 mounts using solid rubber in place
+   of the factory hydraulic design, and report the result as **"a rougher idle
+   than you had with the old, failed mount"** and **"intense cabin vibrations"**.
+   A fluid-filled mount absorbs a torque impulse; solid rubber transmits it
+   almost undiminished, then springs back — **which is precisely "it gets shocked
+   and fights back."** Whether this applies depends on what Ford fitted
+   originally, which is not yet established for the 3.7.
+1. **Normal settling of new mounts.** A fresh mount is far stiffer than a dead
+   one and transmits events the old ones absorbed by being limp. Mount bolts also
+   relax after the first heat cycles. **Re-torque everything after a few hundred
+   kilometres before treating this as a fault.**
 2. **The engine ringing its own mounts.** With mounts that now have a real spring
    rate, any torque *step* — the A/C compressor clutch engaging on its 15.78 s
    cycle, or a gear engagement — excites the 8–15 Hz engine-rock mode as a brief
@@ -76,6 +89,21 @@ in order:
    and this truck is **4x4** — a transfer case and a front driveshaft the earlier
    revisions of this file did not know existed. A mount of different height, or
    one not seated square, shifts those angles.
+
+**Part numbers found by search, NOT verified against a Ford catalogue** — every
+parts page was blocked at the network layer, so these are search-summary level
+and must be confirmed by VIN at a parts counter before ordering:
+
+| Part | Reported as |
+|---|---|
+| `BL3Z-6038-A` | Motor mount, **driver side (LH)**, 2011–2016 F-150 |
+| `BL3Z-6038-G` | Motor mount, **passenger side (RH)**, listed compatible with 3.7L |
+| `DL3Z-6038-C` | **Right side, 3.7L, build date from 6/12/13** — a mid-2013 running change |
+| `BL3Z-6038-C / -E / -F / -H / -J` | Other variants in the same family |
+
+Ford calls the part an **"Insulator Assembly"**. **The build-date split matters:**
+a 2014 truck built after 12 June 2013 may take a different right-side part from
+one built before.
 
 **What separates them: when it happens.** Only at idle in gear points at the
 compressor or engine rock; only while driving points at driveline angle; random
