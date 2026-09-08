@@ -20,6 +20,11 @@ Timestamps are the phone clock. Odometer and adaptives are not re-read here.
 | `20260908_171750.csv.gz` | 17:17:58 → 18:19:29 | 61.5 min | 29 | Longest. Mixed — GPS 0 → 39.6 km/h. ECT 83–84 °C. |
 | `20260908_181946.csv.gz` | 18:19:54 → 18:33:11 | 13.3 min | 23 | GPS/fuel-economy channels only. No engine PIDs. |
 
+**MOUNTS: all of 2026-09-08 is on the NEW engine and transmission mounts**
+(owner, replaced 2026-09-06). Every earlier log in `data/carscanner/` — 09-04
+and 09-05 — is on the OLD hardened mounts. Do not treat a 09-05-to-09-08 change
+as a single-variable comparison.
+
 ## Coverage gap, recorded at intake and not yet acted on
 
 **`Engine RPM` appears in one file of five.** The four later captures have fuel

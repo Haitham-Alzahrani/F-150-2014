@@ -13,6 +13,12 @@ battery replacement). Both earlier wipes improved the symptom and both relapsed
 by roughly 100 km. The odometer trip here reads 1.598 km, so this capture sits
 at the very start of that window.
 
+**MOUNTS: both of today's epochs are on the NEW mounts** (replaced 09-06), so
+the mounts are held constant across the battery comparison and cannot explain
+it. Across sessions they are a confound: the mount replacement itself moved the
+Park median only 37.3 -> 32.3 rpm, which is independent confirmation that the
+mounts govern what reaches the cab and not what the crankshaft does.
+
 ## What changed, measured
 
 Rate-matched to 0.212 s, Park idle 600–720 rpm, 10 s windows:
