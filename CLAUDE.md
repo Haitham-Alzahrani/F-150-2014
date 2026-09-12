@@ -28,6 +28,72 @@ An electric fan loads the engine only through the alternator, which is a far
 smaller and differently-shaped load than a mechanical fan clutch. Any reasoning
 that treated a fan clutch as a direct crankshaft load is withdrawn.
 
+## THE FELT SHAKE AND THE RPM OSCILLATION ARE SEPARATE — PROVEN TWICE (2026-09-09)
+
+**Two repairs, each moving one symptom and not the other. This is now settled.**
+
+| Repair | Felt shake | Measured 0.3 Hz rpm oscillation |
+|---|---|---|
+| Engine + transmission mounts, 09-06 | **GONE** | unchanged, 37.3 -> 32.3 rpm |
+| Battery replacement, 09-08 | (returned 09-09) | **32.3 -> 25.3 rpm, quieter** |
+
+On 09-09 the owner reported *"after relearn complete i feel the shake back"* and
+captured it the same afternoon. **The rpm oscillation had not come back:**
+
+| State | n windows | Median 10 s span |
+|---|---|---|
+| 09-08 15:49 before the battery | 18 | 32.3 rpm |
+| 09-08 22:05 after, owner reports quiet | 16 | **25.3** |
+| 09-09 17:42, owner reports the shake back | 14 | **27.3** |
+
+**Quiet versus relapsed: Mann-Whitney p = 0.633.** No difference.
+
+**Consequence: stop using the needle as a proxy for what the owner feels.** The
+0.3 Hz oscillation is a control-loop property worth understanding on its own
+merits, but it is not the complaint. Rate-matched Park-idle span is the metric
+for the oscillation; only the owner's report, or an accelerometer, measures the
+shake.
+
+**What to chase for the FELT shake instead.** `CLAUDE.md` already carries the
+answer and it is due now: **the new mounts have never been re-torqued.** This
+file says *"Re-torque everything after a few hundred kilometres before treating
+this as a fault."* They went in 09-06 and the truck has been driven since.
+
+## LONG TERM TRIM: BANK 1 IS NOT LEARNING, BANK 2 IS (2026-09-09)
+
+After the battery wipe and a 64-minute drive:
+
+| Capture | Bank 1 | Bank 2 |
+|---|---|---|
+| 09-08 17:04, before | -0.7812 (n=201) | -0.7812 |
+| 09-09 16:24, after 64 min | **0.0000 flat** (n=5,971) | 0.0000 -> +0.7812 (n=5,945) |
+| 09-09 17:42 | **0.0000 flat** (n=986) | +0.7812 -> +1.5625 (n=984) |
+
+**Bank 1 holds exactly 0.0000 across 7,165 samples while Bank 2 learns in the
+same samples.** Not a disabled learning mode — Bank 2 is moving. Bank 1 needs no
+correction; Bank 2 (driver side) needs more fuel.
+
+**Third independent sighting of the driver-side lean offset**, after the +1.64 %
+paired short-term measurement (n=227, se 0.10) and the +2.00 % that survived the
+09-05 wipe unchanged. Two possible causes, and the sensors cannot separate them:
+a real driver-side air leak, or a lean-biased Bank 2 upstream sensor. **The
+separating test is the two upstream sensors at wide open throttle**, where fuel
+is open loop and a fixed leak becomes negligible while a sensor bias persists.
+
+## THE DITHER GREW WHILE THE RESPONSE DID NOT (2026-09-09)
+
+| Capture | Commanded p2p | As % of mean | Lean-side |
+|---|---|---|---|
+| 09-04 pre-wipe (n=7,515) | 0.4559 | 3.126 % | 47.8 % |
+| 09-09 16:12 (n=125) | 0.5291 | **3.627 %** | 40.0 % |
+
+~16 % larger command and more rich-side time, the direction a relearned rich
+bias predicts — while the rpm response stayed at its post-battery level.
+**Whatever the new battery changed sits on the response side, not the command.**
+Caveat: n=125 against n=7,515, five days apart, and **no commanded-AFR channel
+exists in the quiet 09-08 22:05 capture**, so the quiet-state dither is still
+unmeasured.
+
 ## SOLVED — THE ENGINE AND TRANSMISSION MOUNTS WERE THE CAUSE (2026-09-06)
 
 **The owner replaced all engine mounts and the transmission mount. The seat shake
