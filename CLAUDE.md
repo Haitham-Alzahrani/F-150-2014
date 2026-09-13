@@ -28,6 +28,107 @@ An electric fan loads the engine only through the alternator, which is a far
 smaller and differently-shaped load than a mechanical fan clutch. Any reasoning
 that treated a fan clutch as a direct crankshaft load is withdrawn.
 
+## COLD START, 2026-09-13 — coolant ELIMINATED, and the oscillation scales with rpm
+
+**19.6 min continuous from a 43 C cold start, recording begun before cranking.**
+`data/carscanner/2026-09-13-cold-start/`. Engine speed and commanded ratio share
+a rate (9,969 and 9,874 samples at 0.117 s).
+
+**THE OPEN-LOOP TEST CANNOT BE DONE ON THIS TRUCK.** Closed loop begins **20 s
+after start, at ECT 45.9 C** — not the ~80 C the 2023 shows. Commanded AFR p2p
+goes 0.0000 (engine off) to 0.0540 (open loop, t+79 to t+99) to 0.4117. Those
+20 s are the startup ramp, engine speed falling 1,268 to 931 rpm, detrended sd
+188.66. There is no steady open-loop idle to measure. In Jeddah's ambient the
+oxygen sensors are ready before the engine settles. **The only remaining route to
+open loop is disconnecting the two upstream oxygen sensors.**
+
+### COOLANT TEMPERATURE IS ELIMINATED — the minute 40-50 item is CLOSED
+
+46 settled idle windows (rpm 600-700) spanning ECT **62 to 90 C**:
+
+| | |
+|---|---|
+| ECT vs rpm sd | r = -0.219, **p = 0.143** |
+| ECT vs 10 s span | r = -0.259, **p = 0.082** |
+| Below 75 C vs above 85 C | sd 7.92 (n=13) vs 7.24 (n=8), **p = 0.301** |
+
+This is exactly the separation this file asked for: on a cold start coolant
+climbs fast while elapsed time is short, breaking the 88 % collinearity that made
+the original observation untestable. **The amplitude does not step at any coolant
+value. The minute 40-50 halving was not temperature.**
+
+### THE OSCILLATION IS A FIXED FRACTION OF ENGINE SPEED
+
+| | Mean rpm | Detrended sd | % of idle |
+|---|---|---|---|
+| Cold high idle | 903.4 | 10.72 | **1.187 %** |
+| Warm idle | 651.5 | 7.80 | **1.198 %** |
+
+n = 558 and 4,840. Identical to two decimal places across 250 rpm. **This is the
+first measurement of the owner's standing report that the needle moves at every
+engine speed** — it does, by the same percentage. **It also rules out raising
+idle speed as a fix:** the absolute swing scales with it.
+
+### THE FREQUENCY DOES NOT SCALE WITH ENGINE SPEED
+
+**0.326 Hz (3.07 s) at 905 rpm and at 651 rpm**, and in all three separate warm
+windows. A rotating order would shift with engine speed; this does not. Together
+with the amplitude result: a torque disturbance of constant fractional size at a
+fixed frequency — a control loop or a chemical process, not a moving part.
+
+## THE FUEL DITHER EXPLAINS UNDER 5 PERCENT OF THE BEAT-TO-BEAT IRREGULARITY
+
+Per-beat analysis, every individual cycle detected by rising zero crossings of
+the band-passed signal, correlated against each channel sampled inside that same
+beat:
+
+| Predictor of beat amplitude | R2 | n |
+|---|---|---|
+| Engine load swing, A/C off | **72.2 %** | 26 |
+| Engine load swing, A/C cycling | 58.8 % | 66 |
+| MAF airflow swing | 31.7 % | 132 |
+| Supply voltage swing | 7.0 % | 199 |
+| **Commanded fuel swing** | **3.6-4.6 %** | 151, 267 |
+| Throttle movement | 1.9 % | 136 — median swing **0.0000** |
+
+Confounds checked: the load result is **stronger** with the A/C off, so it is not
+a compressor artefact; and load vs rpm is r = -0.121 on 2,656 simultaneous
+samples, MAF vs rpm r = +0.064, so neither is an arithmetic mirror of rpm.
+
+**Direction is NOT established.** The commanded ratio is the only channel where
+the PREVIOUS beat predicts better than the current one (r = +0.260 and +0.316
+against +0.214 and +0.190, two independent sessions) — a causal signature. Load
+and airflow correlate simultaneously, which an effect does as readily as a cause,
+and with the throttle plate provably still and flow choked, airflow through the
+sensor should not vary at all; intake pulsation modulating the MAF reading is the
+likelier explanation, which would make it downstream.
+
+**Net: the one channel that leads is too small, and everything large enough is
+downstream. Nothing in the OBD channel set explains the irregularity.**
+
+### THE IRREGULAR BEATS THEMSELVES
+
+3.2 h log, 2,224 beats measured individually: **57 outliers at 62.8 rpm against a
+typical 18.1 (3.48x)**, arriving **randomly** — median spacing 82.3 s,
+sd/mean = 1.21 (Poisson), not clustered, not periodic.
+
+**Period jitter is what the battery changed, not amplitude:**
+
+| State | Beats | Period jitter | Amplitude |
+|---|---|---|---|
+| 09-04 worst | 2,224 | 34.0 % | 19.9 rpm |
+| 09-08 after new battery, owner reports quiet | 36 | **19.1 %** | 17.4 |
+| 09-09 after relearn, owner reports it back | 38 | **33.9 %** | 15.2 |
+
+Levene: quiet vs now **p = 0.0127**; now vs worst **p = 0.66** (identical); quiet
+vs worst p = 0.0003. Amplitude quiet vs now p = 0.633 — unchanged. **The beats
+did not get bigger; they got irregular again.**
+
+**Caveat that matters: the healthy 2023 has the HIGHEST jitter of all, 57.1 %.**
+Its oscillation is broad and shallow — peak 16x above the noise floor against
+this truck's 213x. Jitter alone is not the fault. Strong rhythm with low jitter
+is the quiet state; strong rhythm with high jitter is what the owner feels.
+
 ## THE FELT SHAKE AND THE RPM OSCILLATION ARE SEPARATE — PROVEN TWICE (2026-09-09)
 
 **Two repairs, each moving one symptom and not the other. This is now settled.**
