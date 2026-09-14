@@ -37,12 +37,28 @@ owner is looking at**, so the rate is set by how many tiles are on screen.
 
 | Channels polled at >= 1 Hz | Windows | Median `Engine RPM` rate | p10-p90 |
 |---|---|---|---|
-| 1 | **0 — never once recorded** | — | — |
+| **1** | 1 | **33.3 Hz** | flat 30.0 ms |
 | **2** | 6 | **32.9 Hz** | 15.7-33.2 |
 | 3 | 100 | 15.5 Hz | 13.2-22.9 |
 | 4 | 79 | 10.9 Hz | 7.7-16.1 |
 | 5-6 | 46 | 8.0 Hz | 5.0-10.3 |
 | 7-9 | 5 | 2.1 Hz | 1.1-9.4 |
+
+**ONE CHANNEL WAS MEASURED ON 2026-09-14 AND IT IS NOT FASTER THAN TWO.**
+`data/carscanner/2026-09-14-rate-test/`. `Engine RPM` alone gave 1,861 samples
+at a flat **30.0 ms — 33.3 Hz**. Two channels gave 32.9 Hz. **33 Hz is the
+adapter's ceiling, not a budget divided between channels, so the second tile is
+free.** Keep capturing two.
+
+**The law is now proven INSIDE a single file**, which no earlier measurement
+was. In `2026-09-14_14-43-48`, three extra channels sat on the page for the
+first 2.7 s and then left it: `Engine RPM` ran at **8.4 Hz** while they were
+there and **33.3 Hz** immediately after. Same drive, seconds apart, four times
+faster.
+
+**Two of that day's four captures recorded no engine channel at all** — only
+GPS and the app's own fuel arithmetic. **A recording is only as good as the page
+left on screen.** Confirm the tiles are showing before pressing record.
 
 **The cliff is between 2 and 3 — the rate more than halves.** Every fast window
 in the project (33.2, 32.9, 30.9 Hz) had exactly two polled, all in the 09-04
@@ -60,6 +76,78 @@ other channel had 13 or fewer.** The rest were configured but idle.
   the visible page was ever being polled, so two channels on different pages have
   zero simultaneous samples by construction. **Four false findings in this
   project came from comparing channels that were never polled together.**
+
+## A `[PCM]` CHANNEL FAMILY EXISTS THAT THIS PROJECT NEVER KNEW ABOUT (2026-09-14)
+
+**Twelve screenshots of the owner's sensor list show a block of channels
+prefixed `[PCM]` that appear in no log, in no analysis, and in
+`docs/scanner-pids.md` nowhere.** Several of them read values this project spent
+weeks saying were unreachable without FORScan.
+
+| Channel, as the sensor list spells it | Observed |
+|---|---|
+| **`[PCM] Cylinder 1 Acceleration Value`** | −0.03 |
+| **`[PCM] Cylinder 2 Acceleration Value`** | −0.02 |
+| **`[PCM] Cylinder 3 Acceleration Value`** | −0.03 |
+| **`[PCM] Cylinder 4 Acceleration Value`** | **−0.08** |
+| **`[PCM] Cylinder 5 Acceleration Value`** | −0.02 |
+| **`[PCM] Cylinder 6 Acceleration Value`** | 0 |
+| `[PCM] Desired Electronic Throttle Control` | 15.31° / 19.55° |
+| `[PCM] Actual Electronic Throttle Control` | 15.25° / 19.62° |
+| `[PCM] Knock Sensor 1` / `[PCM] Knock Sensor 2` | 323 / 336 (raw, no units) |
+| `[PCM] Currently Detected Engine Misfire` | 0 |
+| `[PCM] A/C Pressure` | **1282 kPa — the unprefixed one is dead, this one is not** |
+| `[PCM] Cylinder head temperature` | 83 °C |
+| `[PCM] ATF Temperature` | 62.81 °C |
+| `[PCM] Actual Turbine Shaft Speed` | 1458 rpm |
+| `[PCM] Actual Output Shaft Speed` | 2117.75 rpm |
+| `[PCM] Actual Torque Converter Slip` | 12 rpm |
+| `[PCM] Desired Torque Converter Slip` | 10.25 rpm |
+| `[PCM] Commanded Gear Ratio` / `[PCM] Commanded Gear` / `[PCM] Measured Gear Ratio` | present |
+| `[PCM] Battery voltage` | 12.7 V |
+| `[PCM] Fuel level` | 86.27 % |
+
+### `[PCM] Cylinder N Acceleration Value` is per-cylinder contribution
+
+**This is the measurement the investigation has wanted since night one.** It is
+what the injector-kill balance test approximates by hand and what the
+accelerometer test tries to infer from the outside. `CLAUDE.md` and
+`docs/DATA-REQUESTS.md` both say per-cylinder contribution needs FORScan and
+manufacturer-specific addressing. **It is in the owner's app.**
+
+**Cylinder 4 read −0.08 against −0.02 and −0.03 for its neighbours — roughly
+three times the others.** Mode 06 logged **2 misfire counts on cylinder 4**, the
+highest of the six, with everything else at 0 or 1. Those are two independent
+tools naming the same cylinder.
+
+**DO NOT TREAT THIS AS A FINDING YET.** It is one snapshot off a screenshot, the
+units are undocumented, the sign convention is unknown, the engine condition at
+that moment was not recorded, and six numbers with no repeat tell nobody
+anything. **It is a lead, and it is the strongest-shaped lead available.**
+
+**What it needs:** `Engine RPM` plus one `[PCM] Cylinder N Acceleration Value`
+at a time, warm Park idle, two tiles, 33 Hz, one minute each — six captures.
+Then the same six again after a stop and restart. A real weak cylinder repeats;
+an artefact does not.
+
+### What is still NOT in the list
+
+`Long term secondary oxygen sensor trim Bank 1` and `Bank 2` appear in **none**
+of the twelve screenshots. Outstanding capture #2 may not be possible on this
+truck. Confirm by searching the sensor list for `secondary` before removing it
+from the protocol.
+
+`Oxygen sensor 2 Bank 1 Short term fuel trim` and `Oxygen sensor 2 Bank 2 Short
+term fuel trim` are in the list but read **n/a %** — the truck answered "not
+supported". That is a different thing from the channel being absent.
+
+### Standing correction this forces
+
+**The phrase "the OBD port cannot see it" appears repeatedly in this file and
+has now been wrong at least once.** Before writing that a measurement requires
+FORScan, a different tool, or hardware the owner does not have, **ask him to
+search his sensor list for it first.** The list is longer than this project
+assumed and nobody had ever read all of it.
 
 ## NAMING — use the SENSOR LIST label, never the graph header, never an abbreviation
 
@@ -657,6 +745,14 @@ sample of every log, including while driving. Every statement in this file that
 "A/C was off, confirmed by A/C pressure reading 0" is withdrawn: that channel
 never answers. `Gear (AT)` is dead the same way, constant 1.000 in all 45
 samples. **Do not request either again, and do not treat their values as data.**
+
+**CORRECTION 2026-09-14 — `[PCM] A/C Pressure` IS A DIFFERENT CHANNEL AND IT
+WORKS.** The owner's sensor list carries both. The `[PCM]`-prefixed one read
+**1282 kPa** in a screenshot. The instruction above applies ONLY to the
+unprefixed `A/C pressure`. **Use `[PCM] A/C Pressure` to establish compressor
+state** — that has been an unmeasured confound on every amplitude figure in this
+file. The same caution now applies in reverse to `Gear (AT)`: a `[PCM]` variant
+(`[PCM] Commanded Gear`) exists and has not been tested.
 
 **Is doubling the amplitude with A/C on a fault?** No — a compressor cycling on
 and off at idle disturbs any engine, and this one recovers to a stable idle
