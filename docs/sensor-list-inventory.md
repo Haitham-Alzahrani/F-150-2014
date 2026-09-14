@@ -270,3 +270,9 @@ project must state which one it came from.
 `Intake manifold absolute pressure` · `Engine oil temperature` ·
 `Absolute throttle position` (unsuffixed) · `Variable camshaft actual advance` ·
 the `[BCM]` block · anything naming a crankshaft or camshaft position sensor
+
+---
+
+**SUPERSEDED — this file is now a working record of the screenshot batches.
+The single reliable list is [`docs/SENSOR-INVENTORY.md`](SENSOR-INVENTORY.md),
+built from all 44 logging sessions with the 2023 control truck excluded.**

@@ -77,6 +77,36 @@ other channel had 13 or fewer.** The rest were configured but idle.
   zero simultaneous samples by construction. **Four false findings in this
   project came from comparing channels that were never polled together.**
 
+## THE SENSOR INVENTORY — [`docs/SENSOR-INVENTORY.md`](docs/SENSOR-INVENTORY.md)
+
+**One reliable list, built 2026-09-14 from all 44 logging sessions plus the
+sensor-list screenshots. Read it before claiming any measurement is out of
+reach.** 129 channels answer on this VIN: **75 that move**, **21 that returned a
+constant in every sample they ever produced**, and **33 that are the app's own
+arithmetic and must never be analysed as vehicle data.**
+
+**Three things it settles:**
+
+* **`Long term secondary oxygen sensor trim Bank 1` and `Bank 2` have never been
+  selected on THIS truck.** The two files carrying them are the **2023 control**.
+  Their status here is **unknown, not unsupported** — every statement in this
+  file that treats them as read or as absent is withdrawn. Search the sensor list
+  for `secondary` to settle it.
+* **Per-cylinder contribution already logged**, in `2026-09-14_14-49-23`, all six
+  `[PCM] Cylinder N Acceleration Value` channels, quantised at ~0.0156. Too few
+  samples to analyse; enough to prove it needs no FORScan.
+* **`PCM Odometer` reads 131,313 km.** Use that, not "131,000".
+
+**It also names the collisions that have been silently mixed in this file:**
+seven throttle channels in two different units; `Calculated engine load value`
+69.02 % against `Absolute load value` 14.12 % at the same instant; four supply
+voltage channels; two transmission fluid temperature channels. **Every figure
+quoted anywhere must say which channel it came from.**
+
+**And the limit: no channel on this truck reports crankshaft or camshaft sensor
+signal quality, injector pulse width, coil dwell, or plausible fuel rail
+pressure.** The crank-signal hypothesis cannot be tested through the port.
+
 ## A `[PCM]` CHANNEL FAMILY EXISTS THAT THIS PROJECT NEVER KNEW ABOUT (2026-09-14)
 
 **Twelve screenshots of the owner's sensor list show a block of channels
@@ -203,7 +233,10 @@ These two have 13,348 simultaneous samples in `20260905_041723` but only at
 ~15 Hz. At 30 Hz the question becomes answerable: does the fuel command move
 BEFORE a big beat?
 
-**2 — 3 minutes.** Never read once on this truck.
+**2 — 3 minutes.** **NEVER SELECTED on this truck — status unknown.** The two
+logs carrying these are the 2023 control, not this truck. Confirm the channels
+exist here by searching the sensor list for `secondary` before planning around
+them.
 ```
 Long term secondary oxygen sensor trim Bank 1
 Long term secondary oxygen sensor trim Bank 2
