@@ -1,5 +1,24 @@
 # Sensor names as the scan app shows them
 
+**RULE, owner's instruction 2026-09-14: when asking for a reading, give the
+SENSOR LIST label from this file.** Not the graph header, not an abbreviation,
+not the engineering term, not the SAE PID name. He scrolls a list on a phone; a
+name that does not match it wastes his time at the truck.
+
+**The graph-header table further down is for READING his screenshots, not for
+telling him what to enable.** Giving `O2S1 air:fuel` or `Fuel/Air com. ratio` as
+something to switch on is the mistake this rule exists to prevent — it has
+happened.
+
+**Write words out in prose too.** No WOT, STFT, LTFT, KAM, ECT or p2p when
+addressing the owner: "wide open throttle", "short term fuel trim", "long term
+fuel trim", "memory wipe", "coolant temperature", "peak to peak".
+
+**Sample rate is set by how many tiles are on the visible page, not by the length
+of the sensor list** — 2 tiles gives ~33 Hz, 3 gives ~15, 4 gives ~11. See
+CLAUDE.md. Nothing needs removing from the list; just show two and stay on the
+page.
+
 **Purpose: when a reading is requested, it must be requested by the exact
 label that appears on the phone.** Not an abbreviation, not the engineering
 term, not the SAE PID name. The owner navigates a list; a name that does not

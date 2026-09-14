@@ -28,6 +28,104 @@ An electric fan loads the engine only through the alternator, which is a far
 smaller and differently-shaped load than a mechanical fan clutch. Any reasoning
 that treated a fan clutch as a direct crankshaft load is withdrawn.
 
+## HOW TO CAPTURE — the sample rate is set by TILES ON SCREEN, not by the sensor list
+
+**Measured across 265 one-minute windows in 10 logs (2026-09-14).** This
+overturns the standing "Car Scanner samples each channel at ~17 Hz" claim: there
+is no fixed rate. **Car Scanner polls only the channels visible on the page the
+owner is looking at**, so the rate is set by how many tiles are on screen.
+
+| Channels polled at >= 1 Hz | Windows | Median `Engine RPM` rate | p10-p90 |
+|---|---|---|---|
+| 1 | **0 — never once recorded** | — | — |
+| **2** | 6 | **32.9 Hz** | 15.7-33.2 |
+| 3 | 100 | 15.5 Hz | 13.2-22.9 |
+| 4 | 79 | 10.9 Hz | 7.7-16.1 |
+| 5-6 | 46 | 8.0 Hz | 5.0-10.3 |
+| 7-9 | 5 | 2.1 Hz | 1.1-9.4 |
+
+**The cliff is between 2 and 3 — the rate more than halves.** Every fast window
+in the project (33.2, 32.9, 30.9 Hz) had exactly two polled, all in the 09-04
+log. Direct check inside that log's 33 Hz stretch: of 87 channels in the file,
+`Engine RPM` had 18,016 samples, `Control module voltage` 16,579, and **every
+other channel had 13 or fewer.** The rest were configured but idle.
+
+**Consequences:**
+* **Nothing needs deleting from the sensor list.** Show two tiles and stay on
+  that page.
+* `Engine RPM` and `Engine RPM x1000` are **one request** reported twice.
+* The fast stretches ended because the owner navigated away. **A long capture
+  needs the phone left alone** — screen kept awake, no page switching.
+* This also explains why channels in these logs so rarely overlap in time: only
+  the visible page was ever being polled, so two channels on different pages have
+  zero simultaneous samples by construction. **Four false findings in this
+  project came from comparing channels that were never polled together.**
+
+## NAMING — use the SENSOR LIST label, never the graph header, never an abbreviation
+
+**Owner's instruction, 2026-09-14: "never use shortcut and never use terms that
+doesn't match my scanner list."** This file already carried the rule and it was
+broken anyway — `O2S1 air:fuel` and `Fuel/Air com. ratio` were given as things to
+enable. Those are what the app prints **on the graph**. They are not what appears
+in the **sensor list** he scrolls on the phone.
+
+| WRONG — graph header or abbreviation | RIGHT — sensor list label |
+|---|---|
+| `O2S1 air:fuel` | `Oxygen sensor 1 Wide Range Equivalence ratio` |
+| `O2S5 air:fuel` | `Oxygen sensor 5 Wide Range Equivalence ratio` |
+| `Fuel/Air com. ratio` | `Fuel/Air commanded equivalence ratio` |
+| `Tim. adv.` | `Timing advance` |
+| `LTFT - B1` | `Long term fuel % trim - Bank 1` |
+| `STFT B2` | `Short term fuel % trim - Bank 2` |
+| `ECU voltage` | `Control module voltage` |
+| `MAF` | `MAF air flow rate` |
+| `Abs. load` | `Absolute load value` |
+| `EVAP purge` | `Commanded evaporative purge` |
+
+**Also write words out in prose.** No WOT, no STFT/LTFT, no KAM, no ECT, no p2p
+when addressing the owner. "Wide open throttle", "short term fuel trim", "memory
+wipe", "coolant temperature", "peak to peak".
+
+## THE THREE CAPTURES STILL OUTSTANDING
+
+Two tiles at a time, everything else off the visible page. Warm, Park,
+standstill, air conditioning off. Export **CSV #2 (Horizontal)**. Note the
+odometer and the phone clock on each.
+
+**1 — 20 minutes.** The 33 Hz beat-shape capture. Never obtained.
+```
+Engine RPM
+Fuel/Air commanded equivalence ratio
+```
+These two have 13,348 simultaneous samples in `20260905_041723` but only at
+~15 Hz. At 30 Hz the question becomes answerable: does the fuel command move
+BEFORE a big beat?
+
+**2 — 3 minutes.** Never read once on this truck.
+```
+Long term secondary oxygen sensor trim Bank 1
+Long term secondary oxygen sensor trim Bank 2
+```
+Reads exactly 0.0000 on both banks of the 2023 control. It is the one learned
+value that directly modifies the commanded mixture, and a memory wipe has
+improved the symptom three times out of three.
+
+**3 — while driving, pedal fully to the floor.** Third gear to ~5,000, then lift.
+```
+Oxygen sensor 1 Wide Range Equivalence ratio
+Oxygen sensor 5 Wide Range Equivalence ratio
+```
+Separates the Bank 2 fuel offset into a driver-side air leak (invisible at full
+throttle, where that bank flows ~107 g/s and a fixed leak is 0.026 %) versus a
+lean-biased sensor (offset persists). The 09-05 wide-open-throttle pull reached
+6,832 rpm but those two sensors have **zero** simultaneous samples in it.
+
+**Also due at the truck, independent of all scanning: re-torque the engine and
+transmission mount bolts.** Fitted 09-06, driven since, never re-torqued, and
+this file has said since the day they went in that fresh mounts relax after the
+first heat cycles. It targets the felt symptom, which the rpm data has twice
+shown is a separate phenomenon.
+
 ## COLD START, 2026-09-13 — coolant ELIMINATED, and the oscillation scales with rpm
 
 **19.6 min continuous from a 43 C cold start, recording begun before cranking.**
