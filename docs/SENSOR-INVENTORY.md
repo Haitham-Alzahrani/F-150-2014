@@ -173,7 +173,7 @@ returned the same number in every sample it ever produced.
 | `A/C pressure` | 0 | **Dead.** Use `[PCM] A/C Pressure` — it moves, 1098–1282 kPa. |
 | `Gear (AT)` | 1 | **Dead.** Use `[PCM] Commanded Gear` — reports 5 and 6. |
 | `Vane position sensor` | 0 | Dead or not fitted. |
-| `Intake manifold absolute pressure` | 99 | 16 samples, one session, sitting at barometric. **Not established.** |
+| `Intake manifold absolute pressure` | 99 | **The engine was OFF.** All 16 samples came with `Engine RPM` = 0 and `Calculated engine load value` = 0, where 99 kPa is the correct atmospheric answer. **This channel has never once been read with the engine running. It is untested, not dead.** |
 | `Fuel rail press.` | 7770 kPa | Impossible on a port-injected engine. **Do not use.** |
 | `Steering Wheel Angle` | −6.25 | One session, stationary. Untested. |
 | `Abs Wheel Speed 1`–`4` | 0 | One session, stationary. Untested. |
@@ -249,7 +249,7 @@ their unit with no value on `m105-02` / `m182-01`, confirmed by opening the imag
 | `Oil Life %` | Offered, not answered on this vehicle |
 | `(ABS) Front left wheel speed` | Blank here; **answers on the 2023** |
 | `(ABS) Front right wheel speed` | Blank here; answers on the 2023 |
-| `Manifold absolute pressure (high resolution)` | Blank here; answers on the 2023 |
+| `Manifold absolute pressure (high resolution)` | Blank **with the engine running at 661 rpm**; answers on the 2023 |
 
 **Twelve `[BCM]` start/stop flags are also offered and blank** —
 `Battery Voltage too low for Start/Stop`, `Battery Refresh Cycle in progress for
@@ -262,6 +262,34 @@ for start/stop`, `Battery Voltage too low for cold cranking capability`,
 stop/start system.** Every one of them answers on the 2023, which does.
 
 ---
+
+### MANIFOLD PRESSURE IS THE ONE BLANK CHANNEL THAT MATTERS
+
+**Manifold vacuum is the variable this truck's symptom tracks.** `CLAUDE.md`'s
+central observation is the load curve — worst in Park and Neutral at the highest
+vacuum, less in Drive and Reverse, gone under load. **The truck has never
+reported manifold pressure once while running.**
+
+| Channel | Status |
+|---|---|
+| `Manifold absolute pressure (high resolution)` | **Blank while the engine ran at 661 rpm** (`m105-02`, same pass as `m105-09`). Genuinely unsupported here. |
+| `Intake manifold absolute pressure` | **Never tried with the engine running.** 16 samples, engine off, correctly reporting atmospheric. |
+
+**The second one is worth one minute at the truck.** Put it on the page at warm
+idle in Park. A healthy 3.7 should read roughly **30–40 kPa** there. If it does,
+this project gains the load signal it has been inferring all along from
+`MAF air flow rate` and the two load channels. If it stays at 99, manifold
+pressure is unreachable through the port and the **vacuum gauge** is the only
+route — which `CLAUDE.md` already lists, for combustion character at a bandwidth
+the port cannot reach.
+
+**Nothing else that is blank or absent touches the powertrain.** The DPF
+counters are for a diesel particulate filter this petrol engine does not have.
+`Oil Life %` is a maintenance counter. The ABS wheel speeds, `Abs Lateral
+Accelaration` and `Steering Wheel Angle` are chassis channels, and the symptom
+reproduces at a standstill in Park where the wheels do not turn. The twelve
+`[BCM]` flags are battery management for an automatic stop/start system this
+truck does not have.
 
 ## TIER 5 — IN THE LIST, NEVER EXPORTED
 

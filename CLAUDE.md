@@ -110,6 +110,22 @@ seven throttle channels in two different units; `Calculated engine load value`
 voltage channels; two transmission fluid temperature channels. **Every figure
 quoted anywhere must say which channel it came from.**
 
+**MANIFOLD PRESSURE — the one blank channel that touches this investigation.**
+Manifold vacuum is the variable the symptom tracks, and the truck has never
+reported it once while running. `Manifold absolute pressure (high resolution)`
+was **blank with the engine turning at 661 rpm**, so it is unsupported here.
+`Intake manifold absolute pressure` read 99 kPa in all 16 samples it ever
+produced — but **`Engine RPM` was 0 in every one of them**, where 99 kPa is the
+correct atmospheric answer. **That channel has never been tried with the engine
+running.** One minute at warm idle in Park settles it: roughly 30-40 kPa means
+the load signal is available at last; still 99 means the vacuum gauge is the only
+route.
+
+**Nothing else blank or absent is powertrain.** Three DPF counters for a diesel
+filter this engine does not have, `Oil Life %`, two ABS wheel speeds and the
+steering angle (chassis, and the symptom reproduces at a standstill in Park), and
+twelve `[BCM]` flags for an automatic stop/start system this truck does not have.
+
 **And the limit: no channel on this truck reports crankshaft or camshaft sensor
 signal quality, injector pulse width, coil dwell, or plausible fuel rail
 pressure.** The crank-signal hypothesis cannot be tested through the port.
