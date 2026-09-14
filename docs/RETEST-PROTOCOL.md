@@ -328,3 +328,134 @@ separate ways. Soapy water on the joints while cold and idling will show it.
 **Cannot settle:** what sets the loop's phase margin at 0.32 Hz. That is a
 calibration constant and no capture reaches it. If everything above comes back
 clean, 8.5 is the remaining lever.
+
+---
+
+## SESSION 9 — THE MEMORY WIPE. Do this LAST, and only after 1–7 are complete.
+
+### Why last
+
+A memory wipe destroys the state everything else is measured against: all fuel
+trims, learned octane, the inferred ethanol value, the monitors, the freeze
+frame and the code history, in one action. **Sessions 1–7 are the baseline.
+Without them the wipe measures nothing.**
+
+This project's own standing rule, written after the last time this went wrong:
+*"never wipe the memory before a measurement unless the wipe IS the
+experiment."* Here it is the experiment.
+
+### Why this one will finally be clean
+
+**All three previous wipes were confounded:**
+
+| Wipe | What else changed at the same time |
+|---|---|
+| Owner's earlier relearn plus 300 km | unknown |
+| 2026-09-05 | **new purge valve fitted in the same operation** |
+| 2026-09-08 | **new battery fitted — that WAS the wipe** |
+
+Every one had a hardware change alongside it, so "the reset helped" could never
+be separated from "the part helped". **A standalone wipe, with nothing else
+touched, has never been done.** It would be the first single-variable test of the
+effect that has now appeared three times out of three.
+
+### How to do it safely
+
+1. Ignition off, key out, doors closed, bonnet propped.
+2. **Disconnect the negative cable first.** Move it clear so it cannot spring
+   back onto the post.
+3. **Then disconnect the positive cable.** Move it clear too.
+4. **Touch the two disconnected CABLE ENDS together for 30 seconds.** That drains
+   the modules' capacitors through the truck's own circuits, with the battery
+   completely out of the loop.
+5. Leave everything disconnected **30 minutes**.
+6. Reconnect **positive first, then negative.**
+
+**Do not bridge a disconnected negative cable onto a still-connected positive
+post.** That puts battery positive onto the chassis through the ground cable. The
+cable-ends-together method with both cables off achieves the same drain with the
+battery isolated.
+
+**Expect afterwards:** a rough or high idle for the first few minutes, radio
+presets lost, and the window one-touch function needing relearning (hold the
+switch up at the top of travel for a few seconds).
+
+### The capture schedule after the wipe
+
+**The window is short.** It closed at roughly 100 km both previous times, and both
+times it was missed. This schedule is built so it cannot be missed again.
+
+**A — IMMEDIATELY, before driving anywhere. Odometer reading written down.**
+
+Start the engine, let it reach full temperature at idle, then:
+
+**A.1 — values, photograph the screen**
+```
+Long term secondary oxygen sensor trim Bank 1
+Long term secondary oxygen sensor trim Bank 2
+Long term fuel % trim - Bank 1
+Long term fuel % trim - Bank 2
+```
+
+**A.2 — 20 minutes, warm idle in Park, air conditioning off**
+```
+Engine RPM
+Fuel/Air commanded equivalence ratio
+```
+**This is the capture the project has missed three times.** The file records it
+explicitly: *"the commanded mixture dither was never captured during the window
+when Drive and Reverse were clean."* It is the direct test of whether the wipe
+changes the COMMAND or only the RESPONSE.
+
+**A.3 — 3 minutes**
+```
+Engine RPM
+Timing advance
+```
+
+**A.4 — 3 minutes, in Drive at a standstill, foot on the brake**
+```
+Engine RPM
+Fuel/Air commanded equivalence ratio
+```
+
+**B — THE RELEARN CURVE. Repeat A.1 only, at each of these points:**
+
+| Odometer since the wipe | Also note |
+|---|---|
+| 25 km | how it feels |
+| 50 km | how it feels |
+| 75 km | how it feels |
+| 100 km | how it feels |
+| **the moment the symptom returns** | **exact odometer** |
+
+A.1 takes under a minute. **Doing it five times is the whole experiment**, because
+it traces the learned values against the symptom coming back.
+
+**C — WHEN THE SYMPTOM RETURNS. Repeat A.2, A.3 and A.4 in full.**
+
+Now there is a matched pair — identical channels, identical conditions, same
+battery, same mounts, days apart, one state clean and one state symptomatic.
+Nothing in this project has ever had that.
+
+### What this settles
+
+* **If the secondary oxygen sensor trim reads 0.0000 at A.1 and has climbed by
+  the time the symptom returns — that is the mechanism named.** It is the one
+  learned value that directly modifies the commanded mixture.
+* **If the commanded mixture is smaller at A.2 than at C — the wipe changes the
+  command**, and the catalyst control loop owns the problem.
+* **If the command is identical and only the engine speed response differs — the
+  wipe changes the plant or the governor**, and the command is exonerated.
+* **If nothing measurable differs between A and C while the owner reports a clear
+  difference** — the same result as 2026-09-09 — then what is felt is not the
+  0.3 Hz oscillation, and the needle should be abandoned as a proxy for it
+  permanently.
+
+### One caution on interpretation
+
+Long term fuel trim did **not** return to its old value after either previous
+wipe. It went from +3.13 / +2.34 % to −0.78 / −0.78 % after the first, and was
+heading to 0.0000 / +1.5625 % after the second. **Relearning lands somewhere new
+each time.** Do not expect the old numbers back, and do not treat a different
+number as a fault.
