@@ -1,55 +1,63 @@
 # SENSOR INVENTORY — 2014 F-150 3.7, VIN `1FTMF1EM1EFC80632`
 
-**One list. Built 2026-09-14 from every log file and every sensor-list screenshot
-this project holds for this truck.** It replaces the guesswork in
-`docs/scanner-pids.md` about what is and is not reachable.
+**One list. Every log file and every screenshot this project holds for this
+truck, scanned in full on 2026-09-14.** It replaces the guesswork in
+`docs/scanner-pids.md` about what this truck can and cannot report.
 
-## How it was built, and why it can be trusted
+## Exactly what was scanned
 
-* **44 logging sessions** were parsed directly — the exporter writes the app's
-  exact sensor-list label as the column header, so no name here was read off a
-  photograph.
-* **Every value in every row was counted.** A channel is listed as answering only
-  if it returned at least one non-empty value. A channel whose value never
-  changed across every sample it ever produced is listed separately.
-* **THE 2023 CONTROL TRUCK WAS EXCLUDED.** The owner's other F-150 — a 2023 5.0 —
-  was logged with the same phone and app on 2026-09-06, and its files sit in the
-  same upload folder. Three sessions (17:38:25, 18:20:55, 18:44:59) were removed
-  before counting. **A sweep that misses this puts the other truck's channels in
-  this truck's inventory**, which is exactly how `Long term secondary oxygen
-  sensor trim` nearly got recorded as available here.
-* **Re-uploaded sessions were de-duplicated by timestamp**, so a session sent
-  twice is counted once.
+| Source | Count | How |
+|---|---|---|
+| Logging sessions | **44** | every column header and **every value in every row** counted |
+| Unique screenshots | **279** of 606 files, de-duplicated by checksum | |
+| — old set, `data/screenshots/` | 258 | all 277 extracted text files scanned; the sensor-list pages opened and read directly |
+| — this session's batches | 19 | read directly |
+| Sensor-list pages inside the old set | **21** | `m105-01` to `-11` and `m182-01` to `-10`, which are **the same 11 screens uploaded twice** — one pass through the list, 2026-09-04 at 22:31 |
 
-**Sample and session counts are evidence of availability, nothing more.** They
-say a channel answers on this VIN. They are not measurements — the conditions
-behind them vary from Park idle to wide open throttle.
+Everything else in the old set is a graph screen, a Mode 06 screen, the fault-code
+screen, or the accelerometer app — none of which can show a channel the list does
+not already carry.
+
+**THE 2023 CONTROL TRUCK WAS EXCLUDED, AND THE EXCLUSION WAS VERIFIED.** The
+owner's other F-150 — a 2023 5.0 — was logged with the same phone and app on
+2026-09-06, and its files sit in the same folder. Three sessions (17:38:25,
+18:20:55, 18:44:59) were removed. **Every one of the 34 channels that dropped out
+traces to those three sessions and to nothing else.** Without that step the other
+truck's channels land in this truck's inventory — which is exactly what happened
+with `Long term secondary oxygen sensor trim`.
+
+**Sample and session counts are evidence of availability, nothing more.** They say
+a channel answers on this VIN. They are not measurements.
 
 ---
 
-## WHAT THIS ANSWERS
+## WHAT THE FULL SCAN CHANGED
 
 **`Long term secondary oxygen sensor trim Bank 1` and `Bank 2` have NEVER been
-selected on this truck.** They appear in exactly two files, both of which are the
-**2023 control**. Their status on the 2014 is therefore **unknown, not
-unsupported** — nobody has ever put them on the screen. That is a different
-finding from the one this project has been carrying, and it is testable in two
-minutes by searching the sensor list for `secondary`.
+selected on this truck, and do not appear in any of its 279 screenshots.** The
+only two files carrying them are the 2023 control. Status here: **unknown, not
+unsupported.**
 
-**Per-cylinder contribution has already been logged on this truck.** All six
+**Per-cylinder contribution is already logged.** All six
 `[PCM] Cylinder N Acceleration Value` channels answered in
-`2026-09-14_14-49-23`, quantised in steps of about 0.0156. Sample counts are 8 to
-42 across roughly 20 seconds of driving with the whole list on screen, so there
-is nothing to analyse — but the channel is proven to log, and it needs no FORScan.
+`2026-09-14_14-49-23`, quantised in steps of about 0.0156. Only 8 to 42 samples
+each across ~20 seconds with the whole list on screen, so nothing to analyse —
+but it needs no FORScan.
 
-**The odometer is readable.** `PCM Odometer` returned **131,313 km**, one session,
-24 samples, constant. This project has been working from "131,000 km (Aug 2026)".
+**Seven channels are offered by the app and left blank by the truck** — found
+only by reading the old screenshots, because a channel that returns nothing never
+reaches a CSV. See Tier 4.
+
+**`PCM Odometer` reads 131,313 km.** Use that, not "131,000".
+
+**The old sensor-list pass has one gap.** `Abs Wheel Speed 1` to `4`,
+`Abs Lateral Accelaration` and `Steering Wheel Angle` were logged on this truck
+but appear in **no screenshot at all** — they sit between
+`(ABS) Front right wheel speed` and the `[BCM]` block, which no screen captured.
 
 ---
 
-## TIER 1 — CHANNELS THAT ANSWER AND MOVE  (75)
-
-These are the real measurements available through the port on this truck.
+## TIER 1 — ANSWERS AND MOVES  (75)
 
 | Channel | Unit | Samples | Sessions |
 |---|---|---|---|
@@ -129,14 +137,12 @@ These are the real measurements available through the port on this truck.
 | `Abs Lateral Accelaration` | g | 32 | 2 |
 | `[PCM] Cylinder 5 Acceleration Value` |  | 16 | 2 |
 
-
-
 ---
 
 ## TIER 2 — LOGGED, BUT THE VALUE NEVER CHANGED  (21)
 
-**A constant is not a reading.** Each of these answered every time it was asked
-and returned the same number in every sample it ever produced.
+**A constant is not a reading.** Each answered every time it was asked and
+returned the same number in every sample it ever produced.
 
 | Channel | Unit | Samples | Sessions |
 |---|---|---|---|
@@ -162,32 +168,30 @@ and returned the same number in every sample it ever produced.
 | `Fuel rail press.` | kPa | 10 | 1 |
 | `[BCM] Battery Temperature` | ℃ | 8 | 2 |
 
-
-
-| Channel | Constant value | What it means |
+| Channel | Constant | Reading |
 |---|---|---|
-| `A/C pressure` | 0 | **Dead.** Use `[PCM] A/C Pressure`, which moves (1098–1282 kPa). |
-| `Gear (AT)` | 1 | **Dead.** Use `[PCM] Commanded Gear`, which reports 5 and 6. |
+| `A/C pressure` | 0 | **Dead.** Use `[PCM] A/C Pressure` — it moves, 1098–1282 kPa. |
+| `Gear (AT)` | 1 | **Dead.** Use `[PCM] Commanded Gear` — reports 5 and 6. |
 | `Vane position sensor` | 0 | Dead or not fitted. |
-| `Intake manifold absolute pressure` | 99 | 16 samples, one session, sitting at barometric. **Not established as working.** |
-| `Fuel rail press.` | 7770 kPa | Implausible on a port-injected engine. Wrong scaling or unsupported. **Do not use.** |
-| `Steering Wheel Angle` | −6.25 | One session, truck stationary. Untested. |
-| `Abs Wheel Speed 1–4` | 0 | One session, stationary. Untested. |
+| `Intake manifold absolute pressure` | 99 | 16 samples, one session, sitting at barometric. **Not established.** |
+| `Fuel rail press.` | 7770 kPa | Impossible on a port-injected engine. **Do not use.** |
+| `Steering Wheel Angle` | −6.25 | One session, stationary. Untested. |
+| `Abs Wheel Speed 1`–`4` | 0 | One session, stationary. Untested. |
 | `[BCM] Left Rear Inner` / `Right Rear Inner Tire Pressure` | 0 | **Correct** — single rear wheels, no inner sensors exist. |
-| `Knock retard` | 0 | **Probably real.** 87 samples across 7 sessions including wide open throttle. |
-| `[PCM] Currently Detected Engine Misfire` | 0 | **Probably real.** 102 samples, 4 sessions. |
-| `Distance traveled with MIL on` | 0 | **Real** — the warning lamp has never been on. |
-| `PCM Odometer` | 131313 km | Real, and the truck's actual distance. |
-| `[BCM] Battery Temperature` | 37 °C | 8 samples only. Untested. |
+| `Knock retard` | 0 | **Probably real** — 87 samples, 7 sessions, includes wide open throttle. |
+| `[PCM] Currently Detected Engine Misfire` | 0 | **Probably real** — 102 samples, 4 sessions. |
+| `Distance traveled with MIL on` | 0 | **Real** — the lamp has never been on. |
+| `PCM Odometer` | 131313 km | Real. |
+| `[BCM] Battery Temperature` | 37 °C | 8 samples. Untested. |
 | `[BCM] Normalized cumulative` ×3 | 121.6 / 2.9 / 10.6 | 2,756 samples each in **one** session, all frozen. Suspect. |
 
 ---
 
-## TIER 3 — THE APP'S OWN ARITHMETIC, NOT READINGS FROM THE TRUCK  (33)
+## TIER 3 — THE APP'S OWN ARITHMETIC, NOT THE TRUCK  (33)
 
-**Never analyse these as vehicle data.** They are computed on the phone from GPS
-or from other channels, and at least one is provably nonsense: `Calculated boost`
-reported 0.17 bar and 4.21 bar on a naturally aspirated engine with no boost.
+**Never analyse these as vehicle data.** Computed on the phone from GPS or from
+other channels. `Calculated boost` reported 0.17 bar and 4.21 bar on a naturally
+aspirated engine with no boost.
 
 | Channel | Unit | Samples | Sessions |
 |---|---|---|---|
@@ -225,85 +229,137 @@ reported 0.17 bar and 4.21 bar on a naturally aspirated engine with no boost.
 | `Distance to empty` | km | 400 | 11 |
 | `Average fuel consumption 10 sec` | L/100km | 217 | 17 |
 
-`Air:fuel ratio` and `Lambda` are the app's two presentations of the same
-measurement and carry identical sample counts (17,979 across 13 sessions each).
-`Power from MAF` tracks `MAF air flow rate` exactly, sample for sample.
+`Air:fuel ratio` and `Lambda` are two presentations of one measurement — identical
+sample counts, 17,979 across 13 sessions each. `Power from MAF` tracks
+`MAF air flow rate` sample for sample.
 
 ---
 
-## TIER 4 — IN THE SENSOR LIST, NEVER LOGGED
+## TIER 4 — OFFERED BY THE APP, LEFT BLANK BY THE TRUCK
 
-Seen in the 2026-09-14 screenshots, absent from every export. Most are text or
-status fields the exporter does not write.
+**Found only by reading screenshots.** A channel that returns nothing never
+appears in an export, so no amount of log analysis can find these. All seven show
+their unit with no value on `m105-02` / `m182-01`, confirmed by opening the image.
+
+| Channel | Why |
+|---|---|
+| `DPF average distance between regen` | Diesel particulate filter. **This is a petrol engine.** |
+| `DPF failed regens` | same |
+| `DPF failed regens (average)` | same |
+| `Oil Life %` | Offered, not answered on this vehicle |
+| `(ABS) Front left wheel speed` | Blank here; **answers on the 2023** |
+| `(ABS) Front right wheel speed` | Blank here; answers on the 2023 |
+| `Manifold absolute pressure (high resolution)` | Blank here; answers on the 2023 |
+
+**Twelve `[BCM]` start/stop flags are also offered and blank** —
+`Battery Voltage too low for Start/Stop`, `Battery Refresh Cycle in progress for
+Start/Stop`, `Battery Temperature Too Low for auto stop`, `Battery Voltage Too Low
+for auto restart`, `Battery State Detection Status`, `Battery SoC too low for
+start/stop`, `Battery Capacity too low for start/stop`, `Battery Current too high
+for start/stop`, `Battery Voltage too low for cold cranking capability`,
+`Battery Current: Predicted`, `Battery Quinscent Current: low range`,
+`Vehicle Battery B Voltage` and `B Current`. **This truck has no automatic
+stop/start system.** Every one of them answers on the 2023, which does.
+
+---
+
+## TIER 5 — IN THE LIST, NEVER EXPORTED
+
+Text and status fields the exporter does not write.
 
 | Channel | Observed |
 |---|---|
 | `Fuel System Status` | "Closed loop, using oxygen sensor feedback to determine fuel mix" |
-| `Monitor status since DTCs cleared.` | all monitors Completed |
+| `Monitor status since DTCs cleared.` | the trailing full stop is the app's |
 | `Monitor status this drive cycle` | MIL:OFF, DTC count 0 |
 | `OBD standards this vehicle conforms to` | "OBD as defined by the EPA" |
-| `Auxillary Input Status` | "Power take off: not active" — the app's own spelling |
-| `Run time since engine start` | 0:00:11:31 |
-| `Current time` | 14:55 |
+| `Auxillary Input Status` | "Power take off: not active" — the app's own misspelling |
+| `Run time since engine start` | 0:00:37:42 |
+| `Current time` | phone clock, 12-hour display against the app's 24-hour |
 | `Oxygen sensor 2 Bank 1 Short term fuel trim` | **n/a — the truck answered "not supported"** |
 | `Oxygen sensor 2 Bank 2 Short term fuel trim` | **n/a — not supported** |
 | `Reset distance, fuel used, avg.speed, avg.fuel consumption` | an action, not a reading |
 
 ---
 
-## NAMING COLLISIONS — every figure in this project must say which channel it came from
+## GRAPH HEADER → SENSOR LIST LABEL
 
-**Seven separate throttle channels exist and they do not agree.**
+**`CLAUDE.md` forbids using graph headers when asking the owner for a reading, and
+this project has broken that rule repeatedly.** Here is the mapping, taken from
+the screenshots themselves rather than from memory.
 
-| Channel | Unit | Note |
-|---|---|---|
-| `Throttle position` | % | |
-| `Absolute throttle position B` | % | |
-| `Relative throttle position` | % | |
-| `Commanded throttle actuator` | % | |
-| `Throttle Position Actually` | ° | degrees, not percent |
-| `Throttle Position Desired` | ° | degrees |
-| `[PCM] Actual Electronic Throttle Control` | ° | |
-| `[PCM] Desired Electronic Throttle Control` | ° | |
+| Printed on the graph | The sensor list label to ask for |
+|---|---|
+| `LTFT - B1` / `LTFT - BI` | `Long term fuel % trim - Bank 1` |
+| `LTFT - B2` | `Long term fuel % trim - Bank 2` |
+| `STFT B1` | `Short term fuel % trim - Bank 1` |
+| `STFT B2` | `Short term fuel % trim - Bank 2` |
+| `Tim. adv.` | `Timing advance` |
+| `EVAP purge` | `Commanded evaporative purge` |
+| `Fuel/Air com. ratio` | `Fuel/Air commanded equivalence ratio` |
+| `O2S1 air:fuel` | `Oxygen sensor 1 Wide Range Equivalence ratio` |
+| `O2S5 air:fuel` | `Oxygen sensor 5 Wide Range Equivalence ratio` |
+| `O2S2 volt.` | `Oxygen sensor 2 Bank 1 Voltage` |
+| `OBD Volts` | `OBD Module Voltage` |
+| `ECU voltage` | `Control module voltage` |
+| `MAF` | `MAF air flow rate` |
+| `Calc. eng. load` | `Calculated engine load value` |
+| `Abs. load` | `Absolute load value` |
+| `Throttle actuator` | `Commanded throttle actuator` |
 
-**Two load channels, read at the same moment: `Calculated engine load value`
-69.02 % against `Absolute load value` 14.12 %.**
+---
+
+## NAMING COLLISIONS — every figure must say which channel it came from
+
+**Eight throttle channels, in two different units.**
+
+| Channel | Unit |
+|---|---|
+| `Throttle position` | % |
+| `Absolute throttle position B` | % |
+| `Relative throttle position` | % |
+| `Commanded throttle actuator` | % |
+| `Throttle Position Actually` | ° |
+| `Throttle Position Desired` | ° |
+| `[PCM] Actual Electronic Throttle Control` | ° |
+| `[PCM] Desired Electronic Throttle Control` | ° |
+
+**Two load channels, same instant: `Calculated engine load value` 69.02 % against
+`Absolute load value` 14.12 %.**
 
 **Four supply voltage channels:** `Control module voltage`, `OBD Module Voltage`,
-`[PCM] Battery voltage`, `[BCM] Vehicle Battery Voltage`. None has ever been
-compared against another.
+`[PCM] Battery voltage`, `[BCM] Vehicle Battery Voltage`. Never compared.
 
-**Two transmission fluid temperature channels:** `ATF temperature var.3` and
+**Two transmission fluid temperatures:** `ATF temperature var.3` and
 `[PCM] ATF Temperature`.
 
-**`A/C pressure` is dead and `[PCM] A/C Pressure` works. `Gear (AT)` is dead and
-`[PCM] Commanded Gear` works.** In both cases the prefixed channel is the real
-one — the standing instruction in `CLAUDE.md` to never request them again applies
-only to the unprefixed pair.
+**Two pedal channels:** `Absolute pedal position D` and `E` — they disagree by
+roughly half (16.08 % against 7.84 %), which is normal for a redundant pair.
 
 ---
 
-## NOT AVAILABLE ANYWHERE — no channel exists on this truck for any of these
+## NOT AVAILABLE ANYWHERE ON THIS TRUCK
 
-Nothing in 129 logged channels or in any screenshot reports: crankshaft position
-sensor signal quality · camshaft position sensor signal · individual injector
-pulse width · individual coil dwell · cylinder pressure · fuel rail pressure that
-reads plausibly · engine oil temperature · engine oil pressure (the
-`Engine oil pressure raw` label appears only in the 2023 control).
+Across 129 logged channels and 279 screenshots, nothing reports: crankshaft
+position sensor signal quality · camshaft position sensor signal · injector pulse
+width · coil dwell · cylinder pressure · engine oil temperature · engine oil
+pressure · a plausible fuel rail pressure.
 
-**Consequence: the crankshaft signal hypothesis cannot be tested through this
-port.** It needs the timing-light comparison against an independent tachometer.
+**Consequence: the crankshaft-signal hypothesis cannot be tested through this
+port.** It needs a timing light against an independent tachometer.
 
 ---
 
-## RULES THAT FOLLOW FROM THIS FILE
+## RULES THAT FOLLOW
 
-1. **Use the label exactly as written above.** It is the exporter's own string.
-2. **Two tiles on screen, never more**, for anything that will be analysed. The
-   app prints a refresh time in red beside each channel: 30 ms for one tile,
-   324–696 ms with the whole list showing, and **0 ms for a channel that is
-   displayed but not being polled at all.**
+1. **Use the label exactly as written here.** These are the exporter's own strings
+   and the sensor list's own spellings, misspelling included.
+2. **Two tiles on screen, never more,** for anything to be analysed. The app
+   prints its refresh time in red beside each row: **30 ms** for one tile,
+   **324–696 ms** with the whole list showing, **0 ms** for a channel displayed
+   but not polled at all.
 3. **Never analyse a Tier 3 channel as vehicle data.**
-4. **Before writing that a measurement needs FORScan or another tool, check this
-   file.** Per-cylinder contribution was declared unreachable here twice and it
-   logs through the ordinary app.
+4. **Never ask the owner for a graph header.** Use the mapping above.
+5. **Before writing that a measurement needs FORScan or other hardware, check this
+   file.** Per-cylinder contribution was declared unreachable twice and it logs
+   through the ordinary app.

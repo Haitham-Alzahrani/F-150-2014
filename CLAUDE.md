@@ -79,11 +79,18 @@ other channel had 13 or fewer.** The rest were configured but idle.
 
 ## THE SENSOR INVENTORY — [`docs/SENSOR-INVENTORY.md`](docs/SENSOR-INVENTORY.md)
 
-**One reliable list, built 2026-09-14 from all 44 logging sessions plus the
-sensor-list screenshots. Read it before claiming any measurement is out of
-reach.** 129 channels answer on this VIN: **75 that move**, **21 that returned a
-constant in every sample they ever produced**, and **33 that are the app's own
-arithmetic and must never be analysed as vehicle data.**
+**One reliable list, built 2026-09-14 from all 44 logging sessions AND all 279
+unique screenshots. Read it before claiming any measurement is out of reach.**
+129 channels answer on this VIN: **75 that move**, **21 that returned a constant
+in every sample they ever produced**, and **33 that are the app's own arithmetic
+and must never be analysed as vehicle data.** Beyond those, **7 channels plus 12
+`[BCM]` start/stop flags are offered by the app and left blank by the truck** —
+findable only in screenshots, because a channel that returns nothing never
+reaches an export.
+
+**It also carries the graph-header to sensor-list mapping**, taken from the
+screenshots themselves. `CLAUDE.md` forbids asking the owner for a graph header
+and this project has broken that rule repeatedly; the table is the fix.
 
 **Three things it settles:**
 
