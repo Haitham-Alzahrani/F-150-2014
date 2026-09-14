@@ -11,7 +11,8 @@ contribution is in the app.
 | Batch | Images | Session clock | Covers |
 |---|---|---|---|
 | 01 | 12 | 02:55 – 02:57 | `All sensors` page, `[PCM]` block, `Emission tests` |
-| 02 | 9 — **all duplicates of batch 01**, no new files | — | re-read at full detail |
+| 02a | 9 — all duplicates of batch 01 | — | re-read at full detail |
+| 02 | 9 sent, **7 new** | 02:51 – 02:55 | rest of `All sensors`, both wide range oxygen sensors, both banks' trims |
 
 **Rules for this file**
 * Every channel is recorded **exactly as the sensor list spells it**, including
@@ -172,3 +173,100 @@ list partway through a drive, not a fault.
 `Oxygen sensor N Wide Range Equivalence ratio` channels · `Intake manifold
 absolute pressure` · `Engine oil temperature` · `Absolute throttle position` ·
 the `[BCM]` block seen in earlier sessions
+
+---
+
+## BATCH 02 — 7 new images, clock 02:51 to 02:55
+
+`data/sensor-list-2026-09-14/batch-02/03.jpg` to `09.jpg`. Two of the nine sent
+duplicated batch 01 and were removed.
+
+**The app's own `Current time` channel reads `14:55` while the phone shows
+`2:55`.** The phone is on a 12-hour clock and this is the afternoon. Every
+"02:5x" in this file means **14:5x**.
+
+The truck was driving throughout — 73 km/h at 1343 rpm, then 32 km/h at 999 rpm.
+
+### BOTH UPSTREAM WIDE RANGE OXYGEN SENSORS EXIST AND ANSWER
+
+**This is outstanding capture #3's channel pair, which `CLAUDE.md` lists as never
+obtained.** They are in the list and they return values.
+
+| Channel | 02:51 | 02:55 |
+|---|---|---|
+| `Oxygen sensor 1 Wide Range Equivalence ratio` | 14.73 | 13.84 |
+| `Oxygen sensor 5 Wide Range Equivalence ratio` | 15.12 | 13.8 |
+| `Oxygen sensor 1 Wide Range Current (mA)` | −0.01 | −0.38 |
+| `Oxygen sensor 5 Wide Range Current (mA)` | +0.08 | −0.42 |
+
+**Not a measurement.** These were read at different refresh moments on a moving
+truck, and the two banks' rows carry different millisecond stamps. The pair is
+recorded here only to prove both channels are reachable. **The wide open
+throttle capture is now possible and should be taken.**
+
+### Both banks' trims, both halves — all four channels present
+
+| Channel | Readings seen |
+|---|---|
+| `Short term fuel % trim - Bank 1` | 3.13 % |
+| `Long term fuel % trim - Bank 1` | **−0.78 % and −2.34 %, both within the same minute** |
+| `Short term fuel % trim - Bank 2` | 0 %, twice |
+| `Long term fuel % trim - Bank 2` | −3.13 %, twice |
+
+**`Long term fuel % trim - Bank 1` was seen at two different values inside one
+minute**, both rows freshly stamped (210 ms and 450 ms). It is moving, so any
+single reading of it is a snapshot of a value in motion.
+
+### Newly confirmed channels
+
+| Channel | Readings |
+|---|---|
+| `Fuel System Status` | **"Closed loop, using oxygen sensor feedback to determine fuel mix"** |
+| `Engine coolant temperature` | 84 °C |
+| `MAF air flow rate` | 5.02 / 5.08 g/sec |
+| `Intake air temperature` | 36 / 37 °C |
+| `Calculated engine load value` | 69.02 % |
+| `Absolute load value` | 14.12 / 65.49 % |
+| `Throttle position` | 13.33 / 14.12 % |
+| `Engine RPM` | 1343 / 999 rpm |
+| `Vehicle speed` | 73 / 32 km/h |
+| `Timing advance` | 49.5 ° / 26.5 ° |
+| `Oxygen sensor 2 Bank 1 Voltage` | 0.18 V / 0 V |
+| `Oxygen sensor 2 Bank 2 Voltage` | 0.22 V / 0 V |
+| `Evap. system vapor pressure` | **85.5 Pa / 34 Pa — it answers** |
+| `Commanded evaporative purge` | 0 % / 25.88 % |
+| `Control module voltage` | 12.62 V |
+| `OBD Module Voltage` | 12.9 V |
+| `Current time` | 14:55 |
+| `Fuel level input (%)` | 85.49 / 86.27 % |
+| `Distance traveled with MIL on` | **0 km** |
+| `Auxillary Input Status` | "Power take off: not active" — the app's own spelling |
+| `OBD standards this vehicle conforms to` | "OBD as defined by the EPA" |
+| `Monitor status since DTCs cleared.` | all Completed — the trailing full stop is the app's |
+| `Reset distance, fuel used, avg.speed, avg.fuel consumption` | an action, not a reading |
+
+**`Fuel System Status` is the channel that names the loop state directly.** The
+cold start work had to infer open versus closed loop from the commanded ratio's
+peak to peak. This channel says it in words.
+
+**`Evap. system vapor pressure` answers.** `docs/scanner-pids.md` lists it among
+channels that returned blank. It does not.
+
+**Two separate voltage channels exist** — `Control module voltage` at 12.62 V and
+`OBD Module Voltage` at 12.9 V, read minutes apart. Also `[PCM] Battery voltage`.
+Three different supply readings, none of them yet compared against each other.
+
+**Two separate load channels exist** — `Calculated engine load value` 69.02 % and
+`Absolute load value` 14.12 %, at the same moment. Every load figure in this
+project must state which one it came from.
+
+### Still absent from every image so far
+
+* `Long term secondary oxygen sensor trim Bank 1`
+* `Long term secondary oxygen sensor trim Bank 2`
+
+### Still not seen
+
+`Intake manifold absolute pressure` · `Engine oil temperature` ·
+`Absolute throttle position` (unsuffixed) · `Variable camshaft actual advance` ·
+the `[BCM]` block · anything naming a crankshaft or camshaft position sensor
