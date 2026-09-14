@@ -8,78 +8,167 @@ contribution is in the app.
 
 **Status: COLLECTING. Do not draw conclusions until every batch is in.**
 
-| Batch | Screenshots | Received | Covers |
+| Batch | Images | Session clock | Covers |
 |---|---|---|---|
-| 01 | 12 | 2026-09-14 | Mixed — live data pages and part of the sensor list |
-| 02 | — | awaiting | — |
+| 01 | 12 | 02:55 – 02:57 | `All sensors` page, `[PCM]` block, `Emission tests` |
+| 02 | 9 — **all duplicates of batch 01**, no new files | — | re-read at full detail |
 
 **Rules for this file**
 * Every channel is recorded **exactly as the sensor list spells it**, including
   the `[PCM]` prefix, capitalisation and spacing. That label is what the owner
   searches for on the phone.
-* A value seen in a screenshot is recorded beside it **only as evidence the
-  channel answers** — never as a measurement. Conditions were not controlled and
-  the phone clock was not always legible.
+* A value is recorded **only as evidence the channel answers** — never as a
+  measurement. The truck was moving, conditions were not controlled.
 * `n/a` means the truck answered "not supported". That is different from the
   channel being absent from the list.
 * Nothing here is a finding.
 
 ---
 
-## BATCH 01 — 12 screenshots, 2026-09-14
+## THE APP PRINTS ITS OWN REFRESH TIME BESIDE EVERY CHANNEL
 
-Images: `data/sensor-list-2026-09-14/batch-01/01.jpg` to `12.jpg`
+**In red, in milliseconds, on the right of each row.** Nobody in this project had
+noticed. It is the app stating, per channel, how long since that value was last
+refreshed — the tiles-on-screen rule measured by the app itself.
 
-### The `[PCM]` block — none of these appear in any log or in `docs/scanner-pids.md`
-
-| Channel | Seen reading |
+| Page state | Refresh times seen |
 |---|---|
-| `[PCM] Cylinder 1 Acceleration Value` | −0.03 / −0.02 |
-| `[PCM] Cylinder 2 Acceleration Value` | −0.02 / 0 |
-| `[PCM] Cylinder 3 Acceleration Value` | −0.03 / 0 |
-| `[PCM] Cylinder 4 Acceleration Value` | **−0.08** |
-| `[PCM] Cylinder 5 Acceleration Value` | −0.02 |
-| `[PCM] Cylinder 6 Acceleration Value` | 0 |
-| `[PCM] Desired Electronic Throttle Control` | 15.31° / 19.55° |
-| `[PCM] Actual Electronic Throttle Control` | 15.25° / 19.62° |
-| `[PCM] Knock Sensor 1` | 323 / 293 |
-| `[PCM] Knock Sensor 2` | 336 |
-| `[PCM] Currently Detected Engine Misfire` | 0 |
-| `[PCM] A/C Pressure` | **1282 kPa — works; the unprefixed channel is dead** |
-| `[PCM] Cylinder head temperature` | 83 °C |
-| `[PCM] ATF Temperature` | 62.81 °C |
-| `[PCM] Battery voltage` | 12.7 V |
-| `[PCM] Fuel level` | 86.27 % |
-| `[PCM] Actual Turbine Shaft Speed` | 1458 rpm |
-| `[PCM] Actual Output Shaft Speed` | 2117.75 rpm |
-| `[PCM] Actual Torque Converter Slip` | 12 rpm |
-| `[PCM] Desired Torque Converter Slip` | 10.25 rpm |
-| `[PCM] Commanded Gear Ratio` | present |
-| `[PCM] Commanded Gear` | present |
-| `[PCM] Measured Gear Ratio` | present |
+| `All sensors`, whole list scrolling | **324 – 696 ms** |
+| GPS-derived channels on the same page | **3 ms** — computed on the phone, never polled |
+| Channels scrolled off the visible area | **0 ms** — stale, not being polled at all |
 
-### Standard channels seen in this batch
+**Two things follow.** With the full list on screen every engine channel updates
+at roughly **1.5 to 3 Hz**, against 33 Hz for one tile alone — the same law, now
+confirmed by the app's own reporting rather than by counting samples in a log.
+And **0 ms marks a channel that is displayed but not being refreshed**, which is
+exactly the "configured but idle" state that produced four false findings here.
 
-| Channel | Seen reading |
+**Use this at the truck: if the red number beside a channel is not small, that
+channel is not being sampled fast enough to analyse.**
+
+---
+
+## BATCH 01 — 12 images, clock 02:55 to 02:57
+
+`data/sensor-list-2026-09-14/batch-01/01.jpg` to `12.jpg`.
+Truck was **moving** — 49.5 km/h, gear 5 and 6, ambient 37 °C.
+
+### The `[PCM]` block — absent from every log and from `docs/scanner-pids.md`
+
+| Channel | Reading A | Reading B |
+|---|---|---|
+| `[PCM] Cylinder 1 Acceleration Value` | −0.03 | −0.02 |
+| `[PCM] Cylinder 2 Acceleration Value` | −0.02 | 0 |
+| `[PCM] Cylinder 3 Acceleration Value` | −0.03 | 0 |
+| `[PCM] Cylinder 4 Acceleration Value` | **−0.08** | — |
+| `[PCM] Cylinder 5 Acceleration Value` | −0.02 | — |
+| `[PCM] Cylinder 6 Acceleration Value` | 0 | — |
+| `[PCM] Desired Electronic Throttle Control` | 15.31 ° | 19.55 ° |
+| `[PCM] Actual Electronic Throttle Control` | 15.25 ° | 19.62 ° |
+| `[PCM] Knock Sensor 1` | 323 | 293 |
+| `[PCM] Knock Sensor 2` | 336 | — |
+| `[PCM] Currently Detected Engine Misfire` | 0 | — |
+| `[PCM] A/C Pressure` | **1282 kPa** | — |
+| `[PCM] Battery voltage` | 12.7 V | — |
+| `[PCM] Cylinder head temperature` | 83 °C | — |
+| `[PCM] ATF Temperature` | 62.81 °C | — |
+| `[PCM] Fuel level` | 86.27 % | 86.67 % |
+| `[PCM] Commanded Gear` | 6 | 5 |
+| `[PCM] Commanded Gear Ratio` | 0.69 | 0.87 |
+| `[PCM] Measured Gear Ratio` | 0.69 | — |
+| `[PCM] Actual Turbine Shaft Speed` | 1458 rpm | — |
+| `[PCM] Actual Output Shaft Speed` | 2117.75 rpm | — |
+| `[PCM] Actual Torque Converter Slip` | 12 rpm | — |
+| `[PCM] Desired Torque Converter Slip` | 10.25 rpm | — |
+
+**`[PCM] Measured Gear Ratio` equals `[PCM] Commanded Gear Ratio` to two
+decimals** and converter slip is 12 rpm against a commanded 10.25. The
+transmission is doing exactly what it is told. Recorded, not interpreted.
+
+### Standard channels confirmed present and answering
+
+| Channel | Reading |
 |---|---|
+| `Control module voltage` | 13.38 V |
+| `Absolute load value` | 14.12 % |
+| `Fuel/Air commanded equivalence ratio` | 12.44 |
+| `Catalyst temperature Bank 1 Sensor 1` | 642.5 °C |
+| `Catalyst temperature Bank 2 Sensor 1` | **642.5 °C — identical** |
+| `Ambient air temperature` | 37 °C |
+| `Ethanol fuel percent` | 22.35 % |
+| `Relative throttle position` | 2.35 % |
+| `Absolute throttle position B` | 16.47 / 16.86 % |
+| `Absolute pedal position D` | 16.08 % |
+| `Absolute pedal position E` | 7.84 % |
+| `Commanded throttle actuator` | 3.14 % |
+| `Engine RPM x1000` | 1.9 rpm |
+| `Fuel level input (V)` | 42.94 L |
+| `Free space in fuel tank` | 7.06 L |
+| `Monitor status this drive cycle` | MIL:OFF, DTC count 0 |
 | `Long term fuel % trim - Bank 1` | −2.34 % |
 | `Long term fuel % trim - Bank 2` | −3.13 % |
-| `Oxygen sensor 2 Bank 1 Short term fuel trim` | **n/a %** — not supported |
-| `Oxygen sensor 2 Bank 2 Short term fuel trim` | **n/a %** — not supported |
-| `Ethanol fuel percent` | 22.35 % |
 | `Barometric pressure` | 98 kPa |
-| `Control module voltage` | 13.38 V |
-| `Timing advance` | 49.5° at 1343 rpm, 73 km/h |
+| `Timing advance` | 49.5 ° |
 | `Commanded evaporative purge` | 0 % |
 | `Run time since engine start` | 0:00:11:31 |
 | `Distance traveled since codes cleared` | 364 km |
 | `# warm-ups since codes cleared` | 7 |
 
-### Absent from this batch — confirm by searching the list
+### Not supported — the truck itself answered `n/a`
+
+* `Oxygen sensor 2 Bank 1 Short term fuel trim`
+* `Oxygen sensor 2 Bank 2 Short term fuel trim`
+
+### App arithmetic, not readings from the truck — do not analyse these
+
+`Speed (GPS)` · `Altitude (GPS)` · `Average speed (GPS)` · `Average speed` ·
+`Average fuel consumption` and its Today / total / Week / 10 sec variants ·
+`Calculated instant fuel consumption` · `Calculated instant fuel rate` ·
+`Distance travelled` and variants · `Fuel used` and variants · `Fuel used price`
+and variants · `Fuel economizer (based on fuel system status and throttle
+position)` · `Instant engine power (based on fuel consumption)` ·
+`Power from MAF` · `Vehicle acceleration` · `Calculated boost`
+
+**`Calculated boost` read 0.17 bar on one screen and 4.21 bar on another.** This
+engine is naturally aspirated and has no boost. The channel is the app computing
+something meaningless. `Power from MAF` at 49.68 hp is in the same family, though
+it does confirm `MAF air flow rate` is being read.
+
+### `Emission tests` — the monitor list, clock 02:57
+
+**STATUS SINCE DTC RESET — every monitor Completed:**
+
+| Monitor | Supported | Result |
+|---|---|---|
+| Misfire | Available | Completed |
+| Fuel System | Available | Completed |
+| Components | Available | Completed |
+| Catalyst | Available | Completed |
+| Heated Catalyst | Not available | Completed |
+| **Evaporative System** | **Available** | **Completed** |
+| Secondary Air System | Not available | Completed |
+| A/C refrigerant | Not available | Completed |
+| Oxygen Sensor | Available | Completed |
+| Oxygen Sensor Heater | Available | Completed |
+| EGR system | Available | Completed |
+
+**The Evaporative System monitor has now run.** `CLAUDE.md` says it was the one
+monitor never completed since the purge valve was fitted, because the fuel level
+and cold soak conditions had not been met. They have been met, and it passed.
+
+**CURRENT DRIVE CYCLE STATUS** — Misfire and Fuel System completed; Components,
+Catalyst, Evaporative System and EGR system **not completed**. That is a monitor
+list partway through a drive, not a fault.
+
+### Still absent from every image so far
 
 * `Long term secondary oxygen sensor trim Bank 1`
 * `Long term secondary oxygen sensor trim Bank 2`
 
-### Searches still to run in the app's filter box
+### Not yet seen anywhere, and expected to exist
 
-`secondary` · `cylinder` · `knock` · `throttle` · `misfire` · `oxygen` · `fuel`
+`MAF air flow rate` · `Engine coolant temperature` · `Intake air temperature` ·
+`Short term fuel % trim - Bank 1` and `- Bank 2` · the four
+`Oxygen sensor N Wide Range Equivalence ratio` channels · `Intake manifold
+absolute pressure` · `Engine oil temperature` · `Absolute throttle position` ·
+the `[BCM]` block seen in earlier sessions
