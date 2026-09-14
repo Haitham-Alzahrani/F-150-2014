@@ -86,7 +86,21 @@ in the **sensor list** he scrolls on the phone.
 when addressing the owner. "Wide open throttle", "short term fuel trim", "memory
 wipe", "coolant temperature", "peak to peak".
 
-## THE THREE CAPTURES STILL OUTSTANDING
+## FULL RE-TEST PROTOCOL — [`docs/RETEST-PROTOCOL.md`](docs/RETEST-PROTOCOL.md)
+
+**Owner asked 2026-09-14 to redo every test at the proper sample rate and
+re-eliminate every item.** That protocol supersedes the three-capture list below
+and contains it. 23 captures across 8 sessions, every one two channels at 33 Hz,
+each stating what it re-tests and what it can settle. It also carries the
+hands-on items that need no scanner: mount bolt re-torque, ground voltage drops,
+alternator ripple, crankcase ventilation valve, calibration identifier, and a
+driver-side exhaust leak check.
+
+**The eight questions it can settle cleanly** are listed at the end of that file.
+The one it cannot is what sets the loop's phase margin at 0.32 Hz — a calibration
+constant no capture reaches.
+
+## THE THREE CAPTURES STILL OUTSTANDING — highest priority within the protocol
 
 Two tiles at a time, everything else off the visible page. Warm, Park,
 standstill, air conditioning off. Export **CSV #2 (Horizontal)**. Note the
