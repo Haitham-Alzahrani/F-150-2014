@@ -30,6 +30,57 @@ list scrolled on the phone, not the short header the app prints on the graph.
 
 ---
 
+## FITNESS FOR THIS ENGINE — checked 2026-09-14
+
+**Channels.** All 23 were checked against this truck's own logs. **21 have
+returned real data on the 2014 3.7** with sample counts from its own captures.
+Two have not:
+
+| Channel | Your 2014 3.7 | 2023 5.0 control |
+|---|---|---|
+| `Long term secondary oxygen sensor trim Bank 1` | **never requested** | n=116 |
+| `Long term secondary oxygen sensor trim Bank 2` | **never requested** | n=108 |
+
+Both are SAE standard Mode 01 PIDs (0x56 and 0x58, formula (A−128)×100÷128), so
+the app supports them; whether this computer answers is unknown until asked.
+Capture 3.1 is the test. **If the field stays blank, record that and the
+hypothesis closes.**
+
+Going the other way: `MAF air flow rate` has 5,712 samples on the 2014 and
+**never appears in any 2023 log**, so capture 2.3 is valid for this truck but has
+no control comparison.
+
+**Three items that are NOT verified for this specific engine:**
+
+1. **Crankcase ventilation valve location (8.4).** `CLAUDE.md` carries it as
+   passenger-side valve cover, roughly halfway forward, and marks it **[VERIFY]**
+   — that location is documented for the 2011–2014 Mustang 3.7, the same Cyclone
+   engine, but was never confirmed on the F-150 installation. **Find it visually
+   before assuming.**
+
+2. **Which physical side is Bank 2 (8.6).** This project has assumed throughout
+   that Bank 1 is the passenger side (cylinders 1, 2, 3) and Bank 2 the driver
+   side (4, 5, 6). That convention has **never been verified on this truck.** It
+   matters, because the exhaust leak check is aimed at one side. **Identify it
+   physically first: trace the upstream sensor that the app calls `Oxygen sensor
+   5 Wide Range Equivalence ratio` and check which manifold it screws into.**
+   That sensor's manifold is the side to inspect, whatever it is called.
+
+3. **Holding a steady engine speed by hand (Session 6).** The throttle is
+   drive-by-wire, so a steady foot is not a steady plate — this project has
+   already measured the computer moving it. The hold will wander by tens of
+   engine speed and that is normal, not a symptom. The captures still work
+   because what is being measured is the wander's frequency and its relationship
+   to the other channel, not the absolute value.
+
+**Confirmed correct for this engine:** no external exhaust gas recirculation
+valve (the 3.7 Ti-VCT uses cam phasing for internal dilution), six-speed
+automatic so third gear reaches 5,000 comfortably for capture 7.1, and the
+oxygen sensor numbering — sensors 1 and 5 upstream, sensor 2 on each bank
+downstream — matches this truck's own exports.
+
+---
+
 ## SESSION 1 — COLD START. First thing, engine sat overnight.
 
 **1.1 — 20 minutes. Start the recording BEFORE turning the key.**
