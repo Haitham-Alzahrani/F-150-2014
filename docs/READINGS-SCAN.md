@@ -486,3 +486,48 @@ atmospheric pressure, so **they must agree.** If `Barometric pressure` sits
 4 % below the manifold channel at key-on, that is a genuine, quantified sensor
 offset — and it is the one calibration error whose direction and size match the
 lean bias this project has chased for weeks.
+
+
+---
+
+## TRANSMISSION FLUID TEMPERATURE — highest ever recorded (2026-09-15)
+
+**Owner asked for the maximum across every run.**
+
+| Channel | Sessions | Maximum on the 2014 | Where |
+|---|---|---|---|
+| **`ATF temperature var.3`** | 5 | **92.75 °C** | `20260905_041723`, **61 km/h at 1449 rpm** |
+| `[PCM] ATF Temperature` | 3 | 63.06 °C | `2026-09-14_14-49-23` |
+
+**The truck attribution was checked explicitly, and it mattered.** The 2023
+control reached **97.12 °C** on the same channel — **4.4 °C hotter than the 2014
+has ever been recorded.** A sweep that mixed the two trucks would have returned
+the 2023's number as the answer.
+
+### 92.75 °C is not a concern
+
+Ordinary operating temperature for a 6R80. The threshold that shortens fluid life
+sits far above it, and the healthy control truck ran hotter. **Nothing here is a
+fault.**
+
+### But it is the highest RECORDED, not the highest REACHED
+
+**The maximum came from a steady 61 km/h cruise** — close to the easiest
+condition a torque converter ever sees. Only 22 samples produced it, out of 1,806
+for that channel across five sessions.
+
+**This truck has never been logged towing, climbing a grade, or sitting in
+stopped traffic with the air conditioning loaded** — the conditions that actually
+heat a transmission. Whatever it reaches under those, nothing in this dataset
+shows it.
+
+**Context:** the fluid was changed at 113,000 km and `PCM Odometer` now reads
+131,313 km. Nothing in the temperature record argues against that interval.
+
+### The two channels have never been polled together
+
+`ATF temperature var.3` appears only in the 09-05 and 09-08 logs;
+`[PCM] ATF Temperature` only in 09-13 and 09-14. **Zero simultaneous samples**,
+so the 29 °C gap between their maxima cannot be attributed — it may be nothing
+more than different sessions in different conditions. **Do not quote one against
+the other.** One capture with both tiles on screen would settle which to trust.

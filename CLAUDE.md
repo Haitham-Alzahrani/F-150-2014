@@ -159,6 +159,25 @@ were never polled together. Any electrical reasoning that mixed them is unsound.
 **Also still open: the right front tyre is 211.7 kPa against 237.5 on the left and
 a 241 label.** Unchanged since the first scan.
 
+## TRANSMISSION FLUID TEMPERATURE - highest ever recorded is 92.75 C (2026-09-15)
+
+`ATF temperature var.3`, in `20260905_041723`, at **61 km/h and 1449 rpm**.
+`[PCM] ATF Temperature` peaked at 63.06 C in a different session.
+
+**Not a concern** - ordinary for a 6R80, and **the 2023 control reached 97.12 C
+on the same channel**, hotter than the 2014 has ever been recorded. The truck
+attribution was checked explicitly; a mixed sweep would have returned the 2023's
+number.
+
+**It is the highest RECORDED, not the highest REACHED.** The maximum came from a
+steady cruise - the easiest condition a torque converter sees - from 22 samples
+out of 1,806. **This truck has never been logged towing, climbing, or in stopped
+traffic with the air conditioning loaded.**
+
+**The two channels have never been polled together** - zero simultaneous samples -
+so the 29 C gap between their maxima cannot be attributed and neither should be
+quoted against the other.
+
 ## IS A SENSOR LYING? NO CLEAR CLUE - and one piece of evidence is VACUOUS
 
 **Cross-checked every pairing of channels that must physically agree.** Full
