@@ -159,6 +159,46 @@ were never polled together. Any electrical reasoning that mixed them is unsound.
 **Also still open: the right front tyre is 211.7 kPa against 237.5 on the left and
 a 241 label.** Unchanged since the first scan.
 
+## IS A SENSOR LYING? NO CLEAR CLUE - and one piece of evidence is VACUOUS
+
+**Cross-checked every pairing of channels that must physically agree.** Full
+table in [`docs/READINGS-SCAN.md`](docs/READINGS-SCAN.md).
+
+**CORRECTION - CATALYST TEMPERATURE IS MODELLED, NOT MEASURED.** The two banks'
+values are **exactly equal in 78.3 % of 1,494 paired samples**, r = 1.000, and
+the rest differ by at most 1.5 C. Two separate sensors in different thermal
+environments cannot do that. **It is one computed value printed on two channels.**
+This file cites "catalyst temps identical both banks" as evidence of health in
+two places. **That evidence is worthless** - identical is what a shared
+calculation produces whatever the catalysts are doing.
+
+**Both upstream oxygen sensors track together** - 1,192 paired samples, r = 0.986,
+mean difference 0.01, and Mode 06 timed both at 0.014 s against a 0.4 s limit.
+Neither is lazy. **But this does NOT rule out a biased sensor and must not be read
+as if it does:** in closed loop each bank is driven to stoichiometric by its own
+trim, so a lean-reading Bank 2 sensor would have the PCM add fuel until that
+sensor reads stoichiometric - both sensors agree and Bank 2's trim sits positive,
+which is exactly the observed pattern.
+
+**FOUR OF SEVEN CROSS-CHECKS HAVE ZERO PAIRED SAMPLES.** Coolant against cylinder
+head temperature, intake air against ambient, and the two load channels were
+never polled together. **The comparisons that would most directly expose a lying
+sensor are the ones nobody has captured.**
+
+**No clue is present that would name one:** no code on any powertrain circuit
+ever, no two sensors of the same quantity disagreeing, nothing out of physical
+range that the reporting path does not explain, no monitor short of margin.
+
+**The one sensor that fits the symptom cannot be tested through the port** -
+crankshaft position. The timing light against `Engine RPM` at idle and a held
+1500 is the test, and it has been outstanding since night one.
+
+**THE CAPTURE WORTH TAKING FIRST:** `Barometric pressure` + `Intake manifold
+absolute pressure`, **engine off**. Both then read atmospheric, so **they must
+agree.** If barometric sits 4 % low against the manifold channel, that is a
+quantified sensor offset whose direction and size match the lean bias this file
+has chased for weeks.
+
 ## THE SENSOR INVENTORY — [`docs/SENSOR-INVENTORY.md`](docs/SENSOR-INVENTORY.md)
 
 **One reliable list, built 2026-09-14 from all 44 logging sessions AND all 279

@@ -378,3 +378,111 @@ MIL on` 0 km · both upstream oxygen sensors sweeping the full 0–29.38 range �
 **`Intake air temperature` reaches 68 °C against a 32–40 °C ambient** — 28 °C of
 heat soak. Normal for a stationary truck in Jeddah; recorded because it reduces
 charge density and nobody had looked at it.
+
+
+---
+
+## IS THE PCM ACTING ON A FAULTY SENSOR? (2026-09-15)
+
+**Owner's question. Short answer: there is no clear clue that it is.** The
+honest way to look for one without a reference instrument is to check whether
+sensors that must physically agree actually do. Here is that test, run on every
+pairing the data allows.
+
+| Pairing | Paired samples | Result |
+|---|---|---|
+| `Oxygen sensor 1` vs `Oxygen sensor 5 Wide Range Equivalence ratio` | **1,192** | mean difference **+0.01**, **r = +0.986** |
+| `Catalyst temperature Bank 1` vs `Bank 2 Sensor 1` | **1,494** | **78.3 % EXACTLY equal** — see below |
+| `ATF temperature var.3` vs `Engine coolant temperature` | 465 | ATF runs **13.2 °C cooler**, sd 0.18 — a cooler in the radiator, normal |
+| `Engine coolant temperature` vs `[PCM] Cylinder head temperature` | **0** | never polled together |
+| `Intake air temperature` vs `Ambient air temperature` | **0** | never polled together |
+| `Calculated engine load value` vs `Absolute load value` | **0** | never polled together |
+| `Barometric pressure` vs `MAF air flow rate` | 2 | useless |
+
+**Four of seven cross-checks cannot be done at all.** The tiles-on-screen rule
+again: channels on different pages have zero simultaneous samples by
+construction. **The comparisons that would most directly expose a lying sensor
+are exactly the ones nobody has captured.**
+
+### CORRECTION: catalyst temperature is MODELLED, not measured
+
+**The two banks' catalyst temperatures are the same number printed twice.**
+
+| | |
+|---|---|
+| Paired within 0.12 s | 1,494 |
+| **Exactly equal** | **1,170 — 78.3 %** |
+| The other 324 differ by | at most **1.5 °C**, one or two quantisation steps |
+| Correlation | **r = 1.000** |
+
+Two physically separate sensors on two separate banks, in different thermal
+environments, cannot agree to the decimal 78 % of the time. **This is one
+computed value reported on two channels** — the PCM modelling catalyst
+temperature from load, spark and airflow rather than measuring it.
+
+**`CLAUDE.md` cites "catalyst temps identical both banks" as evidence the engine
+is healthy, in two places. That evidence is vacuous.** Identical is what a shared
+calculation produces whatever the catalysts are doing. It is not a measurement
+and it carries no bank information.
+
+### What the working cross-checks DO establish
+
+**Both upstream oxygen sensors are responsive and track together** — 1,192 paired
+samples, r = 0.986, mean difference 0.01. Combined with Mode 06 timing both at
+**0.014 s against a 0.4 s limit, identical**, neither sensor is lazy.
+
+**But this does NOT rule out a biased sensor, and it must not be read as if it
+does.** In closed loop each bank is driven to stoichiometric by its own trim. A
+Bank 2 sensor reading lean would have the PCM add fuel to Bank 2 until that
+sensor reads stoichiometric — **so both sensors read the same and Bank 2's trim
+sits positive, which is precisely the pattern observed.** Sensor agreement is
+consistent with a bias, not evidence against one.
+
+### The two channels reporting the physically impossible
+
+Neither is likely a sensor fault, but both must be named:
+
+* **`Throttle Position Actually` reaches 127.99°.** A throttle plate cannot pass
+  90°. `[PCM] Actual Electronic Throttle Control` tracks `[PCM] Desired` closely
+  in degrees that make sense, so this is a **scaling problem in the reporting
+  path**, not a throttle that has broken free.
+* **Both downstream oxygen sensor voltage channels reach 1.275 V**, above what a
+  narrowband zirconia sensor can generate — and **identically on both banks at
+  the same rate**, which again points at the path rather than the sensors.
+
+### What a clear clue would look like, and none of it is present
+
+| Signature of a lying sensor | Present? |
+|---|---|
+| A stored or pending code naming the circuit | **No.** None, ever, on any powertrain circuit |
+| Two sensors measuring the same quantity disagreeing | **No** — and the pairings that could show it were never captured |
+| A reading outside physical range with no reporting explanation | **No** |
+| A reading that fails to move when physics says it must | **No** |
+| A monitor failing or running out of margin | **No.** Mode 06 passed every item with margin |
+
+### The one sensor that fits the symptom cannot be tested here
+
+**Crankshaft position.** It explains reset-helps-then-returns, every-rpm
+instability, and the absence of codes — and **no channel on this truck reports
+crank signal quality, so the port cannot answer it.** The test is the timing
+light with a tachometer function against the app's `Engine RPM`, at idle and at a
+held 1500. If the independent reading is steadier than the truck's own, the
+signal is lying. **That test has been outstanding since night one and needs no
+tool this project does not have.**
+
+### The cheapest way to make the missing cross-checks possible
+
+Each is one capture, two tiles, three minutes:
+
+```
+Engine coolant temperature      +  [PCM] Cylinder head temperature
+Intake air temperature          +  Ambient air temperature
+Calculated engine load value    +  Absolute load value
+Barometric pressure             +  Intake manifold absolute pressure
+```
+
+**The last one is the most valuable.** With the engine off both channels read
+atmospheric pressure, so **they must agree.** If `Barometric pressure` sits
+4 % below the manifold channel at key-on, that is a genuine, quantified sensor
+offset — and it is the one calibration error whose direction and size match the
+lean bias this project has chased for weeks.
