@@ -366,12 +366,80 @@ roughly half (16.08 % against 7.84 %), which is normal for a redundant pair.
 
 ---
 
+## CHECKED ONLINE, 2026-09-15 — why the missing powertrain channels are missing
+
+**Two are now closed permanently. One is open and testable. One is unresolved.**
+
+### `Engine oil pressure` — THERE IS NO SENSOR. CLOSED FOREVER.
+
+The 2010–2014 F-150 uses an **oil pressure SWITCH, not a sensor.** It is a
+normally-open switch that closes at roughly 7 psi; the dash gauge then moves to a
+fixed mid-scale position and stays there. **It does not report a pressure and it
+never varies with one.** There is no value for any scan tool to read, because the
+truck never measures one.
+
+**Consequence: stop listing engine oil pressure as a missing channel.** It is not
+missing — it does not exist. Real oil pressure needs a mechanical gauge on the
+port.
+
+### `Fuel rail press.` — NO ELECTRONIC SENSOR. That is why it reads 7770 kPa.
+
+The 3.7 runs a **two-speed Mechanical Returnless Fuel System**: pressure is set by
+a regulator at the tank, and **there is no rail pressure sensor on this engine.**
+The 7770 kPa constant is the app requesting a PID nothing answers.
+
+**[VERIFY]** This rests on one Q&A-site source naming the 2013 F-150 3.7 Duratec.
+It is consistent with the engineering and with the junk reading, but it is not
+Ford documentation. Fuel pressure, if ever needed, is a mechanical gauge job.
+
+### `Intake manifold absolute pressure` — SUPPORTED. The truck already answered.
+
+**The strongest evidence is in this truck's own data, not online.** When the
+channel was polled it returned **99 kPa** — a plausible number, with the engine
+off, which is exactly correct for atmospheric. **An unsupported channel returns
+nothing at all**, the way `Manifold absolute pressure (high resolution)` shows its
+unit with no value while the engine runs at 661 rpm.
+
+**A number came back. The standard channel is supported and answering.** It has
+simply never been sampled with the engine running. **One minute at warm idle in
+Park settles what this project has been inferring for weeks.**
+
+### Crankshaft position variation — NOT A LIVE CHANNEL AT ALL
+
+Ford's learned crankshaft position variation correction is a **service routine**,
+not a parameter. It appears in scan tools under special functions or adaptations,
+it is *performed*, and it is a write to the module. **There is no channel to read
+and no amount of sensor-list searching will find one.**
+
+That does not weaken the hypothesis. It means the hypothesis cannot be tested by
+reading anything — **the timing-light tachometer against the app's `Engine RPM` is
+the test**, and it needs no tool this project does not already have.
+
+**Note the codebase rule this collides with:** performing a relearn is a write.
+`src/f150diag/` is read-only by design and must stay that way.
+
+### Injector pulse width and coil dwell — UNRESOLVED
+
+No source found either way for this platform. Neither is a standard OBD-II
+parameter. Whether Ford exposes them through manufacturer-specific addressing on a
+2014 PCM is **not established**, and nothing here should assume it either way.
+
+**Sources that could not be checked: `rockauto.com` and `forscan.org` are both
+blocked by this container's network egress proxy.** The parts catalogue and the
+FORScan forum — the two best authorities on what this PCM exposes — were
+unreachable. Everything above that is marked verified came from sources that did
+load, or from this truck's own logs.
+
 ## NOT AVAILABLE ANYWHERE ON THIS TRUCK
 
 Across 129 logged channels and 279 screenshots, nothing reports: crankshaft
 position sensor signal quality · camshaft position sensor signal · injector pulse
 width · coil dwell · cylinder pressure · engine oil temperature · engine oil
 pressure · a plausible fuel rail pressure.
+
+**Two of those are absent because the hardware does not exist** — see the section
+above. There is no oil pressure sensor (a switch) and no fuel rail pressure sensor
+(mechanical returnless). They are not gaps in the tool.
 
 **Consequence: the crankshaft-signal hypothesis cannot be tested through this
 port.** It needs a timing light against an independent tachometer.
