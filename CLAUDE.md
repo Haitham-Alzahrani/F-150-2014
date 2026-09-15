@@ -89,10 +89,30 @@ trims are the most negative in the entire dataset**. On E0 fuel a 22 % estimate
 targets roughly 13.5:1 instead of 14.7:1 - about 9 % more fuel commanded, which
 closed loop corrects and open loop does not.
 
-**This is a learned value that wipes and climbs back - the signature this
+**THERE IS NO ETHANOL SENSOR ON THIS TRUCK.** Ford deleted the physical fuel
+composition sensor on 2004-and-newer vehicles; the PCM infers the value from
+oxygen sensor feedback and how the trims settle after a refuel. **So it cannot be
+reading wrong, and it cannot say what is in the tank.** A reading of 22.35 % means
+only "after the last fill this engine behaved as though it needed more fuel than
+my model predicted" - **the lean bias restated in different units, not independent
+evidence of a second problem.** Stop treating it as a separate anomaly.
+
+**Where it still does damage: open loop.** Closed loop drives to lambda 1 whatever
+the PCM believes; the first ~20 s of a cold start and wide open throttle do not.
+
+**"Saudi pump fuel is normally E0" is an ASSUMPTION this file has repeated as
+fact and nobody has ever checked.** A search returned Aramco octane grades and no
+ethanol specification.
+
+**SETTLE IT WITH THE WATER DILUTION TEST - ten minutes, no tools.** 10 ml water in
+a graduated cylinder, top to 100 ml with fuel, invert ten times, stand five
+minutes, read the water layer. Unchanged at 10 ml = E0 and the PCM's estimate is
+wrong. About 32 ml = E22 and the estimate is right and the whole line closes.
+**Cheapest remaining test in the investigation.** Full procedure in the scan file.
+
+**It is still a learned value that wipes and climbs back - the signature this
 investigation has chased since the D/R relapse.** Not proof: the shake returned on
-09-09 while the estimate was still 9.80 %. But it is the first learned value
-anybody has tracked across wipes, and the fuel has never been tested.
+09-09 while the estimate was still 9.80 %.
 
 **BANK 2 NEEDS +1.95 % MORE FUEL THAN BANK 1**, paired within 0.15 s at settled
 idle, n=108, t=15.5, p=3.4e-29. Fourth sighting of the driver-side offset.

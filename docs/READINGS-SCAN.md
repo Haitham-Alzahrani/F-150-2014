@@ -55,7 +55,72 @@ does not:** the first 20 seconds of every cold start, and wide open throttle.
   behaviour, so a real lean bias would also drive the estimate up. This may be a
   symptom of the driver-side offset rather than a separate fault.
 
-### How to settle it
+### THERE IS NO ETHANOL SENSOR ON THIS TRUCK — the number is INFERRED
+
+**Ford deleted the physical fuel composition sensor on 2004-and-newer vehicles.**
+The PCM derives `Ethanol fuel percent` from **oxygen sensor feedback and how the
+long term fuel trims settle after a refuel**. It is a computed guess, not a
+measurement of what is in the tank.
+
+**This reframes the whole finding.**
+
+* **It cannot be "reading wrong" in the sensor sense** — there is no sensor to
+  drift, foul or fail.
+* **It cannot tell anyone what is in the fuel.** A reading of 22.35 % means only
+  *"after the last refuel this engine behaved as though it needed more fuel than
+  my model predicted."*
+* **Therefore the ethanol estimate is the lean bias restated in different
+  units** — not independent evidence of a second problem. This project must stop
+  treating it as a separate anomaly.
+
+**Where it still does real damage: open loop.** In closed loop the wideband
+oxygen sensors drive mixture to lambda 1 whatever the PCM believes about the
+fuel, and the trims absorb the error. **In open loop nothing corrects it** — the
+first ~20 s of every cold start, and wide open throttle. An over-estimated
+ethanol figure genuinely over-fuels there.
+
+**Arithmetic, if the fuel really is E0:** at 22.35 % the PCM targets roughly
+**13.4:1 instead of 14.7:1** — about **9.5 % more fuel**. The measured trims are
+only −2.3 to −3.1 %, which is **far less than a 9.5 % base error should require**.
+So either the fuel contains real ethanol, or the estimate is not being applied at
+face value. **Unresolved, and it should not be guessed at.**
+
+**Saudi pump fuel ethanol content is NOT established.** Searching returned octane
+grades for Aramco 91 and 95 but no ethanol specification. This project has
+repeatedly written "Saudi pump fuel is normally E0" as though it were a fact. **It
+is an assumption and it has never been checked.**
+
+### How to settle it — the water dilution test, ten minutes in the shop
+
+**This measures the fuel directly and needs no tool the owner does not have.**
+Ethanol dissolves into water; petrol does not. So water pulls the ethanol out of
+a fuel sample and grows by exactly the volume of ethanol that was in it.
+
+1. A clear graduated cylinder or a straight-sided bottle marked in millilitres.
+2. Put in **10 ml of water**. Mark the level.
+3. Top up to **100 ml with fuel** straight from the truck's tank or the pump.
+4. Cap it, invert gently ten times. Do not froth it.
+5. Stand it still for **five to ten minutes** until the two layers are sharp.
+6. **Read the water layer.** Still 10 ml means E0. Twenty ml means the fuel was
+   10 % ethanol. Thirty ml means 20 %.
+
+Accurate to a percent or two, which is all this question needs.
+
+**What each outcome means:**
+
+| Water layer | Reading |
+|---|---|
+| **10 ml, unchanged** | The fuel is E0 and **the PCM's 22 % estimate is wrong.** The inference is being driven by a real lean bias, and it is over-fuelling every cold start and every full-throttle pull. |
+| **12–14 ml (E10-ish)** | Ordinary blended fuel. The estimate is high but not absurd, and the trims make sense. |
+| **≈ 32 ml (E22)** | The estimate is **correct** and there is nothing wrong with the fuelling at all. The whole line closes. |
+
+**Do this before anything else in the fuel line.** It is the cheapest test left in
+the entire investigation and it decides whether a reading this project has carried
+as an anomaly since day one is a fault or a fact.
+
+### Then, at the truck
+
+
 
 1. **Read `Ethanol fuel percent` before and immediately after the next fill**, on
    the same tank of fuel from the same pump. If it moves again, the inference is
