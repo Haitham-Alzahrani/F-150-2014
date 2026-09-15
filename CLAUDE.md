@@ -77,6 +77,46 @@ other channel had 13 or fewer.** The rest were configured but idle.
   zero simultaneous samples by construction. **Four false findings in this
   project came from comparing channels that were never polled together.**
 
+## FULL SCAN OF EVERY READING — [`docs/READINGS-SCAN.md`](docs/READINGS-SCAN.md) (2026-09-15)
+
+**Every numeric value in all 44 sessions, 129 channels, statistics on raw samples.**
+
+**THE ONE NEW FINDING: the PCM re-learns an ethanol content of 19-22 % after every
+refuel, and it resets to 9.80 % on a memory wipe.** Three discrete values across
+every session ever logged - bytes 25, 49, 57. It jumped **9.80 -> 22.35 %** across
+a fill that took the tank from 29 % to 86 %, and at 22.35 % **both banks' long term
+trims are the most negative in the entire dataset**. On E0 fuel a 22 % estimate
+targets roughly 13.5:1 instead of 14.7:1 - about 9 % more fuel commanded, which
+closed loop corrects and open loop does not.
+
+**This is a learned value that wipes and climbs back - the signature this
+investigation has chased since the D/R relapse.** Not proof: the shake returned on
+09-09 while the estimate was still 9.80 %. But it is the first learned value
+anybody has tracked across wipes, and the fuel has never been tested.
+
+**BANK 2 NEEDS +1.95 % MORE FUEL THAN BANK 1**, paired within 0.15 s at settled
+idle, n=108, t=15.5, p=3.4e-29. Fourth sighting of the driver-side offset.
+**Severe caveat: only ONE session in the whole project ever polled both short term
+trims together at idle.** Strong measurement of one session, not replicated.
+
+**TWO CHANNELS MUST STOP BEING READ AS ABSOLUTE NUMBERS.**
+`Throttle Position Actually` exceeds 90 degrees in 2.67 % of samples, maximum
+**127.99** - a throttle plate cannot do that, so the scaling is not plate angle.
+Use it only as "does it move". And both downstream oxygen sensor voltage channels
+reach **1.275 V**, above what a narrowband zirconia sensor can produce.
+
+**A LOOMING ARTEFACT WAS CAUGHT.** `[PCM] Cylinder 6 Acceleration Value` spans
+-0.452 to +0.374, six to ten times the others - entirely because it was the only
+cylinder still polled after a throttle lift. In the one window all six share it is
+ordinary. **In that window cylinder 5 is the outlier; the screenshot and Mode 06
+both named cylinder 4.** Three looks, two cylinders, n=8. That is noise.
+
+**THE FOUR SUPPLY VOLTAGE CHANNELS SPAN 1.26 V** and three of the four pairings
+were never polled together. Any electrical reasoning that mixed them is unsound.
+
+**Also still open: the right front tyre is 211.7 kPa against 237.5 on the left and
+a 241 label.** Unchanged since the first scan.
+
 ## THE SENSOR INVENTORY — [`docs/SENSOR-INVENTORY.md`](docs/SENSOR-INVENTORY.md)
 
 **One reliable list, built 2026-09-14 from all 44 logging sessions AND all 279
