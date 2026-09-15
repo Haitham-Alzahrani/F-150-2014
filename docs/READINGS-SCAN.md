@@ -90,21 +90,62 @@ grades for Aramco 91 and 95 but no ethanol specification. This project has
 repeatedly written "Saudi pump fuel is normally E0" as though it were a fact. **It
 is an assumption and it has never been checked.**
 
-### How to settle it — the water dilution test, ten minutes in the shop
+### How to settle it — the water dilution test
 
-**This measures the fuel directly and needs no tool the owner does not have.**
-Ethanol dissolves into water; petrol does not. So water pulls the ethanol out of
-a fuel sample and grows by exactly the volume of ethanol that was in it.
+**This measures the fuel directly.** Ethanol dissolves into water; petrol does
+not. Water pulls the ethanol out of a fuel sample and **grows by the volume of
+ethanol that was in it**, while the fuel layer shrinks by the same amount.
 
-1. A clear graduated cylinder or a straight-sided bottle marked in millilitres.
-2. Put in **10 ml of water**. Mark the level.
-3. Top up to **100 ml with fuel** straight from the truck's tank or the pump.
-4. Cap it, invert gently ten times. Do not froth it.
-5. Stand it still for **five to ten minutes** until the two layers are sharp.
-6. **Read the water layer.** Still 10 ml means E0. Twenty ml means the fuel was
-   10 % ethanol. Thirty ml means 20 %.
+**SAFETY FIRST: this is an open container of petrol.** Outdoors or a fully
+ventilated bay. No ignition source, no smoking, no grinder running nearby. Keep
+it capped except while pouring.
 
-Accurate to a percent or two, which is all this question needs.
+**The container**
+
+* **Tall and narrow beats short and wide.** The same volume change shows as a
+  bigger height change, which is where the accuracy comes from.
+* **Glass is ideal.** Polypropylene or high-density polyethylene are fine.
+* **NEVER polystyrene — petrol dissolves it.** Acrylic crazes. Clear PET is
+  tolerable for a few minutes but no longer.
+* **1 ml graduations.** A 100 ml laboratory measuring cylinder is the right tool.
+
+**Water: distilled, and dyed**
+
+* **Use distilled or deionised water** — the sort sold for batteries and steam
+  irons. Tap water will work chemically, but distilled removes any argument about
+  minerals coming out of solution and clouding the reading.
+* **Add one drop of WATER-BASED food colouring to the water before you start.**
+  Petrol will not take up a water-soluble dye, so the boundary becomes
+  unmistakable instead of a faint refractive line. **Check the dye is not
+  alcohol-based** — an alcohol carrier would corrupt the very thing being
+  measured.
+
+**The procedure**
+
+1. **10 ml of dyed distilled water** into the cylinder. Read the level and write
+   it down.
+2. Add fuel to the **100 ml** mark — that is **90 ml of fuel** — straight from
+   the tank or the pump nozzle.
+3. Cap it. **Invert slowly ten times over about thirty seconds.**
+   **Do not shake it hard.** Vigorous shaking makes an emulsion that can take an
+   hour to clear; gentle inversion extracts just as completely.
+4. Stand it upright and still for **ten to fifteen minutes** — longer than the
+   five minutes first written here. The boundary is sharp when it stops moving.
+5. **Read the water layer.**
+
+**Cross-check, and it is free:** the fuel layer must fall by the same amount the
+water rose. Water 10 → 19 ml and fuel 90 → 81 ml agree. If they do not, the
+sample was not given long enough to separate.
+
+**Resolution:** with 90 ml of fuel, **each 1 % of ethanol moves the boundary
+0.9 ml**, so 1 ml graduations resolve a little better than 1 %. Ample.
+
+**Do it at one temperature.** Sample and cylinder both at ambient, and keep it
+out of direct sun — in Jeddah heat an uncapped sample loses light ends fast.
+
+**One caveat that does NOT matter:** petrol and water are very slightly soluble
+in each other even with zero ethanol, but that is on the order of hundredths of a
+millilitre. **A true E0 sample reads 10 ml unchanged.**
 
 **What each outcome means:**
 
