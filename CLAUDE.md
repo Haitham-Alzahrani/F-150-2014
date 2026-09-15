@@ -89,6 +89,28 @@ trims are the most negative in the entire dataset**. On E0 fuel a 22 % estimate
 targets roughly 13.5:1 instead of 14.7:1 - about 9 % more fuel commanded, which
 closed loop corrects and open loop does not.
 
+**THE 2023 CONTROL TRUCK ALSO REPORTS ETHANOL - 11.37 %** (byte 29, n=116,
+constant). **Neither truck reads zero**, and the healthy one's value sits INSIDE
+the 2014's own range. **A non-zero ethanol estimate is therefore not a fault
+marker** - the smooth truck has one too. It raises the real possibility that
+Saudi pump fuel does contain roughly 10 % ethanol, which this file has denied as
+fact without ever checking. It does not settle it: the 2023 infers the same way,
+and two PCMs using one method are not two measurements. **The 2014 still reads
+roughly double the 2023 at its highest, and that gap is the part worth
+explaining.** The water test answers both trucks at once.
+
+**The 2023 also confirms `Long term secondary oxygen sensor trim` Bank 1 and
+Bank 2 at exactly 0.0000** across 116 and 108 samples.
+
+**And a caution against this file's own trim reasoning: across that session the
+2023's long term trims ranged -5.47 to +5.47 %** - wider excursions than anything
+the 2014 has shown. Conditions were not matched, so it is not a like-for-like
+comparison and must not be used as one; it is recorded because **the healthy
+truck's trims are not tidier than the sick one's.** The bank comparison on the
+2023 could not be done at all - only 10 paired samples at settled idle - so
+**whether a healthy F-150 carries a bank offset is still unknown, and the 2014's
++1.95 % has no control to be judged against.**
+
 **THERE IS NO ETHANOL SENSOR ON THIS TRUCK.** Ford deleted the physical fuel
 composition sensor on 2004-and-newer vehicles; the PCM infers the value from
 oxygen sensor feedback and how the trims settle after a refuel. **So it cannot be
