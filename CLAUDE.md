@@ -92,6 +92,26 @@ them:
 
 **They now sit on opposite sides of the engine. One reading separates them.**
 
+### THE SHAKE CANNOT BE ANSWERED FROM THIS CAPTURE — owner asked, 2026-09-16
+
+**The owner asked whether the data can tell him if the shake is present. It
+cannot, and saying otherwise would be inventing it.** This file settled the point
+twice with two natural experiments: the mounts killed the felt shake and left the
+oscillation unchanged; the battery quietened the oscillation and left the shake.
+On 09-09 the owner reported the shake back while the oscillation had not returned
+— quiet versus relapsed, **Mann-Whitney p = 0.633.**
+
+**The physics agrees.** The oscillation is 0.3 Hz; what shakes a seat is 10-33 Hz;
+the port cannot resolve those frequencies at all.
+
+**The phone accelerometer is the instrument for it, and it is the only test in
+this investigation aimed at the actual complaint.** Phone flat on a rigid surface,
+warm Park idle 60 s, then Drive on the brake 60 s. At ~650 rpm: **~33 Hz** is the
+firing pulse and normal in a bare cab · **~11 Hz** is rotational imbalance ·
+**~5.5 Hz** is one cylinder differing · **8-15 Hz** is engine rock on the mounts.
+**Also look for the amplitude rising and falling every ~3 s** — that would tie the
+felt shake to the 0.3 Hz oscillation for the first time.
+
 ### THE PREDICTION, written down before the reading exists
 
 | `Short term fuel % trim` at warm Park idle | What it proves |
@@ -109,11 +129,32 @@ the gasket fixed a leak.
 
 ### What must be captured, and what must NOT happen first
 
-**Do not wipe the memory before this reading.** If the battery came off for the
-gasket job it is already wiped — that is fine and in one way better, because with
-long term trim at 0 the short term channel carries the whole correction and is
-live from the first minute. **But note which it was**, because it decides how to
-read the long term numbers.
+**OWNER CONFIRMS: the battery was NOT disconnected, but the shop may have
+cleared the codes** (2026-09-16).
+
+**A code clear is NOT a memory wipe, and the difference matters here.** Clearing
+removes the codes, the freeze frame, monitor readiness, and the distance and
+warm-up counters. **It does not remove the learned adaptive fuel tables** — those
+need a battery disconnect or a specific adaptive-reset function, and neither was
+done. **So the learned trims should have survived**, which makes the pre-swap
+values a live baseline rather than an erased one. That is the better case for
+this experiment.
+
+**Two readings establish which state the truck is actually in**, and both belong
+on one page:
+
+```
+Distance traveled since codes cleared
+# warm-ups since codes cleared
+```
+
+They read **364 km and 7 warm-ups** on 09-14. **Near zero now means the shop
+cleared.** And if `Long term fuel % trim` reads **exactly 0.0000 on both banks**,
+the adaptive memory went with it after all — which would change how every other
+number in the capture must be read.
+
+**Short term trim answers the swap question either way.** It does not depend on
+learning.
 
 **Short term trim is the channel that answers this.** It does not depend on
 learning. Long term needs a relearn drive before it means anything.
