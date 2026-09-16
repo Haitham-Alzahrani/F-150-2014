@@ -159,6 +159,52 @@ learning.
 **Short term trim is the channel that answers this.** It does not depend on
 learning. Long term needs a relearn drive before it means anything.
 
+## FIRST ORDER IS VISIBLE IN THE RPM CHANNEL — a standing ruling is WITHDRAWN (2026-09-16)
+
+**Full analysis: [`docs/RPM-ORDER-ANALYSIS.md`](docs/RPM-ORDER-ANALYSIS.md).
+Tool: [`data/order_track_rpm.py`](data/order_track_rpm.py).**
+
+**This file says in five places that the OBD port cannot reach the frequencies
+that shake a cab. Every one of those rulings uses Nyquist 8.3 Hz, from the
+~17 Hz sample rate that was overturned on 2026-09-14.** At the proven **33.3 Hz**
+Nyquist is **16.65 Hz**. **First order at 650 rpm is 10.8 Hz — it is inside**,
+and so is the whole 8–15 Hz engine-rock band. Nobody re-tested after the rate
+law changed.
+
+**Re-tested now, by resampling engine speed onto uniform crank angle** so orders
+become fixed lines instead of smearing as idle wanders:
+
+| Order | Means | Lands at | **Amplitude** |
+|---|---|---|---|
+| **1.0 first order** — rotational imbalance | damper, pulley, flexplate | **exactly 1.000, 11 of 11 stretches**, median 3.95× background | **0.173 rpm** |
+| **0.5 half order** — one cylinder differing | a weak cylinder repeats once per engine cycle | 0.470–0.500, 7 of 10 at idle, **absent at 900 rpm** | **0.576 rpm** |
+| **3.0 firing** | the buzz that is actually felt | **unreachable — needs 65 Hz** | — |
+
+**First order is not an alias.** A folded order moves when the sampling ratio
+changes. The 899.6 rpm stretch runs at a **38 % different ratio** and first
+order **stayed on exactly 1.000**, with the strongest line of the set. It is
+real, repeatable and measurable through the port.
+
+**BUT THE AMPLITUDES ARE TINY AND THERE IS NO CONTROL.** 0.173 rpm against a
+19 rpm slow oscillation — **110× smaller**. The 2023 has no 33 Hz stretch, so
+whether that is normal is **unknown**. **Do not read the small number as a
+healthy engine:** flywheel and converter inertia absorb a per-cylinder torque
+difference almost entirely, which is precisely why it takes an accelerometer to
+feel what the crank barely registers. **Engine speed is the wrong end of the
+mechanism to judge cab vibration at.** The half order line is weaker still —
+it wanders, and the aliasing test that cleared first order has not been passed
+for it.
+
+**What it is genuinely good for: every stretch above is from 2026-09-04 —
+before the mounts, the battery, the intake gasket and the oxygen sensor swap.**
+It is a banked pre-repair baseline in the band of the actual complaint, and it
+reruns in one command. **A fresh `Engine RPM`-alone capture is directly
+comparable.** Five minutes warm Park idle, plus two minutes held at ~1200 rpm —
+at 1200 a fold would move, which is the one test the existing data cannot do.
+
+**Standing correction: before writing that a frequency is out of reach, check it
+against 16.65 Hz, not 8.3.** Firing order is still out. First order is not.
+
 ## FULL SCAN OF EVERY READING — [`docs/READINGS-SCAN.md`](docs/READINGS-SCAN.md) (2026-09-15)
 
 **Every numeric value in all 44 sessions, 129 channels, statistics on raw samples.**
