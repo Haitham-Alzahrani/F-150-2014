@@ -77,6 +77,47 @@ other channel had 13 or fewer.** The rest were configured but idle.
   zero simultaneous samples by construction. **Four false findings in this
   project came from comparing channels that were never polled together.**
 
+## THE SENSOR SWAP — the decisive experiment, PREDICTION LOCKED BEFORE THE DATA (2026-09-16)
+
+**Owner changed the intake gaskets AND swapped all four oxygen sensors side for
+side — every sensor moved to the mirror position on the opposite bank.**
+
+**This makes the driver-side offset decidable for the first time.** The project
+has carried two candidates for it since 09-09 and no measurement could separate
+them:
+
+* **A real physical difference on that side** — a leak, an exhaust leak upstream
+  of the sensor, anything bolted to that bank. **Stays with the BANK.**
+* **A lean-biased Bank 2 sensor.** **Moves with the SENSOR.**
+
+**They now sit on opposite sides of the engine. One reading separates them.**
+
+### THE PREDICTION, written down before the reading exists
+
+| `Short term fuel % trim` at warm Park idle | What it proves |
+|---|---|
+| **Bank 2 still needs more fuel** | The offset lives with the **BANK**. **Sensor bias ELIMINATED.** Physical, on that side — and the new intake gasket did not fix it. |
+| **Bank 1 now needs more fuel** | **The offset MOVED WITH THE SENSOR. A lean-biased sensor is PROVEN.** Four sightings of a "driver-side lean offset" become one biased part. |
+| **Both banks equal** | Either the gasket closed a real leak, or the offset was never robust. **Cannot separate these two without the pre-swap baseline**, and the gasket change is a second variable. |
+
+**THE CONFOUND, stated plainly: two things changed at once.** New intake gaskets
+and swapped sensors, in one operation — exactly the mistake this file recorded
+after the purge valve went in with a memory wipe. **It does not spoil this test**,
+because the question "which SIDE does the offset live on" is answerable whatever
+the gasket did to the overall level. It does spoil any conclusion about whether
+the gasket fixed a leak.
+
+### What must be captured, and what must NOT happen first
+
+**Do not wipe the memory before this reading.** If the battery came off for the
+gasket job it is already wiped — that is fine and in one way better, because with
+long term trim at 0 the short term channel carries the whole correction and is
+live from the first minute. **But note which it was**, because it decides how to
+read the long term numbers.
+
+**Short term trim is the channel that answers this.** It does not depend on
+learning. Long term needs a relearn drive before it means anything.
+
 ## FULL SCAN OF EVERY READING — [`docs/READINGS-SCAN.md`](docs/READINGS-SCAN.md) (2026-09-15)
 
 **Every numeric value in all 44 sessions, 129 channels, statistics on raw samples.**
