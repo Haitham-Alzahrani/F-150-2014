@@ -104,6 +104,33 @@ span the 2014 is **1.90×** the control; on rate of change it is **1.17×**.
 which one tracks what he feels. **Conditions were not matched across these
 sessions, so 1.17× is a starting figure and not a finding.**
 
+## WHAT TO LOG AT IDLE — the list [`docs/IDLE-LOG-LIST.md`](docs/IDLE-LOG-LIST.md)
+
+**Owner asked 2026-09-17. Every entry is a SEPARATE recording.** Warm, Park,
+standstill, air conditioning off, phone left alone, CSV #2 (Horizontal), note the
+phone clock and odometer.
+
+**A RULE THAT CHANGES THE PLAN: 33 Hz is only needed when ENGINE SPEED ITSELF is
+being analysed** — orders, rate of change, event shape. **Fuel trims quantise at
+0.78 % and move over seconds, so 15.5 Hz is far more than they need.** The trim
+capture should therefore spend a THIRD tile on `Engine RPM`, because the last one
+had no engine state recorded and that cost the whole reading its meaning.
+**Two tiles when the question is about engine speed; three when engine speed is
+only there to prove the condition.**
+
+| # | Time | Channels | What it settles |
+|---|---|---|---|
+| **1** | **1 min** | `Engine RPM` + `Intake manifold absolute pressure` | **THE CHEAPEST THING THAT COULD FIND A REAL FAULT.** 30–40 kPa = working. Still 99 kPa or blank = the reporting path is wrong, and load feeds fuelling and idle control. |
+| **2** | **30 min** | `Engine RPM` + `[PCM] Currently Detected Engine Misfire` | The hiccup capture. Events are 0.24 s — combustion timescale. **Thirty minutes because they arrive every ~84 s**; five minutes gives three and settles nothing. |
+| **3** | **3 min** | `Short term fuel % trim - Bank 1` + `- Bank 2` + `Engine RPM` | The swap, properly. **Do not touch the throttle** — the bank difference reverses sign under throttle movement. |
+| **4** | **5 min + 2 min** | `Engine RPM` alone, then held at ~1200 rpm | Post-tune baseline for all three rpm tools. At 1200 a false order line moves and a real one does not. |
+| **5** | **6 × 1 min** | `Engine RPM` + one `[PCM] Cylinder N Acceleration Value` | One cylinder at a time; all six on a page drops to 2 Hz. **Repeat after a restart** — a real weak cylinder repeats. |
+| **6** | **2 min** | `[PCM] Knock Sensor 1` + `[PCM] Knock Sensor 2` | Never logged. Should be quiet and matched on 95 octane. |
+| **7** | **1 min, ENGINE OFF** | `Barometric pressure` + `Intake manifold absolute pressure` | Both read atmospheric with the engine stopped, so they must agree. Barometric has read 97 kPa where sea level is ~101. |
+| **8** | **1 min, no scanner** | Meter across the battery posts at idle | `Control module voltage` reads 12.49–12.77 V running. **13.5–14.5 with drops = normal. Steady 12.6 = not.** |
+
+**IF THERE IS ONLY TIME FOR TWO: numbers 1 and 2.**
+
 ## IS THE ENGINE RUNNING BADLY? NO — the unbiased sweep (2026-09-17)
 
 **Full record: [`docs/IS-THE-ENGINE-OK.md`](docs/IS-THE-ENGINE-OK.md). Tool:
