@@ -141,6 +141,58 @@ other channel had 13 or fewer.** The rest were configured but idle.
   zero simultaneous samples by construction. **Four false findings in this
   project came from comparing channels that were never polled together.**
 
+## THE SWAP READING ARRIVED — THE OFFSET CHANGED SIDES (2026-09-17, phone clock 5:57)
+
+**Full record: [`docs/SENSOR-SWAP-RESULT.md`](docs/SENSOR-SWAP-RESULT.md).
+Screenshot: [`data/sensor-swap-2026-09-17/`](data/sensor-swap-2026-09-17/).
+Extraction tool: [`data/read_trim_screenshot.py`](data/read_trim_screenshot.py).**
+
+| | Bank 1 | Bank 2 |
+|---|---|---|
+| **Before the swap** (n=108, paired within 0.15 s) | baseline | **+1.95 % more fuel** |
+| **After the swap** (999 columns, one 15 s window) | **+0.58 % more fuel** | baseline |
+
+**The offset followed the HARDWARE across the engine, not the bank.** Bank 1 sits
+higher in 78 % of columns, median +0.64 %, and the sign holds in all three thirds
+of the window. **That is the branch the locked prediction called "a lean-biased
+sensor is PROVEN"** — a leak or an exhaust leak on the driver's side would have
+stayed with the bank.
+
+**IT NAMES A PHYSICAL PART FOR THE FIRST TIME: the upstream oxygen sensor that
+used to be on Bank 2 and is now on Bank 1.**
+
+**READ BY PIXEL, NOT BY EYE — and this matters.** The two panels are drawn on
+**different vertical scales** (Bank 1 to −3.0, Bank 2 to −3.8). Comparing their
+curve heights visually is the same error this file already records as *"a good
+number compared against a bad one."* Both traces were extracted and converted
+using the gridlines, and the extraction **reproduces the app's own Min/Max to
+within a pixel**. A **59 ms** draw skew between panels was found and corrected.
+
+**FOUR REASONS IT IS NOT YET PROVEN, and none are small:**
+
+1. **The magnitude did not mirror.** A carried-across bias should reappear at a
+   similar size: −1.95 % expected, **+0.58 % observed, under a third** — and
+   **below one quantisation step**, so it exists only as a duty cycle between
+   adjacent steps.
+2. **The engine state was not recorded.** Both trims swing roughly −3.9 to
+   +3.9 % on a slow cycle, far wider than any earlier settled idle. **The air
+   conditioning compressor cycles at 15.78 s and the window is only ~15 s, so
+   this capture cannot rule the compressor in or out.**
+3. **Screenshot, not export.** The +1.95 % came from 108 CSV samples. **Adjacent
+   pixel columns are not independent, so no significance test may be computed
+   from them** — sign and size only.
+4. **THREE variables changed**: intake gaskets, the sensor swap, **and the
+   2026-09-16 retune**. The retune should not affect a bank *difference* since a
+   calibration applies to both banks equally — but that is reasoning, not a
+   measurement.
+
+**WHAT SETTLES IT: the same two channels as CSV #2 (Horizontal), warm, Park,
+standstill, air conditioning off, three minutes.** That reproduces the method
+behind the +1.95 % and makes the two numbers comparable rather than merely
+opposite. A genuine mirror at a known state names the part; a collapse toward
+zero means the gasket closed a real leak and this window was a disturbed
+condition.
+
 ## THE SENSOR SWAP — the decisive experiment, PREDICTION LOCKED BEFORE THE DATA (2026-09-16)
 
 **Owner changed the intake gaskets AND swapped all four oxygen sensors side for
