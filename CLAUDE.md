@@ -104,6 +104,66 @@ span the 2014 is **1.90×** the control; on rate of change it is **1.17×**.
 which one tracks what he feels. **Conditions were not matched across these
 sessions, so 1.17× is a starting figure and not a finding.**
 
+## IS THE ENGINE RUNNING BADLY? NO — the unbiased sweep (2026-09-17)
+
+**Full record: [`docs/IS-THE-ENGINE-OK.md`](docs/IS-THE-ENGINE-OK.md). Tool:
+[`data/idle_sweep.py`](data/idle_sweep.py).** Owner asked directly and asked not
+to be limited to his complaint. Every channel both trucks recorded at settled
+idle, then the 2014 judged on **absolute criteria needing no control**.
+
+| | median at idle | expected | |
+|---|---|---|---|
+| Spark advance | **12.00°** | 10–20, steady | normal |
+| Short term trim B1 / B2 | **0.00 / 3.12 %** | within ±10 | normal |
+| Long term trim B1 / B2 | **0.00 / 1.56 %** | within ±10 | normal |
+| Airflow | **3.00 g/s** | 2–5 for a 3.7 | normal |
+| Idle speed | **652 rpm** | 600–750 | normal |
+| Calculated engine load | **28.2 %** | 15–35 | normal |
+
+**Every trim sits inside ±5 % where the limit is ±10 %. Nothing measured says an
+engine running badly.**
+
+**THE ONE ABSOLUTE CRITERION IT FAILS IS ELECTRICAL: `Control module voltage`
+reads 12.49–12.77 V WITH THE ENGINE RUNNING**, against 13.0–14.8 expected. This
+file explains it with Ford smart charging and a BCM reading of 13.8 V — **but
+this file also records that the four supply voltage channels span 1.26 V and
+three of four pairings were never polled together.** The 13.8 V that explains it
+was never sampled alongside the 12.67 V, and the 12.67 V is one session.
+**Unresolved, not explained. A meter across the battery posts at idle settles it
+in one minute**, and it matters because every sensor reference rides on that
+supply.
+
+**`Calculated boost` IS GARBAGE ON THIS TRUCK — never read it.** +0.256 bar at
+idle, 0.17 to **7.08 bar** across sessions. A naturally aspirated engine at idle
+is in vacuum. **Traced: the 2023 reports `Intake manifold absolute pressure`
+(28–46 kPa, correct) and its boost is properly negative; the 2014 reports no
+manifold pressure running, so the app computes from nothing.** Add it to the
+app-arithmetic list.
+
+**That makes manifold pressure the real gap, and the channel is NOT dead here** —
+it answered 99 kPa with the engine at 0 rpm, correct atmospheric. It has never
+been selected running. **Roughly 30–40 kPa at warm idle means the load signal is
+finally available; still 99 kPa means the reporting path is genuinely wrong, and
+THAT would be an engine-run problem** because load feeds fuelling and idle control.
+
+**A POOLING ARTEFACT NEARLY BECAME THE HEADLINE — record the rule.** The first
+pass pooled samples per truck and reported the 2014's oxygen sensor pumping
+current at **−0.074 mA against the control's −0.012**, six times worse and 3.5×
+more variable. **It was one session: 18,232 of ~18,500 pooled samples came from
+the 09-04 log.** Per session, every later 2014 reading (−0.033, −0.029, −0.020)
+sits on the control (−0.012, −0.008); the outlier is the pre-purge-valve session
+with its known leak. **Aggregate as the median of per-session medians, never by
+pooling samples — pooling weights by sample count and one long log becomes the
+truck.**
+
+**WHAT THE SWEEP CANNOT JUDGE.** The control has **two** sessions with settled
+idle and most channels appear in only one, so nearly every comparison is n=1
+against n=1. **And the four measurements most likely to show a combustion problem
+have never been logged:** `[PCM] Currently Detected Engine Misfire`, the six
+`[PCM] Cylinder N Acceleration Value` channels, `[PCM] Knock Sensor 1`/`2`, and
+manifold pressure with the engine running. **Nothing measured shows a fault, and
+the measurements that would show one have not been taken.**
+
 ## THE HICCUPS MEASURED — and the healthy truck has them too (2026-09-17)
 
 **Full record: [`docs/IDLE-EVENTS.md`](docs/IDLE-EVENTS.md). Tool:

@@ -7,3 +7,4 @@ __pycache__/
 *.pyc
 .venv/
 logs/
+.idle_sweep.pkl
