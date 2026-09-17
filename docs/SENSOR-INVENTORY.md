@@ -164,7 +164,7 @@ returned the same number in every sample it ever produced.
 | `Abs Wheel Speed 2` | km/h | 32 | 2 |
 | `Abs Wheel Speed 3` | km/h | 32 | 2 |
 | `PCM Odometer` | km | 24 | 1 |
-| `Intake manifold absolute pressure` | kPa | 16 | 1 |
+| ~~`Intake manifold absolute pressure`~~ | — | **0** | **0** | **2023-only, see the withdrawal below** |
 | `Fuel rail press.` | kPa | 10 | 1 |
 | `[BCM] Battery Temperature` | ℃ | 8 | 2 |
 
@@ -173,7 +173,7 @@ returned the same number in every sample it ever produced.
 | `A/C pressure` | 0 | **Dead.** Use `[PCM] A/C Pressure` — it moves, 1098–1282 kPa. |
 | `Gear (AT)` | 1 | **Dead.** Use `[PCM] Commanded Gear` — reports 5 and 6. |
 | `Vane position sensor` | 0 | Dead or not fitted. |
-| `Intake manifold absolute pressure` | 99 | **The engine was OFF.** All 16 samples came with `Engine RPM` = 0 and `Calculated engine load value` = 0, where 99 kPa is the correct atmospheric answer. **This channel has never once been read with the engine running. It is untested, not dead.** |
+| `Intake manifold absolute pressure` | — | **WITHDRAWN 2026-09-17 — THIS IS A 2023-ONLY CHANNEL.** A raw header scan of every file finds it in exactly three, all three the 2023 control. This truck has never had it. The "99 kPa, 16 samples, engine off, untested not dead" entry was 2023 data attributed here — the same error this project already recorded for the secondary oxygen sensor trims. **What this truck has is `Manifold absolute pressure (high resolution)`, and it reads blank.** |
 | `Fuel rail press.` | 7770 kPa | Impossible on a port-injected engine. **Do not use.** |
 | `Steering Wheel Angle` | −6.25 | One session, stationary. Untested. |
 | `Abs Wheel Speed 1`–`4` | 0 | One session, stationary. Untested. |
@@ -273,7 +273,7 @@ reported manifold pressure once while running.**
 | Channel | Status |
 |---|---|
 | `Manifold absolute pressure (high resolution)` | **Blank while the engine ran at 661 rpm** (`m105-02`, same pass as `m105-09`). Genuinely unsupported here. |
-| `Intake manifold absolute pressure` | **Never tried with the engine running.** 16 samples, engine off, correctly reporting atmospheric. |
+| ~~`Intake manifold absolute pressure`~~ | **WITHDRAWN — not a channel on this truck at all. 2023-only.** |
 
 **The second one is worth one minute at the truck.** Put it on the page at warm
 idle in Park. A healthy 3.7 should read roughly **30–40 kPa** there. If it does,

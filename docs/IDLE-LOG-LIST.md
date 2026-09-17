@@ -1,61 +1,74 @@
-# WHAT TO LOG AT IDLE — the list, in order (2026-09-17)
+# WHAT TO LOG AT IDLE — corrected against the owner's own sensor list (2026-09-17)
 
-Owner asked directly. Every entry below is a **separate recording**. Conditions
-are the same for all of them unless stated:
+**The owner corrected the first version: `Intake manifold absolute pressure` is
+NOT in his sensor list.** He is right, and checking it exposed three further
+errors. All are fixed below.
 
-**Warm · Park · standstill · air conditioning OFF · phone left alone, screen
-awake, do not switch pages · export CSV #2 (Horizontal) · note the phone clock
-and the odometer.**
+## FOUR CORRECTIONS THIS FORCED
 
-## A rule that changes the plan — 33 Hz is only needed for engine SPEED
+**1. `Intake manifold absolute pressure` IS A 2023-ONLY CHANNEL.** A raw header
+scan of every file in the repository finds it in **exactly three files, all three
+the 2023 control**. `CLAUDE.md` and `docs/SENSOR-INVENTORY.md` both credit this
+truck with *"99 kPa in all 16 samples it ever produced, engine off"* and call it
+**"untested, not dead."** **That is the same 2023-attribution error this project
+already recorded once for the secondary oxygen sensor trims.** Withdrawn.
 
-The tiles law says two channels give 32.9 Hz and three drop to 15.5 Hz. **That
-cliff only matters when engine speed itself is being analysed** — orders, the
-rate of change, event shape. **Fuel trims quantise at 0.78 % and move over
-seconds; 15.5 Hz is far more than they need.**
+**What this truck actually has is `Manifold absolute pressure (high resolution)`,
+and it reads BLANK with a 0 ms refresh time** — offered by the app, not answered
+by the truck. **So manifold pressure is genuinely unavailable here. A mechanical
+vacuum gauge on a manifold port is the only route, and the "one minute settles
+it" capture I put at the top of the previous list does not exist.**
 
-**So the trim capture can afford a third tile for `Engine RPM`** — and it should,
-because the last trim capture had no engine state recorded and that cost the
-whole reading its meaning. **Two tiles when the question is about engine speed.
-Three when engine speed is only there to prove the condition.**
+**2, 3 and 4 — "never logged" was wrong three times.** These have all been
+recorded, in small amounts:
+
+| Channel | Samples | Sessions | Reads |
+|---|---|---|---|
+| `[PCM] Currently Detected Engine Misfire` | **53** | 3 | **exactly 0.0000 in every one** |
+| `[PCM] Knock Sensor 1` | 48 | 3 | 156–394 |
+| `[PCM] Knock Sensor 2` | 48 | 3 | 170–483 |
+| `[PCM] Cylinder 1–6 Acceleration Value` | 8–42 each | 1 | ±0.078, except cylinder 6 |
+
+**The misfire capture is still needed, but for a different reason than I gave.**
+Not "never logged" — **never logged for long enough to overlap an event.** At one
+event every 84 s, 53 scattered samples almost certainly never coincided with one.
 
 ---
 
-## 1 — ONE MINUTE. Do this first; it is the cheapest and it can find a real fault
+Every entry below is a **separate recording**. Conditions for all of them:
 
-```
-Engine RPM
-Intake manifold absolute pressure
-```
+**Warm · Park · standstill · air conditioning OFF · phone left alone, screen
+awake, no page switching · export CSV #2 (Horizontal) · note the phone clock and
+the odometer.**
 
-**This is the only outstanding capture that could reveal a genuine engine-run
-problem.** Manifold vacuum is the variable the symptom tracks, and this truck has
-never reported it once with the engine running.
+## The rule that shapes the list
 
-**The channel is not dead here** — it answered 99 kPa in 16 samples with the
-engine at 0 rpm, which is the correct atmospheric value.
+The tiles law: two channels give 32.9 Hz, three drop to 15.5 Hz. **That cliff
+only matters when engine speed ITSELF is being analysed** — orders, rate of
+change, event shape. **Fuel trims step in 0.78 % and move over seconds, so
+15.5 Hz is far more than they need.**
 
-| What it reads at warm idle | Meaning |
-|---|---|
-| **roughly 30–40 kPa** | Working. The load signal is available at last and a large gap in this investigation closes. |
-| **still 99 kPa, or blank** | **The reporting path is wrong.** The computer's load calculation feeds fuelling and idle control, so this would be a real fault and would move to the top of the list. |
+**Two tiles when the question is about engine speed. Three when engine speed is
+only there to prove the condition.**
 
-## 2 — THIRTY MINUTES. The hiccup capture
+---
+
+## 1 — THIRTY MINUTES. The hiccup capture, now the top of the list
 
 ```
 Engine RPM
 [PCM] Currently Detected Engine Misfire
 ```
 
-**Never logged.** The events measured at idle are **0.24 s wide, about one
-engine cycle** — combustion timescale. This channel answers directly whether a
-cylinder is missing or partly missing at those moments.
+The idle events are **0.24 s wide — about one engine cycle**, which is combustion
+timescale. This channel asks directly whether a cylinder is missing or partly
+missing at those moments.
 
-**Thirty minutes because the events arrive about every 84 s** — that gives ~20 of
-them, enough to test against control moments. A five-minute capture gives three
-and settles nothing.
+**Thirty minutes because events arrive about every 84 s.** That gives roughly
+twenty. The 53 samples already on record all read 0, but they are scattered and
+almost certainly never landed on an event — which is exactly the gap this fills.
 
-## 3 — THREE MINUTES. Settle the oxygen sensor swap properly
+## 2 — THREE MINUTES. Settle the oxygen sensor swap
 
 ```
 Short term fuel % trim - Bank 1
@@ -63,86 +76,87 @@ Short term fuel % trim - Bank 2
 Engine RPM
 ```
 
-Three tiles deliberately — see the rule above. **The last attempt had no engine
-state and the reading could not be trusted because of it.**
+Three tiles deliberately. **The last attempt recorded no engine state, and that
+is what cost the reading its meaning.**
 
-This reproduces the method behind the pre-swap **+1.95 %** and makes the two
-numbers comparable. Current reading is **+0.62 % on Bank 1** — opposite side,
-under a third the size.
+Reproduces the method behind the pre-swap **+1.95 %**. Current reading is
+**+0.62 % on Bank 1** — opposite side, under a third the size.
 
-**Do not touch the throttle during this capture.** The bank difference reverses
-sign under throttle movement (−0.91 % during blips), so a single blip
-contaminates the whole recording.
+**Do not touch the throttle.** The bank difference reverses sign under throttle
+movement (−0.91 % during blips); one blip contaminates the recording.
 
-## 4 — FIVE MINUTES. The post-tune baseline
+## 3 — FIVE MINUTES, then TWO MORE. The post-tune baseline
 
 ```
 Engine RPM
 ```
 
-Alone, at a flat 33.3 Hz. Feeds `data/rpm_rate.py` (rate of change), 
-`data/order_track_rpm.py` (half and first order) and `data/idle_events.py`
-(events). **Every existing number from those three tools is pre-tune** — this is
-the first directly comparable post-tune reading.
+Alone, flat 33.3 Hz. Then **two minutes held at about 1200 rpm.**
 
-**Then two minutes held at about 1200 rpm.** At 1200 the sampling ratio changes,
-so a false order line moves and a real one does not. It is the one test the
-existing data cannot do.
+Feeds `data/rpm_rate.py`, `data/order_track_rpm.py` and `data/idle_events.py`.
+**Every existing number from all three is pre-tune.** At 1200 rpm the sampling
+ratio changes, so a false order line moves and a real one does not — the one test
+the existing data cannot do.
 
-## 5 — SIX CAPTURES, ONE MINUTE EACH. Per-cylinder contribution
+## 4 — SIX CAPTURES, ONE MINUTE EACH. Per-cylinder contribution
 
 ```
 Engine RPM
 [PCM] Cylinder 1 Acceleration Value        (then 2, 3, 4, 5, 6)
 ```
 
-One cylinder at a time — **all six on one page would drop the rate to 2 Hz and
-the readings would not be simultaneous with anything.**
+One at a time — **all six on a page drops the rate to 2 Hz.**
 
-Cylinder 4 read **−0.08** against −0.02 and −0.03 for its neighbours in the one
-screenshot that exists, and Mode 06 logged its highest misfire count on the same
-cylinder. **Two tools naming one cylinder, from a single snapshot each.**
-**Repeat all six after a stop and restart** — a real weak cylinder repeats, an
-artefact does not.
+Existing coverage is 8–42 samples each from a single session, and the cylinder 6
+spread in it is a known artefact of being the only one still polled after a
+throttle lift. **Repeat all six after a stop and restart** — a real weak cylinder
+repeats, an artefact does not.
 
-## 6 — TWO MINUTES. Knock sensors, never logged
+## 5 — TWO MINUTES. The knock sensors, and there is a reason now
 
 ```
 [PCM] Knock Sensor 1
 [PCM] Knock Sensor 2
 ```
 
-Read 323 and 336 in one screenshot, raw with no units, and have never been
-recorded. At idle with 95 octane they should be quiet and matched. **Worth two
-minutes purely because nobody has ever looked.**
+**Sensor 2 reads consistently higher than sensor 1** across all three sessions
+that carry them — 170–483 against 156–394. **Raw units, no documented scaling,
+48 samples each, mixed conditions including driving.** Not a finding, but the two
+should be comparable at a steady idle and nobody has ever put them side by side
+under a known condition.
 
-## 7 — ENGINE OFF, one minute. The sensor cross-check
+## 6 — ONE MINUTE. Confirm the manifold channel really is blank
 
 ```
-Barometric pressure
-Intake manifold absolute pressure
+Engine RPM
+Manifold absolute pressure (high resolution)
 ```
 
-**With the engine stopped both channels read the same thing — atmospheric — so
-they must agree.** Barometric has been reading **97 kPa** where Jeddah at sea
-level should be near 101. If it sits 4 % below the manifold channel, that is a
-quantified sensor offset in the same direction and roughly the same size as the
-lean bias this project has chased for weeks.
+**The claim that this reads blank rests on a single screenshot.** One minute of
+logging either confirms it (the column stays empty, the channel is genuinely
+unsupported and the vacuum gauge is the only route) or it produces numbers and a
+significant measurement returns.
 
-## 8 — NO SCANNER. A meter across the battery posts at idle
+## 7 — ONE MINUTE, no scanner at all
 
-`Control module voltage` reads **12.49–12.77 V with the engine running**, against
-13.0–14.8 expected. It is the only absolute criterion the engine fails. The smart
-charging explanation rests on a different channel that was never sampled
-alongside it.
+**A meter across the battery posts at idle.** `Control module voltage` reads
+**12.49–12.77 V with the engine running** against 13.0–14.8 expected — the only
+absolute criterion this engine fails, and the smart-charging explanation for it
+rests on a channel that was never sampled alongside it.
 
 **13.5–14.5 V with occasional drops = the strategy working. A steady 12.6 V
-running = not.** One minute, no scan tool.
+running = not.**
 
 ---
 
 ## If there is only time for two
 
-**Number 1 and number 2.** The first can find a real fault for one minute of
-effort. The second is the only capture aimed squarely at the symptom as the owner
-now describes it.
+**Numbers 1 and 2.** The first is aimed squarely at the symptom as the owner now
+describes it. The second closes an experiment already half-done.
+
+## Dropped from the previous list
+
+**`Barometric pressure` + `Intake manifold absolute pressure` with the engine
+off**, which was going to cross-check the 97 kPa barometric reading. **It cannot
+be done — the second channel does not exist on this truck.** Barometric has no
+partner here to be checked against.
