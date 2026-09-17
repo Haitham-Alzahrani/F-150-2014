@@ -104,6 +104,68 @@ span the 2014 is **1.90×** the control; on rate of change it is **1.17×**.
 which one tracks what he feels. **Conditions were not matched across these
 sessions, so 1.17× is a starting figure and not a finding.**
 
+## THE HICCUPS MEASURED — and the healthy truck has them too (2026-09-17)
+
+**Full record: [`docs/IDLE-EVENTS.md`](docs/IDLE-EVENTS.md). Tool:
+[`data/idle_events.py`](data/idle_events.py).** Owner asked whether saved data can
+name what makes the engine hiccup. **It measures the events. It cannot name the
+cause, and the reason is specific.**
+
+**A HICCUP AND AN OSCILLATION ARE DIFFERENT SIGNALS.** Every metric in this file
+describes a *continuous* wobble. The owner describes **discrete events**. A
+detector for one does not find the other — this needed its own.
+
+**THE EVENTS ARE REAL: 136 in 3.2 h of Park idle, one every 84 s, median 31 rpm.**
+That matches the "57 outliers, median spacing 82.3 s" already in this file, which
+nobody ever followed up.
+
+**THEY ARE SHORT — 0.24 s at half height, about ONE ENGINE CYCLE (0.185 s at
+650 rpm).** The flanking dips in the averaged shape were checked against the
+filter and **are filter ringing, not a precursor** — a pure impulse produces them
+too. The *width* survives the check, and it rules out every slow mechanism:
+**air conditioning compressor 15.78 s (65× too slow), purge 10–30 s, the 0.33 Hz
+dither 3 s (12× too slow), fan and coolant far slower.** Only a combustion-scale
+event fits.
+
+**BUT THE 2023 CONTROL HAS THEM AT THE SAME RATE AND SIZE.**
+
+| | Events/min | Median size |
+|---|---|---|
+| 2014, four sessions | 0.127 – 0.909 | 29–33 rpm |
+| **2023 control, two sessions** | **0.368 and 0.954** | **29 and 39 rpm** |
+
+**The two control sessions are the same healthy truck on the same evening and
+differ by 2.6× — a wider spread than any gap between the trucks. So event rate
+cannot distinguish them, and size is identical. By rate and size these events are
+NOT the fault.**
+
+**One weak thread survives: 105 dips against 77 rises on the 2014, 58 %,
+p = 0.045** — the direction a weak combustion event gives, the opposite of a
+momentary load release. **Control is 7 and 7, far too few to compare.**
+
+**WHY THE CAUSE CANNOT BE EXTRACTED — the tiles law, again.** The only session
+with hours of settled idle (09-04, 136 events) had **just `Engine RPM` polled
+fast**; every other channel in that file had 13 samples or fewer. Every log
+carrying fuel trim, timing or airflow at speed has **minutes** of idle at most.
+Across all logs exactly one stretch has a channel densely co-sampled with engine
+speed for 30+ minutes, and it contains **4 minutes of idle and 2 events**.
+
+**A TRAP CAUGHT IN THE PROCESS, worth remembering:** run over that same stretch
+without an idle restriction, the detector found 23 "events" at a 231.8 rpm
+threshold with a fuel-trim difference at p < 0.001. **Those were throttle
+transients** — the tip-in and overrun spikes this file already documents at
++9.38 % and −11.72 %. **An event detector run over a log containing driving will
+find the driving.** Require idle across the whole neighbourhood, not at the centre.
+
+**THE CAPTURE THAT ANSWERS IT: two tiles at 33 Hz, warm Park idle, THIRTY
+MINUTES** — about 20 events, enough to test. The second tile is free and this
+project has never spent it on a long idle session.
+**First choice partner: `[PCM] Currently Detected Engine Misfire`** — in the
+owner's sensor list, read 0 in one screenshot, **never logged**, and exactly the
+right timescale for a 0.24 s event. Then one `[PCM] Cylinder N Acceleration
+Value` at a time; then `Timing advance`, which separates a real torque
+disturbance (the governor answers) from a false reading (it does not).
+
 ## THE TRUCK WAS DYNO'D AND RETUNED ON 2026-09-16 — every baseline is now BEFORE/AFTER
 
 **Full record: [`docs/DYNO-2026-09-16.md`](docs/DYNO-2026-09-16.md). Screenshot:
