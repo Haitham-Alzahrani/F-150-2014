@@ -23,6 +23,7 @@ from carscanner_lib import load
 GRID_HZ = 10.0     # uniform resample rate
 SMOOTH_S = 0.3     # moving-average width - sets the bandwidth
 STEP_S = 0.3       # differentiation interval
+MAX_GAP_S = 1.0    # a grid point spanning a larger hole is invented, not measured
 MIN_RATE_HZ = 4.0  # a session sampled slower than this cannot be filtered to it
 
 
@@ -33,13 +34,21 @@ def idle_rate(t, v, idle, band=0.08):
         return None
     grid = np.arange(t[0], t[-1], 1.0 / GRID_HZ)
     y = np.interp(grid, t, v)
+    # BUG FIXED 2026-09-17: np.interp draws a straight line across any gap in the
+    # source, and a straight line has almost no rate of change.  On the 09-17 log
+    # 44 % of the grid fell inside a 47 min hole and dragged the median from
+    # 12.50 rpm/s down to 1.82.  Only keep grid points that sit between two real
+    # samples less than MAX_GAP_S apart.
+    real = np.zeros(len(grid), bool)
+    for i in np.where(np.diff(t) < MAX_GAP_S)[0]:
+        real |= (grid >= t[i]) & (grid <= t[i + 1])
     w = max(3, int(SMOOTH_S * GRID_HZ) | 1)
     y = np.convolve(y, np.ones(w) / w, mode='same')
     k = max(1, int(STEP_S * GRID_HZ))
     r = (y[k:] - y[:-k]) / (k / GRID_HZ)
     mid = (y[k:] + y[:-k]) / 2
     lo, hi = idle * (1 - band), idle * (1 + band)
-    ok = (mid > lo) & (mid < hi)
+    ok = (mid > lo) & (mid < hi) & real[:len(mid)]
     # drop the smoother's edge transients
     ok[:w] = False; ok[-w:] = False
     return np.abs(r[ok]) if ok.sum() > 100 else None

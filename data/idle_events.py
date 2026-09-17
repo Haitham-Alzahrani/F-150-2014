@@ -20,6 +20,7 @@ from carscanner_lib import load
 
 FS = 1 / 0.060          # common grid
 THRESH = 25.0           # rpm, fixed so sessions are comparable
+MAX_GAP_S = 1.0         # a grid point spanning a bigger hole is invented
 GUARD_S = 1.5           # idle must hold this far either side
 
 
@@ -34,10 +35,16 @@ def analyse(t, v, idle_lo, idle_hi):
         return None
     g = np.arange(t[0], t[-1], 1 / FS)
     y = np.interp(g, t, v)
+    # Same gap bug as rpm_rate.py, fixed 2026-09-17: np.interp invents a straight
+    # line across any hole in the source.  A straight line produces no events, so
+    # a gapped session would report an artificially LOW event rate.
+    real = np.zeros(len(g), bool)
+    for i in np.where(np.diff(t) < MAX_GAP_S)[0]:
+        real |= (g >= t[i]) & (g <= t[i + 1])
     w = int(GUARD_S * FS)
     hi = np.array([y[max(0, i - w):i + w].max() for i in range(len(y))])
     lo = np.array([y[max(0, i - w):i + w].min() for i in range(len(y))])
-    idle = (hi < idle_hi) & (lo > idle_lo)
+    idle = (hi < idle_hi) & (lo > idle_lo) & real
     if idle.sum() < 60 * FS:              # need at least a minute of idle
         return None
     slow = ma(y, int(2.0 * FS))

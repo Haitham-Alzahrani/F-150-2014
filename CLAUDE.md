@@ -72,37 +72,78 @@ its mounts shifting every ~3 s. **The tune leaving it unchanged fits**: the tune
 altered shift points and throttle response and touched neither idle fuelling nor
 the catalyst dither that drives the oscillation.
 
-### THE RIGHT METRIC IS THE DERIVATIVE, AND NOBODY HAS EVER COMPUTED IT
+### THE RIGHT METRIC IS THE DERIVATIVE — and it AGREES with amplitude (corrected 2026-09-17)
 
-**Tool: [`data/rpm_rate.py`](data/rpm_rate.py).**
+**Tool: [`data/rpm_rate.py`](data/rpm_rate.py). Log record:
+[`docs/LOG-2026-09-17.md`](docs/LOG-2026-09-17.md).**
 
 What pushes an engine against its mounts is **reaction torque, proportional to
-angular ACCELERATION** — not to how far the speed swings. **Every metric in this
-project measures the swing**: peak-to-peak span, standard deviation, frequency,
-jitter, order amplitude. **The owner's description points at the rate of change
-instead, and it has never been measured.**
+angular ACCELERATION** — not how far the speed swings. Every other metric in this
+file measures the swing.
 
-**A RAW DERIVATIVE IS USELESS AND THIS WAS CAUGHT, NOT ASSUMED.** A plain
-difference quotient is dominated by the sample interval: **the 2023 control gave
-60.3 rpm/s in one session and 90.0 in another ON THE SAME EVENING**, purely
-because one was logged at 0.130 s and the other at 0.049 s. **Any comparison
-across sessions must fix the bandwidth first.**
+**A RAW DERIVATIVE IS USELESS** — it is dominated by the sample interval: the
+2023 control gave 60.3 rpm/s in one session and 90.0 in another **on the same
+evening**, purely from 0.130 s against 0.049 s logging. **Fix the bandwidth
+first.** At a fixed 0.3 s those two read **7.09 and 7.25** — agreeing within 2 %
+across a 2.6× rate difference.
 
-With a fixed 0.3 s bandwidth those same two control sessions read **7.02 and
-7.32** — agreeing within 4 % across a 2.6× difference in raw rate. **That is the
-method validating itself.**
+**A BUG IN THIS TOOL WAS CAUGHT ON 2026-09-17 AND IT CHANGED THE ANSWER.**
+`np.interp` draws a straight line across any gap in the source, and a straight
+line has almost no rate of change. The 09-17 log has a **47.5-minute hole** in
+`Engine RPM`; **44 % of its grid fell inside it**, and the tool reported
+**1.82 rpm/s** — which would have been a spectacular four-times-quieter-than-
+healthy result. **Real coverage only: 12.50 rpm/s.** Both this tool and
+`data/idle_events.py` now discard grid points spanning a gap over 1 s, and every
+session was recomputed.
 
-| | Median rate of change at idle |
-|---|---|
-| **2014, 8 sessions** | **8.37 rpm/s** |
-| **2023 control, 2 sessions** | **7.17 rpm/s** |
-| Ratio | **1.17×** |
+| | Before the fix | **After** |
+|---|---|---|
+| 2014 median | 8.37 rpm/s | **13.53 rpm/s** |
+| 2023 control | 7.17 | **7.17** |
+| **Ratio** | 1.17× | **1.89×** |
 
-**Note how much smaller that gap is than the amplitude gap.** On peak-to-peak
-span the 2014 is **1.90×** the control; on rate of change it is **1.17×**.
-**Two metrics, same data, very different verdicts** — and nobody has established
-which one tracks what he feels. **Conditions were not matched across these
-sessions, so 1.17× is a starting figure and not a finding.**
+**THE PREVIOUS ENTRY HERE SAID "two metrics, same data, very different
+verdicts" — 1.90× on peak-to-peak against 1.17× on rate of change. THAT
+DISAGREEMENT WAS THE BUG.** Corrected, rate of change gives **1.89×** against
+peak-to-peak's **1.90×**. **They agree almost exactly and are measuring the same
+thing.** The question of which metric tracks what he feels dissolves.
+
+## THE 108-MINUTE LOG, 2026-09-17 — the post-tune baseline arrived
+
+**Full record: [`docs/LOG-2026-09-17.md`](docs/LOG-2026-09-17.md). Log:
+`data/carscanner/2026-09-17-full-page/`.** 108 minutes stationary
+(`Vehicle speed` 0.00 in all 596 samples), idle 652 rpm, 74 channels.
+
+**IT IS THE QUIETEST IDLE THIS TRUCK HAS EVER MEASURED, on every metric:**
+
+| Metric | Today | Other 2014 sessions | 2023 control |
+|---|---|---|---|
+| Median 10 s span (decimated to 0.215 s) | **31.0 rpm**, 302 windows | 25.5–38.0 | not rate-matchable |
+| Rate of change | **12.50 rpm/s**, n=33,979 | 10.99–15.12 | 7.09 / 7.25 |
+| Discrete events | **0.442 /min**, 56.5 min idle | 0.128–1.664 | 0.372 / 0.975 |
+| Band-passed sd | **5.72 rpm — lowest of any 2014 session** | 6.82–19.30 | 4.54 / 6.20 |
+
+**AND THE COMPRESSOR STATE IS KNOWN FOR THE FIRST TIME.** This file has insisted
+for weeks that every amplitude figure must state whether the air conditioning was
+running and none could. **`[PCM] A/C Pressure` answers: 1070–1518 kPa, 7,621
+samples, cycling with a dominant period of 49.4 s** — **not** the 15.78 s recorded
+in 2026-09. The only previous session with the compressor known to be cycling
+gave a **69 rpm** span; today, cycling, **31.0**. Conditions unmatched and the
+methods differ, so not a clean before-and-after — but the compressor is at last
+measured rather than guessed.
+
+**WHAT THE CAPTURE FAILED TO DO — 74 TILES ON THE PAGE.** `[PCM] Currently
+Detected Engine Misfire` got **1 sample**. Knock sensors **2 and 1**.
+`Timing advance` **2**. **And `Engine RPM` has a 47.5-minute hole that covers the
+ENTIRE window in which all six cylinder channels were polled** — all six DO
+overlap for 10.8 minutes at ~591 samples each, the window wanted since night one,
+**but engine speed is absent from every second of it**, which is exactly the flaw
+that invalidated the last per-cylinder reading. In the 60-minute block where
+engine speed does exist, `Short term fuel % trim - Bank 1` has **1 sample**.
+
+**THE RULE: putting everything on the page does not capture everything. It
+captures a little of a lot, badly, and the app chooses which.** Two tiles; three
+only when engine speed is there to prove the condition.
 
 ## WHAT TO LOG AT IDLE — [`docs/IDLE-LOG-LIST.md`](docs/IDLE-LOG-LIST.md)
 
