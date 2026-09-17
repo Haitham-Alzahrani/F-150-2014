@@ -141,6 +141,70 @@ other channel had 13 or fewer.** The rest were configured but idle.
   zero simultaneous samples by construction. **Four false findings in this
   project came from comparing channels that were never polled together.**
 
+## THE CSV CONFIRMS THE SWAP RESULT, AND THE MEMORY WAS WIPED (2026-09-17)
+
+**Full record: [`docs/DYNO-WINDOW-LOGS.md`](docs/DYNO-WINDOW-LOGS.md). Logs:
+[`data/carscanner/2026-09-16-17-dyno-window/`](data/carscanner/2026-09-16-17-dyno-window/).**
+Three logs around the 18:29 retune — **one 34 minutes before it, two after.**
+**Neither post-retune log can answer the bank question:** 22:10 was taken with the
+engine OFF (`Engine RPM` 0 in all 63 samples), and 00:49 carries only Bank 1,
+n=8.
+
+**THE ADAPTIVE MEMORY WAS WIPED — not merely a code clear.** `Long term fuel %
+trim` reads **exactly 0.0000 on BOTH banks across all 213 samples**, which is the
+test this file named in advance. The counters agree: **364 km / 7 warm-ups on
+09-14 → 142 km / 0 now**, matching the signature of the 09-05 and 09-09 resets
+exactly. **Short term trim is therefore carrying the whole correction alone**,
+which is why it swings −20.31 to +15.62 % here.
+
+**THE BANK OFFSET AT SETTLED IDLE IS CONFIRMED ON BANK 1 — +0.621 %, n=1,711.**
+
+| Minute | Engine speed | Bank 1 − Bank 2 |
+|---|---|---|
+| 17:55 / 17:56 / 17:57 | not sampled | **+0.613 / +0.679 / +0.599 %** |
+| **17:58** | **629–690 rpm, confirmed idle** | **+0.564 %** |
+| 17:59 / 18:00 | 523–787 / 562–1314 | −0.859 / −0.960 % |
+
+**Four consecutive minutes agree within 0.12 points**, and the one with engine
+speed on the page confirms settled idle. **It corroborates the pixel reading of
+the screenshot (+0.58 %) by a completely independent route.** The offset is on the
+opposite bank from the pre-swap +1.95 % — **it followed the hardware.**
+
+**THE SIGN REVERSES UNDER THROTTLE MOVEMENT — new.** During the blips Bank 2 needs
+more, −0.907 %, n=174. **That is tip-in and overrun, not a bank property** (this
+file already records a +9.38 % tip-in spike and a −11.72 % overrun crash).
+**Consequence: a whole-session average is condition-soup** — mixing everything
+gives +0.480 %, which is neither number.
+
+**METHOD WARNING THAT COST A WRONG INTERMEDIATE ANSWER HERE:** selecting idle
+samples by the **time span** of the qualifying engine-speed readings sweeps in the
+blips between them and flips the result to −0.711 %. **Select by each sample's own
+condition, never by a window bounded by qualifying samples.**
+
+**STILL NOT A MIRROR: −1.95 % expected, +0.62 % observed.** One reading fits both
+— **two contributions, only one of which moved**: a driver-side leak the new
+intake gaskets closed, plus a sensor bias that travelled with the part. **A
+hypothesis that fits, not a measurement.**
+
+**TWO OF THE FOUR MISSING CROSS-CHECKS ARE NOW DONE.** `Engine coolant
+temperature` vs `[PCM] Cylinder head temperature`: identical in **99.5 %** of
+1,679 pairs, never over 1 °C apart. **This clears nothing** — Ford derives coolant
+temperature from the cylinder head sensor on several engines, and if it does here
+these are one measurement on two channels, **the same trap the catalyst channels
+turned out to be.** [VERIFY whether this engine has a separate coolant sensor.]
+`Intake air temperature` sits **19 °C above ambient** — ordinary heat soak on a
+stationary engine; the r = −0.959 is both channels following time in opposite
+directions, not a relationship.
+
+**PARTIAL CORRECTION TO THE CATALYST FINDING.** This file calls the two catalyst
+temperature channels *"one computed value printed on two channels."* Here, n=3,359:
+r=0.9999 but **identical in only 53.2 %**, differing **−6 to +9 °C**. **They do
+diverge** — still far too coupled to be independent evidence, but not one value
+copied twice.
+
+**`Ethanol fuel percent` = 18.43 %, a FOURTH discrete value** (byte 47), after
+9.80, 19.22 and 22.35.
+
 ## THE SWAP READING ARRIVED — THE OFFSET CHANGED SIDES (2026-09-17, phone clock 5:57)
 
 **Full record: [`docs/SENSOR-SWAP-RESULT.md`](docs/SENSOR-SWAP-RESULT.md).
