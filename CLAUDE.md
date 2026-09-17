@@ -28,6 +28,70 @@ An electric fan loads the engine only through the alternator, which is a far
 smaller and differently-shaped load than a mechanical fan clutch. Any reasoning
 that treated a fan clutch as a direct crankshaft load is withdrawn.
 
+## THE TRUCK WAS DYNO'D AND RETUNED ON 2026-09-16 — every baseline is now BEFORE/AFTER
+
+**Full record: [`docs/DYNO-2026-09-16.md`](docs/DYNO-2026-09-16.md). Screenshot:
+[`data/dyno-2026-09-16/`](data/dyno-2026-09-16/).** Dynojet, WinPEP 8, correction
+factor STD, smoothing 5, 18:29, 38 °C ambient. Owner: *"Today i did dyno test and
+we fix shifting pount and throttle response."*
+
+| | Before (`RunFile_0`) | After (`RunFile_3`) | Change |
+|---|---|---|---|
+| **Peak power** | **227.16 hp @ 5400** | **250.34 hp @ 5800** | **+23.18, +10.2 %** |
+| **Peak torque** | **225.03 ft-lb @ 4130** | **248.30 ft-lb @ 4020** | **+23.27, +10.3 %** |
+| At 4665 rpm | 187.02 hp | 209.79 hp | **+12.2 %** |
+
+Axis assignment verified, not assumed — torque × rpm ÷ 5252 reproduces both
+cursor callouts to 0.01 %.
+
+**TWO STATEMENTS IN THIS FILE ARE NOW OUT OF DATE.** It says in three places that
+this truck has **"no aftermarket tune"** and lists **"PCM tune"** among the items
+eliminated. **The calibration was deliberately changed on 2026-09-16.**
+
+**CONSEQUENCE, AND IT APPLIES TO EVERY NUMBER BELOW THIS LINE.** Every measurement
+in this repository was taken on the **previous calibration** — the idle governor
+gain, the 0.33 Hz oscillation, the ±0.9° spark authority, the trims, the inferred
+ethanol value, the first-order content in engine speed. **All of it remains valid
+as history and NONE of it is a valid comparison for anything captured from
+2026-09-16 onward** unless that capture is labelled post-tune.
+
+**This file ASKED for a calibration change and called it the only legitimate lever
+on this idle** — *"A Ford calibration update... the only legitimate lever on
+dither amplitude and governor gain."* **Something in that family has now happened
+by a different route. Whether it touched idle at all is unknown and is directly
+testable.**
+
+**THE PARK IDLE SHAKE SHOULD NOT BE EXPECTED TO CHANGE.** Shift points do not
+apply in Park; a throttle map does not apply at a closed throttle. Unchanged
+tomorrow is the expected result, not a failure.
+
+**BUT THE THROTTLE CHANGE TOUCHES A STANDING COMPLAINT.** The owner's *"it is hard
+for me to adjust the RPM at 1000 because something is working on behalf of me"* is
+a pedal-to-plate complaint on a drive-by-wire throttle, and that mapping is
+exactly what was altered. **Ask whether holding 1000 and 1500 feels different now.**
+
+**THE SENSOR SWAP EXPERIMENT SURVIVES.** A calibration applies to both banks
+equally, so a bank-versus-bank difference is not destroyed by it. **What would
+destroy it is an adaptive memory reset, which tuners routinely do when flashing.
+Establish that before reading any trim** — this file's rule *"never wipe the
+adaptive memory before a measurement unless the wipe is the experiment"* has now
+been at risk twice in three days without anyone asking.
+
+**`Air/Fuel Ratio 1` read 14.84 before and 12.78 after, at 4665 rpm. DO NOT ACT
+ON IT — the source is unknown.** If it is a dyno wideband it is an independent
+measurement that **contradicts this file's own "12.3:1 commanded and delivered at
+wide throttle"**, which would be the two-sensors-disagreeing evidence this file
+says has never been captured. If WinPEP read it from the OBD port it is not
+independent and means only that the tune changed the command. **One question to
+the shop decides which.**
+
+**AND AN ESTIMATE MUST STOP BEING QUOTED AS A MEASUREMENT.** This file says
+*"215 g/s × ~1.4 ≈ 301 hp against a 302 hp rating"*. That is airflow arithmetic
+with a rule-of-thumb multiplier. There is now a real dynamometer number: **227
+hp at the wheels, 75 % of the 302 crank rating, rising to 83 % after the tune** —
+consistent with an ordinary 4x4 driveline loss, and it does **not** establish a
+power deficit, because whether it ran in two or four wheel drive is unrecorded.
+
 ## HOW TO CAPTURE — the sample rate is set by TILES ON SCREEN, not by the sensor list
 
 **Measured across 265 one-minute windows in 10 logs (2026-09-14).** This
@@ -1372,7 +1436,9 @@ Spark plugs · air filter · oil and filter · coolant flush · 6R80 fluid
 removed, cleaned and flow-tested** · O2 sensors "cleaned", method unknown.
 
 Also established: factory airbox and duct (no oiled filter) · always 95
-octane from the same station · no aftermarket tune, no evidence of prior
+octane from the same station · **no aftermarket tune UNTIL 2026-09-16, when
+the calibration was changed on a dyno — see the dyno section at the top of this
+file** · no evidence of prior
 engine work · thermostat reaches and holds temperature · coolant level
 steady · battery disconnected once, relearn done plus 300 km.
 
@@ -1442,7 +1508,9 @@ considering a 3.7 vibration normal bears directly on the first question above.
 injectors (flow-tested) · MAF and intake (factory) · fuel delivery and fuel
 quality · ignition · compression, cam timing and phasers *in their
 stuck-in-position mode* (all worsen under load) · mounts and driveline ·
-thermostat · coolant intrusion · PCM tune · adaptive memory.
+thermostat · coolant intrusion · ~~PCM tune~~ (**WITHDRAWN 2026-09-16 — the
+calibration was deliberately changed; it is a live variable again**) · adaptive
+memory.
 
 ### Codes — read 2026-09, complete multi-module scan
 
