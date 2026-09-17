@@ -28,6 +28,82 @@ An electric fan loads the engine only through the alternator, which is a far
 smaller and differently-shaped load than a mechanical fan clutch. Any reasoning
 that treated a fan clutch as a direct crankshaft load is withdrawn.
 
+## THE SYMPTOM, RESTATED BY THE OWNER — READ THIS BEFORE ANY DIAGNOSIS (2026-09-17)
+
+**Owner's own words, and they re-scope this entire file:**
+
+> *"When I ask you to diagnose my car don't think that I'm talking about the old
+> shake which resolved by changing the mounts. My current ongoing problem is the
+> engine feel like shaking and rpm unstable on very low non-noticeable events.
+> Don't assume I'm complaining about something shaking hard. It's very small
+> vibration associated with engine rpm change. It's still the same even after the
+> custom tune."*
+
+| | |
+|---|---|
+| **THE BIG SEAT SHAKE** | **CLOSED. The mounts fixed it. Do not re-open it, do not chase it, do not cite it.** |
+| **THE CURRENT PROBLEM** | **A very small vibration that accompanies engine speed CHANGING** — low-level, easy to miss, not violent. Plus the speed being unsteady. |
+| **The custom tune** | **Changed nothing about it.** |
+
+**THIS FILE IS FULL OF LANGUAGE WRITTEN FOR THE OLD SYMPTOM.** Every phrase about
+"the felt shake", "moves him in the seat", "shakes a person", and every test aimed
+at a strong vibration is **about a complaint that is finished**. Read those
+sections as history. **Do not hand him a test designed to find something violent.**
+
+### WHAT THIS CHANGES LOGICALLY — the separation proof does NOT apply any more
+
+This file states, twice and in capitals, that the felt shake and the 0.3 Hz rpm
+oscillation are **separate phenomena, proven by two natural experiments** — the
+mounts killed the shake and left the oscillation; the battery quietened the
+oscillation and left the shake.
+
+**Both experiments used the BIG shake as the variable.** The small
+speed-linked vibration he is describing now **was never the thing being watched in
+either one.** So:
+
+**THE SEPARATION IS PROVEN FOR THE OLD SYMPTOM AND IS UNTESTED FOR THE NEW ONE.**
+Do not carry it over. It is the single easiest mistake available here, because the
+conclusion is written in this file in bold.
+
+**And the new description points the other way.** A vibration that tracks engine
+speed *changing* is what the 0.3 Hz oscillation would feel like — not as a 0.3 Hz
+buzz, which is far too slow to feel as vibration, but as the engine's motion on
+its mounts shifting every ~3 s. **The tune leaving it unchanged fits**: the tune
+altered shift points and throttle response and touched neither idle fuelling nor
+the catalyst dither that drives the oscillation.
+
+### THE RIGHT METRIC IS THE DERIVATIVE, AND NOBODY HAS EVER COMPUTED IT
+
+**Tool: [`data/rpm_rate.py`](data/rpm_rate.py).**
+
+What pushes an engine against its mounts is **reaction torque, proportional to
+angular ACCELERATION** — not to how far the speed swings. **Every metric in this
+project measures the swing**: peak-to-peak span, standard deviation, frequency,
+jitter, order amplitude. **The owner's description points at the rate of change
+instead, and it has never been measured.**
+
+**A RAW DERIVATIVE IS USELESS AND THIS WAS CAUGHT, NOT ASSUMED.** A plain
+difference quotient is dominated by the sample interval: **the 2023 control gave
+60.3 rpm/s in one session and 90.0 in another ON THE SAME EVENING**, purely
+because one was logged at 0.130 s and the other at 0.049 s. **Any comparison
+across sessions must fix the bandwidth first.**
+
+With a fixed 0.3 s bandwidth those same two control sessions read **7.02 and
+7.32** — agreeing within 4 % across a 2.6× difference in raw rate. **That is the
+method validating itself.**
+
+| | Median rate of change at idle |
+|---|---|
+| **2014, 8 sessions** | **8.37 rpm/s** |
+| **2023 control, 2 sessions** | **7.17 rpm/s** |
+| Ratio | **1.17×** |
+
+**Note how much smaller that gap is than the amplitude gap.** On peak-to-peak
+span the 2014 is **1.90×** the control; on rate of change it is **1.17×**.
+**Two metrics, same data, very different verdicts** — and nobody has established
+which one tracks what he feels. **Conditions were not matched across these
+sessions, so 1.17× is a starting figure and not a finding.**
+
 ## THE TRUCK WAS DYNO'D AND RETUNED ON 2026-09-16 — every baseline is now BEFORE/AFTER
 
 **Full record: [`docs/DYNO-2026-09-16.md`](docs/DYNO-2026-09-16.md). Screenshot:
@@ -2662,10 +2738,34 @@ Rules that are not negotiable in this codebase:
 
 This is a Linux host.
 
-- **Virtual environment path:** `/home/user/f-150-2014/.venv/`
-- **Never use `source .venv/bin/activate`.** Always invoke the binary path
-  directly.
-- **Run a script:** `/home/user/f-150-2014/.venv/bin/python <filename>.py`
-- **Install packages:** `/home/user/f-150-2014/.venv/bin/pip install <package>`
-- The package lives under `src/`, so run it as
-  `PYTHONPATH=src /home/user/f-150-2014/.venv/bin/python -m f150diag.cli ...`
+**CORRECTED 2026-09-17. The path this file gave, `/home/user/f-150-2014/.venv/`,
+DOES NOT EXIST** — note the lower-case `f`, where the repository is
+`/home/user/F-150-2014`. Anything following those instructions failed.
+
+- **`pyproject.toml` now exists**, so the tool installs properly:
+  `python3 -m pip install -e .` from the repository root. That puts a `f150diag`
+  command on the path and makes the package importable from any directory.
+- **`PYTHONPATH=src python3 -m f150diag.cli ...` always works** from the
+  repository root without installing anything, and is the safe fallback.
+- **Never use `source .venv/bin/activate`.** If a virtual environment is in use,
+  invoke its binary directly.
+- **Run an analysis script:** `python3 data/<name>.py`.
+- `python3 -m f150diag.cli selftest` needs no vehicle and validates the
+  protocols, decoders, condition evaluator and knowledge base.
+
+### Connecting to the truck
+
+**`docs/LOCAL-SETUP.md` section 2a carries the capture aimed at the CURRENT
+symptom** — one parameter, five minutes, warm Park idle:
+
+```
+f150diag --port /dev/ttyUSB0 --baud 115200 live --pids rpm --seconds 300 --label idle-rate
+python3 data/rpm_rate.py logs/<file>.csv
+```
+
+`f150diag ports` lists serial ports. **`--pids` takes single PID names or the
+groups `idle`, `fuel`, `o2`, `evap`, `air`, `full`** — and every extra parameter
+divides the sample rate, so name exactly what the question needs. The rate law
+measured for Car Scanner is about tiles on a phone screen; **this tool polls
+precisely what you list**, which is why a single-parameter capture is the fast
+one here too.

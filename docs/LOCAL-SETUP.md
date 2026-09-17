@@ -27,8 +27,13 @@ analysis, so keep PID counts modest when the question is rpm stability.
 git clone <this repo>
 cd F-150-2014
 python3 -m venv .venv
-.venv/bin/pip install -r requirements.txt
+.venv/bin/pip install -e .
 ```
+
+**`pyproject.toml` now exists, so `pip install -e .` works** and installs the
+dependencies with it. That puts a `f150diag` command on the path and makes the
+package importable from any directory — **no `PYTHONPATH=src` needed any more.**
+(`pip install -r requirements.txt` still works if you only want the libraries.)
 
 Verify with no vehicle attached:
 
@@ -41,8 +46,53 @@ That exercises the PID decoders, DTC decoding, the condition evaluator
 verdict thresholds, every protocol's step graph, and the knowledge base
 schema. It should end with `all checks passed`.
 
-If the module is not found, run with `PYTHONPATH=src`, or
-`.venv/bin/pip install -e .` once a packaging file exists.
+If the module is not found you are probably in a different virtual environment
+than the one you installed into. `PYTHONPATH=src python3 -m f150diag.cli` always
+works from the repository root as a fallback.
+
+---
+
+## 2a. THE CAPTURE FOR THE CURRENT SYMPTOM — run this one first
+
+**The complaint is a small vibration that accompanies engine speed CHANGING**
+(owner, 2026-09-17), not the old seat shake, which the mounts fixed. The metric
+for it is the **rate of change** of engine speed, not the size of the swing —
+see the top of `CLAUDE.md` and [`data/rpm_rate.py`](../data/rpm_rate.py).
+
+**One parameter, nothing else, five minutes, warm, Park, standstill, air
+conditioning off:**
+
+```
+f150diag --port /dev/ttyUSB0 --baud 115200 live --pids rpm --seconds 300 --label idle-rate
+```
+
+Then, on the file it prints:
+
+```
+python3 data/rpm_rate.py logs/<the-file-it-wrote>.csv
+```
+
+`rpm_rate.py` reads both this tool's own log format and Car Scanner exports, so
+the new capture lands beside the whole pre-existing baseline.
+
+**Repeat it in Drive with your foot on the brake.** In gear the converter loads
+the engine and the same torque disturbance moves the speed far less — if the
+vibration follows the rate of change, it should fall in gear by roughly the same
+factor the number does.
+
+### Sample rate: local may beat the phone, but not by enough for firing order
+
+Car Scanner topped out at **33.3 Hz** and this project treated that as the
+adapter's ceiling. **That ceiling was measured through a phone app over
+Bluetooth.** A direct serial adapter polling ONE parameter has far less overhead,
+so **raise the baud rate** — `--baud 115200` — and check what you actually get:
+the recorder writes `elapsed_s` on every sample, so the true rate is in the file.
+
+**Do not assume it buys the firing pulse.** Firing order at 650 rpm is 32.5 Hz
+and needs **65 Hz** sampling to resolve. Even a fast adapter is unlikely to reach
+that, because the limit is the ELM327 and CAN transaction latency, not the serial
+line. **What a faster rate does buy is margin on half order and first order**,
+which `docs/RPM-ORDER-ANALYSIS.md` showed are already reachable at 33 Hz.
 
 ---
 

@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "f150diag"
+version = "0.1.0"
+description = "Read-only OBD-II diagnostic tool for a 2014 Ford F-150 3.7 Ti-VCT"
+requires-python = ">=3.10"
+dependencies = [
+    "pyserial>=3.5",
+    "PyYAML>=6.0",
+]
+
+[project.scripts]
+f150diag = "f150diag.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+f150diag = ["**/*.yaml", "**/*.yml"]
