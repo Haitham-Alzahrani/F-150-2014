@@ -1,0 +1,36 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python data/f150_agent.py:*)",
+      "Bash(python3 data/f150_agent.py:*)",
+      "Bash(.venv/Scripts/python.exe data/f150_agent.py:*)",
+      "Bash(python data/rpm_rate.py:*)",
+      "Bash(python3 data/rpm_rate.py:*)",
+      "Bash(python data/idle_events.py:*)",
+      "Bash(python3 data/idle_events.py:*)",
+      "Bash(python data/idle_sweep.py:*)",
+      "Bash(python3 data/idle_sweep.py:*)",
+      "Bash(python data/bank_offset.py:*)",
+      "Bash(python3 data/bank_offset.py:*)",
+      "Bash(python data/voltage_compare.py:*)",
+      "Bash(python3 data/voltage_compare.py:*)",
+      "Bash(python data/order_track_rpm.py:*)",
+      "Bash(python3 data/order_track_rpm.py:*)",
+      "Bash(python -m f150diag.cli:*)",
+      "Bash(python3 -m f150diag.cli:*)",
+      "Bash(.venv/Scripts/python.exe -m f150diag.cli:*)",
+      "Bash(f150diag:*)",
+      "Bash(git status:*)",
+      "Bash(git diff:*)",
+      "Bash(git log:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Read(//home/user/F-150-2014/**)",
+      "Read(./**)"
+    ],
+    "deny": [
+      "Bash(*CLEAR_DTC*)",
+      "Bash(*clear_dtc*)"
+    ]
+  }
+}

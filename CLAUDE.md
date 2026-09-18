@@ -28,6 +28,41 @@ An electric fan loads the engine only through the alternator, which is a far
 smaller and differently-shaped load than a mechanical fan clutch. Any reasoning
 that treated a fan clutch as a direct crankshaft load is withdrawn.
 
+## RUNNING LOCALLY WITH THE TRUCK ATTACHED — [`docs/START-HERE.md`](docs/START-HERE.md)
+
+**First time on the owner's Windows machine: run `setup.cmd`.** It builds the
+environment, installs, runs the self-test, and exercises the car link against a
+**simulated** adapter before you go near the truck.
+
+**THE CAR LINK IS [`data/f150_agent.py`](data/f150_agent.py), and it is the one
+an agent can actually drive.** `data/f150_live.py` reads typed commands from
+stdin, which a person can use and an agent cannot: **every shell command is a
+separate process**, so the connection dies between questions and each reading
+costs a fresh ELM327 handshake. So the link is split —
+
+```
+serve     ONE long-lived process owns the adapter, holds one handshake open,
+          and logs Engine RPM continuously at full rate
+clients   status | read <NAME> | snapshot | log start|stop | list | stop
+          each a one-shot command returning one JSON object
+```
+
+**Measured: 32.4 Hz logging sustained through a status call, a read and an
+11-channel snapshot on the same connection.** The CSV it writes is
+`elapsed_s,rpm`, which `rpm_rate.py` and `idle_events.py` read directly — the
+whole loop from capture to analysis is verified end to end.
+
+**Read-only, guarded on the SERVICE MODE, not on a name.** Modes 1/2/3/6/7/9
+allowed, **mode 4 refused**. `read CLEAR_DTC` returns REFUSED — verified, because
+`getattr(obd.commands, 'CLEAR_DTC')` passes a `hasattr` check and sits in
+`base_commands()`, so a name blocklist would not be enough.
+
+**`serve --sim` runs it all with no hardware**, and every reply then carries
+`"sim": true`. **Never report a simulated number as the truck.**
+
+`.claude/settings.json` pre-approves these commands so a local session is not
+prompted for each one, and denies anything naming CLEAR_DTC.
+
 ## THE DASHBOARD — [`docs/DIAGNOSTIC-DASHBOARD.md`](docs/DIAGNOSTIC-DASHBOARD.md)
 
 **Built 2026-09-18: every system classified CONFIRMED / HIGH-CONFIDENCE SUSPECT
