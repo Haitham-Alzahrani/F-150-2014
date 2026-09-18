@@ -108,12 +108,40 @@ python3 data/f150_live.py --port /dev/ttyUSB0 --baud 115200
 ```
 
 ```
-log park-idle      start recording engine speed to logs/
-rpm                one reading, without interrupting the recording
-rate               samples, seconds and achieved Hz so far
-endlog             stop, and print the command to analyse it
-help               every allowed reading
+log park-idle          start recording engine speed to logs/
+rpm                    one reading, without interrupting the recording
+read <NAME>            any python-obd command by name, mode-guarded
+list                   what python-obd can reach on this truck
+mode06                 per-cylinder misfire counts
+rate                   samples, seconds and achieved Hz so far
+endlog                 stop, and print the command to analyse it
 ```
+
+Add `--json` and every data line becomes one JSON object, for a program to parse.
+
+**`read <NAME>` is guarded by OBD service mode, not by a list of names** — by
+what the command *does*:
+
+| mode | | |
+|---|---|---|
+| 1, 2, 6, 7, 9 | live data, freeze frame, monitors | allowed |
+| 3 | read stored trouble codes | allowed |
+| **4** | **clear DTCs and freeze data** | **refused** |
+
+This is not theoretical. The obvious way to write a dynamic reader is
+`getattr(obd.commands, name)` after a `hasattr` check. Verified against
+python-obd 0.7.3:
+
+```
+read_sensor:clear_dtc  ->  hasattr passes
+                       ->  OBDCommand('CLEAR_DTC', 'Clear DTCs and Freeze data', b'04')
+                       ->  mode 4  ->  SENT
+```
+
+and `CLEAR_DTC` is in `obd.commands.base_commands()`, so python-obd treats it as
+always supported and will not refuse it. **A path named "read_sensor" would have
+erased the freeze frame, the monitor readiness and the distance and warm-up
+counters.**
 
 It writes `elapsed_s,rpm`, **which `data/rpm_rate.py` and `data/idle_events.py`
 already read**, so a capture goes straight into the analysis:
@@ -134,6 +162,17 @@ analysed offline.
 never imported. Clearing destroys the freeze frame, monitor readiness and the
 distance and warm-up counters, and this project has twice had a measurement
 ruined by an adaptive reset nobody asked for.
+
+**`list` REPORTS THE LIBRARY'S REACH, NOT THE TRUCK'S.** python-obd implements
+**no mode 22 at all** — checked, it carries modes 1, 2, 3, 4, 6, 7 and 9 only.
+So every `[PCM]`-prefixed channel in the owner's sensor list is invisible to it:
+knock sensors, cylinder acceleration, cylinder head temperature, A/C pressure,
+ATF temperature, turbine speed, commanded gear ratio. **That is most of what
+this investigation still wants.** Car Scanner and FORScan reach them; this
+script does not, and a short `list` does not mean a limited truck.
+
+It *does* reach **Mode 06**, including the per-cylinder misfire counts this
+project read once and has wanted since.
 
 **BEFORE BUYING OR PAIRING ANYTHING — `python-obd` cannot talk to a
 Bluetooth Low Energy adapter.** It speaks to a serial port. That means:

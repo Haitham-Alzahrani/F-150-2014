@@ -74,28 +74,43 @@ def load_any(path):
     return d[k] if k else None
 
 
-def sessions(paths):
+def sessions(paths, skipped=None):
+    """Yield analysable sessions.  `skipped` collects (path, reason) pairs.
+
+    A file dropped in silence is the same failure this tool already had once:
+    at the truck you record, run this, get an empty table and no idea why.
+    Every rejection now says which gate it failed, so a short or non-idle
+    capture is obvious instead of invisible.
+    """
+    note = (lambda p, why: skipped.append((p, why))) if skipped is not None else \
+           (lambda p, why: None)
     for p in paths:
         if not os.path.isfile(p) or not any(p.endswith(e) for e in ('.csv', '.csv.gz', '.zip')):
             continue
         try:
             got = load_any(p)
-        except Exception:
+        except Exception as exc:                      # noqa: BLE001
+            note(p, 'could not be read (%s)' % type(exc).__name__)
             continue
         if got is None:
+            note(p, 'no Engine RPM column, or fewer than 50 rows')
             continue
         t, v = got
         v = np.asarray(v, float)
         if len(v) < 500:
+            note(p, 'only %d engine-speed samples, need 500 (about 15 s at 33 Hz)' % len(v))
             continue
         run = v[v > 400]
         if len(run) < 300:
+            note(p, 'only %d samples with the engine running, need 300' % len(run))
             continue
         idle = np.median(run[run < 900])
         if not (520 < idle < 720):
+            note(p, 'median idle %.0f rpm is outside 520-720 - not a settled Park idle' % idle)
             continue
         r = idle_rate(t, v, idle)
         if r is None:
+            note(p, 'no stretch long enough at idle after the gap and bandwidth filters')
             continue
         yield p, idle, np.median(np.diff(t)), r
 
@@ -110,17 +125,24 @@ def main(paths=None):
     print('ENGINE SPEED RATE OF CHANGE AT IDLE, fixed %.1f s bandwidth\n' % SMOOTH_S)
     print('  session                          n     median   90th pct   idle   raw dt')
     out = []
+    skipped = []
     if not paths:
         paths = sorted(glob.glob('data/carscanner/**/*', recursive=True) +
                        glob.glob('data/control-2023/**/*', recursive=True) +
                        glob.glob('logs/**/*', recursive=True))
-    for p, idle, dt, r in sessions(paths):
+    for p, idle, dt, r in sessions(paths, skipped):
         ctl = 'control-2023' in p or '20260906_17' in p or '20260906_18' in p
         out.append((ctl, os.path.basename(p)[:30], len(r), np.median(r),
                     np.percentile(r, 90), idle, dt))
     for ctl, n, cnt, med, p90, idle, dt in sorted(out, key=lambda x: (x[0], x[3])):
         print('  %-30s %6d  %7.2f   %7.2f  %6.1f  %.3f%s'
               % (n, cnt, med, p90, idle, dt, '   <- 2023 CONTROL' if ctl else ''))
+    if skipped and len(skipped) <= 12:
+        print('\n  not analysed:')
+        for p, why in skipped:
+            print('    %-30s %s' % (os.path.basename(p)[:30], why))
+    elif skipped:
+        print('\n  %d files not analysed (pass them by name to see why)' % len(skipped))
     a = [x[3] for x in out if not x[0]]
     b = [x[3] for x in out if x[0]]
     print()
