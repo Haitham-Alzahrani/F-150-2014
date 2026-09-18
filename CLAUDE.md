@@ -215,14 +215,44 @@ idle, then the 2014 judged on **absolute criteria needing no control**.
 engine running badly.**
 
 **THE ONE ABSOLUTE CRITERION IT FAILS IS ELECTRICAL: `Control module voltage`
-reads 12.49–12.77 V WITH THE ENGINE RUNNING**, against 13.0–14.8 expected. This
-file explains it with Ford smart charging and a BCM reading of 13.8 V — **but
-this file also records that the four supply voltage channels span 1.26 V and
-three of four pairings were never polled together.** The 13.8 V that explains it
-was never sampled alongside the 12.67 V, and the 12.67 V is one session.
-**Unresolved, not explained. A meter across the battery posts at idle settles it
-in one minute**, and it matters because every sensor reference rides on that
-supply.
+reads 12.49–12.77 V WITH THE ENGINE RUNNING**, against 13.0–14.8 expected.
+
+**ADVANCED 2026-09-18 — see
+[`docs/VOLTAGE-PCM-VS-BCM.md`](docs/VOLTAGE-PCM-VS-BCM.md). Tool:
+[`data/voltage_compare.py`](data/voltage_compare.py).**
+
+**The two supply channels can never be paired, and it is structural.** In the
+one session carrying both they share a **145-minute** span and coincide **zero
+times, even at a 30 s tolerance** — different pages of the app, and the PCM is
+on HS-CAN while the BCM is on MS-CAN, so a bus-switching adapter makes
+simultaneous sampling physically impossible. **No log will ever pair them.**
+
+**Their distributions over the same window, engine confirmed running throughout,
+do not overlap:**
+
+| 2026-09-04, engine 602–812 rpm | n | median | **in 13.5–14.5 V** |
+|---|---|---|---|
+| `Control module voltage` (PCM) | 3,276 | **12.67 V** | **0.7 %** |
+| `[BCM] Vehicle Battery Voltage` | 2,756 | **13.00 V** | **47.9 %** |
+
+**The BCM is in the charging band about half the time; the PCM essentially
+never.** And **the 13.8 V this file uses to explain the problem is not typical**
+— the BCM median across 2,756 samples is **13.00 V**. The explanation rested on
+one snapshot.
+
+**THE CONTROL TRUCK DOES NOT SHOW THE GAP: PCM 13.47 V against BCM 13.40 V,
+agreeing within 0.07 V** (n=10 and n=3 — a hint, not a measurement). The 2014's
+two channels are five times further apart, and its PCM channel sits 0.80 V below
+the control's.
+
+**A candidate that fits: a voltage drop in the PCM's own supply or ground.**
+That would be a real fault, and it matters because **every sensor reference
+rides on that supply.** The alternative is that the channel reports a
+post-regulator rail, in which case a fixed offset is normal.
+
+**A meter across the battery posts at idle separates them in one minute** — it
+measures the battery directly instead of asking two modules on two buses. Then
+the ground-drop test if the battery is healthy while the PCM reads low.
 
 **`Calculated boost` IS GARBAGE ON THIS TRUCK — never read it.** +0.256 bar at
 idle, 0.17 to **7.08 bar** across sessions. A naturally aspirated engine at idle
