@@ -20,6 +20,9 @@ import numpy as np
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from carscanner_lib import load
 
+sys.path.insert(0, str(__import__('pathlib').Path(__file__).resolve().parent))
+from _repo import ROOT, utf8, data_globs   # Windows + cwd safety
+
 GRID_HZ = 10.0     # uniform resample rate
 SMOOTH_S = 0.3     # moving-average width - sets the bandwidth
 STEP_S = 0.3       # differentiation interval
@@ -127,9 +130,7 @@ def main(paths=None):
     out = []
     skipped = []
     if not paths:
-        paths = sorted(glob.glob('data/carscanner/**/*', recursive=True) +
-                       glob.glob('data/control-2023/**/*', recursive=True) +
-                       glob.glob('logs/**/*', recursive=True))
+        paths = sorted(p for g in data_globs() for p in glob.glob(g, recursive=True))
     for p, idle, dt, r in sessions(paths, skipped):
         ctl = 'control-2023' in p or '20260906_17' in p or '20260906_18' in p
         out.append((ctl, os.path.basename(p)[:30], len(r), np.median(r),
@@ -155,4 +156,5 @@ def main(paths=None):
 
 
 if __name__ == '__main__':
+    utf8()                 # Windows console/pipe safety - see data/_repo.py
     main(sys.argv[1:] or None)

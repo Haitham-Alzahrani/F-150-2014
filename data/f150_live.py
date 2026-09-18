@@ -115,6 +115,20 @@ WRITE_MODE = 4                      # Clear DTCs and Freeze data.  Never sent.
 LOG_DIR = Path(__file__).resolve().parent.parent / 'logs'
 
 
+def list_serial_ports():
+    """Every serial port, with its description.  Windows names them COM3, COM5.
+
+    Worth printing before connecting: auto-detect picks the first port that
+    answers, which on a laptop with several virtual COM ports is often the wrong
+    one, and the failure then looks like a dead adapter.
+    """
+    try:
+        from serial.tools import list_ports
+    except ImportError:
+        return []
+    return [(p.device, p.description or 'no description') for p in list_ports.comports()]
+
+
 class Link(threading.Thread):
     """Owns the adapter.  Logs `rpm` continuously; answers ad-hoc requests."""
 
@@ -259,10 +273,24 @@ def main():
     ap.add_argument('--baud', type=int, default=115200)
     ap.add_argument('--json', action='store_true',
                     help='emit one JSON object per line, for a program to parse')
+    ap.add_argument('--ports', action='store_true',
+                    help='list serial ports and exit (Windows: COM3, COM5, ...)')
     a = ap.parse_args()
 
     def emit(obj, human):
         print(json.dumps(obj) if a.json else human, flush=True)
+
+    if a.ports or not a.port:
+        found = list_serial_ports()
+        if found:
+            print('[PORTS] %s' % ', '.join('%s (%s)' % p for p in found), flush=True)
+        else:
+            print('[PORTS] none found. On Windows a Bluetooth adapter must be '
+                  'PAIRED first, and you then use its OUTGOING COM port. A BLE '
+                  'adapter presents no COM port at all and cannot be used here.',
+                  flush=True)
+        if a.ports:
+            return
 
     print('[SYSTEM] opening adapter%s ...' % (' on %s' % a.port if a.port else ' (auto-detect)'),
           flush=True)

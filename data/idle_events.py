@@ -18,6 +18,9 @@ import numpy as np
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from carscanner_lib import load
 
+sys.path.insert(0, str(__import__('pathlib').Path(__file__).resolve().parent))
+from _repo import ROOT, utf8, data_globs   # Windows + cwd safety
+
 FS = 1 / 0.060          # common grid
 THRESH = 25.0           # rpm, fixed so sessions are comparable
 MAX_GAP_S = 1.0         # a grid point spanning a bigger hole is invented
@@ -76,9 +79,7 @@ def main(paths=None):
     print('  session                          idle min   events  per min   dips/rises  median  band sd  idle runs')
     out = []
     if not paths:
-        paths = sorted(glob.glob('data/carscanner/**/*', recursive=True) +
-                       glob.glob('data/control-2023/**/*', recursive=True) +
-                       glob.glob('logs/**/*', recursive=True))
+        paths = sorted(p for g in data_globs() for p in glob.glob(g, recursive=True))
     for p in paths:
         if not os.path.isfile(p) or not any(p.endswith(e) for e in ('.csv', '.csv.gz', '.zip')):
             continue
@@ -116,5 +117,6 @@ def main(paths=None):
 
 
 if __name__ == '__main__':
+    utf8()                 # Windows console/pipe safety - see data/_repo.py
     # Same argv fix as rpm_rate.py, 2026-09-18.
     main(sys.argv[1:] or None)

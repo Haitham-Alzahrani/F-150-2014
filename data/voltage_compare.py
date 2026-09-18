@@ -29,6 +29,9 @@ import numpy as np
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from carscanner_lib import load
 
+sys.path.insert(0, str(__import__('pathlib').Path(__file__).resolve().parent))
+from _repo import ROOT, utf8, data_globs   # Windows + cwd safety
+
 PCM_KEY = 'Control module voltage'
 BCM_KEY = '[BCM] Vehicle Battery Voltage'
 CHARGING = (13.5, 14.5)      # what a healthy charging system should show
@@ -36,7 +39,7 @@ RUNNING = 400.0
 
 
 def main():
-    for p in sorted(glob.glob('data/**/*', recursive=True)):
+    for p in sorted(q for g in data_globs() for q in glob.glob(g, recursive=True)):
         if not os.path.isfile(p) or not any(p.endswith(e) for e in ('.csv', '.csv.gz', '.zip')):
             continue
         try:
@@ -79,4 +82,5 @@ def main():
 
 
 if __name__ == '__main__':
+    utf8()                 # Windows console/pipe safety - see data/_repo.py
     main()

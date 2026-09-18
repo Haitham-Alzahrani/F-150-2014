@@ -3129,6 +3129,24 @@ allowlist; `CLEAR_DTC` is never imported.** See `docs/LOCAL-SETUP.md` §2b —
 including that **`python-obd` cannot talk to a Bluetooth Low Energy adapter at
 all**, which is what most cheap clones and anything paired to an iPhone are.
 
+**RUNNING ON WINDOWS FROM `cmd`: read
+[`docs/WINDOWS-SETUP.md`](docs/WINDOWS-SETUP.md) first.** Two things broke and
+are now fixed in code, both reproduced rather than guessed:
+
+* **`f150diag selftest` died part way through on cp437**, the standard US `cmd`
+  codepage, with `UnicodeEncodeError` on an **em dash in its own output**. Python
+  writes Unicode straight to a Windows *console*, so typing it by hand can look
+  fine — **the crash bites when output is redirected or piped, which is what
+  happens when an agent runs the command.** `cli.py` and every tool in `data/`
+  now force UTF-8 on stdout and stderr; verified on cp437, cp850 and cp1252.
+* **The analysis tools globbed relative to the current directory**, so run from
+  anywhere but the repository root they matched nothing, printed an empty table
+  and **exited 0**. `data/_repo.py` now anchors every path to the repository.
+
+**Use `.venv\Scripts\python.exe` directly — never `activate`.** `--ports` on
+`data/f150_live.py` lists COM ports before connecting, because auto-detect takes
+the first port that answers and that is often the wrong one.
+
 **A NOTE FOR ANY SESSION RUNNING IN THE CLOUD: you cannot reach the truck.**
 A Claude Code Remote container has no serial device (`/dev/ttyUSB*` does not
 exist) and no route to Jeddah. Scripts that open an adapter only run on a

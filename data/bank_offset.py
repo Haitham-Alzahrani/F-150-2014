@@ -16,6 +16,9 @@ import numpy as np
 sys.path.insert(0, str(__import__('pathlib').Path(__file__).parent))
 from carscanner_lib import load
 
+sys.path.insert(0, str(__import__('pathlib').Path(__file__).resolve().parent))
+from _repo import ROOT, utf8, data_globs   # Windows + cwd safety
+
 PAIR_TOL  = 0.15   # s, between the two banks' short term samples
 NEAR_S    = 1.0    # s, how close a confirming sample must be
 IDLE_LO, IDLE_HI = 600.0, 700.0
@@ -96,9 +99,10 @@ def main(paths):
 
 
 if __name__ == '__main__':
+    utf8()                 # Windows console/pipe safety - see data/_repo.py
     args = sys.argv[1:]
     if not args:
         # glob '**/*' with no extension filter: these logs are stored plain,
         # gzipped and zipped, and a '*.csv' sweep silently read 2 of 11 files.
-        args = sorted(glob.glob('data/**/*', recursive=True))
+        args = sorted(p for g in data_globs() for p in glob.glob(g, recursive=True))
     main(args)

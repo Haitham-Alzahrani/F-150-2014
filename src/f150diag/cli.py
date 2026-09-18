@@ -585,7 +585,31 @@ def build_parser() -> argparse.ArgumentParser:
     return p
 
 
+def _utf8_console() -> None:
+    """Make stdout/stderr UTF-8 whatever codepage the console is running.
+
+    MEASURED 2026-09-18, not guessed: `f150diag selftest` - the first command in
+    docs/LOCAL-SETUP.md - dies part way through on cp437, the standard US
+    Windows cmd codepage, with
+
+        UnicodeEncodeError: 'charmap' codec can't encode character '\u2014'
+
+    on an em dash in this file's own output.  Python writes Unicode straight to
+    a Windows CONSOLE through the wide API, so typing the command by hand can
+    look fine; the crash bites when output is REDIRECTED OR PIPED, which is
+    exactly what happens when an agent runs the command and captures the result.
+    cp1252 survives the em dash but still fails on the arrows, ticks and box
+    drawing elsewhere in this package.
+    """
+    for stream in (sys.stdout, sys.stderr):
+        try:
+            stream.reconfigure(encoding="utf-8", errors="replace")
+        except (AttributeError, ValueError):
+            pass
+
+
 def main(argv: list[str] | None = None) -> int:
+    _utf8_console()
     args = build_parser().parse_args(argv)
     configure_logging(args.verbose)
     return args.fn(args)
