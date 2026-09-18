@@ -94,6 +94,40 @@ directly in raw python, which is the actual dangerous act.
 
 ---
 
+## 2c. THE `[PCM]` CHANNELS — service 0x22
+
+The channels that would settle the misfire question — `[PCM] Currently Detected
+Engine Misfire`, `[PCM] Knock Sensor 1`/`2`, `[PCM] Cylinder 1-6 Acceleration
+Value` — are Ford enhanced, and **`python-obd` has no service 0x22 at all**.
+`data/f150_did.py` builds those requests by hand, through the same connection.
+
+**The guard is on the service byte, by number: 0x22 only.** Write, routine
+control, security access, reflash and reset are each refused explicitly.
+
+```
+python data/did_scan.py scan --from 0x1100 --to 0x11FF
+```
+
+```
+python data/did_scan.py identify 0x1100 RPM --samples 250 --name "Engine speed (mode 22)"
+```
+
+**Blip the throttle steadily all the way through that second command.** An
+address that answers tells you nothing about what it carries, so the scale is
+fitted against a known channel — and at idle, where engine speed moves only
+about 30 rpm, the fit comes out **11 % low** on an address that is *correct*.
+Swept, it lands within 0.5 %. Full reasoning and the measured table:
+[`MODE-22.md`](MODE-22.md).
+
+Nothing is interpreted until it is identified. **`data/did_registry.json` is
+empty and no identifier has been verified on this VIN.**
+
+```
+python data/f150_agent.py sim sweep on
+```
+
+rehearses the whole identification path against `serve --sim`, with no hardware.
+
 ## 3. From a capture to an answer
 
 The daemon writes `elapsed_s,rpm`, which the analysis tools read directly:

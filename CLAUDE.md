@@ -63,6 +63,27 @@ allowed, **mode 4 refused**. `read CLEAR_DTC` returns REFUSED — verified, beca
 `.claude/settings.json` pre-approves these commands so a local session is not
 prompted for each one, and denies anything naming CLEAR_DTC.
 
+## READING THE `[PCM]` CHANNELS — [`docs/MODE-22.md`](docs/MODE-22.md)
+
+**The `[PCM]` family is Ford enhanced service 0x22, and `python-obd` has no
+service 0x22 at all** — its table stops at modes 1, 2, 3, 4, 6, 7 and 9. So the
+link could read engine speed and the trims but **not** the misfire counter, the
+knock sensors or the cylinder acceleration values. `data/f150_did.py` builds
+those requests by hand.
+
+**Guarded on the SERVICE BYTE, by number — 0x22 only.** `0x2E` write, `0x31`
+routine, `0x27` security, `0x34`/`0x36` reflash and `0x11` reset are all refused
+explicitly, and `did_command()` asserts its own first byte before it returns.
+
+**`data/did_registry.json` is EMPTY BY DESIGN and no identifier has been
+verified on this VIN.** An unidentified read returns raw bytes with a refusal
+attached. Two routes in, and no third: **correlation against a standard channel
+at r-squared >= 0.99 over >= 200 samples**, or **a manipulation predicted in
+writing first**.
+
+**IDENTIFY WITH THE THROTTLE SWEPT, NOT AT IDLE.** See method rule 22 — at idle
+the same correct address calibrated 11 % low.
+
 ## THE DASHBOARD — [`docs/DIAGNOSTIC-DASHBOARD.md`](docs/DIAGNOSTIC-DASHBOARD.md)
 
 **Built 2026-09-18: every system classified CONFIRMED / HIGH-CONFIDENCE SUSPECT
@@ -355,6 +376,15 @@ evidence for all of them is in [`docs/HISTORY.md`](docs/HISTORY.md).
     app all along.*
 21. **Say what was verified and what was not.** Every withdrawn claim here was
     withdrawn because somebody re-ran it, not because somebody doubted it.
+22. **A quantity that barely moves cannot calibrate anything.** Two channels
+    polled one after the other move between the reads, and that error in the
+    x-variable **attenuates the fitted slope** — the scale comes out low. The
+    cure is a **wider signal, not a better fit.** *A mode 22 identifier
+    carrying engine speed calibrated 11 % low at idle and within 0.5 % with the
+    throttle swept; the true scale was known because it was planted.*
+23. **An address that answers tells you nothing about what it carries.** A
+    wrong identifier returns a plausible number, not an error, and a plausible
+    number condemns a good part. *This is why both registries start empty.*
 
 
 ## NAMING — use the SENSOR LIST label, never the graph header, never an abbreviation
@@ -398,6 +428,7 @@ stays readable; nothing was deleted.
 | [`docs/WINDOWS-SETUP.md`](docs/WINDOWS-SETUP.md) | Windows, `cmd`, COM ports, the codepage trap |
 | [`docs/SENSOR-INVENTORY.md`](docs/SENSOR-INVENTORY.md) | every channel this VIN answers, and what is blank |
 | [`docs/scanner-pids.md`](docs/scanner-pids.md) | the app's exact labels — **use these when asking him for a reading** |
+| [`docs/MODE-22.md`](docs/MODE-22.md) | **reading the `[PCM]` channels directly**, and the two traps in calibrating one |
 | [`docs/VOLTAGE-PCM-VS-BCM.md`](docs/VOLTAGE-PCM-VS-BCM.md) | the one high-confidence suspect |
 | [`docs/BANK-OFFSET-WITHDRAWN.md`](docs/BANK-OFFSET-WITHDRAWN.md) | why the sensor-swap result does not stand |
 | [`docs/f150-specs.md`](docs/f150-specs.md) | identification, capacities, fluids, buses, part numbers |

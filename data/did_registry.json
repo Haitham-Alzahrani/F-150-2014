@@ -1,0 +1,35 @@
+{
+  "_README": [
+    "EMPTY BY DESIGN. An address enters here only with the evidence that",
+    "identified it, produced on THIS VIN. A mode 22 reply is just bytes: a",
+    "wrong address returns a plausible number rather than an error, and that",
+    "number will condemn a good part.",
+    "",
+    "Two ways in, both empirical:",
+    "  correlation  - logged beside a standard channel whose meaning is known,",
+    "                 r-squared >= 0.99 over >= 200 paired samples. The same",
+    "                 regression measures the scale and offset.",
+    "  manipulation - a physical change PREDICTED IN WRITING first, then made,",
+    "                 then observed. For channels with no standard twin.",
+    "",
+    "verified:false entries are carried but every reading from one is flagged.",
+    "Run: python data/did_scan.py --help"
+  ],
+  "entries": {},
+  "scans": [
+    {
+      "answered": [],
+      "range": "1100-1110",
+      "when": "2026-09-18 23:43"
+    },
+    {
+      "answered": [
+        "1100",
+        "1173",
+        "11A6"
+      ],
+      "range": "1100-11B0",
+      "when": "2026-09-18 23:44"
+    }
+  ]
+}

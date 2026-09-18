@@ -111,15 +111,49 @@ class SimConnection:
 
     def supports(self, cmd): return cmd.name not in ('AMBIANT_AIR_TEMP',)
 
-    def query(self, cmd):
+    # Three mode 22 identifiers answer, and their scaling is DELIBERATELY not
+    # round.  Nothing tells the discovery tools what it is - they have to
+    # recover it by regression, which is the whole point of the exercise.
+    AC_ON = False
+    SWEEP = False
+
+    def _did(self, ident):
+        import math
+        t = time.monotonic() - self._t
+        rpm = 652 + 9 * math.sin(2 * math.pi * 0.33 * t) + self._r.gauss(0, 3)
+        if SimConnection.SWEEP:            # a simulated throttle sweep
+            rpm += 1200 * (1 + math.sin(2 * math.pi * 0.05 * t))
+        if ident == 0x1100:                     # engine speed, quarter-rpm
+            return int(round(rpm * 4)).to_bytes(2, 'big')
+        if ident == 0x1173:                     # cylinder 4 accel, signed, /1024
+            return (int(round(self._r.gauss(-0.03, 0.02) * 1024))
+                    & 0xFFFF).to_bytes(2, 'big')
+        if ident == 0x11A6:                     # A/C pressure, kPa * 8
+            base = 1300 if SimConnection.AC_ON else 250
+            return int(round((base + self._r.gauss(0, 20)) * 8)).to_bytes(2, 'big')
+        return None
+
+    def query(self, cmd, force=False):
         time.sleep(0.030)                                   # the 33 Hz ceiling
+        raw = getattr(cmd, 'command', None)
+        if raw and bytes(raw).startswith(b'22'):
+            ident = int(bytes(raw)[2:6], 16)
+            pay = self._did(ident)
+            if pay is None:
+                return SimResponse(None)        # negative response / no answer
+            msg = type('M', (), {'data': bytes([0x62])
+                                 + ident.to_bytes(2, 'big') + pay})()
+            return SimResponse(cmd.decode([msg]))
         n = getattr(cmd, 'name', str(cmd))
         if n == 'RPM':
             # idle with a slow 0.3 Hz wander, like the real thing
             t = time.monotonic() - self._t
             import math
-            return SimResponse(SimValue(652 + 9 * math.sin(2 * math.pi * 0.33 * t)
-                                        + self._r.gauss(0, 3)))
+            rpm = (652 + 9 * math.sin(2 * math.pi * 0.33 * t)
+                   + self._r.gauss(0, 3))
+            if SimConnection.SWEEP:
+                rpm += 1200 * (1 + math.sin(2 * math.pi * 0.05 * t))
+            return SimResponse(SimValue(rpm))
         if n == 'GET_DTC':
             return SimResponse([])
         if n == 'ELM_VOLTAGE':
@@ -242,6 +276,19 @@ class Daemon:
         if op == 'log':
             return self.log(req.get('action'), req.get('label', 'idle'),
                             req.get('channels'))
+        if op == 'sim':
+            if not self.sim:
+                return {'ok': False, 'error': 'not a simulated link'}
+            what, on = req.get('what'), bool(req.get('on'))
+            if what == 'ac':
+                SimConnection.AC_ON = on
+            elif what == 'sweep':
+                SimConnection.SWEEP = on
+            else:
+                return {'ok': False, 'error': 'sim what must be ac or sweep'}
+            return {'ok': True, 'sim': True, what: on}
+        if op == 'did':
+            return self.did(int(req['did']))
         if op == 'list':
             return {'ok': True, 'sim': self.sim,
                     'supported': sorted(c.name for c in self.conn.supported_commands),
@@ -251,6 +298,38 @@ class Daemon:
             self.stop.set()
             return {'ok': True, 'stopping': True}
         return {'ok': False, 'error': 'unknown op %r' % op}
+
+    def did(self, ident):
+        """Mode 22 read. Service 0x22 ONLY - see data/f150_did.py for why."""
+        import f150_did as D
+        D.guard(D.SERVICE)                     # refuses every write service
+        if self.sim:
+            import obd as _o
+            cmd = D.did_command(_o, ident)
+        else:
+            cmd = D.did_command(self._obd, ident)
+        with self.lock:
+            r = self.conn.query(cmd, force=True)
+        if r.is_null() or not r.value:
+            return {'ok': False, 'did': '%04X' % ident,
+                    'error': 'no answer (the PCM has no such identifier, or '
+                             'refused it)', 'sim': self.sim}
+        hexdata = str(r.value)
+        out = {'ok': True, 'did': '%04X' % ident, 'hex': hexdata, 'sim': self.sim}
+        # If it has been identified ON THIS VIN, decode it - and say so.
+        reg = D.load_registry()
+        e = reg.get('entries', {}).get('%04X' % ident)
+        if e:
+            out['name'] = e['name']
+            out['value'] = D.decode(e, hexdata)
+            out['verified'] = e['verified']
+            if not e['verified']:
+                out['warning'] = ('UNVERIFIED identification - this number may '
+                                  'be meaningless. See data/did_registry.json.')
+        else:
+            out['note'] = ('not identified on this VIN. Raw bytes only - do not '
+                           'interpret. Run data/did_scan.py identify.')
+        return out
 
     def read(self, name):
         c = self.cmd(name)
@@ -384,6 +463,11 @@ def main():
     sub.add_parser('ports', help='list serial ports')
     sub.add_parser('list', help='what python-obd can reach on this truck')
     sub.add_parser('stop', help='shut the daemon down')
+    dd = sub.add_parser('did', help='mode 22 read by identifier (read-only)')
+    dd.add_argument('ident', help='hex, e.g. 0x1100')
+    sm = sub.add_parser('sim', help='simulated manipulations, --sim links only')
+    sm.add_argument('what', choices=['ac', 'sweep'])
+    sm.add_argument('state', choices=['on', 'off'])
     r = sub.add_parser('read', help='one reading'); r.add_argument('name')
     sn = sub.add_parser('snapshot', help='a set of readings in one call')
     sn.add_argument('names', nargs='*')
@@ -403,6 +487,10 @@ def main():
                           'note': 'BLE adapters present no serial port and cannot be used.'}))
         return 0
     req = {'op': a.op}
+    if a.op == 'did':
+        req['did'] = int(a.ident, 0)
+    if a.op == 'sim':
+        req['what'], req['on'] = a.what, a.state == 'on'
     if a.op == 'read':
         req['name'] = a.name
     if a.op == 'snapshot':
