@@ -48,6 +48,39 @@ READ_MODES = {1, 2, 3, 6, 7, 9}
 WRITE_MODE = 4                   # Clear DTCs and Freeze data.  Never sent.
 LOG_DIR = ROOT / 'logs'
 
+# python-obd's name -> the label the OWNER'S SENSOR LIST uses, exactly.
+# Two reasons this matters more than it looks:
+#   1. Every analysis tool in data/ looks channels up by these strings, so a
+#      capture written with them is read by rpm_rate, idle_events, bank_offset,
+#      idle_sweep, voltage_compare and check_capture with NO changes - an agent
+#      capture becomes indistinguishable from a Car Scanner export.
+#   2. CLAUDE.md forbids quoting a graph header or an abbreviation back to the
+#      owner. Writing the sensor-list label into the file makes that automatic.
+LABELS = {
+    'RPM':                    'Engine RPM (rpm)',
+    'SPEED':                  'Vehicle speed (km/h)',
+    'COOLANT_TEMP':           'Engine coolant temperature (\u2103)',
+    'INTAKE_TEMP':            'Intake air temperature (\u2103)',
+    'AMBIANT_AIR_TEMP':       'Ambient air temperature (\u2103)',
+    'SHORT_FUEL_TRIM_1':      'Short term fuel % trim - Bank 1 (%)',
+    'SHORT_FUEL_TRIM_2':      'Short term fuel % trim - Bank 2 (%)',
+    'LONG_FUEL_TRIM_1':       'Long term fuel % trim - Bank 1 (%)',
+    'LONG_FUEL_TRIM_2':       'Long term fuel % trim - Bank 2 (%)',
+    'TIMING_ADVANCE':         'Timing advance (\u00b0)',
+    'MAF':                    'MAF air flow rate (g/sec)',
+    'ENGINE_LOAD':            'Calculated engine load value (%)',
+    'ABSOLUTE_LOAD':          'Absolute load value (%)',
+    'THROTTLE_POS':           'Throttle position (%)',
+    'BAROMETRIC_PRESSURE':    'Barometric pressure (kPa)',
+    'EVAPORATIVE_PURGE':      'Commanded evaporative purge (%)',
+    'COMMANDED_EQUIV_RATIO':  'Fuel/Air commanded equivalence ratio ()',
+    'CONTROL_MODULE_VOLTAGE': 'Control module voltage (V)',
+}
+
+
+def label(name):
+    return LABELS.get(name, name)
+
 
 # ---------------------------------------------------------------- simulator
 class SimValue:
@@ -110,6 +143,8 @@ class Daemon:
         self._t0 = None
         self._n = 0
         self._last = None
+        self._channels = ['RPM']
+        self._per = {}
 
     # -- connect ---------------------------------------------------------
     def connect(self):
@@ -144,20 +179,42 @@ class Daemon:
 
     # -- the sampling loop ------------------------------------------------
     def run(self):
+        turn = 0
         while not self.stop.is_set():
-            if self._logging:
-                with self.lock:
-                    r = self.conn.query(self.cmd('RPM'))
-                if not r.is_null():
-                    v = r.value.magnitude
-                    self._last = v
-                    self._writer.writerow({'elapsed_s': '%.4f' % (time.monotonic() - self._t0),
-                                           'rpm': '%.2f' % v})
-                    self._n += 1
-                    if self._n % 200 == 0:
-                        self._fh.flush()
-            else:
+            if not self._logging:
                 time.sleep(0.05)
+                continue
+            # Round robin, one channel per pass.  Each row carries the single
+            # channel just sampled and leaves the rest blank - which is exactly
+            # what Car Scanner writes, and what carscanner_lib expects: every
+            # channel keeps its OWN true sample times and nothing is forward
+            # filled.  Polling N channels divides the rate by N, the same
+            # arithmetic as the tiles law on the phone.
+            name = self._channels[turn % len(self._channels)]
+            turn += 1
+            c = self.cmd(name)
+            if c is None:
+                continue
+            with self.lock:
+                r = self.conn.query(c)
+            if r.is_null():
+                continue
+            v = getattr(r.value, 'magnitude', r.value)
+            try:
+                v = float(v)
+            except (TypeError, ValueError):
+                continue
+            if name == 'RPM':
+                self._last = v
+            el = time.monotonic() - self._t0
+            row = {'time': time.strftime('%H:%M:%S', time.localtime())
+                           + ('%.3f' % (el % 1))[1:]}
+            row[label(name)] = '%.4f' % v
+            self._writer.writerow(row)
+            self._n += 1
+            self._per[name] = self._per.get(name, 0) + 1
+            if self._n % 200 == 0:
+                self._fh.flush()
 
     # -- request handlers -------------------------------------------------
     def handle(self, req):
@@ -183,7 +240,8 @@ class Daemon:
                 out[n] = self.read(n)
             return {'ok': True, 'sim': self.sim, 'snapshot': out}
         if op == 'log':
-            return self.log(req.get('action'), req.get('label', 'idle'))
+            return self.log(req.get('action'), req.get('label', 'idle'),
+                            req.get('channels'))
         if op == 'list':
             return {'ok': True, 'sim': self.sim,
                     'supported': sorted(c.name for c in self.conn.supported_commands),
@@ -210,18 +268,37 @@ class Daemon:
             return {'ok': False, 'sensor': name, 'error': 'no answer / not supported'}
         return {'ok': True, 'sensor': name, 'value': str(r.value), 'sim': self.sim}
 
-    def log(self, action, label):
+    def log(self, action, lbl, channels=None):
         if action == 'start':
             if self._logging:
                 return {'ok': False, 'error': 'already recording', 'file': str(self._fh.name)}
+            chans = [c.upper() for c in (channels or ['RPM'])]
+            bad = [c for c in chans if self.cmd(c) is None]
+            if bad:
+                return {'ok': False, 'error': 'unknown channel(s): %s' % ', '.join(bad)}
+            ref = [c for c in chans if self.cmd(c).mode == WRITE_MODE]
+            if ref:
+                return {'ok': False,
+                        'error': 'REFUSED: %s is OBD service %d' % (ref[0], WRITE_MODE)}
             LOG_DIR.mkdir(exist_ok=True)
             name = '%s-%s.csv' % (datetime.now().strftime('%Y-%m-%d_%H-%M-%S'),
-                                  label.replace(' ', '-'))
-            self._fh = open(LOG_DIR / name, 'w', newline='')
-            self._writer = csv.DictWriter(self._fh, fieldnames=['elapsed_s', 'rpm'])
+                                  lbl.replace(' ', '-'))
+            self._fh = open(LOG_DIR / name, 'w', newline='', encoding='utf-8')
+            self._writer = csv.DictWriter(
+                self._fh, fieldnames=['time'] + [label(c) for c in chans],
+                restval='', extrasaction='ignore')
             self._writer.writeheader()
-            self._t0 = time.monotonic(); self._n = 0; self._logging = True
-            return {'ok': True, 'recording': str(LOG_DIR / name), 'sim': self.sim}
+            self._channels = chans
+            self._t0 = time.monotonic(); self._n = 0; self._per = {}
+            self._logging = True
+            warn = None
+            if len(chans) > 3:
+                warn = ('%d channels divides the rate by %d. Engine-speed questions '
+                        '- orders, rate of change, event shape - need 25 Hz or '
+                        'better, so use two.' % (len(chans), len(chans)))
+            return {'ok': True, 'recording': str(LOG_DIR / name),
+                    'channels': [label(c) for c in chans], 'warning': warn,
+                    'sim': self.sim}
         if action == 'stop':
             if not self._logging:
                 return {'ok': False, 'error': 'not recording'}
@@ -230,8 +307,12 @@ class Daemon:
             path = self._fh.name
             self._fh.close()
             return {'ok': True, 'file': path, 'samples': self._n,
-                    'seconds': round(el, 1), 'hz': round(self._n / el, 1) if el else 0,
-                    'next': 'python data/rpm_rate.py "%s"' % path, 'sim': self.sim}
+                    'seconds': round(el, 1),
+                    'total_hz': round(self._n / el, 1) if el else 0,
+                    'per_channel_hz': {label(k): round(v / el, 1)
+                                       for k, v in self._per.items()},
+                    'next': 'python data/check_capture.py "%s"' % path,
+                    'sim': self.sim}
         return {'ok': False, 'error': 'log action must be start or stop'}
 
 
@@ -306,9 +387,12 @@ def main():
     r = sub.add_parser('read', help='one reading'); r.add_argument('name')
     sn = sub.add_parser('snapshot', help='a set of readings in one call')
     sn.add_argument('names', nargs='*')
-    lg = sub.add_parser('log', help='continuous Engine RPM recording')
+    lg = sub.add_parser('log', help='continuous multi-channel recording')
     lg.add_argument('action', choices=['start', 'stop'])
     lg.add_argument('label', nargs='?', default='idle')
+    lg.add_argument('channels', nargs='*',
+                    help='python-obd names, default RPM. Each extra channel '
+                         'divides the rate, exactly like tiles on the phone.')
 
     a = ap.parse_args()
     if a.op == 'serve':
@@ -325,6 +409,7 @@ def main():
         req['names'] = a.names or None
     if a.op == 'log':
         req['action'], req['label'] = a.action, a.label
+        req['channels'] = a.channels or None
     rep = client(req, a.listen)
     print(json.dumps(rep, indent=None))
     return 0 if rep.get('ok') else 1
