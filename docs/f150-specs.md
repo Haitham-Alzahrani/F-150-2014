@@ -28,7 +28,7 @@ a wrong fluid capacity damages a transmission.
 | Body | Regular Cab, 8-ft box, Styleside | [VIN] |
 | Engine | 3.7L V6 Ti-VCT (Cyclone / Duratec 37) | [VIN] |
 | Transmission | 6R80 6-speed automatic | [SPEC] |
-| Drivetrain | **4x2 (RWD)** | [VIN] |
+| Drivetrain | **4x4 — owner-confirmed 2026-09-06.** The VIN pattern decodes 4x2; see the note below | [OWNER] |
 | Build date | 08/2014 | [VIN] |
 | In service | 19 Nov 2014 | [VIN] |
 | Assembly | United States | [VIN] |
@@ -41,16 +41,24 @@ a wrong fluid capacity damages a transmission.
 |---|---|---|
 | 1–3 | `1FT` | Ford, USA, truck |
 | 4 | `M` | GVWR class / brake system |
-| 5–7 | `F1E` | F-150, Regular Cab, 8-ft box, **4x2** |
+| 5–7 | `F1E` | F-150, Regular Cab, 8-ft box — **decodes as 4x2, contradicted by the owner** |
 | 8 | `M` | 3.7L V6 Ti-VCT |
 | 9 | `1` | Check digit |
 | 10 | `E` | 2014 model year |
 | 11 | `F` | Assembly plant |
 | 12–17 | `C80632` | Sequential serial |
 
-> **Note:** A purchased vehicle history report for this VIN lists fuel type
-> as "Electric" and drivetrain as "Four-wheel Drive". Both are wrong. The
-> VIN is authoritative: gasoline, 4x2.
+> **CORRECTED 2026-09-18.** This note used to read *"Both are wrong. The VIN is
+> authoritative: gasoline, 4x2."* **The fuel-type half stands — it is a gasoline
+> truck. The drivetrain half is WITHDRAWN.**
+>
+> **The owner has the truck in front of him and says it is 4x4** (2026-09-06),
+> which outranks a decode and agrees with the history report. The conflict is
+> genuine and unresolved: `1FTMF1E` decodes as Regular Cab 4x2 in the position-4
+> series codes, where a 4x4 Regular Cab is normally `1FTNF1E`.
+>
+> **It matters for parts.** Confirm before ordering any driveline component by
+> checking for a transfer case, a front driveshaft and a 4x4 selector.
 
 ---
 
@@ -109,7 +117,7 @@ and timing chain removal.
 
 | Spec | Value | |
 |---|---|---|
-| Drive | Rear-wheel drive, 4x2 | [VIN] |
+| Drive | **4x4 — owner-confirmed**; VIN decodes 4x2, see the identification note | [OWNER] |
 | Axle code (door label) | `26` | [VIN] |
 | Ratio | Likely 3.55, conventional/open — **read the axle tag to confirm** | [VERIFY] |
 | Rear axle | Ford 9.75" ring gear | [VERIFY] |

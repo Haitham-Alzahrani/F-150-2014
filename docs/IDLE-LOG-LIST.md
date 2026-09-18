@@ -31,7 +31,8 @@ recorded, in small amounts:
 
 **The misfire capture is still needed, but for a different reason than I gave.**
 Not "never logged" — **never logged for long enough to overlap an event.** At one
-event every 84 s, 53 scattered samples almost certainly never coincided with one.
+measured rate of 0.44–1.66 events per minute, 53 scattered samples almost
+certainly never coincided with one.
 
 ---
 
@@ -64,8 +65,8 @@ The idle events are **0.24 s wide — about one engine cycle**, which is combust
 timescale. This channel asks directly whether a cylinder is missing or partly
 missing at those moments.
 
-**Thirty minutes because events arrive about every 84 s.** That gives roughly
-twenty. The 53 samples already on record all read 0, but they are scattered and
+**Thirty minutes because events arrive at 0.44–1.66 per minute.** That gives
+**13 to 50** depending on which session's rate this one resembles. The 53 samples already on record all read 0, but they are scattered and
 almost certainly never landed on an event — which is exactly the gap this fills.
 
 ## 2 — THREE MINUTES. Settle the oxygen sensor swap

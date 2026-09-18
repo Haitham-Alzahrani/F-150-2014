@@ -27,7 +27,7 @@ Decoded from the VIN and the door jamb label.
 | Model | Ford F-150 XL, Regular Cab, 8-ft box |
 | Engine | 3.7L V6 Ti-VCT (Cyclone), ~302 hp |
 | Transmission | 6R80 6-speed automatic |
-| Drive | **4x2** — VIN position 5 (`F1E`) |
+| Drive | **4x4 — owner-confirmed 2026-09-06.** VIN position 5 (`F1E`) decodes 4x2; the owner outranks the decode |
 | Built | 08/2014 · in service 19 Nov 2014 |
 | Odometer | 131,000 km (Aug 2026) |
 
@@ -41,9 +41,11 @@ The purchased report contains two fields that contradict the VIN. Do not
 act on them:
 
 - Lists fuel type as **"Electric"** — it is gasoline.
-- Lists drive as **"Four-wheel Drive"** — VIN says 4x2. Confirm visually
-  (look for a front driveshaft and transfer case) before ordering any
-  driveline part.
+- Lists drive as **"Four-wheel Drive"** — **and on this the report is right.**
+  The owner confirmed 4x4 on 2026-09-06. Earlier revisions used the VIN decode
+  to dismiss the report; that is **WITHDRAWN**. Still confirm visually (front
+  driveshaft, transfer case, 4x4 selector) before ordering any driveline part,
+  because the decode genuinely disagrees.
 
 ---
 

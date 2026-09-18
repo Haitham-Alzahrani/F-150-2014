@@ -168,7 +168,9 @@ not exist.
 0.0000 in every one**; `[PCM] Knock Sensor 1`/`2` **48 samples each**;
 `[PCM] Cylinder 1–6 Acceleration Value` **8–42 each**. **The misfire capture is
 still needed — not because it was never logged, but because 53 scattered samples
-almost certainly never landed on an event arriving every 84 s.**
+almost certainly never landed on an event. **Rate measured: 0.44–1.66 per
+minute across sessions** — the 09-04 log gives 136 events in 122 idle minutes,
+one per 54 s.
 
 **THE RULE THAT SHAPES THE LIST: the 33 Hz cliff only matters when ENGINE SPEED
 ITSELF is analysed** — orders, rate of change, event shape. **Trims step in
@@ -179,7 +181,7 @@ cost it its meaning.
 
 | # | Time | Channels | What it settles |
 |---|---|---|---|
-| **1** | **30 min** | `Engine RPM` + `[PCM] Currently Detected Engine Misfire` | The hiccups. Events are 0.24 s — combustion timescale. Thirty minutes gives ~20. |
+| **1** | **30 min** | `Engine RPM` + `[PCM] Currently Detected Engine Misfire` | The hiccups. Events are 0.24 s — combustion timescale. At the measured 0.44–1.66 per minute, thirty minutes gives **13–50**. |
 | **2** | **3 min** | `Short term fuel % trim - Bank 1` + `- Bank 2` + `Engine RPM` | The swap. **Do not touch the throttle** — the bank difference reverses sign under throttle movement. |
 | **3** | **5 min + 2 min** | `Engine RPM` alone, then held ~1200 rpm | Post-tune baseline for all three rpm tools. At 1200 a false order moves, a real one does not. |
 | **4** | **6 × 1 min** | `Engine RPM` + one `[PCM] Cylinder N Acceleration Value` | One at a time; all six drops to 2 Hz. **Repeat after a restart.** |
@@ -264,9 +266,22 @@ cause, and the reason is specific.**
 describes a *continuous* wobble. The owner describes **discrete events**. A
 detector for one does not find the other — this needed its own.
 
-**THE EVENTS ARE REAL: 136 in 3.2 h of Park idle, one every 84 s, median 31 rpm.**
-That matches the "57 outliers, median spacing 82.3 s" already in this file, which
-nobody ever followed up.
+**THE EVENTS ARE REAL: 136 in 122 minutes of Park idle, median 31 rpm —
+a rate of 1.114 per minute, one every 54 s.**
+
+**CORRECTED 2026-09-18: this said "one every 84 s" and cited the "57 outliers,
+median spacing 82.3 s" line as agreement. That was two different populations.**
+The 84 s belonged to the 57 *large outliers*; the 136 is every detected event.
+Quoting one population's count with another's spacing is not a match.
+
+**AND THE SPACING CANNOT BE MEASURED ON THIS DATA AT ALL.** Idle in that session
+is not one block — it is **65 separate stretches**, so any gap long enough to
+matter is cut short by the end of its stretch. Restricting to pairs inside one
+stretch drops a third of the gaps, and they are the long ones: median 9.6 s
+against 14.8 s for all gaps, mean 13.4 s against 85.3 s. **That is right-
+censoring, not a measurement.** A spacing column was added to the tool, checked,
+and removed; the reasoning is in `data/idle_events.py` so nobody re-adds it.
+**Use the rate, which divides events by idle time and is unaffected.**
 
 **THEY ARE SHORT — 0.24 s at half height, about ONE ENGINE CYCLE (0.185 s at
 650 rpm).** The flanking dips in the averaged shape were checked against the
@@ -280,13 +295,16 @@ event fits.
 
 | | Events/min | Median size |
 |---|---|---|
-| 2014, four sessions | 0.127 – 0.909 | 29–33 rpm |
+| 2014, **seven** sessions | **0.128 – 1.664** | 27.8–37.8 rpm |
 | **2023 control, two sessions** | **0.368 and 0.954** | **29 and 39 rpm** |
 
 **The two control sessions are the same healthy truck on the same evening and
-differ by 2.6× — a wider spread than any gap between the trucks. So event rate
-cannot distinguish them, and size is identical. By rate and size these events are
+differ by 2.6×. Both sit inside the 2014's own range. So event rate cannot
+distinguish the trucks, and size is identical. By rate and size these events are
 NOT the fault.**
+
+*The size range excludes two 2014 sessions whose "median" comes from n=2 events
+(174.6 and 319.6 rpm). Two events do not have a median worth quoting.*
 
 **One weak thread survives: 105 dips against 77 rises on the 2014, 58 %,
 p = 0.045** — the direction a weak combustion event gives, the opposite of a
@@ -310,8 +328,11 @@ find the driving.** Require idle across the whole neighbourhood, not at the cent
 MINUTES** — about 20 events, enough to test. The second tile is free and this
 project has never spent it on a long idle session.
 **First choice partner: `[PCM] Currently Detected Engine Misfire`** — in the
-owner's sensor list, read 0 in one screenshot, **never logged**, and exactly the
-right timescale for a 0.24 s event. Then one `[PCM] Cylinder N Acceleration
+owner's sensor list and exactly the right timescale for a 0.24 s event.
+**Not "never logged" — that was wrong, see the idle logging list above: 53
+samples across 3 sessions, exactly 0.0000 in every one.** What is missing is a
+capture long enough to overlap an event. Events run 0.44–1.66 per minute.
+Then one `[PCM] Cylinder N Acceleration
 Value` at a time; then `Timing advance`, which separates a real torque
 disturbance (the governor answers) from a false reading (it does not).
 
@@ -522,9 +543,11 @@ of 4,631 samples, pointing the **opposite way** to short term.
 
 **2. THE PRE-SWAP BASELINE WAS NOT ONE SESSION.** `docs/READINGS-SCAN.md` says
 *"only ONE session in the entire project ever polled both short term trims
-together."* **Eleven do.** That scan globbed `*.csv` and **every one of the others
-is stored gzipped.** Standing rule: **glob `*.csv` AND `*.csv.gz` AND `*.zip`, or
-use `carscanner_lib.logs()`.**
+together."* **Twelve do.** That scan globbed `*.csv` and **the others are stored
+gzipped or zipped — it read 2 of 12 files.** Standing rule: **glob `**/*` with no
+extension filter, or use `carscanner_lib.logs()`, which handles all three.**
+`data/idle_sweep.py`, `data/idle_events.py` and `data/rpm_rate.py` were checked
+and already do this; the fault was in the scan, not the tools.
 
 **3. THE OFFSET CHANGES SIGN INSIDE ONE CONTINUOUS SESSION.** The largest paired
 dataset in the project had never been analysed — **2026-09-04, 3.2 h of unbroken
@@ -612,6 +635,17 @@ firing pulse and normal in a bare cab · **~11 Hz** is rotational imbalance ·
 felt shake to the 0.3 Hz oscillation for the first time.
 
 ### THE PREDICTION, written down before the reading exists
+
+**OUTCOME, 2026-09-18: the third branch is the one that came true, and this table
+named it in advance.** *"Both banks equal — either the gasket closed a real leak,
+or the offset was never robust."* **It was never robust.** The bank difference
+changes sign inside a single 3.2-hour session, by 2.3 points, with nothing done
+to the truck — a range wider than anything the swap could have produced. The
+first two branches both assumed a stable offset to move, and there is not one.
+See [`docs/BANK-OFFSET-WITHDRAWN.md`](docs/BANK-OFFSET-WITHDRAWN.md).
+
+**The table below is kept as written, because a locked prediction must not be
+edited after the fact.** Read it as the prediction it was, not as a verdict.
 
 | `Short term fuel % trim` at warm Park idle | What it proves |
 |---|---|
@@ -735,8 +769,10 @@ the 2014 has shown. Conditions were not matched, so it is not a like-for-like
 comparison and must not be used as one; it is recorded because **the healthy
 truck's trims are not tidier than the sick one's.** The bank comparison on the
 2023 could not be done at all - only 10 paired samples at settled idle - so
-**whether a healthy F-150 carries a bank offset is still unknown, and the 2014's
-+1.95 % has no control to be judged against.**
+**whether a healthy F-150 carries a bank offset is still unknown.** And the
+2014's own +1.95 % no longer needs a control to be doubted: its bank difference
+**changes sign inside a single session** — see
+[`docs/BANK-OFFSET-WITHDRAWN.md`](docs/BANK-OFFSET-WITHDRAWN.md).
 
 **THERE IS NO ETHANOL SENSOR ON THIS TRUCK.** Ford deleted the physical fuel
 composition sensor on 2004-and-newer vehicles; the PCM infers the value from
@@ -846,11 +882,12 @@ range that the reporting path does not explain, no monitor short of margin.
 crankshaft position. The timing light against `Engine RPM` at idle and a held
 1500 is the test, and it has been outstanding since night one.
 
-**THE CAPTURE WORTH TAKING FIRST:** `Barometric pressure` + `Intake manifold
-absolute pressure`, **engine off**. Both then read atmospheric, so **they must
-agree.** If barometric sits 4 % low against the manifold channel, that is a
-quantified sensor offset whose direction and size match the lean bias this file
-has chased for weeks.
+**THE CAPTURE THIS SECTION USED TO NAME CANNOT BE TAKEN.** It asked for
+`Barometric pressure` + `Intake manifold absolute pressure` with the engine off,
+to cross-check one against the other. **The second channel does not exist on this
+truck** — it is 2023-only (owner correction, 2026-09-17). The 97 kPa barometric
+reading has nothing here to be checked against, and a mechanical vacuum gauge is
+the only route to manifold pressure.
 
 ## THE SENSOR INVENTORY — [`docs/SENSOR-INVENTORY.md`](docs/SENSOR-INVENTORY.md)
 
@@ -889,12 +926,14 @@ quoted anywhere must say which channel it came from.**
 Manifold vacuum is the variable the symptom tracks, and the truck has never
 reported it once while running. `Manifold absolute pressure (high resolution)`
 was **blank with the engine turning at 661 rpm**, so it is unsupported here.
-`Intake manifold absolute pressure` read 99 kPa in all 16 samples it ever
-produced — but **`Engine RPM` was 0 in every one of them**, where 99 kPa is the
-correct atmospheric answer. **That channel has never been tried with the engine
-running.** One minute at warm idle in Park settles it: roughly 30-40 kPa means
-the load signal is available at last; still 99 means the vacuum gauge is the only
-route.
+**`Intake manifold absolute pressure` IS NOT A CHANNEL ON THIS TRUCK — the
+"99 kPa in all 16 samples" belongs to the 2023 control** (owner correction,
+2026-09-17; a raw header scan finds it in exactly three files, all three the
+control). Every statement that this truck's copy is "untested, not dead" is
+**WITHDRAWN**, and so is the one-minute capture built on it.
+
+**Manifold pressure is genuinely unavailable here. A mechanical vacuum gauge is
+the only route.**
 
 **Nothing else blank or absent is powertrain.** Three DPF counters for a diesel
 filter this engine does not have, `Oil Life %`, two ABS wheel speeds and the
@@ -2177,11 +2216,18 @@ margin**. The engine is sound mechanically, electronically and in its
 combustion, by every measurement the vehicle can produce. **An engine-running
 fault would have shown itself in at least one of them.**
 
-What remains is **vibration and its transmission path**, which the OBD port
-cannot see for reasons of physics: the app answers every 56–117 ms, resolving
-4–8 Hz at best, while first order at 650 rpm is **10.8 Hz** and firing is
-**32.5 Hz**. **Everything from here is hands-on** — harmonic balancer, engine
-mounts, contact point, and the phone accelerometer to name the frequency.
+What remains is **vibration and its transmission path**.
+
+**THE PHYSICS ARGUMENT THAT WAS HERE IS PARTLY WITHDRAWN (2026-09-16).** It said
+the port resolves 4–8 Hz at best and therefore cannot see anything that shakes a
+cab. **The rate law measured on 2026-09-14 gives 33.3 Hz with two tiles on
+screen, so Nyquist is 16.65 Hz** — and first order at 650 rpm (**10.8 Hz**) has
+since been measured through the port, landing on exactly 1.000 in 11 of 11
+stretches. Firing at **32.5 Hz** needs 65 Hz and remains out of reach.
+
+**Much of what follows is still hands-on** — harmonic balancer, engine mounts,
+contact point, and the phone accelerometer, which is still the only instrument
+that reaches the firing pulse.
 
 ### THE LEAK IS CLOSED — idle trim −0.78 % BOTH banks (2026-09, 04:28–04:31)
 
@@ -2216,10 +2262,12 @@ is gone and the hunt did not change. The leak was never causing the hunt.**
 
 **Remaining, and only these:** ① **Mode 06 per-cylinder misfire counts**, the one
 ECU item never read · ② the hunt itself, needing a control sample to judge · ③
-the felt shake, which is **invisible to this tool by physics**: the app's
-response time is 56–117 ms, resolving 4–8 Hz at best, while first order at
-650 rpm is 10.8 Hz and firing is 32.5 Hz. **No tool sampling through the OBD port
-can see the frequencies that shake a cab.**
+the felt shake. **THE CLAIM THAT WAS HERE IS WITHDRAWN** — it read *"no tool
+sampling through the OBD port can see the frequencies that shake a cab"*, on a
+56–117 ms response time and Nyquist 4–8 Hz. **The measured rate is 33.3 Hz with
+two tiles, Nyquist 16.65 Hz, and first order at 10.8 Hz has since been measured
+through the port.** Firing at 32.5 Hz is still out of reach. See the first-order
+section above.
 
 ### WIDE OPEN THROTTLE — the engine breathes PERFECTLY (2026-09, 04:02–04:03)
 
@@ -2872,8 +2920,12 @@ only find leaks too small to explain anything.
   not send anyone looking for the valve — earlier revisions of this file
   wrongly did both. Exhaust dilution at idle is still a live mechanism, but
   it lives in the **cam phasers**. [VERIFY against the service manual]
-- The purchased history report wrongly lists fuel type as "Electric" and
-  drive as "4WD". The VIN says **4x2**. Ignore the report on both.
+- The purchased history report lists fuel type as "Electric", which is wrong.
+  **On drive type it agrees with the owner: this truck is 4x4** — see the top of
+  this file. Earlier revisions said "the VIN says 4x2, ignore the report on
+  both", and that reasoning is **WITHDRAWN**: the owner has the truck in front of
+  him. `docs/f150-specs.md` and `docs/f150-diagnosis.md` carried the same error
+  and are corrected.
 - The odometer history is non-monotonic (a 2016 reading sits 9,000 km above
   the 2020 ones). **True distance may exceed 131,000 km** — treat wear
   intervals as "at least."

@@ -392,17 +392,26 @@ The 7770 kPa constant is the app requesting a PID nothing answers.
 It is consistent with the engineering and with the junk reading, but it is not
 Ford documentation. Fuel pressure, if ever needed, is a mechanical gauge job.
 
-### `Intake manifold absolute pressure` — SUPPORTED. The truck already answered.
+### `Intake manifold absolute pressure` — WITHDRAWN. It is not a channel on this truck.
 
-**The strongest evidence is in this truck's own data, not online.** When the
-channel was polled it returned **99 kPa** — a plausible number, with the engine
-off, which is exactly correct for atmospheric. **An unsupported channel returns
-nothing at all**, the way `Manifold absolute pressure (high resolution)` shows its
-unit with no value while the engine runs at 661 rpm.
+**This section used to be headed "SUPPORTED. The truck already answered", and it
+was wrong.** It argued from a **99 kPa** reading that the channel answers here and
+had simply never been polled running.
 
-**A number came back. The standard channel is supported and answering.** It has
-simply never been sampled with the engine running. **One minute at warm idle in
-Park settles what this project has been inferring for weeks.**
+**Owner correction, 2026-09-17: the channel is not in his sensor list.** A raw
+header scan of every file in this repository finds it in **exactly three, and all
+three are the 2023 control**. The 99 kPa was the control truck's reading
+attributed to this one — **the same 2023-attribution error already recorded for
+the secondary oxygen sensor trims.**
+
+**The reasoning was sound and the data was not.** "A number came back, so the
+channel is supported" only holds if the number came from this VIN. It did not.
+**Check which truck a reading belongs to before reasoning from it.**
+
+**What this truck has is `Manifold absolute pressure (high resolution)`, and it
+reads blank at 0 ms refresh** — offered by the app, not answered by the truck.
+**Manifold pressure is genuinely unavailable here; a mechanical vacuum gauge is
+the only route.**
 
 ### Crankshaft position variation — NOT A LIVE CHANNEL AT ALL
 

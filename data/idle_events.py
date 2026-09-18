@@ -54,15 +54,26 @@ def analyse(t, v, idle_lo, idle_hi):
     runs = [rr for rr in np.split(idx, np.where(np.diff(idx) > int(0.5 * FS))[0] + 1) if len(rr)]
     peaks = np.array([band[rr[np.argmax(np.abs(band[rr]))]] for rr in runs])
     mins = idle.sum() / FS / 60
+    # NO SPACING METRIC HERE, DELIBERATELY - tried and removed 2026-09-18.
+    # CLAUDE.md quoted "one every 84 s" and nothing computed it, so a median
+    # inter-event spacing was added.  It cannot be measured on this data.
+    # Idle is not one block: on the 09-04 log it is 94 separate stretches, so a
+    # gap that would have been long is cut short by the end of its stretch.
+    # Restricting to pairs inside one stretch drops 32 of 100 gaps and those are
+    # the LONG ones - median falls to 9.6 s against 14.8 s for all gaps, and a
+    # mean of 13.4 s against 85.3 s.  That is right-censoring, not a measurement.
+    # Report the RATE, which divides events by idle time and is unaffected.
+    # Reinstate only with a capture that holds unbroken idle for its whole length.
+    stretches = 1 + int(np.sum(np.diff(idle.astype(int)) == 1))
     return dict(minutes=mins, n=len(peaks), per_min=len(peaks) / mins,
                 dips=int((peaks < 0).sum()), rises=int((peaks > 0).sum()),
                 median_size=float(np.median(np.abs(peaks))) if len(peaks) else 0.0,
-                sd_band=float(band[idle].std()))
+                sd_band=float(band[idle].std()), stretches=stretches)
 
 
 def main():
     print('DISCRETE IDLE EVENTS, fixed %.0f rpm threshold, 0.5-5 Hz band\n' % THRESH)
-    print('  session                          idle min   events  per min   dips/rises  median  band sd')
+    print('  session                          idle min   events  per min   dips/rises  median  band sd  idle runs')
     out = []
     for p in sorted(glob.glob('data/carscanner/**/*', recursive=True) +
                     glob.glob('data/control-2023/**/*', recursive=True)):
@@ -89,9 +100,10 @@ def main():
         ctl = 'control-2023' in p or '20260906_17' in p or '20260906_18' in p
         out.append((ctl, os.path.basename(p)[:28], res))
     for ctl, name, r in sorted(out, key=lambda x: (x[0], -x[2]['per_min'])):
-        print('  %-28s %8.1f %8d %8.3f %6d/%-5d %7.1f %7.2f%s'
+        print('  %-28s %8.1f %8d %8.3f %6d/%-5d %7.1f %7.2f %9d%s'
               % (name, r['minutes'], r['n'], r['per_min'], r['dips'], r['rises'],
-                 r['median_size'], r['sd_band'], '  <- 2023 CONTROL' if ctl else ''))
+                 r['median_size'], r['sd_band'], r['stretches'],
+                 '  <- 2023 CONTROL' if ctl else ''))
     a = [r['per_min'] for c, _, r in out if not c]
     b = [r['per_min'] for c, _, r in out if c]
     print()

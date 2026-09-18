@@ -486,17 +486,30 @@ tool this project does not have.**
 Each is one capture, two tiles, three minutes:
 
 ```
-Engine coolant temperature      +  [PCM] Cylinder head temperature
-Intake air temperature          +  Ambient air temperature
-Calculated engine load value    +  Absolute load value
-Barometric pressure             +  Intake manifold absolute pressure
+Engine coolant temperature      +  [PCM] Cylinder head temperature     DONE 09-17
+Intake air temperature          +  Ambient air temperature             DONE 09-17
+Calculated engine load value    +  Absolute load value                 still open
+Barometric pressure             +  Intake manifold absolute pressure   IMPOSSIBLE
 ```
 
-**The last one is the most valuable.** With the engine off both channels read
-atmospheric pressure, so **they must agree.** If `Barometric pressure` sits
-4 % below the manifold channel at key-on, that is a genuine, quantified sensor
-offset — and it is the one calibration error whose direction and size match the
-lean bias this project has chased for weeks.
+**UPDATED 2026-09-18. Two are done and the fourth cannot be taken.**
+
+**The fourth was called "the most valuable" here, and it is now withdrawn:**
+`Intake manifold absolute pressure` **is not a channel on this truck** (owner
+correction, 2026-09-17 — it appears in exactly three files, all three the 2023
+control). `Barometric pressure` has no partner here to be checked against, so the
+97 kPa reading cannot be cross-checked at all. A mechanical vacuum gauge is the
+only route to manifold pressure.
+
+**What the two completed ones gave:** coolant against cylinder head temperature
+is identical in 99.5 % of 1,679 pairs — which **clears nothing**, because Ford
+derives one from the other on several engines, and if it does here they are one
+measurement printed twice. Intake air sits 19 °C above ambient, ordinary heat
+soak on a stationary engine.
+
+**Only `Calculated engine load value` + `Absolute load value` is still worth
+capturing** — those two read 69.02 % and 14.12 % at the same instant and have
+never been polled together, so the discrepancy has never been checked.
 
 
 ---

@@ -19,7 +19,15 @@ neighbourhood, so a throttle blip cannot contribute.
 
 ## The events are real
 
-**3.2 hours of Park idle, 09-04: 136 events, one every 84 s, median 31 rpm.**
+**3.2 hours of Park idle, 09-04: 136 events in 122 idle minutes, median 31 rpm —
+a rate of 1.114 per minute, one per 54 s.**
+
+**CORRECTED 2026-09-18.** This read *"one every 84 s"*, which was the median
+spacing of the **57 large outliers**, not of the 136 detected events. Two
+different populations. **And spacing cannot be measured here at all:** idle in
+that session is 65 separate stretches, so long gaps are cut short by the end of
+their stretch — restricting to pairs inside one stretch drops a third of the
+gaps, and they are the long ones. Use the rate, not the spacing.
 Matches the "57 outliers, median spacing 82.3 s" already in `CLAUDE.md`, which
 nobody followed up.
 

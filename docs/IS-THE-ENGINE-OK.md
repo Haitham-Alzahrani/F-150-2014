@@ -112,11 +112,16 @@ power to detect anything but a gross difference.
 **And four measurements that would speak directly to combustion have never been
 logged at all:**
 
-* `[PCM] Currently Detected Engine Misfire` — in the sensor list, never recorded
-* `[PCM] Cylinder N Acceleration Value` — per-cylinder contribution, one
-  screenshot only
-* `[PCM] Knock Sensor 1` and `2` — read 323 / 336 in one screenshot, never analysed
-* `Intake manifold absolute pressure` with the engine running
+* `[PCM] Currently Detected Engine Misfire` — **53 samples across 3 sessions,
+  exactly 0.0000 in every one.** Corrected 2026-09-18: this said "never
+  recorded", which was wrong. What is missing is a capture long enough to
+  overlap an event. Measured rate: 0.44–1.66 per minute.
+* `[PCM] Cylinder N Acceleration Value` — 8–42 samples each, never with engine
+  speed co-sampled long enough to read
+* `[PCM] Knock Sensor 1` and `2` — 48 samples each, never compared at a known idle
+* ~~`Intake manifold absolute pressure` with the engine running~~ — **WITHDRAWN.
+  Not a channel on this truck; it is 2023-only.** A mechanical vacuum gauge is
+  the only route.
 
 **So the honest verdict is: nothing that has been measured shows an engine fault,
 and the measurements most likely to show one have not been taken.**
