@@ -28,6 +28,18 @@ An electric fan loads the engine only through the alternator, which is a far
 smaller and differently-shaped load than a mechanical fan clutch. Any reasoning
 that treated a fan clutch as a direct crankshaft load is withdrawn.
 
+## THE DASHBOARD — [`docs/DIAGNOSTIC-DASHBOARD.md`](docs/DIAGNOSTIC-DASHBOARD.md)
+
+**Built 2026-09-18: every system classified CONFIRMED / HIGH-CONFIDENCE SUSPECT
+/ POSSIBLE / NORMAL / UNKNOWN, from archived data only.** Read it for the state
+of the whole truck rather than the state of one argument.
+
+**Confirmed faults: none.** **One high-confidence suspect: the PCM supply
+voltage.** **The largest unexamined system is the TRANSMISSION** — commanded
+against measured gear ratio exists at n=591, but every sample is at a
+standstill, where the measured ratio is a division by zero and the constant
+0.829 "error" is a clamp, not slip. **It has never been measured while moving.**
+
 ## THE SYMPTOM, RESTATED BY THE OWNER — READ THIS BEFORE ANY DIAGNOSIS (2026-09-17)
 
 **Owner's own words, and they re-scope this entire file:**
@@ -1643,8 +1655,21 @@ right and the doubt was wrong.**
 **`A/C pressure` is a DEAD CHANNEL on this truck** — exactly 0.000 in every
 sample of every log, including while driving. Every statement in this file that
 "A/C was off, confirmed by A/C pressure reading 0" is withdrawn: that channel
-never answers. `Gear (AT)` is dead the same way, constant 1.000 in all 45
-samples. **Do not request either again, and do not treat their values as data.**
+never answers. **Do not request it, and do not treat its values as data.**
+
+**`Gear (AT)` IS NOT DEAD — that claim is WITHDRAWN (2026-09-18).** This file
+said *"dead the same way, constant 1.000 in all 45 samples"* and told the owner
+never to request it again. It is constant on this truck — 1.000 in all 61
+samples across four sessions — **but every sample that has a co-sampled vehicle
+speed was taken at 0 km/h, at 637–667 rpm.** A transmission standing still
+reports a constant legitimately. **The channel has never once been sampled while
+the truck was moving, so it is UNTESTED, not dead**, and the 2023 control reads
+**5** on the same channel, which proves the channel can carry other values.
+
+**The rule this repeats for the third time: a constant reading only means a dead
+channel if the CONDITION varied.** The same error produced the manifold pressure
+mix-up and the catalyst-temperature claim. **Check what the truck was doing
+before calling a channel dead.**
 
 **CORRECTION 2026-09-14 — `[PCM] A/C Pressure` IS A DIFFERENT CHANNEL AND IT
 WORKS.** The owner's sensor list carries both. The `[PCM]`-prefixed one read
