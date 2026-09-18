@@ -3065,6 +3065,21 @@ f150diag --port /dev/ttyUSB0 --baud 115200 live --pids rpm --seconds 300 --label
 python3 data/rpm_rate.py logs/<file>.csv
 ```
 
+**A PERSISTENT INTERACTIVE LINK ALSO EXISTS:
+[`data/f150_live.py`](data/f150_live.py)** — one background thread owns the
+adapter and logs `Engine RPM` continuously at full rate while the foreground
+answers typed questions off the same connection. It writes `elapsed_s,rpm`,
+which `data/rpm_rate.py` and `data/idle_events.py` read directly. **Read-only by
+allowlist; `CLEAR_DTC` is never imported.** See `docs/LOCAL-SETUP.md` §2b —
+including that **`python-obd` cannot talk to a Bluetooth Low Energy adapter at
+all**, which is what most cheap clones and anything paired to an iPhone are.
+
+**A NOTE FOR ANY SESSION RUNNING IN THE CLOUD: you cannot reach the truck.**
+A Claude Code Remote container has no serial device (`/dev/ttyUSB*` does not
+exist) and no route to Jeddah. Scripts that open an adapter only run on a
+machine physically plugged into the truck. **Do not claim to have queried the
+vehicle from a remote session.**
+
 `f150diag ports` lists serial ports. **`--pids` takes single PID names or the
 groups `idle`, `fuel`, `o2`, `evap`, `air`, `full`** — and every extra parameter
 divides the sample rate, so name exactly what the question needs. The rate law

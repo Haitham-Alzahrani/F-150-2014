@@ -100,13 +100,21 @@ def sessions(paths):
         yield p, idle, np.median(np.diff(t)), r
 
 
-def main():
+def main(paths=None):
+    # BUG FIXED 2026-09-18: this ignored sys.argv and always re-ran the historical
+    # sweep, while CLAUDE.md and docs/LOCAL-SETUP.md both document
+    # `python3 data/rpm_rate.py logs/<file>.csv`.  At the truck that printed a
+    # tidy table of OLD sessions and silently said nothing about the capture just
+    # taken - the worst kind of failure, because it looks like it worked.
+    # `logs/` is in the default sweep now too, so local captures are never missed.
     print('ENGINE SPEED RATE OF CHANGE AT IDLE, fixed %.1f s bandwidth\n' % SMOOTH_S)
     print('  session                          n     median   90th pct   idle   raw dt')
     out = []
-    for p, idle, dt, r in sessions(sorted(
-            glob.glob('data/carscanner/**/*', recursive=True) +
-            glob.glob('data/control-2023/**/*', recursive=True))):
+    if not paths:
+        paths = sorted(glob.glob('data/carscanner/**/*', recursive=True) +
+                       glob.glob('data/control-2023/**/*', recursive=True) +
+                       glob.glob('logs/**/*', recursive=True))
+    for p, idle, dt, r in sessions(paths):
         ctl = 'control-2023' in p or '20260906_17' in p or '20260906_18' in p
         out.append((ctl, os.path.basename(p)[:30], len(r), np.median(r),
                     np.percentile(r, 90), idle, dt))
@@ -125,4 +133,4 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    main(sys.argv[1:] or None)

@@ -71,12 +71,15 @@ def analyse(t, v, idle_lo, idle_hi):
                 sd_band=float(band[idle].std()), stretches=stretches)
 
 
-def main():
+def main(paths=None):
     print('DISCRETE IDLE EVENTS, fixed %.0f rpm threshold, 0.5-5 Hz band\n' % THRESH)
     print('  session                          idle min   events  per min   dips/rises  median  band sd  idle runs')
     out = []
-    for p in sorted(glob.glob('data/carscanner/**/*', recursive=True) +
-                    glob.glob('data/control-2023/**/*', recursive=True)):
+    if not paths:
+        paths = sorted(glob.glob('data/carscanner/**/*', recursive=True) +
+                       glob.glob('data/control-2023/**/*', recursive=True) +
+                       glob.glob('logs/**/*', recursive=True))
+    for p in paths:
         if not os.path.isfile(p) or not any(p.endswith(e) for e in ('.csv', '.csv.gz', '.zip')):
             continue
         try:
@@ -113,4 +116,5 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    # Same argv fix as rpm_rate.py, 2026-09-18.
+    main(sys.argv[1:] or None)

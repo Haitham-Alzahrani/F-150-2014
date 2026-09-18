@@ -96,6 +96,61 @@ which `docs/RPM-ORDER-ANALYSIS.md` showed are already reachable at 33 Hz.
 
 ---
 
+## 2b. A PERSISTENT LIVE LINK — [`data/f150_live.py`](../data/f150_live.py)
+
+**For when you want to keep one connection open and ask it things as you go**,
+rather than run a fixed protocol and stop. One background thread owns the
+adapter and logs `Engine RPM` continuously at full rate; the foreground answers
+typed questions off the same connection.
+
+```
+python3 data/f150_live.py --port /dev/ttyUSB0 --baud 115200
+```
+
+```
+log park-idle      start recording engine speed to logs/
+rpm                one reading, without interrupting the recording
+rate               samples, seconds and achieved Hz so far
+endlog             stop, and print the command to analyse it
+help               every allowed reading
+```
+
+It writes `elapsed_s,rpm`, **which `data/rpm_rate.py` and `data/idle_events.py`
+already read**, so a capture goes straight into the analysis:
+
+```
+python3 data/rpm_rate.py logs/<file>.csv
+```
+
+**Why it logs in the background instead of sampling per command.** Every open
+question on this truck is about how engine speed *moves* — rate of change,
+0.24 s events, engine orders. Those need tens of samples per second. One sample
+per typed command is about 1 Hz, Nyquist 0.5 Hz, which is below even the 0.33 Hz
+idle oscillation and nowhere near first order at 10.8 Hz. A per-command reading
+also **keeps nothing**: every finding in this project came from a logged CSV
+analysed offline.
+
+**It is read-only by allowlist, not blocklist.** `obd.commands.CLEAR_DTC` is
+never imported. Clearing destroys the freeze frame, monitor readiness and the
+distance and warm-up counters, and this project has twice had a measurement
+ruined by an adaptive reset nobody asked for.
+
+**BEFORE BUYING OR PAIRING ANYTHING — `python-obd` cannot talk to a
+Bluetooth Low Energy adapter.** It speaks to a serial port. That means:
+
+| Adapter | What to pass to `--port` |
+|---|---|
+| **USB** (OBDLink SX and similar) | `/dev/ttyUSB0` · macOS `/dev/tty.usbserial-*` · Windows `COM3` |
+| **Bluetooth Classic**, Linux | bind it first: `sudo rfcomm bind 0 <MAC> 1` → `/dev/rfcomm0` |
+| **Bluetooth Classic**, macOS | `/dev/tty.OBDII-*` once paired |
+| **Bluetooth Classic**, Windows | the outgoing `COM` port in Bluetooth settings |
+| **BLE / Bluetooth 4.0+** (most cheap clones, and anything paired to an iPhone) | **Will not work.** No serial port exists to open. Use a USB or Bluetooth Classic adapter for laptop work. |
+
+A phone running Car Scanner is very often on a BLE adapter. **If that is the one
+in the port, it will not drive this script**, and no port string fixes it.
+
+---
+
 ## 3. Find the adapter
 
 ```
