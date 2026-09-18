@@ -29,8 +29,7 @@
       "Read(./**)"
     ],
     "deny": [
-      "Bash(*CLEAR_DTC*)",
-      "Bash(*clear_dtc*)"
+      "Bash(*obd.commands.CLEAR*)"
     ]
   }
 }
