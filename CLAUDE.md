@@ -444,34 +444,37 @@ test this file named in advance. The counters agree: **364 km / 7 warm-ups on
 exactly. **Short term trim is therefore carrying the whole correction alone**,
 which is why it swings −20.31 to +15.62 % here.
 
-**THE BANK OFFSET AT SETTLED IDLE IS CONFIRMED ON BANK 1 — +0.621 %, n=1,711.**
+**THE BANK OFFSET CLAIM FROM THIS LOG IS WITHDRAWN — see
+[`docs/BANK-OFFSET-WITHDRAWN.md`](docs/BANK-OFFSET-WITHDRAWN.md) (2026-09-18).**
+This section previously read *"CONFIRMED ON BANK 1 — +0.621 %, n=1,711"* and
+called it corroboration that the offset followed the hardware. **It was neither
+confirmed nor at settled idle.**
 
-| Minute | Engine speed | Bank 1 − Bank 2 |
-|---|---|---|
-| 17:55 / 17:56 / 17:57 | not sampled | **+0.613 / +0.679 / +0.599 %** |
-| **17:58** | **629–690 rpm, confirmed idle** | **+0.564 %** |
-| 17:59 / 18:00 | 523–787 / 562–1314 | −0.859 / −0.960 % |
+| Minute | Engine speed | Bank 1 − Bank 2 | |
+|---|---|---|---|
+| 17:55 / 17:56 / 17:57 | **ZERO samples** | +0.703 / +0.607 / +0.607 % | condition unknown |
+| 17:58 | **4 samples** | +0.781 % | n=2 after the guard band |
+| 17:59 / 18:00 / 18:01 | sampled, guard-band clean | **−0.308 / −1.136 / −0.977 %** | **Bank 2 needs more** |
 
-**Four consecutive minutes agree within 0.12 points**, and the one with engine
-speed on the page confirms settled idle. **It corroborates the pixel reading of
-the screenshot (+0.58 %) by a completely independent route.** The offset is on the
-opposite bank from the pre-swap +1.95 % — **it followed the hardware.**
+**The 1,711 samples were the minutes with no engine speed on the page.** The
+"confirmed idle" rested on **four** samples in the last of them. Where engine
+speed does exist the sign is the other way, at n=140.
 
-**THE SIGN REVERSES UNDER THROTTLE MOVEMENT — new.** During the blips Bank 2 needs
-more, −0.907 %, n=174. **That is tip-in and overrun, not a bank property** (this
-file already records a +9.38 % tip-in spike and a −11.72 % overrun crash).
-**Consequence: a whole-session average is condition-soup** — mixing everything
-gives +0.480 %, which is neither number.
+**Neither half is clean** — the rpm-bearing minutes are the ones holding the
+throttle blips, and short term trim lags engine speed by 0.65 s, so a 2 s guard
+band may not clear a recovery from 1,314 rpm. **The post-swap bank offset at
+settled idle has never been measured.**
+
+**THE SIGN REVERSES UNDER THROTTLE MOVEMENT.** During the blips Bank 2 needs
+more. **That is tip-in and overrun, not a bank property** (this file already
+records a +9.38 % tip-in spike and a −11.72 % overrun crash). **A whole-session
+average is condition-soup** — mixing everything gives +0.480 %.
 
 **METHOD WARNING THAT COST A WRONG INTERMEDIATE ANSWER HERE:** selecting idle
 samples by the **time span** of the qualifying engine-speed readings sweeps in the
-blips between them and flips the result to −0.711 %. **Select by each sample's own
-condition, never by a window bounded by qualifying samples.**
-
-**STILL NOT A MIRROR: −1.95 % expected, +0.62 % observed.** One reading fits both
-— **two contributions, only one of which moved**: a driver-side leak the new
-intake gaskets closed, plus a sensor bias that travelled with the part. **A
-hypothesis that fits, not a measurement.**
+blips between them. **Select by each sample's own condition, never by a window
+bounded by qualifying samples** — and require idle across a guard band, not just
+at the centre sample.
 
 **TWO OF THE FOUR MISSING CROSS-CHECKS ARE NOW DONE.** `Engine coolant
 temperature` vs `[PCM] Cylinder head temperature`: identical in **99.5 %** of
@@ -492,57 +495,86 @@ copied twice.
 **`Ethanol fuel percent` = 18.43 %, a FOURTH discrete value** (byte 47), after
 9.80, 19.22 and 22.35.
 
-## THE SWAP READING ARRIVED — THE OFFSET CHANGED SIDES (2026-09-17, phone clock 5:57)
+## DOES FLIPPING THE SENSORS CHANGE ANYTHING? UNEVALUATED — and the claim that it did is WITHDRAWN (2026-09-18)
 
-**Full record: [`docs/SENSOR-SWAP-RESULT.md`](docs/SENSOR-SWAP-RESULT.md).
-Screenshot: [`data/sensor-swap-2026-09-17/`](data/sensor-swap-2026-09-17/).
-Extraction tool: [`data/read_trim_screenshot.py`](data/read_trim_screenshot.py).**
+**Full record: [`docs/BANK-OFFSET-WITHDRAWN.md`](docs/BANK-OFFSET-WITHDRAWN.md).
+Tool: [`data/bank_offset.py`](data/bank_offset.py).** Owner asked directly. Every
+session that ever polled both banks was re-derived, and the finding does not
+survive.
 
-| | Bank 1 | Bank 2 |
-|---|---|---|
-| **Before the swap** (n=108, paired within 0.15 s) | baseline | **+1.95 % more fuel** |
-| **After the swap** (999 columns, one 15 s window) | **+0.58 % more fuel** | baseline |
+**THIS SECTION PREVIOUSLY SAID THE OFFSET FOLLOWED THE HARDWARE AND NAMED A
+PART** — *"the upstream oxygen sensor that used to be on Bank 2 and is now on
+Bank 1"*, on Bank 2 +1.95 % before against Bank 1 +0.58/+0.62 % after. **Three
+errors, each sufficient on its own.**
 
-**The offset followed the HARDWARE across the engine, not the bank.** Bank 1 sits
-higher in 78 % of columns, median +0.64 %, and the sign holds in all three thirds
-of the window. **That is the branch the locked prediction called "a lean-biased
-sensor is PROVEN"** — a leak or an exhaust leak on the driver's side would have
-stayed with the bank.
+**1. IT READ SHORT TERM TRIM ALONE AFTER LONG TERM HAD LEARNED.** The two halves
+trade off — this file has said so since 09-09. On the 09-17 log long term has
+**re-learned asymmetrically**: Bank 1 **−3.125 %**, Bank 2 **−2.344 %**, in 4,615
+of 4,631 samples, pointing the **opposite way** to short term.
 
-**IT NAMES A PHYSICAL PART FOR THE FIRST TIME: the upstream oxygen sensor that
-used to be on Bank 2 and is now on Bank 1.**
+| 2026-09-17, n=4,484 paired | |
+|---|---|
+| Short term, Bank 1 − Bank 2 | **+1.116 %** |
+| Long term, Bank 1 − Bank 2 | **−0.781 %** |
+| **TOTAL correction difference** | **+0.336 %** |
 
-**READ BY PIXEL, NOT BY EYE — and this matters.** The two panels are drawn on
-**different vertical scales** (Bank 1 to −3.0, Bank 2 to −3.8). Comparing their
-curve heights visually is the same error this file already records as *"a good
-number compared against a bad one."* Both traces were extracted and converted
-using the gridlines, and the extraction **reproduces the app's own Min/Max to
-within a pixel**. A **59 ms** draw skew between panels was found and corrected.
+**Long term absorbs 70 % of it.** Only the total is comparable across sessions.
 
-**FOUR REASONS IT IS NOT YET PROVEN, and none are small:**
+**2. THE PRE-SWAP BASELINE WAS NOT ONE SESSION.** `docs/READINGS-SCAN.md` says
+*"only ONE session in the entire project ever polled both short term trims
+together."* **Eleven do.** That scan globbed `*.csv` and **every one of the others
+is stored gzipped.** Standing rule: **glob `*.csv` AND `*.csv.gz` AND `*.zip`, or
+use `carscanner_lib.logs()`.**
 
-1. **The magnitude did not mirror.** A carried-across bias should reappear at a
-   similar size: −1.95 % expected, **+0.58 % observed, under a third** — and
-   **below one quantisation step**, so it exists only as a duty cycle between
-   adjacent steps.
-2. **The engine state was not recorded.** Both trims swing roughly −3.9 to
-   +3.9 % on a slow cycle, far wider than any earlier settled idle. **The air
-   conditioning compressor cycles at 15.78 s and the window is only ~15 s, so
-   this capture cannot rule the compressor in or out.**
-3. **Screenshot, not export.** The +1.95 % came from 108 CSV samples. **Adjacent
-   pixel columns are not independent, so no significance test may be computed
-   from them** — sign and size only.
-4. **THREE variables changed**: intake gaskets, the sensor swap, **and the
-   2026-09-16 retune**. The retune should not affect a bank *difference* since a
-   calibration applies to both banks equally — but that is reasoning, not a
-   measurement.
+**3. THE OFFSET CHANGES SIGN INSIDE ONE CONTINUOUS SESSION.** The largest paired
+dataset in the project had never been analysed — **2026-09-04, 3.2 h of unbroken
+Park idle, 1,746 guard-band-clean samples.** Long term sits *fixed* at
++3.125 / +2.344 throughout, so this drift is entirely in short term:
 
-**WHAT SETTLES IT: the same two channels as CSV #2 (Horizontal), warm, Park,
-standstill, air conditioning off, three minutes.** That reproduces the method
-behind the +1.95 % and makes the two numbers comparable rather than merely
-opposite. A genuine mirror at a known state names the part; a collapse toward
-zero means the gasket closed a real leak and this window was a disturbed
-condition.
+| Block | short B1 | short B2 | **TOTAL B1−B2** |
+|---|---|---|---|
+| 1 | −0.467 | −0.518 | **+0.722** |
+| 2 | −0.038 | −0.107 | **+0.851** |
+| 3 | +0.572 | +1.818 | **−0.515** |
+| 4 | +1.069 | +3.273 | **−1.423** |
+| 6 | +0.502 | +2.593 | **−1.368** |
+
+**It crosses zero mid-session with nothing done to the truck — range +0.85 to
+−1.42, 2.3 points.** The swap was being judged on well under one point.
+
+**AND IT IS NOT A SETTLING CURVE THAT COULD BE WAITED OUT.** The two long
+sessions drift in **opposite** directions — at 60–75 minutes in, 09-04 reads
+**+0.852** and 09-17 reads **+0.994**, but 09-04 then goes to **−1.379** by minute
+150 while 09-17 never does. There is no settled value to compare.
+
+| Session | Era | Total at guard-band idle | n |
+|---|---|---|---|
+| `2026-09-04 22-23-38` | pre | **−0.466 %** (range +0.85 … −1.42) | **1,746** |
+| `20260905_041723` | pre | −1.373 % | 42 |
+| `20260908_154859` | pre | +0.220 % | 42 |
+| `2026-09-16_17-54-19` | **post** | −0.686 % | 140 |
+| `2026-09-17_15-49-53` | **post** | +0.336 %, **no idle confirmation** | 4,484 |
+
+**EVERY POST-SWAP NUMBER SITS INSIDE THE RANGE THE TRUCK COVERED BEFORE THE SWAP,
+WITHIN A SINGLE SESSION.**
+
+**THE SWAP IS UNEVALUATED, NOT REFUTED.** A sensor bias may well have moved;
+nothing measured can currently see it. **Do not quote a single number for "the
+bank offset" again** without naming the session and where in that session it sits.
+
+**WHAT SETTLES IT — and it now needs two runs, not one.** Three tiles, three
+minutes, warm Park idle, **do not touch the throttle**:
+
+```
+Short term fuel % trim - Bank 1
+Short term fuel % trim - Bank 2
+Engine RPM
+```
+
+then the same again with `Long term fuel % trim - Bank 1` and `- Bank 2`.
+**All four are needed and four tiles costs too much rate to run at once.**
+**Engine speed must be on the page** — without it the capture cannot be read,
+which is the fourth time this project has learned that lesson.
 
 ## THE SENSOR SWAP — the decisive experiment, PREDICTION LOCKED BEFORE THE DATA (2026-09-16)
 
@@ -731,10 +763,17 @@ wrong. About 32 ml = E22 and the estimate is right and the whole line closes.
 investigation has chased since the D/R relapse.** Not proof: the shake returned on
 09-09 while the estimate was still 9.80 %.
 
-**BANK 2 NEEDS +1.95 % MORE FUEL THAN BANK 1**, paired within 0.15 s at settled
-idle, n=108, t=15.5, p=3.4e-29. Fourth sighting of the driver-side offset.
-**Severe caveat: only ONE session in the whole project ever polled both short term
-trims together at idle.** Strong measurement of one session, not replicated.
+**BANK 2 NEEDED +1.95 % MORE FUEL THAN BANK 1 ON 2026-09-05**, paired within
+0.15 s at settled idle, n=108, t=15.5, p=3.4e-29. **This one reading stands.**
+
+**BUT THE CAVEAT PRINTED HERE WAS WRONG AND IT MATTERED.** It said *"only ONE
+session in the whole project ever polled both short term trims together at
+idle."* **Twelve sessions carry both channels** — the scan that produced that
+claim globbed `*.csv` and every one of the others is stored **gzipped**. Across
+them the offset **does not hold a sign**: it is already on Bank 1 by 09-08, three
+days before any sensor was touched. **It is not a "fourth sighting of a
+driver-side offset"; it is one solid reading surrounded by unstable ones.** See
+[`docs/BANK-OFFSET-WITHDRAWN.md`](docs/BANK-OFFSET-WITHDRAWN.md).
 
 **TWO CHANNELS MUST STOP BEING READ AS ABSOLUTE NUMBERS.**
 `Throttle Position Actually` exceeds 90 degrees in 2.67 % of samples, maximum

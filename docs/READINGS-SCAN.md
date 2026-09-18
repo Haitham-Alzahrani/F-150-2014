@@ -248,10 +248,21 @@ raised: both short term trims, same samples, same moment.**
 **Fourth independent sighting of the driver-side lean offset**, and consistent with
 the +1.64 % recorded earlier.
 
-**The caveat is severe and must travel with the number: only ONE session in the
-entire project ever polled both short term trims together at settled idle.** All
-108 samples come from `20260905_041723`. This is a strong measurement of one
-session, not a replicated finding. **Repeat it before acting.**
+**CORRECTED 2026-09-18 — the caveat printed here was itself wrong.** It said
+*"only ONE session in the entire project ever polled both short term trims
+together at settled idle."* **Twelve sessions carry both channels.** This scan
+globbed `*.csv`; the others are stored gzipped or zipped, so a sweep meant to be
+exhaustive read **2 of 12 files**.
+
+**STANDING RULE: glob `**/*` with no extension filter, or call
+`carscanner_lib.logs()`, which handles plain, gzipped and zipped alike.** Four findings in this project
+have now come from an incomplete sweep.
+
+**The 108-sample reading itself stands** — long term trim was near-equal in that
+session, so this short term difference is also the total correction difference.
+**What does not stand is treating it as a stable property of the truck:** across
+the eleven sessions the offset does not hold a sign, and it is already on Bank 1
+by 09-08. See [`BANK-OFFSET-WITHDRAWN.md`](BANK-OFFSET-WITHDRAWN.md).
 
 ---
 

@@ -1,5 +1,13 @@
 # THE THREE LOGS AROUND THE DYNO — 2026-09-16/17
 
+> **WITHDRAWN 2026-09-18 — see [`BANK-OFFSET-WITHDRAWN.md`](BANK-OFFSET-WITHDRAWN.md).**
+> The conclusion below, that the offset followed the hardware and names the
+> upstream oxygen sensor, does not survive re-derivation. It read short term trim
+> alone after long term had learned asymmetrically; its "settled idle" rested on
+> four engine speed samples; and the offset had already changed sides on 09-08,
+> three days before any sensor was touched. **The swap is unevaluated, not
+> refuted.** Read what follows as method, not as a result.
+
 **`data/carscanner/2026-09-16-17-dyno-window/`.** The dyno retune was at **18:29
 on 09-16**, which places one log before it and two after.
 
