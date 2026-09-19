@@ -56,6 +56,20 @@ only there to prove the condition.**
 
 ## 1 — THIRTY MINUTES. The hiccup capture, now the top of the list
 
+> **CHECK SERVICE 06 BEFORE SPENDING THE THIRTY MINUTES (added 2026-09-19).**
+> This capture is long because the live misfire channel has to be **sampled at
+> the moment of an event**. The on-board monitor holds **cumulative per-cylinder
+> misfire counters** instead, with the module's own pass/fail limits, and a
+> counter does not have to be caught in the act. One command reads all six:
+>
+> ```
+> python data/f150_agent.py monitors --only misfire
+> ```
+>
+> **Whether this PCM answers those identifiers is untested** — if it does, it
+> may replace this capture outright, and if it does not, nothing is lost but a
+> minute. See [`SCANNER-PARITY.md`](SCANNER-PARITY.md).
+
 ```
 Engine RPM
 [PCM] Currently Detected Engine Misfire

@@ -44,7 +44,7 @@ from _repo import ROOT, utf8
 
 HOST = '127.0.0.1'
 PORT = 51507                     # arbitrary high port, localhost only
-READ_MODES = {1, 2, 3, 6, 7, 9}
+READ_MODES = {1, 2, 3, 6, 7, 9, 0x0A}
 WRITE_MODE = 4                   # Clear DTCs and Freeze data.  Never sent.
 LOG_DIR = ROOT / 'logs'
 
@@ -116,6 +116,7 @@ class SimConnection:
     # recover it by regression, which is the whole point of the exercise.
     AC_ON = False
     SWEEP = False
+    CODES = False                # rehearse the fault-code path on demand
 
     def _did(self, ident):
         import math
@@ -133,9 +134,72 @@ class SimConnection:
             return int(round((base + self._r.gauss(0, 20)) * 8)).to_bytes(2, 'big')
         return None
 
+    def _msg(self, hexdata):
+        """One synthetic CAN message, fed through the REAL library decoder.
+
+        Faking the DECODED value would test nothing - the decode is most of
+        what these services are.  Building the bytes the truck would send and
+        letting python-obd parse them exercises the actual path.
+        """
+        from obd.protocols.protocol import Message, ECU
+        m = Message([])
+        m.data = bytes.fromhex(hexdata)
+        m.ecu = ECU.ENGINE
+        return m
+
+    def _service(self, cmd):
+        """Synthetic answers for services 02, 03, 06, 07, 09 and 0A."""
+        name = getattr(cmd, 'name', '')
+        codes = SimConnection.CODES
+        if name == 'GET_DTC':
+            return self._msg('4301' + '0316') if codes else self._msg('4300')
+        if name == 'GET_CURRENT_DTC':
+            return self._msg('4700')
+        if name == 'PERMANENT_DTC':
+            return self._msg('4A01' + '0420') if codes else self._msg('4A00')
+        if name == 'STATUS':
+            # malfunction lamp off, no stored codes, spark ignition
+            return self._msg('4101' + ('8107E5E5' if codes else '0007E5E5'))
+        if name == 'VIN':
+            return self._msg('490201' + '1FTMF1EM1EFC80632'.encode().hex())
+        if name == 'CALIBRATION_ID':
+            return self._msg('490401' + b'CDE1104-SIMTUNE'.hex() + '00')
+        if name == 'CVN':
+            return self._msg('490601' + '1A2B3C4D')
+        if name.startswith('DTC_') and codes:
+            # Service 02 answers only while a code is stored, which is exactly
+            # what a freeze frame is: the snapshot taken when one set.
+            pid = bytes(cmd.command)[2:4].decode()
+            body = {'0C': '0C5E',      # 791.5 rpm
+                    '05': '5A',        # 90 C coolant
+                    '04': '4D',        # 30 % load
+                    '06': '85', '07': '7E',
+                    '0E': '9A'}.get(pid)
+            nbytes = max(0, getattr(cmd, 'bytes', 4) - 2)
+            if body is None:
+                body = '00' * nbytes
+            return self._msg('42' + pid + body)
+        if name.startswith('MONITOR_MISFIRE'):
+            mid = int(bytes(cmd.command)[2:4], 16)
+            cyl = mid - 0xA1                    # MID A2 is cylinder 1
+            n = 0 if cyl <= 0 else self._r.randint(0, 40)
+            # MID, test 0x0C misfire counts, scaling 0x24 counts, value/min/max
+            return self._msg('46%02X0C24%04X0000%04X' % (mid, n, 100))
+        if name.startswith('MONITOR_') and codes:
+            mid = int(bytes(cmd.command)[2:4], 16)
+            return self._msg('46%02X010124000000FFFF' % mid)
+        return None
+
     def query(self, cmd, force=False):
         time.sleep(0.030)                                   # the 33 Hz ceiling
         raw = getattr(cmd, 'command', None)
+        if (getattr(cmd, 'name', '') == 'STATUS'
+                or (raw and bytes(raw)[:2] in (b'02', b'03', b'06',
+                                               b'07', b'09', b'0A'))):
+            m = self._service(cmd)
+            if m is None:
+                return SimResponse(None)
+            return SimResponse(cmd([m]).value)
         if raw and bytes(raw).startswith(b'22'):
             ident = int(bytes(raw)[2:6], 16)
             pay = self._did(ident)
@@ -284,11 +348,18 @@ class Daemon:
                 SimConnection.AC_ON = on
             elif what == 'sweep':
                 SimConnection.SWEEP = on
+            elif what == 'codes':
+                SimConnection.CODES = on
             else:
-                return {'ok': False, 'error': 'sim what must be ac or sweep'}
+                return {'ok': False,
+                        'error': 'sim what must be ac, sweep or codes'}
             return {'ok': True, 'sim': True, what: on}
         if op == 'did':
             return self.did(int(req['did']))
+        if op in ('dtc', 'readiness', 'freeze', 'monitors', 'vehicle'):
+            return self.service(op, req)
+        if op == 'healthcheck':
+            return self.healthcheck()
         if op == 'list':
             return {'ok': True, 'sim': self.sim,
                     'supported': sorted(c.name for c in self.conn.supported_commands),
@@ -298,6 +369,51 @@ class Daemon:
             self.stop.set()
             return {'ok': True, 'stopping': True}
         return {'ok': False, 'error': 'unknown op %r' % op}
+
+    # -- the services the live link used to be missing ---------------------
+    def service(self, op, req):
+        """Fault codes, freeze frame, monitor tests, vehicle info, readiness."""
+        import obd
+        import f150_obd2 as S
+        try:
+            if op == 'dtc':
+                out = S.read_dtcs(obd, self.conn)
+            elif op == 'readiness':
+                out = S.read_readiness(obd, self.conn)
+            elif op == 'freeze':
+                out = S.read_freeze_frame(obd, self.conn)
+                if not out:
+                    out = {'empty': True, 'note': 'no freeze frame stored - '
+                           'this is the normal answer with no stored code'}
+            elif op == 'vehicle':
+                out = S.read_vehicle_info(obd, self.conn)
+            else:
+                out = S.read_monitors(obd, self.conn, req.get('only'))
+                if not out:
+                    out = {'empty': True, 'note': 'no monitor returned a '
+                           'completed test - monitors report only after their '
+                           'own drive cycle has run'}
+        except PermissionError as e:
+            return {'ok': False, 'refused': str(e)}
+        return {'ok': True, 'sim': self.sim, op: out}
+
+    def healthcheck(self):
+        """Everything a scan tool reads in one pass, in one call."""
+        import obd
+        import f150_obd2 as S
+        out = {}
+        for name, fn in (('vehicle', S.read_vehicle_info),
+                         ('readiness', S.read_readiness),
+                         ('dtc', S.read_dtcs),
+                         ('freeze', S.read_freeze_frame),
+                         ('monitors', S.read_monitors)):
+            try:
+                out[name] = fn(obd, self.conn)
+            except PermissionError as e:
+                out[name] = {'refused': str(e)}
+            except Exception as e:                 # one dead service must not
+                out[name] = {'error': repr(e)}     # lose the other four
+        return {'ok': True, 'sim': self.sim, 'healthcheck': out}
 
     def did(self, ident):
         """Mode 22 read. Service 0x22 ONLY - see data/f150_did.py for why."""
@@ -465,8 +581,15 @@ def main():
     sub.add_parser('stop', help='shut the daemon down')
     dd = sub.add_parser('did', help='mode 22 read by identifier (read-only)')
     dd.add_argument('ident', help='hex, e.g. 0x1100')
+    sub.add_parser('dtc', help='fault codes: stored, pending and permanent')
+    sub.add_parser('readiness', help='lamp, stored-code count, monitor status')
+    sub.add_parser('freeze', help='the sensor snapshot stored when a code set')
+    sub.add_parser('vehicle', help='VIN, calibration identifier, verification')
+    mo = sub.add_parser('monitors', help='service 06 on-board monitor results')
+    mo.add_argument('--only', choices=['misfire'], help='misfire counters only')
+    sub.add_parser('healthcheck', help='every service above, in one pass')
     sm = sub.add_parser('sim', help='simulated manipulations, --sim links only')
-    sm.add_argument('what', choices=['ac', 'sweep'])
+    sm.add_argument('what', choices=['ac', 'sweep', 'codes'])
     sm.add_argument('state', choices=['on', 'off'])
     r = sub.add_parser('read', help='one reading'); r.add_argument('name')
     sn = sub.add_parser('snapshot', help='a set of readings in one call')
@@ -491,6 +614,8 @@ def main():
         req['did'] = int(a.ident, 0)
     if a.op == 'sim':
         req['what'], req['on'] = a.what, a.state == 'on'
+    if a.op == 'monitors':
+        req['only'] = a.only
     if a.op == 'read':
         req['name'] = a.name
     if a.op == 'snapshot':

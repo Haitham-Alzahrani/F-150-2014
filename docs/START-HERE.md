@@ -94,6 +94,24 @@ directly in raw python, which is the actual dangerous act.
 
 ---
 
+## 2b2. EVERYTHING A SCAN TOOL READS — one command
+
+```
+python data/f150_agent.py healthcheck
+```
+
+Vehicle information, readiness, stored/pending/**permanent** fault codes, the
+freeze frame and every on-board monitor, in one pass, each reported
+independently so one dead service cannot lose the other four. Individually:
+`vehicle`, `readiness`, `dtc`, `freeze`, `monitors --only misfire`.
+
+**Run `monitors --only misfire` before committing to the thirty-minute misfire
+capture.** Those are cumulative per-cylinder counters with the module's own
+limits — they do not have to be caught during an event.
+[`SCANNER-PARITY.md`](SCANNER-PARITY.md) has the full comparison, including the
+library bug that would have reported this truck's VIN with its first and last
+characters missing.
+
 ## 2c. THE `[PCM]` CHANNELS — service 0x22
 
 The channels that would settle the misfire question — `[PCM] Currently Detected

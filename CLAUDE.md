@@ -44,6 +44,7 @@ costs a fresh ELM327 handshake. So the link is split —
 serve     ONE long-lived process owns the adapter, holds one handshake open,
           and logs Engine RPM continuously at full rate
 clients   status | read <NAME> | snapshot | log start|stop | list | stop
+          dtc | readiness | freeze | monitors | vehicle | healthcheck | did
           each a one-shot command returning one JSON object
 ```
 
@@ -62,6 +63,31 @@ allowed, **mode 4 refused**. `read CLEAR_DTC` returns REFUSED — verified, beca
 
 `.claude/settings.json` pre-approves these commands so a local session is not
 prompted for each one, and denies anything naming CLEAR_DTC.
+
+## IS IT AS GOOD AS THE SCAN APP? — [`docs/SCANNER-PARITY.md`](docs/SCANNER-PARITY.md)
+
+**Until 2026-09-19 the link read LIVE SENSOR DATA AND NOTHING ELSE** — one of the
+six things a scan app does. Fault codes, freeze frame, on-board monitor results,
+vehicle information and readiness were **absent**, not weak. All five are in now
+(`data/f150_obd2.py`), plus **permanent codes, service 0A, which `python-obd`
+does not implement at all.**
+
+**`healthcheck` runs all of it in one call.**
+
+**SERVICE 06 CHANGES CAPTURE 1.** `MONITOR_MISFIRE_CYLINDER_1`–`_6` are
+**cumulative counters with the module's own pass/fail limits**, not an
+instantaneous channel. Capture 1 asks for thirty minutes because the live
+misfire channel must be **sampled during an event**. A counter does not have to
+be caught in the act. **Whether this PCM answers those identifiers is untested —
+one command settles it.**
+
+**A LIBRARY BUG WOULD HAVE REPORTED THE WRONG VIN.** `python-obd` 0.7.3 ends its
+service 09 decoder with `bytes.strip`, which treats its argument as a **set of
+bytes** — it strips the digits `0`, `1` and `2` off both ends. This VIN comes
+back as `FTMF1EM1EFC8063`: leading `1` and trailing `2` eaten. **Every Ford VIN
+starts with `1`.** Service 09 is decoded in this repository instead.
+**`CALIBRATION_ID` is the custom tune's fingerprint and nothing here had ever
+recorded it.**
 
 ## READING THE `[PCM]` CHANNELS — [`docs/MODE-22.md`](docs/MODE-22.md)
 
@@ -382,7 +408,11 @@ evidence for all of them is in [`docs/HISTORY.md`](docs/HISTORY.md).
     cure is a **wider signal, not a better fit.** *A mode 22 identifier
     carrying engine speed calibrated 11 % low at idle and within 0.5 % with the
     throttle swept; the true scale was known because it was planted.*
-23. **An address that answers tells you nothing about what it carries.** A
+23. **Read the decoder before trusting a decoded string.** *`python-obd`'s
+    service 09 decoder ends in `bytes.strip`, which takes a SET of bytes, not a
+    prefix — it strips the digits `0`, `1` and `2` off both ends. This truck's
+    VIN came back as `FTMF1EM1EFC8063`. Every Ford VIN starts with `1`.*
+24. **An address that answers tells you nothing about what it carries.** A
     wrong identifier returns a plausible number, not an error, and a plausible
     number condemns a good part. *This is why both registries start empty.*
 
@@ -428,6 +458,7 @@ stays readable; nothing was deleted.
 | [`docs/WINDOWS-SETUP.md`](docs/WINDOWS-SETUP.md) | Windows, `cmd`, COM ports, the codepage trap |
 | [`docs/SENSOR-INVENTORY.md`](docs/SENSOR-INVENTORY.md) | every channel this VIN answers, and what is blank |
 | [`docs/scanner-pids.md`](docs/scanner-pids.md) | the app's exact labels — **use these when asking him for a reading** |
+| [`docs/SCANNER-PARITY.md`](docs/SCANNER-PARITY.md) | **what the link can do against what the scan app can do**, service by service |
 | [`docs/MODE-22.md`](docs/MODE-22.md) | **reading the `[PCM]` channels directly**, and the two traps in calibrating one |
 | [`docs/VOLTAGE-PCM-VS-BCM.md`](docs/VOLTAGE-PCM-VS-BCM.md) | the one high-confidence suspect |
 | [`docs/BANK-OFFSET-WITHDRAWN.md`](docs/BANK-OFFSET-WITHDRAWN.md) | why the sensor-swap result does not stand |

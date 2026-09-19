@@ -58,6 +58,9 @@ REGISTRY = ROOT / 'data' / 'did_registry.json'
 SERVICE = 0x22                    # ReadDataByIdentifier. The only one allowed.
 PCM_HEADER = b'7E0'               # powertrain, HS-CAN
 FORBIDDEN = {
+    # 0x04 is the one this whole project is built around refusing: it erases
+    # the freeze frame and the stored-code history, which is evidence.
+    0x04: 'ClearDiagnosticInformation (OBD-II service 04)',
     0x10: 'DiagnosticSessionControl', 0x11: 'ECUReset',
     0x14: 'ClearDiagnosticInformation', 0x27: 'SecurityAccess',
     0x2E: 'WriteDataByIdentifier', 0x2F: 'InputOutputControlByIdentifier',

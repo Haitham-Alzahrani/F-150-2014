@@ -34,6 +34,12 @@ start /B "" .venv\Scripts\python.exe data\f150_agent.py --listen 51599 serve --s
 REM no 'sleep' in cmd either; ping to itself is the standard idiom.
 ping -n 3 127.0.0.1 > nul
 .venv\Scripts\python.exe data\f150_agent.py --listen 51599 status
+echo.
+echo     ... and the services a scan tool reads (simulated):
+.venv\Scripts\python.exe data\f150_agent.py --listen 51599 vehicle
+.venv\Scripts\python.exe data\f150_agent.py --listen 51599 readiness
+.venv\Scripts\python.exe data\f150_agent.py --listen 51599 dtc
+.venv\Scripts\python.exe data\f150_agent.py --listen 51599 monitors --only misfire
 .venv\Scripts\python.exe data\f150_agent.py --listen 51599 stop > nul 2>&1
 
 echo.
@@ -49,6 +55,7 @@ echo.
 echo  Leave that window open. In ANOTHER window, or from Claude:
 echo     .venv\Scripts\python.exe data\f150_agent.py status
 echo     .venv\Scripts\python.exe data\f150_agent.py log start park-idle
+echo     .venv\Scripts\python.exe data\f150_agent.py healthcheck
 echo.
 echo  Read docs\START-HERE.md
 echo ================================================================
