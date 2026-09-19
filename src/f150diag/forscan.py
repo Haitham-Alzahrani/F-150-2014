@@ -82,11 +82,117 @@ SYNONYMS: dict[str, str] = {
     "MISGENERAL": "misfire_general",
     # electrical
     "VPWR": "module_volts", "BATTV": "module_volts", "VOLT": "module_volts",
+
+    # ---------------------------------------------------------------------
+    # TRANSMISSION — the largest unexamined system on this truck, and every
+    # channel here is Ford enhanced, so FORScan is the only way in until a
+    # service 0x22 identifier is verified. See docs/MODE-22.md.
+    #
+    # THE EXACT FORSCAN HEADER TEXT FOR THIS VEHICLE IS NOT VERIFIED. These
+    # are the plausible forms. An unmapped column is REPORTED BY NAME and
+    # still carried through, so a miss is visible and costs nothing - add the
+    # real header here once a FORScan export has been seen.
+    # ---------------------------------------------------------------------
+    "TFT": "atf_temp", "TOT": "atf_temp", "ATFTEMP": "atf_temp",
+    "ATFTEMPERATURE": "atf_temp", "TRANSFLUIDTEMP": "atf_temp",
+    "PCMATFTEMPERATURE": "atf_temp",
+
+    "TSS": "turbine_speed", "TURBINESPEED": "turbine_speed",
+    "TURBINESHAFTSPEED": "turbine_speed",
+    "PCMACTUALTURBINESHAFTSPEED": "turbine_speed",
+
+    "ISS": "input_shaft_speed", "INPUTSHAFTSPEED": "input_shaft_speed",
+    "OSS": "output_shaft_speed", "OUTPUTSHAFTSPEED": "output_shaft_speed",
+
+    "GEAR": "gear_cmd", "CGEAR": "gear_cmd", "COMMANDEDGEAR": "gear_cmd",
+    "PCMCOMMANDEDGEAR": "gear_cmd", "TR": "trans_range",
+
+    # commanded against measured is the whole point - keep them distinct
+    "CGEARRATIO": "gear_ratio_cmd", "COMMANDEDGEARRATIO": "gear_ratio_cmd",
+    "PCMCOMMANDEDGEARRATIO": "gear_ratio_cmd",
+    "GEARRATIO": "gear_ratio_measured",
+    "MEASUREDGEARRATIO": "gear_ratio_measured",
+    "PCMMEASUREDGEARRATIO": "gear_ratio_measured",
+
+    "TCC": "tcc_cmd", "TCCCMD": "tcc_cmd", "TCCDC": "tcc_duty",
+    "TCCSLIP": "tcc_slip", "TCSLIP": "tcc_slip",
+    "TORQUECONVERTERSLIP": "tcc_slip",
 }
+
+# ---------------------------------------------------------------------------
+# CAR SCANNER SENSOR-LIST LABELS.
+#
+# The table above is FORScan's short acronyms. Car Scanner exports the long
+# sensor-list labels instead, and on a real 76-column export only 11 columns
+# mapped. Adding cylinder acceleration WITHOUT engine speed would break method
+# rule 2 - engine speed must be on the page or a capture cannot be read - so
+# the diagnostic channels are completed here.
+#
+# The app's own arithmetic (fuel used, distance, power-from-MAF, GPS) is
+# deliberately NOT mapped: SENSOR-INVENTORY.md classifies those as the app's
+# computation rather than readings from the truck.
+# ---------------------------------------------------------------------------
+SYNONYMS.update({
+    "ENGINERPM": "rpm", "ENGINERPMX1000": "rpm_x1000",
+    "VEHICLESPEED": "speed",
+    "ENGINECOOLANTTEMPERATURE": "ect",
+    "INTAKEAIRTEMPERATURE": "iat",
+    "AMBIENTAIRTEMPERATURE": "ambient_temp",
+    "MAFAIRFLOWRATE": "maf",
+    "CALCULATEDENGINELOADVALUE": "engine_load",
+    "ABSOLUTELOADVALUE": "abs_load",
+    "THROTTLEPOSITION": "throttle",
+    "ABSOLUTETHROTTLEPOSITIONB": "throttle_b",
+    "TIMINGADVANCE": "timing_adv",
+    "BAROMETRICPRESSURE": "baro",
+    "SHORTTERMFUELTRIMBANK1": "stft_b1", "SHORTTERMFUELTRIMBANK2": "stft_b2",
+    "LONGTERMFUELTRIMBANK1": "ltft_b1", "LONGTERMFUELTRIMBANK2": "ltft_b2",
+    "FUELAIRCOMMANDEDEQUIVALENCERATIO": "equiv_ratio_cmd",
+    "COMMANDEDEVAPORATIVEPURGE": "evap_purge",
+    "CONTROLMODULEVOLTAGE": "module_volts",
+    "OBDMODULEVOLTAGE": "obd_module_volts",
+    "OXYGENSENSOR1WIDERANGEEQUIVALENCERATIO": "o2_s1_equiv",
+    "OXYGENSENSOR5WIDERANGEEQUIVALENCERATIO": "o2_s5_equiv",
+    "OXYGENSENSOR1WIDERANGECURRENTMA": "o2_s1_current",
+    "OXYGENSENSOR5WIDERANGECURRENTMA": "o2_s5_current",
+    "OXYGENSENSOR2BANK1VOLTAGE": "o2_b1s2_v",
+    "OXYGENSENSOR2BANK2VOLTAGE": "o2_b2s2_v",
+    "CATALYSTTEMPERATUREBANK1SENSOR1": "cat_temp_b1",
+    "CATALYSTTEMPERATUREBANK2SENSOR1": "cat_temp_b2",
+    "PCMCURRENTLYDETECTEDENGINEMISFIRE": "misfire_current",
+    "PCMKNOCKSENSOR1": "knock_1", "PCMKNOCKSENSOR2": "knock_2",
+    "PCMCYLINDERHEADTEMPERATURE": "cyl_head_temp",
+    "PCMACTUALELECTRONICTHROTTLECONTROL": "etc_actual",
+    "PCMDESIREDELECTRONICTHROTTLECONTROL": "etc_desired",
+    "PCMACPRESSURE": "ac_pressure",
+    "PCMFUELLEVEL": "fuel_level",
+    # real readings, not app arithmetic
+    "EVAPSYSTEMVAPORPRESSURE": "evap_vapor_pressure",
+    "ABSOLUTEPEDALPOSITIOND": "pedal_d",
+    "ABSOLUTEPEDALPOSITIONE": "pedal_e",
+})
+
+# Cylinder acceleration, generated so the six cannot drift apart by a typo.
+# Also Ford enhanced, and the channel the 2026-09-17 capture was built on -
+# see docs/MISFIRE-BASELINE.md for why it does NOT by itself mean a misfire.
+for _n in range(1, 7):
+    for _form in ("CYL%dACC", "CYL%dACCEL", "CYL%dACCELERATION",
+                  "CYLINDER%dACCELERATION", "CYLINDER%dACCELERATIONVALUE",
+                  "PCMCYLINDER%dACCELERATIONVALUE"):
+        SYNONYMS[_form % _n] = "cyl_accel_c%d" % _n
+    # the sensor-list label Car Scanner exports, normalised
+    SYNONYMS["PCMCYLINDER%dACCELERATIONVALUE" % _n] = "cyl_accel_c%d" % _n
+del _n, _form
 
 TIME_KEYS = {"TIME", "PCTIME", "TIMESTAMP", "ELAPSED", "ELAPSEDTIME", "T"}
 
-_UNIT_SUFFIX = re.compile(r"\s*[\(\[].*?[\)\]]\s*$")
+# Strip ONLY a trailing unit group, and only one whose contents hold no further
+# brackets.  The previous pattern was `\s*[\(\[].*?[\)\]]\s*$`, which begins
+# matching at the FIRST bracket in the header: a Car Scanner label such as
+# "[PCM] Cylinder 6 Acceleration Value ()" matched from its leading "[PCM]" all
+# the way to the trailing "()" and normalised to the EMPTY STRING - so every
+# [PCM] channel collided on one key and none of them could ever be mapped.
+_UNIT_SUFFIX = re.compile(r"\s*[\(\[][^()\[\]]*[\)\]]\s*$")
 _NON_ALNUM = re.compile(r"[^A-Z0-9]")
 
 
