@@ -341,7 +341,13 @@ class Session:
                     flag = "" if t.passed else "  ← OUT OF LIMITS"
                     if not t.passed:
                         failing += 1
-                    self.say(f"  MID {mid:02X} TID {t.tid:02X}: value {t.value} "
+                    # $A1 is the general monitor, $A1+N is cylinder N -
+                    # confirmed on this VIN, see docs/MISFIRE-BASELINE.md
+                    who = ("general" if mid == 0xA1 else
+                           f"cylinder {mid - 0xA1}" if 0xA2 <= mid <= 0xA7
+                           else "unmapped")
+                    self.say(f"  MID {mid:02X} ({who}) TID {t.tid:02X}: "
+                             f"value {t.value} "
                              f"limits {t.min_limit}..{t.max_limit} "
                              f"margin {t.margin}{flag}")
             self.context["mode06_failing"] = failing

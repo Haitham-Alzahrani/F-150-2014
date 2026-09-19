@@ -27,6 +27,39 @@ log = logging.getLogger("f150diag.services")
 # Service 01 — live data
 # ---------------------------------------------------------------------------
 
+def read_pid_raw(elm: Elm327, pid: Pid) -> tuple[float | None, str, str | None, str | None]:
+    """One Mode 01 parameter, KEEPING THE RAW REPLY.
+
+    Returns (value, raw_request, raw_response, error).  `read_pid` throws the
+    reply away after decoding, which makes a session unrepeatable: a decoder
+    fixed later cannot be applied to data already captured.  Raw is never
+    discarded here - see f150diag/session.py.
+    """
+    try:
+        raw = elm.command(pid.request)
+    except NoDataError:
+        return None, pid.request, None, "NO DATA"
+    except ElmError as exc:
+        return None, pid.request, None, str(exc)
+
+    try:
+        payload = clean_hex(raw)
+    except ElmError as exc:
+        return None, pid.request, raw, str(exc)
+
+    marker = f"41{pid.code}"
+    start = payload.find(marker)
+    if start < 0:
+        return None, pid.request, raw, f"no {marker} in reply"
+    data = to_bytes(payload[start + len(marker):])
+    if len(data) < pid.nbytes:
+        return None, pid.request, raw, "reply shorter than expected"
+    try:
+        return pid.decode(data[: pid.nbytes]), pid.request, raw, None
+    except Exception as exc:                                  # decoder fault
+        return None, pid.request, raw, f"decode failed: {exc!r}"
+
+
 def read_pid(elm: Elm327, pid: Pid) -> float | None:
     """One Mode 01 parameter. None when the ECU will not answer."""
     try:
@@ -195,9 +228,8 @@ def monitor_tests(elm: Elm327, mid: int) -> list[MonitorTest]:
     """
     Service 06 for one monitor id. Records are 9 bytes each.
 
-    Misfire monitors are conventionally MID 0x01-0x0A (0x01 = general,
-    0x02.. = per cylinder). Confirm the mapping for this PCM before reading
-    a cylinder number off a MID — it is a convention, not a guarantee.
+    MID 0xA1 is the general misfire monitor and 0xA1+N is cylinder N on this
+    VIN — CONFIRMED, not assumed. See docs/MISFIRE-BASELINE.md.
     """
     try:
         payload = clean_hex(elm.command(f"06{mid:02X}"))
@@ -222,7 +254,28 @@ def monitor_tests(elm: Elm327, mid: int) -> list[MonitorTest]:
 
 
 def misfire_monitors(elm: Elm327) -> dict[int, list[MonitorTest]]:
-    """Sweep the misfire monitor id range. Empty lists mean 'nothing reported'."""
+    """Sweep the misfire monitor ids. Empty lists mean 'nothing reported'.
+
+    THIS RANGE WAS WRONG UNTIL 2026-09-19. It swept MID 0x01-0x0A, which in
+    SAE J1979 are the OXYGEN SENSOR monitors, not misfire — see
+    oxygen_sensor_monitors() below, which is what that range actually reads.
+    The function would have returned oxygen sensor results labelled as misfire
+    counts, or nothing at all.
+
+    The correct identifiers are CONFIRMED on this VIN from the 2026-09-05
+    capture archived in data/f150.db: MID $A1 is the general misfire monitor
+    and cylinder N is MID $A1+N, so $A2..$A7 are cylinders 1..6 of this V6.
+    docs/MISFIRE-BASELINE.md carries the reading and its provenance.
+    """
+    return {mid: monitor_tests(elm, mid) for mid in range(0xA1, 0xA8)}
+
+
+def oxygen_sensor_monitors(elm: Elm327) -> dict[int, list[MonitorTest]]:
+    """MID 0x01-0x0A: the oxygen sensor monitors.
+
+    This is what the old misfire_monitors() range was really reading. On this
+    VIN the 2026-09-05 capture answered $01, $02, $05 and $06.
+    """
     return {mid: monitor_tests(elm, mid) for mid in range(0x01, 0x0B)}
 
 

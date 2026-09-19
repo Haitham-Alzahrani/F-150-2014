@@ -64,6 +64,28 @@ allowed, **mode 4 refused**. `read CLEAR_DTC` returns REFUSED — verified, beca
 `.claude/settings.json` pre-approves these commands so a local session is not
 prompted for each one, and denies anything naming CLEAR_DTC.
 
+## RAW SESSION LOG — [`docs/SESSION-LOG.md`](docs/SESSION-LOG.md)
+
+**The unit of record is THE REQUEST, not the sample set.** Every request stores
+its own request time, response time, latency, module, service, and **the raw
+bytes, which are never discarded** — so a session can be re-analysed, or
+re-decoded with a corrected decoder, **without connecting to the vehicle**.
+
+**`recorder.measure` used to poll parameters one by one and write them under ONE
+shared timestamp.** That is a false claim of simultaneity, and it was
+manufacturing in new data the exact error that produced four withdrawn findings.
+Fixed 2026-09-19: one row per reading, each timestamped when its own reply
+arrived.
+
+**`session.pair_offsets(records, a, b)` reports how far apart two channels
+really were** — median, p90 and max — and returns `simultaneous: False`. Quote
+it with any cross-channel comparison.
+
+**ONE CLOCK.** `data/f150_agent.py` took seconds from `time.localtime()` and the
+fraction from `(monotonic % 1)` — two clocks — and wrote times that jumped
+**backwards by up to 999 ms inside a second**. Fixed and verified: 265 samples,
+9 second boundaries, **zero negative intervals**.
+
 ## THE MISFIRE COUNTERS ALREADY EXIST — [`docs/MISFIRE-BASELINE.md`](docs/MISFIRE-BASELINE.md)
 
 **THIS FILE SAYS THREE TIMES THAT PER-CYLINDER MISFIRE COUNTS WERE NEVER
@@ -484,6 +506,7 @@ stays readable; nothing was deleted.
 | [`docs/WINDOWS-SETUP.md`](docs/WINDOWS-SETUP.md) | Windows, `cmd`, COM ports, the codepage trap |
 | [`docs/SENSOR-INVENTORY.md`](docs/SENSOR-INVENTORY.md) | every channel this VIN answers, and what is blank |
 | [`docs/scanner-pids.md`](docs/scanner-pids.md) | the app's exact labels — **use these when asking him for a reading** |
+| [`docs/SESSION-LOG.md`](docs/SESSION-LOG.md) | **the raw session format** — per-request timing, raw bytes, replay |
 | [`docs/MISFIRE-BASELINE.md`](docs/MISFIRE-BASELINE.md) | **the 2026-09-05 per-cylinder misfire counters**, and what they do to the cylinder 6 theory |
 | [`docs/SCANNER-PARITY.md`](docs/SCANNER-PARITY.md) | **what the link can do against what the scan app can do**, service by service |
 | [`docs/MODE-22.md`](docs/MODE-22.md) | **reading the `[PCM]` channels directly**, and the two traps in calibrating one |

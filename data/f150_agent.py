@@ -251,6 +251,7 @@ class Daemon:
         self._logging = False
         self._fh = self._writer = None
         self._t0 = None
+        self._wall0 = None           # wall-clock anchor, set with _t0
         self._n = 0
         self._last = None
         self._channels = ['RPM']
@@ -317,8 +318,17 @@ class Daemon:
             if name == 'RPM':
                 self._last = v
             el = time.monotonic() - self._t0
-            row = {'time': time.strftime('%H:%M:%S', time.localtime())
-                           + ('%.3f' % (el % 1))[1:]}
+            # ONE CLOCK.  This previously took the seconds from
+            # time.localtime() and the fraction from (el % 1) - two
+            # unsynchronised clocks - so the written time could jump BACKWARDS
+            # by up to 999 ms inside one second, and any interval computed from
+            # the file was wrong.  Reproduced 2026-09-19: elapsed 0.980 -> 1.040
+            # wrote ...18.980 -> ...18.040.  The wall clock is now an ANCHOR
+            # taken once at log start; absolute time is anchor + monotonic
+            # offset, so seconds and fraction always come from the same clock.
+            wall = self._wall0 + el
+            row = {'time': time.strftime('%H:%M:%S', time.localtime(wall))
+                           + ('%.3f' % (wall % 1))[1:]}
             row[label(name)] = '%.4f' % v
             self._writer.writerow(row)
             self._n += 1
@@ -498,7 +508,8 @@ class Daemon:
                 restval='', extrasaction='ignore')
             self._writer.writeheader()
             self._channels = chans
-            self._t0 = time.monotonic(); self._n = 0; self._per = {}
+            self._t0 = time.monotonic(); self._wall0 = time.time()
+            self._n = 0; self._per = {}
             self._logging = True
             warn = None
             if len(chans) > 3:
