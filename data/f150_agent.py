@@ -117,6 +117,7 @@ class SimConnection:
     AC_ON = False
     SWEEP = False
     CODES = False                # rehearse the fault-code path on demand
+    MISFIRE_CLEAN = True         # emit the archived 2026-09-05 pattern
 
     def _did(self, ident):
         import math
@@ -182,9 +183,18 @@ class SimConnection:
         if name.startswith('MONITOR_MISFIRE'):
             mid = int(bytes(cmd.command)[2:4], 16)
             cyl = mid - 0xA1                    # MID A2 is cylinder 1
-            n = 0 if cyl <= 0 else self._r.randint(0, 40)
-            # MID, test 0x0C misfire counts, scaling 0x24 counts, value/min/max
-            return self._msg('46%02X0C24%04X0000%04X' % (mid, n, 100))
+            if SimConnection.MISFIRE_CLEAN:
+                # the pattern actually archived on 2026-09-05: zero everywhere
+                # except a single count on cylinders 4 and 6
+                ewma = 0
+                cnt = {4: 2, 6: 1}.get(cyl, 0)
+            else:
+                ewma = 0 if cyl <= 0 else self._r.randint(0, 3)
+                cnt = 0 if cyl <= 0 else self._r.randint(0, 60)
+            # two 9-byte blocks: TID 0x0B (EWMA) then TID 0x0C (counts),
+            # scaling 0x24 = raw counts, each with value / min / max
+            return self._msg('46%02X0B24%04X0000FFFF%02X0C24%04X0000FFFF'
+                             % (mid, ewma, mid, cnt))
         if name.startswith('MONITOR_') and codes:
             mid = int(bytes(cmd.command)[2:4], 16)
             return self._msg('46%02X010124000000FFFF' % mid)
@@ -220,8 +230,10 @@ class SimConnection:
             return SimResponse(SimValue(rpm))
         if n == 'GET_DTC':
             return SimResponse([])
-        if n == 'ELM_VOLTAGE':
-            return SimResponse(SimValue(12.7))
+        if n in ('ELM_VOLTAGE', 'CONTROL_MODULE_VOLTAGE'):
+            # the archived idle median on this truck, not a random number -
+            # a rehearsal that prints 44 V teaches the wrong reflex
+            return SimResponse(SimValue(12.67 + self._r.gauss(0, 0.05)))
         return SimResponse(SimValue(round(self._r.uniform(1, 90), 2)))
 
     def close(self): pass
@@ -350,6 +362,8 @@ class Daemon:
                 SimConnection.SWEEP = on
             elif what == 'codes':
                 SimConnection.CODES = on
+            elif what == 'misfire-clean':
+                SimConnection.MISFIRE_CLEAN = on
             else:
                 return {'ok': False,
                         'error': 'sim what must be ac, sweep or codes'}
@@ -589,7 +603,7 @@ def main():
     mo.add_argument('--only', choices=['misfire'], help='misfire counters only')
     sub.add_parser('healthcheck', help='every service above, in one pass')
     sm = sub.add_parser('sim', help='simulated manipulations, --sim links only')
-    sm.add_argument('what', choices=['ac', 'sweep', 'codes'])
+    sm.add_argument('what', choices=['ac', 'sweep', 'codes', 'misfire-clean'])
     sm.add_argument('state', choices=['on', 'off'])
     r = sub.add_parser('read', help='one reading'); r.add_argument('name')
     sn = sub.add_parser('snapshot', help='a set of readings in one call')

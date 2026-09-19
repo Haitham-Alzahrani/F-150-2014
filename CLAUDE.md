@@ -64,6 +64,32 @@ allowed, **mode 4 refused**. `read CLEAR_DTC` returns REFUSED — verified, beca
 `.claude/settings.json` pre-approves these commands so a local session is not
 prompted for each one, and denies anything naming CLEAR_DTC.
 
+## THE MISFIRE COUNTERS ALREADY EXIST — [`docs/MISFIRE-BASELINE.md`](docs/MISFIRE-BASELINE.md)
+
+**THIS FILE SAYS THREE TIMES THAT PER-CYLINDER MISFIRE COUNTS WERE NEVER
+OBTAINED. THAT IS WRONG.** They are in `data/f150.db`, table `mode06`, captured
+**2026-09-05 04:36**, with the source screenshots in `data/screenshots/`. Found
+2026-09-19. **The fourth time "never logged" has turned out to mean "never
+looked".**
+
+**Every cylinder's ten-driving-cycle average is 0.** Counts: cylinder 4 = **2**,
+cylinder 6 = **1**, all others 0. Every other monitor — catalyst, fuel system,
+oxygen sensor heaters, cam phasing, purge — **passed with wide margin and is
+symmetric between banks**.
+
+**This does not support cylinder 6, and it ranks cylinder 4 above it.** The
+counter is a direct count of combustion events; cylinder acceleration is
+derived, dimensionless, quantised to 0.0156, and its six values sum to −0.133
+rather than zero, so its zero point is not the engine average.
+
+**It also confirms MID `$A1`–`$A7` are answered by this PCM** — the cylinder-to-
+identifier mapping is no longer an assumption.
+
+**The baseline is PRE-TUNE, so re-read before acting:** `python
+data/diagnose.py misfire` compares live counters against it and names the next
+step. **`python data/diagnose.py status` says what can and cannot be measured
+right now, and why.**
+
 ## IS IT AS GOOD AS THE SCAN APP? — [`docs/SCANNER-PARITY.md`](docs/SCANNER-PARITY.md)
 
 **Until 2026-09-19 the link read LIVE SENSOR DATA AND NOTHING ELSE** — one of the
@@ -458,6 +484,7 @@ stays readable; nothing was deleted.
 | [`docs/WINDOWS-SETUP.md`](docs/WINDOWS-SETUP.md) | Windows, `cmd`, COM ports, the codepage trap |
 | [`docs/SENSOR-INVENTORY.md`](docs/SENSOR-INVENTORY.md) | every channel this VIN answers, and what is blank |
 | [`docs/scanner-pids.md`](docs/scanner-pids.md) | the app's exact labels — **use these when asking him for a reading** |
+| [`docs/MISFIRE-BASELINE.md`](docs/MISFIRE-BASELINE.md) | **the 2026-09-05 per-cylinder misfire counters**, and what they do to the cylinder 6 theory |
 | [`docs/SCANNER-PARITY.md`](docs/SCANNER-PARITY.md) | **what the link can do against what the scan app can do**, service by service |
 | [`docs/MODE-22.md`](docs/MODE-22.md) | **reading the `[PCM]` channels directly**, and the two traps in calibrating one |
 | [`docs/VOLTAGE-PCM-VS-BCM.md`](docs/VOLTAGE-PCM-VS-BCM.md) | the one high-confidence suspect |
