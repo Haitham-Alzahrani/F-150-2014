@@ -64,6 +64,28 @@ allowed, **mode 4 refused**. `read CLEAR_DTC` returns REFUSED — verified, beca
 `.claude/settings.json` pre-approves these commands so a local session is not
 prompted for each one, and denies anything naming CLEAR_DTC.
 
+## THE KNOWLEDGE BASE — [`docs/KNOWLEDGE-BASE.md`](docs/KNOWLEDGE-BASE.md)
+
+**`data/diag.db`, 22 tables, two layers: a Ford knowledge base that is never
+narrowed, and a vehicle-verified profile that is the only thing diagnostics may
+use.** 2,566 definitions, 2,066 fault codes, 56 mode 06 entries, 6 modules.
+
+**THE VERIFICATION LEVELS ARE ENFORCED IN CODE.** A wrong identifier returns a
+plausible number, not an error. `promote()` refuses level 4 without a stored
+non-simulated raw response from this VIN, and refuses level 5 without repeats
+AND a passed cross-check. Tested: asserting level 4 at insert, promoting with no
+evidence, and promoting from a **simulated** response are all REFUSED.
+**Nothing is at level 4 or 5.**
+
+**NOTHING IS EVER DELETED.** A definition this truck does not answer is marked
+`not_supported` *for this vehicle* and stays in the Ford layer.
+
+**THE RATE LAW IS ENFORCED, NOT DESCRIBED.** `acquisition.plan()` computes
+33 ÷ N per channel and reports a group as UNDER-SAMPLED when its question needs
+more. Channels named `simultaneous_with` are counted — they consume the same
+bandwidth. **`CYLINDER_BALANCE` (4.8 Hz against 16 needed) and `TRANSMISSION`
+(4.2 against 5) both fail and say so.**
+
 ## RAW SESSION LOG — [`docs/SESSION-LOG.md`](docs/SESSION-LOG.md)
 
 **The unit of record is THE REQUEST, not the sample set.** Every request stores
@@ -506,6 +528,7 @@ stays readable; nothing was deleted.
 | [`docs/WINDOWS-SETUP.md`](docs/WINDOWS-SETUP.md) | Windows, `cmd`, COM ports, the codepage trap |
 | [`docs/SENSOR-INVENTORY.md`](docs/SENSOR-INVENTORY.md) | every channel this VIN answers, and what is blank |
 | [`docs/scanner-pids.md`](docs/scanner-pids.md) | the app's exact labels — **use these when asking him for a reading** |
+| [`docs/KNOWLEDGE-BASE.md`](docs/KNOWLEDGE-BASE.md) | **the two-layer knowledge base**, verification levels, and the rate law |
 | [`docs/SESSION-LOG.md`](docs/SESSION-LOG.md) | **the raw session format** — per-request timing, raw bytes, replay |
 | [`docs/MISFIRE-BASELINE.md`](docs/MISFIRE-BASELINE.md) | **the 2026-09-05 per-cylinder misfire counters**, and what they do to the cylinder 6 theory |
 | [`docs/SCANNER-PARITY.md`](docs/SCANNER-PARITY.md) | **what the link can do against what the scan app can do**, service by service |

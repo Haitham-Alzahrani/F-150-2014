@@ -1,0 +1,14 @@
+{
+  "url": "https://raw.githubusercontent.com/commaai/opendbc/master/opendbc/dbc/ford_lincoln_base_pt.dbc",
+  "fetched_utc": "2026-09-19T02:53:54+00:00",
+  "bytes": 807422,
+  "sha256": "536fe325ad4be0eeb9b1704c3663bb6518290185967eb738cf2a3b20f02804eb",
+  "source_type": "community reverse-engineered CAN database",
+  "publisher": "commaai/opendbc",
+  "licence": "MIT (see upstream repo)",
+  "what_it_is": "Ford/Lincoln base POWERTRAIN CAN BROADCAST signal definitions",
+  "what_it_is_NOT": "not OBD-II PIDs, not service 0x22 identifiers, not Ford-official",
+  "access_method": "passive CAN sniffing of broadcast frames - NOT request/response diagnostics",
+  "confidence": "low",
+  "verification_level": 1
+}
